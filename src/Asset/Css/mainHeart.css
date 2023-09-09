@@ -1,0 +1,477 @@
+@media (min-width: 320px) and (max-width: 374px){
+    
+
+    .mainNav{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 16vw;
+        min-width: 16vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+
+        background-color: #c0ff1d;
+        color: #000000;
+    
+    }
+
+    .pages{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 84vw;
+        min-width: 84vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 16%;
+
+        background-color: white;
+    }
+}
+
+
+@media (min-width: 375px) and (max-width: 389px){
+    
+
+    .mainNav{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 16vw;
+        min-width: 16vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+
+        background-color: #c0ff1d;
+        color: #000000;
+    
+    }
+
+    .pages{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 84vw;
+        min-width: 84vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 16%;
+
+        background-color: white;
+    }
+}
+
+
+@media (min-width: 390px) and (max-width: 411px){
+    
+
+    .mainNav{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 16vw;
+        min-width: 16vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+
+        background-color: #c0ff1d;
+        color: #000000;
+    
+    }
+
+    .pages{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 84vw;
+        min-width: 84vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 16%;
+
+        background-color: white;
+    }
+}
+
+
+
+@media (min-width: 412px) and (max-width: 539px){
+    
+
+    .mainNav{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 16vw;
+        min-width: 16vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+
+        background-color: #c0ff1d;
+        color: #000000;
+    
+    }
+
+    .pages{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 84vw;
+        min-width: 84vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 16%;
+
+        background-color: white;
+    }
+}
+
+
+
+@media (min-width: 540px) and (max-width: 767px){
+    
+
+    .mainNav{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 12vw;
+        min-width: 12vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+
+        background-color: #c0ff1d;
+        color: #000000;
+    
+    }
+
+    .pages{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 88vw;
+        min-width: 88vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 12%;
+
+        background-color: white;
+    }
+}
+
+
+
+@media (min-width: 768px) and (max-width: 819px){
+    
+
+    .mainNav{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 12vw;
+        min-width: 12vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+
+        background-color: #c0ff1d;
+        color: #000000;
+    
+    }
+
+    .pages{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 88vw;
+        min-width: 88vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 12%;
+
+        background-color: white;
+    }
+}
+
+
+
+@media (min-width: 820px) and (max-width: 911px){
+    
+
+    .mainNav{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 13vw;
+        min-width: 13vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+
+        background-color: #c0ff1d;
+        color: #000000;
+    
+    }
+
+    .pages{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 87vw;
+        min-width: 87vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 13%;
+
+        background-color: white;
+    }
+}
+
+
+
+@media (min-width: 912px) and (max-width: 1023px){
+    
+
+    .mainNav{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 13vw;
+        min-width: 13vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+
+        background-color: #c0ff1d;
+        color: #000000;
+    
+    }
+
+    .pages{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 87vw;
+        min-width: 87vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 13%;
+
+        background-color: white;
+    }
+}
+
+
+
+@media (min-width: 1024px) and (max-width: 1267px){
+    
+
+    .mainNav{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 5.5vw;
+        min-width: 5.5vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+
+        background-color: #c0ff1d;
+        color: #000000;
+    
+    }
+
+    .pages{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 94.5vw;
+        min-width: 94.5vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 5.5%;
+
+        background-color: white;
+    }
+}
+
+
+
+@media (min-width: 1268px) and (max-width: 1365px){
+    
+
+    .mainNav{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 4.5vw;
+        min-width: 4.5vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+
+        background-color: #c0ff1d;
+        color: #000000;
+    
+    }
+
+    .pages{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 95.5vw;
+        min-width: 95.5vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 4.5%;
+
+        background-color: white;
+    }
+}
+
+
+
+@media (min-width: 1366px) and (max-width: 1919px){
+    
+
+    .mainNav{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 4.5vw;
+        min-width: 4.5vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+
+        background-color: #c0ff1d;
+        color: #000000;
+    
+    }
+
+    .pages{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 95.5vw;
+        min-width: 95.5vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 4.5%;
+
+        background-color: white;
+    }
+}
+
+
+
+
+@media (min-width: 1920px) and (max-width: 3840px){
+    
+
+    .mainNav{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 5.5vw;
+        min-width: 5.5vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+
+        background-color: #c0ff1d;
+        color: #000000;
+    
+    }
+
+    .pages{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        max-width : 94.5vw;
+        min-width: 94.5vw;
+        min-height: 100vh;
+        overflow-y: auto;
+        word-wrap: break-word;
+        position: absolute;
+        top: 0%;
+        left: 5.5%;
+
+        background-color: white;
+    }
+}
+
