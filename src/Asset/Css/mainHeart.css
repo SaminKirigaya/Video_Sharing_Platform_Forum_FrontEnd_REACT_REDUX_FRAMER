@@ -565,3 +565,128 @@
     margin-left: 3rem;
 }
 
+
+
+  
+  /* Override Bootstrap tooltip arrow styles */
+  .tooltip-arrow {
+    background-color : #c0ff1d !important; /* Change arrow border color */
+  }
+  
+  /* Override Bootstrap tooltip inner content styles */
+  .tooltip-inner {
+    background-color: #c0ff1d;
+    color: #000000a3;
+    padding: 10px; /* Change inner content padding */
+    font-weight: bold;
+    border-radius: 0.2rem;
+    border:  0.15rem solid #000000a3;
+  }
+
+  .tooltip-arrow{
+    display : none !important;
+}
+
+.linkBtn{
+    text-decoration: none;
+    color: #000000a3;
+}
+
+.linkBtn:hover{
+    text-decoration: none;
+    color: #000000a3;
+}
+
+
+.btn-primary {
+    color: #000000a3 !important;
+    background-color: #96ca12 !important;
+    border-color: #c0ff1d !important;
+}
+
+.btn-primary:hover {
+    color: #000000a3;
+    background-color: #96ca12 !important;
+    border-color: #4f6616 !important;
+}
+
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .15rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.cardBd{
+    background-color: #c0ff1d;
+    color: #000000a3;
+}
+
+
+.linkBtn2{
+    text-decoration: none;
+    color: #415806;
+}
+
+.linkBtn2:hover{
+    text-decoration: none;
+    color: #415806;
+}
+
+#profImage{
+    display: none !important;
+    visibility: none !important;
+}
+
+input{
+    background-color: #c0ff1d !important;
+    border-color: #000000a3 !important;
+}
+select{
+    background-color: #c0ff1d !important;
+    border-color: #000000a3 !important;
+}
+
+.eye{
+    position: relative !important;
+    top: 50%;
+    left: 85%;
+    z-index: 200;
+
+}
+
+.adjustheight{
+    padding: 1rem;
+    height: 100vh !important;
+    display: flex;
+   flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    align-items: center;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.adjustheight::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .adjustheight {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
