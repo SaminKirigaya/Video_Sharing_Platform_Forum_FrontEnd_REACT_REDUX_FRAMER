@@ -1,10 +1,17 @@
 @media (min-width: 320px) and (max-width: 374px){
     
+    .avatarArea{
+        min-width: 100%;
+        min-height: 4.5vh;
+  
+    }
 
     .mainNav{
         display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
+        justify-content: start !important;
+        align-items: center;
+        padding-top: 1rem;
+        flex-direction: column;
         max-width : 16vw;
         min-width: 16vw;
         min-height: 100vh;
@@ -15,7 +22,7 @@
         left: 0%;
 
         background-color: #c0ff1d;
-        color: #000000;
+        color: #000000a3;
     
     }
 
@@ -40,10 +47,17 @@
 @media (min-width: 375px) and (max-width: 389px){
     
 
+    .avatarArea{
+        min-width: 100%;
+        min-height: 5.5vh;
+     
+    }
     .mainNav{
         display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
+        justify-content: start !important;
+        align-items: center;
+        padding-top: 1rem;
+        flex-direction: column;
         max-width : 16vw;
         min-width: 16vw;
         min-height: 100vh;
@@ -54,7 +68,7 @@
         left: 0%;
 
         background-color: #c0ff1d;
-        color: #000000;
+        color: #000000a3;
     
     }
 
@@ -78,11 +92,18 @@
 
 @media (min-width: 390px) and (max-width: 411px){
     
+    .avatarArea{
+        min-width: 100%;
+        min-height: 4.5vh;
+     
+    }
 
     .mainNav{
         display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
+        justify-content: start !important;
+        align-items: center;
+        padding-top: 1rem;
+        flex-direction: column;
         max-width : 16vw;
         min-width: 16vw;
         min-height: 100vh;
@@ -93,7 +114,7 @@
         left: 0%;
 
         background-color: #c0ff1d;
-        color: #000000;
+        color: #000000a3;
     
     }
 
@@ -118,11 +139,18 @@
 
 @media (min-width: 412px) and (max-width: 539px){
     
+    .avatarArea{
+        min-width: 100%;
+        min-height: 4.5vh;
+ 
+    }
 
     .mainNav{
         display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
+        justify-content: start !important;
+        align-items: center;
+        padding-top: 1rem;
+        flex-direction: column;
         max-width : 16vw;
         min-width: 16vw;
         min-height: 100vh;
@@ -133,7 +161,7 @@
         left: 0%;
 
         background-color: #c0ff1d;
-        color: #000000;
+        color: #000000a3;
     
     }
 
@@ -158,11 +186,18 @@
 
 @media (min-width: 540px) and (max-width: 767px){
     
+    .avatarArea{
+        min-width: 100%;
+        min-height: 5.5vh;
+      
+    }
 
     .mainNav{
         display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
+        justify-content: start !important;
+        align-items: center;
+        padding-top: 1rem;
+        flex-direction: column;
         max-width : 12vw;
         min-width: 12vw;
         min-height: 100vh;
@@ -173,7 +208,7 @@
         left: 0%;
 
         background-color: #c0ff1d;
-        color: #000000;
+        color: #000000a3;
     
     }
 
@@ -197,12 +232,19 @@
 
 
 @media (min-width: 768px) and (max-width: 819px){
+    .avatarArea{
+        min-width: 75%;
+        min-height: 5vh;
+       
+    }
     
 
     .mainNav{
         display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
+        justify-content: start !important;
+        align-items: center;
+        padding-top: 1rem;
+        flex-direction: column;
         max-width : 12vw;
         min-width: 12vw;
         min-height: 100vh;
@@ -213,7 +255,7 @@
         left: 0%;
 
         background-color: #c0ff1d;
-        color: #000000;
+        color: #000000a3;
     
     }
 
@@ -238,11 +280,18 @@
 
 @media (min-width: 820px) and (max-width: 911px){
     
+    .avatarArea{
+        min-width: 75%;
+        min-height: 5vh;
+ 
+    }
 
     .mainNav{
         display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
+        justify-content: start !important;
+        align-items: center;
+        padding-top: 1rem;
+        flex-direction: column;
         max-width : 13vw;
         min-width: 13vw;
         min-height: 100vh;
@@ -253,7 +302,7 @@
         left: 0%;
 
         background-color: #c0ff1d;
-        color: #000000;
+        color: #000000a3;
     
     }
 
@@ -278,11 +327,18 @@
 
 @media (min-width: 912px) and (max-width: 1023px){
     
+    .avatarArea{
+        min-width: 60%;
+        min-height: 3.8vh;
+      
+    }
 
     .mainNav{
         display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
+        justify-content: start !important;
+        align-items: center;
+        padding-top: 1rem;
+        flex-direction: column;
         max-width : 13vw;
         min-width: 13vw;
         min-height: 100vh;
@@ -293,7 +349,7 @@
         left: 0%;
 
         background-color: #c0ff1d;
-        color: #000000;
+        color: #000000a3;
     
     }
 
@@ -318,11 +374,18 @@
 
 @media (min-width: 1024px) and (max-width: 1267px){
     
+    .avatarArea{
+        min-width: 95%;
+        min-height: 5.2vh;
+     
+    }
 
     .mainNav{
         display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
+        justify-content: start !important;
+        align-items: center;
+        padding-top: 1rem;
+        flex-direction: column;
         max-width : 5.5vw;
         min-width: 5.5vw;
         min-height: 100vh;
@@ -333,7 +396,7 @@
         left: 0%;
 
         background-color: #c0ff1d;
-        color: #000000;
+        color: #000000a3;
     
     }
 
@@ -358,11 +421,18 @@
 
 @media (min-width: 1268px) and (max-width: 1365px){
     
+    .avatarArea{
+        min-width: 95%;
+        min-height: 4.8vh;
+
+    }
 
     .mainNav{
         display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
+        justify-content: start !important;
+        align-items: center;
+        padding-top: 1rem;
+        flex-direction: column;
         max-width : 4.5vw;
         min-width: 4.5vw;
         min-height: 100vh;
@@ -373,7 +443,7 @@
         left: 0%;
 
         background-color: #c0ff1d;
-        color: #000000;
+        color: #000000a3;
     
     }
 
@@ -398,11 +468,18 @@
 
 @media (min-width: 1366px) and (max-width: 1919px){
     
+    .avatarArea{
+        min-width: 95%;
+        min-height: 5.2vh;
+     
+    }
 
     .mainNav{
         display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
+        justify-content: start !important;
+        align-items: center;
+        padding-top: 1rem;
+        flex-direction: column;
         max-width : 4.5vw;
         min-width: 4.5vw;
         min-height: 100vh;
@@ -413,7 +490,7 @@
         left: 0%;
 
         background-color: #c0ff1d;
-        color: #000000;
+        color: #000000a3;
     
     }
 
@@ -430,7 +507,7 @@
         top: 0%;
         left: 4.5%;
 
-        background-color: white;
+        background-color: rgb(255, 255, 255);
     }
 }
 
@@ -439,11 +516,18 @@
 
 @media (min-width: 1920px) and (max-width: 3840px){
     
+    .avatarArea{
+        min-width: 55%;
+        min-height: 6.2vh;
+       
+    }
 
     .mainNav{
         display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
+        justify-content: start !important;
+        align-items: center;
+        padding-top: 1rem;
+        flex-direction: column;
         max-width : 5.5vw;
         min-width: 5.5vw;
         min-height: 100vh;
@@ -454,7 +538,7 @@
         left: 0%;
 
         background-color: #c0ff1d;
-        color: #000000;
+        color: #000000a3;
     
     }
 
@@ -473,5 +557,11 @@
 
         background-color: white;
     }
+}
+
+.desLoad{
+    color: #c0ff1d;
+    margin-top: 15rem;
+    margin-left: 3rem;
 }
 
