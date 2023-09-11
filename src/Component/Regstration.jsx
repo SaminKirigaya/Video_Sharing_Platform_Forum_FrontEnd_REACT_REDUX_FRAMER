@@ -57,6 +57,14 @@ function Regstration() {
         }
     }, [passState2])
 
+    // initially start a function like component did mount at start by [ ] dependency it runs one time at start till reload ...
+    useEffect(()=>{
+        window.$('[data-bs-toggle="tooltip"]').tooltip()
+
+        return ()=>{
+            window.$('[data-bs-toggle="tooltip"]').tooltip('dispose')
+        }
+    },[])
 
     return (
         <Fragment>
@@ -83,12 +91,12 @@ function Regstration() {
         <div class="row row-cols-1 row-cols-md-2 g-2 mx-auto mt-3">
             <div class="col col-md-12">
             
-            <input type="email" className="form-control"  placeholder="@Email" autoComplete='none'/>
+            <input type="email" className="form-control"  placeholder="@Email" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a valid Email or else you will not be able to verify your account with OTP or get a new password after forgetting password ... Remember Email is unchangable in future."/>
             </div>
 
             <div class="col col-md-12">
             
-            <input type="text" class="form-control" placeholder="User Name" autoComplete='none'/>
+            <input type="text" class="form-control" placeholder="User Name" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a Unique username ..."/>
             </div>
 
 
@@ -136,25 +144,25 @@ function Regstration() {
 
             <div class="col col-md-12 mx-auto">
             
-            <label for="profImage"><AddPhotoAlternateIcon /> Add Profile Image</label>
+            <label for="profImage"  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image of jpg or jpeg format less than 1 MB ... Without jpeg or jpg it won't work."><AddPhotoAlternateIcon /> Add Profile Image</label>
             <input id="profImage" type="file" class="form-control"  placeholder="Address" autoComplete='none'/>
             </div>
 
             <div class="col col-md-12 mx-auto">
             
-            <label for="profImage"><AddPhotoAlternateIcon /> Add Cover Image</label>
+            <label for="profImage"  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image at least 1024px X 680 px which is clear ... Remember image must be jpg or jpeg format."><AddPhotoAlternateIcon /> Add Cover Image</label>
             <input id="profImage" type="file" class="form-control"  placeholder="Address" autoComplete='none'/>
             </div>
 
 
             <div class="col col-md-12">
             <div className='eye' onClick={(e)=>{passState ? setpassState(false) : setpassState(true)}}>{passState ? <VisibilityOffIcon /> : <VisibilityIcon />}</div>
-            <input id="pass" type="text" class="form-control"  placeholder="Password" autoComplete='none'/>
+            <input id="pass" type="text" class="form-control"  placeholder="Password" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Your password can only contain a-z, A-Z, 0-9 with no spaces at times of special characters only @!_ is allowed. Also, password must be atleast 6 digit long and highest 50 digit long. "/>
             </div>
 
             <div class="col col-md-12 mt-0">
             <div className='eye' onClick={(e)=>{passState2 ? setpassState2(false) : setpassState2(true)}}>{passState2 ? <VisibilityOffIcon /> : <VisibilityIcon />}</div>
-            <input id="conpass" type="text" class="form-control"  placeholder="Confirm Password" autoComplete='none'/>
+            <input id="conpass" type="text" class="form-control"  placeholder="Confirm Password" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Your confirm password must be same as password ..."/>
             </div>
 
         </div>

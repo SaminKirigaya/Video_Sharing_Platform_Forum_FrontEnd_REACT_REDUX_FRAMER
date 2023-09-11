@@ -47,6 +47,15 @@ function Verify() {
     },[showPassword]);
 
 
+    // initially start a function like component did mount at start by [ ] dependency it runs one time at start till reload ...
+    useEffect(()=>{
+        window.$('[data-bs-toggle="tooltip"]').tooltip()
+
+        return ()=>{
+            window.$('[data-bs-toggle="tooltip"]').tooltip('dispose')
+        }
+    },[])
+
     return (
         <Fragment>
         <div className='container-fluid pages flex-column'>
@@ -78,6 +87,7 @@ function Verify() {
         >
         <div>
         <TextField
+        data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide the Email with which you created your account also an OTP was sent there ..."
         label="Email"
         id="outlined-size-small"
         
@@ -93,6 +103,7 @@ function Verify() {
             <FormControl sx={{ m: 1, width: '25ch' }} variant="standard" placeholder="OTP">
             <InputLabel htmlFor="standard-adornment-password">OTP</InputLabel>
             <Input
+            data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide the OTP which was sent to you to the email ..."
             label="OTP"
             autoComplete='none'
             placeholder='OTP'

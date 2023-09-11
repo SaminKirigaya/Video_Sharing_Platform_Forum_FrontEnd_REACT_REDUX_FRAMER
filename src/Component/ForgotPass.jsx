@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
@@ -26,6 +26,17 @@ import { Link } from 'react-router-dom';
 
 
 function ForgotPass() {
+
+  // initially start a function like component did mount at start by [ ] dependency it runs one time at start till reload ...
+  useEffect(()=>{
+    window.$('[data-bs-toggle="tooltip"]').tooltip()
+
+    return ()=>{
+        window.$('[data-bs-toggle="tooltip"]').tooltip('dispose')
+    }
+  },[])
+
+
   return (
     <Fragment>
       <div className='container-fluid pages flex-column'>
@@ -57,6 +68,7 @@ function ForgotPass() {
       >
       <div>
       <TextField
+      data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a the Email with which you created your account and where you were given an OTP ... Remember a new password will be sent to you in there. After Login with that you can change your password in profile menu 😁"
       label="Email"
       id="outlined-size-small"
       

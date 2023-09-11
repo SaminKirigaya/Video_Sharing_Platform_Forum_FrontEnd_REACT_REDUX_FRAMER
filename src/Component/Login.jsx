@@ -44,6 +44,15 @@ function Login() {
     },[showPassword]);
 
 
+    // initially start a function like component did mount at start by [ ] dependency it runs one time at start till reload ...
+    useEffect(()=>{
+        window.$('[data-bs-toggle="tooltip"]').tooltip()
+
+        return ()=>{
+            window.$('[data-bs-toggle="tooltip"]').tooltip('dispose')
+        }
+    },[])
+
     return (
         <Fragment>
             <div className='container-fluid pages flex-column'>
@@ -75,6 +84,7 @@ function Login() {
                 >
                 <div>
                 <TextField
+                data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a valid Email or else login will not be allowed ..."
                 label="Email"
                 id="outlined-size-small"
                 
@@ -90,6 +100,7 @@ function Login() {
                     <FormControl sx={{ m: 1, width: '25ch' }} variant="standard" placeholder="Password">
                     <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
                     <Input
+                    data-bs-toggle="tooltip" data-bs-placement="right" title="Your password can only contain a-z, A-Z, 0-9 with no spaces at times of special characters only @!_ is allowed. Also, password must be atleast 6 digit long and highest 50 digit long. "
                     label="Password"
                     autoComplete='none'
                     placeholder='Password'
