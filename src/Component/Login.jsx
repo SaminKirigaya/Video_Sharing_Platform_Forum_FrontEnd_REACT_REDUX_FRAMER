@@ -29,12 +29,35 @@ function Login() {
     // form's showing and hiding pass
     const [showPassword, setShowPassword] = React.useState(false);
 
+    // set FormData in variable 
+    const [formValues, setFormValues] = React.useState({
+        email : '',
+        password : '',
+    })
+    // based on form data two switch will change to indicate if email and pass are according to server rule when any input is given 
+    const [emailCondition, setEmailRight] = React.useState(true);
+    const [passCondition, setPassRight] = React.useState(true);
+
+
+    // Setting email from login data
+    const setTheEmail = (e)=>{
+        setFormValues((prevState)=>({...prevState, email : e.target.value}))
+    }
+
+    // Setting password from login data
+    const setThePassword = (e)=>{
+        setFormValues((prevState)=>({...prevState, password : e.target.value}));
+    }
+
+
+    // form design animation handling state
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     }; 
 
+    // setting image at avatar
     useEffect(()=>{
         if(showPassword){
             setimageName(watching)
@@ -52,6 +75,33 @@ function Login() {
             window.$('[data-bs-toggle="tooltip"]').tooltip('dispose')
         }
     },[])
+
+    // useEffect for handling if any useless data was given in field than is-valid or is-invalid will be added
+    useEffect(()=>{
+        var regexEmail = /^[0-9a-zA-Z@!?\._]+$/; // email
+        var regexPassword = /^([0-9a-zA-Z@!_]+){6,50}$/; // password
+
+        if(formValues.email){ // Email is valid or invalid
+            if(regexEmail.test(formValues.email)){
+                setEmailRight(true)
+            }else{
+                setEmailRight(false)
+            }
+        }else{
+            setEmailRight(true)
+        }
+
+        if(formValues.password){ // Email is valid or invalid
+            if(regexPassword.test(formValues.password)){
+                setPassRight(true)
+            }else{
+                setPassRight(false)
+            }
+        }else{
+            setPassRight(true)
+        }
+
+    },[formValues])
 
     return (
         <Fragment>
@@ -84,12 +134,13 @@ function Login() {
                 >
                 <div>
                 <TextField
+                error = {!emailCondition ? true : null}
                 data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a valid Email or else login will not be allowed ..."
                 label="Email"
-                id="outlined-size-small"
-                
+                id={emailCondition ? "outlined-size-small" : "outlined-error"}
                 size="small"
                 autoComplete="none"
+                onChange={(e)=>{setTheEmail(e)}}
                 />
                 </div>
                 
@@ -100,12 +151,14 @@ function Login() {
                     <FormControl sx={{ m: 1, width: '25ch' }} variant="standard" placeholder="Password">
                     <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
                     <Input
+                    error = {!passCondition ? true : null}
                     data-bs-toggle="tooltip" data-bs-placement="right" title="Your password can only contain a-z, A-Z, 0-9 with no spaces at times of special characters only @!_ is allowed. Also, password must be atleast 6 digit long and highest 50 digit long. "
                     label="Password"
                     autoComplete='none'
                     placeholder='Password'
                     size="small"
-                    id="standard-adornment-password"
+                    id={passCondition ? "standard-adornment-password" : "outlined-error"}
+                    onChange={(e)=>{setThePassword(e)}}
                     type={showPassword ? 'text' : 'password'}
                     endAdornment={
                         <InputAdornment position="end">

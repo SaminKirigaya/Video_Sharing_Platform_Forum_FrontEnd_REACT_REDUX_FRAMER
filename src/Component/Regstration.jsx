@@ -348,7 +348,7 @@ function Regstration() {
 
         <sup className='mt-4 linkBtn2'>Already Have ID ? .... <Link className='linkBtn2' to='/login'>Click Here</Link><br></br></sup>
         <sup className='mt-4 linkBtn2'>Forgot Password ? .... <Link className='linkBtn2' to='/forgotPass'>Click Here</Link></sup>
-     
+    
     </div>
     </div>
         </Fragment>
