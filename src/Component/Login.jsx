@@ -71,7 +71,7 @@ function Login() {
                 
 
                 <div className="card-body d-flex justify-content-center flex-column">
-                <h5 className="card-title mx-auto">LOGIN</h5>
+                <h5 className="card-title mx-auto">Sign In</h5>
 
             
                 <Box
@@ -129,7 +129,7 @@ function Login() {
                 
 
 
-                <button type="button" className="btn btn-sm btn-primary mx-auto mt-3">LogIn</button>
+                <button type="button" className="btn btn-sm btn-primary mx-auto mt-3">Sign In</button>
                 </div>
                 </div>
 

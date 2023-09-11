@@ -35,6 +35,70 @@ function Regstration() {
     const [passState, setpassState] = useState(false); // password field icon and text changing hide or unhide
     const [passState2, setpassState2] = useState(false); // confirm password field icon and text changing hide or unhide
 
+    // Form Data setting here
+    const [formValues, setFormValues] = useState({
+        email : '',
+        password : '',
+        username : '',
+        fullname : '',
+        address : '',
+        confirm_password : '',
+        date_of_birth : null,
+        country : '',
+        gender : '',
+        profile_image : null,
+        cover_image : null, 
+    })
+
+
+
+    // Setting email function
+    const setTheMail = (e)=>{
+        setFormValues((prevState)=>({...prevState, email : e.target.value}))
+    }
+    // Setting Username
+    const setTheUsername = (e)=>{
+        setFormValues((prevState)=>({...prevState, username : e.target.value}))
+    }
+    // Setting Fullname
+    const setTheFullname = (e)=>{
+        setFormValues((prevState)=>({...prevState, fullname : e.target.value}))
+    }
+    // Setting gender
+    const setTheGender = (e)=>{
+        setFormValues((prevState)=>({...prevState, gender : e.target.value}))
+    }
+    // Setting Country
+    const setTheCountry = (e)=>{
+        setFormValues((prevState)=>({...prevState, country : e.target.value}))
+    }
+    // Setting Address
+    const setTheAddress = (e)=>{
+        setFormValues((prevState)=>({...prevState, address : e.target.value}))
+    }
+    // Setting Date of Birth
+    const setTheDateofBirth = (e)=>{
+        setFormValues((prevState)=>({...prevState, date_of_birth : e.target.value}))
+    }
+    // Setting Profile Image
+    const setProfileImage = (e)=>{
+        setFormValues((prevState)=>({...prevState, profile_image : e.target.files[0]}))
+    }
+    // Setting Cover Image
+    const setCoverImage = (e)=>{
+        setFormValues((prevState)=>({...prevState, cover_image : e.target.files[0]}))
+    }
+    // Setting Password
+    const setThePassword = (e)=>{
+        setFormValues((prevState)=>({...prevState, password : e.target.value}))
+    }
+    // Setting Confirm Password
+    const setTheConfirmPassword = (e)=>{
+        setFormValues((prevState)=>({...prevState, confirm_password : e.target.value}))
+    }
+
+
+
     // password field setting hiding or showing with click
     useEffect(()=>{
         if(passState){
@@ -57,6 +121,7 @@ function Regstration() {
         }
     }, [passState2])
 
+
     // initially start a function like component did mount at start by [ ] dependency it runs one time at start till reload ...
     useEffect(()=>{
         window.$('[data-bs-toggle="tooltip"]').tooltip()
@@ -65,6 +130,110 @@ function Regstration() {
             window.$('[data-bs-toggle="tooltip"]').tooltip('dispose')
         }
     },[])
+
+
+    // set Effect To check if user put anything outside expected field
+    useEffect(()=>{
+        var regexEmail = /^[0-9a-zA-Z@!?\._]+$/; // email
+        var regexUsername = /^[0-9a-zA-Z_]+$/; // username
+        var regexFullname = /^[a-zA-Z ]+$/; // fullname
+        var regexAddress = /^[0-9a-zA-Z-,\/ ]+$/; // address
+        var regexPassword = /^([0-9a-zA-Z@!_]+){6,50}$/; // password
+
+        if(formValues.email){ // Email is valid or invalid
+            if(regexEmail.test(formValues.email)){
+                document.getElementById('email').classList.remove('is-invalid')
+                document.getElementById('email').classList.add('is-valid')
+            }else{
+                document.getElementById('email').classList.remove('is-valid')
+                document.getElementById('email').classList.add('is-invalid')
+            }
+        }else{
+            document.getElementById('email').classList.remove('is-valid')
+            document.getElementById('email').classList.remove('is-invalid')
+        }
+
+
+        if(formValues.username){
+            if(regexUsername.test(formValues.username)){
+                document.getElementById('username').classList.remove('is-invalid')
+                document.getElementById('username').classList.add('is-valid')
+            }else{
+                document.getElementById('username').classList.remove('is-valid')
+                document.getElementById('username').classList.add('is-invalid')
+            }
+        }else{
+            document.getElementById('username').classList.remove('is-valid')
+            document.getElementById('username').classList.remove('is-invalid')
+        }
+
+
+        if(formValues.fullname){
+            if(regexFullname.test(formValues.fullname)){
+                document.getElementById('fullname').classList.remove('is-invalid')
+                document.getElementById('fullname').classList.add('is-valid')
+            }else{
+                document.getElementById('fullname').classList.remove('is-valid')
+                document.getElementById('fullname').classList.add('is-invalid')
+            }
+        }else{
+            document.getElementById('fullname').classList.remove('is-valid')
+            document.getElementById('fullname').classList.remove('is-invalid')
+        }
+
+
+        if(formValues.address){
+            if(regexAddress.test(formValues.address)){
+                document.getElementById('address').classList.remove('is-invalid')
+                document.getElementById('address').classList.add('is-valid')
+            }else{
+                document.getElementById('address').classList.remove('is-valid')
+                document.getElementById('address').classList.add('is-invalid')
+            }
+        }else{
+            document.getElementById('address').classList.remove('is-valid')
+            document.getElementById('address').classList.remove('is-invalid')
+        }
+
+
+        if(formValues.password){
+            if(regexPassword.test(formValues.password)){
+                if(formValues.password.length>6 && formValues.password.length<50){
+                    document.getElementById('pass').classList.remove('is-invalid')
+                    document.getElementById('pass').classList.add('is-valid')
+                }else{
+                    document.getElementById('pass').classList.remove('is-valid')
+                    document.getElementById('pass').classList.add('is-invalid')
+                }
+                
+            }else{
+                document.getElementById('pass').classList.remove('is-valid')
+                document.getElementById('pass').classList.add('is-invalid')
+            }
+        }else{
+            document.getElementById('pass').classList.remove('is-valid')
+            document.getElementById('pass').classList.remove('is-invalid')
+        }
+
+
+
+        if(formValues.confirm_password){
+            if(formValues.confirm_password == formValues.password){
+                document.getElementById('conpass').classList.remove('is-invalid')
+                document.getElementById('conpass').classList.add('is-valid')
+            }else{
+                document.getElementById('conpass').classList.remove('is-valid')
+                document.getElementById('conpass').classList.add('is-invalid')
+            }
+        }else{
+            document.getElementById('conpass').classList.remove('is-valid')
+            document.getElementById('conpass').classList.remove('is-invalid')
+        }
+
+
+    },[formValues])
+
+
 
     return (
         <Fragment>
@@ -85,23 +254,27 @@ function Regstration() {
         
 
         <div className="card-body d-flex justify-content-center flex-column">
-        <h5 className="card-title mx-auto">REGISTER</h5>
+        <h5 className="card-title mx-auto">SIGN UP</h5>
 
     
         <div class="row row-cols-1 row-cols-md-2 g-2 mx-auto mt-3">
             <div class="col col-md-12">
             
-            <input type="email" className="form-control"  placeholder="@Email" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a valid Email or else you will not be able to verify your account with OTP or get a new password after forgetting password ... Remember Email is unchangable in future."/>
+            <input id="email" onChange={(e)=>{setTheMail(e)}} type="email" className="form-control"  placeholder="@Email" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a valid Email or else you will not be able to verify your account with OTP or get a new password after forgetting password ... Remember Email is unchangable in future."/>
             </div>
 
             <div class="col col-md-12">
             
-            <input type="text" class="form-control" placeholder="User Name" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a Unique username ..."/>
+            <input id="username" onChange={(e)=>{setTheUsername(e)}} type="text" class="form-control" placeholder="User Name" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a Unique username also it can only have a-z or A-Z or 0-9, It can only have _ as a special character no space is allowed ..."/>
             </div>
 
+            <div class="col col-md-12">
+            
+            <input id="fullname" onChange={(e)=>{setTheFullname(e)}} type="text" class="form-control" placeholder="Full Name" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide your full name it must not have any special characters and must not have any numbers ..."/>
+            </div>
 
             <div class="col-6">
-                <select class="form-select" aria-label="Default select example">
+                <select onChange={(e)=>{setTheGender(e)}} class="form-select" aria-label="Default select example">
                 <option selected disabled={true}>Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -109,7 +282,7 @@ function Regstration() {
                 </select>
             </div>
             <div class="col-6">
-                <select class="form-select" aria-label="Default select example">
+                <select onChange={(e)=>{setTheCountry(e)}} class="form-select" aria-label="Default select example">
                 <option selected disabled={true}>Country</option>
                 <option value="United States">United States</option>
                 <option value="Canada">Canada</option>
@@ -138,38 +311,38 @@ function Regstration() {
 
             <div class="col col-md-6">
             
-            <input type="text" class="form-control"  placeholder="Address" autoComplete='none'/>
+            <input id="address" onChange={(e)=>{setTheAddress(e)}} type="text" class="form-control"  placeholder="Address" autoComplete='none'/>
             </div>
 
 
             <div class="col col-md-12 mx-auto">
             
             <label for="profImage"  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image of jpg or jpeg format less than 1 MB ... Without jpeg or jpg it won't work."><AddPhotoAlternateIcon /> Add Profile Image</label>
-            <input id="profImage" type="file" class="form-control"  placeholder="Address" autoComplete='none'/>
+            <input onChange={(e)=>{setProfileImage(e)}} id="profImage" type="file" class="form-control"  autoComplete='none'/>
             </div>
 
             <div class="col col-md-12 mx-auto">
             
             <label for="profImage"  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image at least 1024px X 680 px which is clear ... Remember image must be jpg or jpeg format."><AddPhotoAlternateIcon /> Add Cover Image</label>
-            <input id="profImage" type="file" class="form-control"  placeholder="Address" autoComplete='none'/>
+            <input onChange={(e)=>{setCoverImage(e)}} id="profImage" type="file" class="form-control" autoComplete='none'/>
             </div>
 
 
             <div class="col col-md-12">
             <div className='eye' onClick={(e)=>{passState ? setpassState(false) : setpassState(true)}}>{passState ? <VisibilityOffIcon /> : <VisibilityIcon />}</div>
-            <input id="pass" type="text" class="form-control"  placeholder="Password" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Your password can only contain a-z, A-Z, 0-9 with no spaces at times of special characters only @!_ is allowed. Also, password must be atleast 6 digit long and highest 50 digit long. "/>
+            <input onChange={(e)=>{setThePassword(e)}} id="pass" type="text" class="form-control"  placeholder="Password" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Your password can only contain a-z, A-Z, 0-9 with no spaces at times of special characters only @!_ is allowed. Also, password must be atleast 6 digit long and highest 50 digit long. "/>
             </div>
 
             <div class="col col-md-12 mt-0">
             <div className='eye' onClick={(e)=>{passState2 ? setpassState2(false) : setpassState2(true)}}>{passState2 ? <VisibilityOffIcon /> : <VisibilityIcon />}</div>
-            <input id="conpass" type="text" class="form-control"  placeholder="Confirm Password" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Your confirm password must be same as password ..."/>
+            <input onChange={(e)=>{setTheConfirmPassword(e)}} id="conpass" type="text" class="form-control"  placeholder="Confirm Password" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Your confirm password must be same as password ..."/>
             </div>
 
         </div>
         
 
 
-        <button type="button" className="btn btn-sm btn-primary mx-auto mt-4">Register</button>
+        <button type="button" className="btn btn-sm btn-primary mx-auto mt-4">Sign Up</button>
         </div>
         </div>
 
