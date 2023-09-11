@@ -32,6 +32,21 @@ function Verify() {
     // form's showing and hiding pass
     const [showPassword, setShowPassword] = React.useState(false);
 
+    // set FormData in variable 
+    const [formValues, setFormValues] = React.useState({
+        email : '',
+        
+    })
+    // based on form data two switch will change to indicate if email and pass are according to server rule when any input is given 
+    const [emailCondition, setEmailRight] = React.useState(true);
+    
+
+
+    // Setting email from login data
+    const setTheEmail = (e)=>{
+        setFormValues((prevState)=>({...prevState, email : e.target.value}))
+    }
+
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (event) => {
@@ -47,6 +62,7 @@ function Verify() {
     },[showPassword]);
 
 
+
     // initially start a function like component did mount at start by [ ] dependency it runs one time at start till reload ...
     useEffect(()=>{
         window.$('[data-bs-toggle="tooltip"]').tooltip()
@@ -55,6 +71,27 @@ function Verify() {
             window.$('[data-bs-toggle="tooltip"]').tooltip('dispose')
         }
     },[])
+
+
+    // useEffect for handling if any useless data was given in field than is-valid or is-invalid will be added
+    useEffect(()=>{
+        var regexEmail = /^[0-9a-zA-Z@!?\._-]+$/; // email
+        
+
+        if(formValues.email){ // Email is valid or invalid
+            if(regexEmail.test(formValues.email)){
+                setEmailRight(true)
+            }else{
+                setEmailRight(false)
+            }
+        }else{
+            setEmailRight(true)
+        }
+
+        
+
+    },[formValues])
+
 
     return (
         <Fragment>
@@ -87,12 +124,14 @@ function Verify() {
         >
         <div>
         <TextField
+        error = {!emailCondition ? true : null}
         data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide the Email with which you created your account also an OTP was sent there ..."
         label="Email"
-        id="outlined-size-small"
+        id={emailCondition ? "outlined-size-small" : "outlined-error"}
         
         size="small"
         autoComplete="none"
+        onChange={(e)=>{setTheEmail(e)}}
         />
         </div>
         

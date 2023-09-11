@@ -78,7 +78,7 @@ function Login() {
 
     // useEffect for handling if any useless data was given in field than is-valid or is-invalid will be added
     useEffect(()=>{
-        var regexEmail = /^[0-9a-zA-Z@!?\._]+$/; // email
+        var regexEmail = /^[0-9a-zA-Z@!?\._-]+$/; // email
         var regexPassword = /^([0-9a-zA-Z@!_]+){6,50}$/; // password
 
         if(formValues.email){ // Email is valid or invalid

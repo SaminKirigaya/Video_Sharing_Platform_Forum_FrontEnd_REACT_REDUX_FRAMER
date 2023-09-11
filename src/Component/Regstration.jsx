@@ -134,7 +134,7 @@ function Regstration() {
 
     // set Effect To check if user put anything outside expected field
     useEffect(()=>{
-        var regexEmail = /^[0-9a-zA-Z@!?\._]+$/; // email
+        var regexEmail = /^[0-9a-zA-Z@!?\._-]+$/; // email
         var regexUsername = /^[0-9a-zA-Z_]+$/; // username
         var regexFullname = /^[a-zA-Z ]+$/; // fullname
         var regexAddress = /^[0-9a-zA-Z-,\/ ]+$/; // address
