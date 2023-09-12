@@ -652,6 +652,12 @@
     visibility: none !important;
 }
 
+#coverImage{
+    display: none !important;
+    visibility: none !important;
+}
+
+
 input{
     background-color: #c0ff1d !important;
     border-color: #000000a3 !important;

@@ -28,12 +28,25 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 import sleep from '../Asset/Images/sleep.jpg';
 import watching from '../Asset/Images/watching.jpg';
+import axios from 'axios';
 
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  
 function Regstration() {
     const [imageName, setimageName] = React.useState(watching); // cat watching or sleep image
-
+    const [open, setOpen] = React.useState(false); // Snackbar open close state
+    const [responseMessage, setResponseMessage] = React.useState(''); // initially any error or success message at snackbar
     const [passState, setpassState] = useState(false); // password field icon and text changing hide or unhide
     const [passState2, setpassState2] = useState(false); // confirm password field icon and text changing hide or unhide
+    const [submissionRule, setSubmissionRule] = useState(false) // at form submit initial page check and snackbar active at error
 
     // Form Data setting here
     const [formValues, setFormValues] = useState({
@@ -98,6 +111,48 @@ function Regstration() {
     }
 
 
+    // Sign up button after click 
+    const signMeUp = async(e)=>{
+        e.preventDefault()
+        if(submissionRule && formValues.email && formValues.username && formValues.fullname && formValues.gender && formValues.country && formValues.address && formValues.date_of_birth && formValues.password && formValues.confirm_password && formValues.profile_image && formValues.cover_image){
+            const formData = new FormData();
+            formData.append('Email', formValues.email)
+            formData.append('Username', formValues.username)
+            formData.append('Fullname', formValues.fullname)
+            formData.append('Gender', formValues.gender)
+            formData.append('Country', formValues.country)
+            formData.append('Address', formValues.address)
+            formData.append('Birth_Date', formValues.date_of_birth)
+            formData.append('Profile_Image', formValues.profile_image)
+            formData.append('Cover_Image', formValues.cover_image)
+            formData.append('Password', formValues.password)
+            formData.append('Confirmed_Password', formValues.confirm_password)
+            try{
+                const response = await axios.post('/signMeUp', formData, {
+                    headers : {
+                        'Content-Type' : 'application/json'
+                    }
+                })
+                if(response.data.message == 'Sign Up Successful. You Are Provided A OTP In Your Mail That You Provided. Kindly Verify It In The Verification Page. To Activate Your Account.'){
+                    setResponseMessage(response.data.message)
+                    setOpen(true)
+                    setTimeout(()=>{
+                        window.location.href = '/verify'
+                    },2000)
+                }else{
+                    setResponseMessage(response.data.message)
+                    setOpen(true)
+                }
+                
+            }catch(err){
+                console.error(err)
+            }
+        }else{
+            setResponseMessage("Make sure you inserted all submission form data according to rules.")
+            setOpen(true)
+        }
+        
+    }
 
     // password field setting hiding or showing with click
     useEffect(()=>{
@@ -144,13 +199,16 @@ function Regstration() {
             if(regexEmail.test(formValues.email)){
                 document.getElementById('email').classList.remove('is-invalid')
                 document.getElementById('email').classList.add('is-valid')
+                setSubmissionRule(true)
             }else{
                 document.getElementById('email').classList.remove('is-valid')
                 document.getElementById('email').classList.add('is-invalid')
+                setSubmissionRule(false)
             }
         }else{
             document.getElementById('email').classList.remove('is-valid')
             document.getElementById('email').classList.remove('is-invalid')
+            setSubmissionRule(false)
         }
 
 
@@ -158,13 +216,16 @@ function Regstration() {
             if(regexUsername.test(formValues.username)){
                 document.getElementById('username').classList.remove('is-invalid')
                 document.getElementById('username').classList.add('is-valid')
+                setSubmissionRule(true)
             }else{
                 document.getElementById('username').classList.remove('is-valid')
                 document.getElementById('username').classList.add('is-invalid')
+                setSubmissionRule(false)
             }
         }else{
             document.getElementById('username').classList.remove('is-valid')
             document.getElementById('username').classList.remove('is-invalid')
+            setSubmissionRule(false)
         }
 
 
@@ -172,13 +233,16 @@ function Regstration() {
             if(regexFullname.test(formValues.fullname)){
                 document.getElementById('fullname').classList.remove('is-invalid')
                 document.getElementById('fullname').classList.add('is-valid')
+                setSubmissionRule(true)
             }else{
                 document.getElementById('fullname').classList.remove('is-valid')
                 document.getElementById('fullname').classList.add('is-invalid')
+                setSubmissionRule(false)
             }
         }else{
             document.getElementById('fullname').classList.remove('is-valid')
             document.getElementById('fullname').classList.remove('is-invalid')
+            setSubmissionRule(false)
         }
 
 
@@ -186,13 +250,16 @@ function Regstration() {
             if(regexAddress.test(formValues.address)){
                 document.getElementById('address').classList.remove('is-invalid')
                 document.getElementById('address').classList.add('is-valid')
+                setSubmissionRule(true)
             }else{
                 document.getElementById('address').classList.remove('is-valid')
                 document.getElementById('address').classList.add('is-invalid')
+                setSubmissionRule(false)
             }
         }else{
             document.getElementById('address').classList.remove('is-valid')
             document.getElementById('address').classList.remove('is-invalid')
+            setSubmissionRule(false)
         }
 
 
@@ -201,18 +268,22 @@ function Regstration() {
                 if(formValues.password.length>6 && formValues.password.length<50){
                     document.getElementById('pass').classList.remove('is-invalid')
                     document.getElementById('pass').classList.add('is-valid')
+                    setSubmissionRule(true)
                 }else{
                     document.getElementById('pass').classList.remove('is-valid')
                     document.getElementById('pass').classList.add('is-invalid')
+                    setSubmissionRule(false)
                 }
                 
             }else{
                 document.getElementById('pass').classList.remove('is-valid')
                 document.getElementById('pass').classList.add('is-invalid')
+                setSubmissionRule(false)
             }
         }else{
             document.getElementById('pass').classList.remove('is-valid')
             document.getElementById('pass').classList.remove('is-invalid')
+            setSubmissionRule(false)
         }
 
 
@@ -221,18 +292,36 @@ function Regstration() {
             if(formValues.confirm_password == formValues.password){
                 document.getElementById('conpass').classList.remove('is-invalid')
                 document.getElementById('conpass').classList.add('is-valid')
+                setSubmissionRule(true)
             }else{
                 document.getElementById('conpass').classList.remove('is-valid')
                 document.getElementById('conpass').classList.add('is-invalid')
+                setSubmissionRule(false)
             }
         }else{
             document.getElementById('conpass').classList.remove('is-valid')
             document.getElementById('conpass').classList.remove('is-invalid')
+            setSubmissionRule(false)
         }
 
 
     },[formValues])
 
+
+    // Snackbar related 
+    
+
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+        return;
+        }
+
+        setOpen(false);
+    };
 
 
     return (
@@ -242,6 +331,7 @@ function Regstration() {
         <div className="card d-flex justify-content-center cardBd" style={{width: "18rem"}}>
         
         <div className='mx-auto mt-4'>
+
         <Stack direction="row" spacing={2}>
         
         <Avatar
@@ -250,6 +340,7 @@ function Regstration() {
             sx={{ width: 56, height: 56 }}
         />
         </Stack>
+
         </div>
         
 
@@ -306,7 +397,7 @@ function Regstration() {
 
             <div class="col col-md-6">
             
-            <input type="date" class="form-control"  placeholder="Date of Birth" autoComplete='none'/>
+            <input onChange={(e)=>{setTheDateofBirth(e)}} type="date" class="form-control"  placeholder="Date of Birth" autoComplete='none'/>
             </div>
 
             <div class="col col-md-6">
@@ -323,8 +414,8 @@ function Regstration() {
 
             <div class="col col-md-12 mx-auto">
             
-            <label for="profImage"  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image at least 1024px X 680 px which is clear ... Remember image must be jpg or jpeg format."><AddPhotoAlternateIcon /> Add Cover Image</label>
-            <input onChange={(e)=>{setCoverImage(e)}} id="profImage" type="file" class="form-control" autoComplete='none'/>
+            <label for="coverImage"  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image at least 1024px X 680 px which is clear ... Remember image must be jpg or jpeg format."><AddPhotoAlternateIcon /> Add Cover Image</label>
+            <input onChange={(e)=>{setCoverImage(e)}} id="coverImage" type="file" class="form-control" autoComplete='none'/>
             </div>
 
 
@@ -342,7 +433,7 @@ function Regstration() {
         
 
 
-        <button type="button" className="btn btn-sm btn-primary mx-auto mt-4">Sign Up</button>
+        <button onClick={(e)=>{signMeUp(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-4">Sign Up</button>
         </div>
         </div>
 
@@ -350,6 +441,20 @@ function Regstration() {
         <sup className='mt-4 linkBtn2'>Forgot Password ? .... <Link className='linkBtn2' to='/forgotPass'>Click Here</Link></sup>
     
     </div>
+
+
+    <Snackbar open={open} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+    <Alert onClose={handleClose} severity="success" sx={{
+        width: '100%',
+        backgroundColor: '#c0ff1d', // Set your custom color here
+        color: '#000000a3', // Set text color for visibility
+        fontFamily: 'Cormorant Infant'
+      }}>
+      {responseMessage}
+    </Alert>
+    </Snackbar>
+
+
     </div>
         </Fragment>
     )
