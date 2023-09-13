@@ -130,12 +130,21 @@ function Regstration() {
             try{
                 const response = await axios.post('/signMeUp', formData, {
                     headers : {
-                        'Content-Type' : 'application/json'
+                        'Content-Type' : 'multipart/form-data'
                     }
                 })
                 if(response.data.message == 'Sign Up Successful. You Are Provided A OTP In Your Mail That You Provided. Kindly Verify It In The Verification Page. To Activate Your Account.'){
                     setResponseMessage(response.data.message)
                     setOpen(true)
+
+                    setFormValues((prevState)=>({...prevState, email : '', username : '', fullname : '', gender : '', country : '', address : '', date_of_birth : null, profile_image : null, cover_image : null, password : '', confirm_password : ''}))
+
+                    const selectElements = document.querySelectorAll('input, select');
+                    selectElements.forEach((each) => {
+                        each.value = '';
+                      });
+
+
                     setTimeout(()=>{
                         window.location.href = '/verify'
                     },2000)
@@ -194,6 +203,7 @@ function Regstration() {
         var regexFullname = /^[a-zA-Z ]+$/; // fullname
         var regexAddress = /^[0-9a-zA-Z-,\/ ]+$/; // address
         var regexPassword = /^([0-9a-zA-Z@!_]+){6,50}$/; // password
+
 
         if(formValues.email){ // Email is valid or invalid
             if(regexEmail.test(formValues.email)){
@@ -350,6 +360,11 @@ function Regstration() {
     
         <div class="row row-cols-1 row-cols-md-2 g-2 mx-auto mt-3">
             <div class="col col-md-12">
+                <sup>It may take few seconds to send you the reply message and otp after clicking sign up in order to verify everything. So, please don't panic and kindly wait few seconds.</sup>
+            
+            </div>
+
+            <div class="col col-md-12">
             
             <input id="email" onChange={(e)=>{setTheMail(e)}} type="email" className="form-control"  placeholder="@Email" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a valid Email or else you will not be able to verify your account with OTP or get a new password after forgetting password ... Remember Email is unchangable in future."/>
             </div>
@@ -409,13 +424,13 @@ function Regstration() {
             <div class="col col-md-12 mx-auto">
             
             <label for="profImage"  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image of jpg or jpeg format less than 1 MB ... Without jpeg or jpg it won't work."><AddPhotoAlternateIcon /> Add Profile Image</label>
-            <input onChange={(e)=>{setProfileImage(e)}} id="profImage" type="file" class="form-control"  autoComplete='none'/>
+            <input onChange={(e)=>{setProfileImage(e)}} id="profImage" type="file" class="form-control"  autoComplete='none' accept=".jpg, .jpeg"/>
             </div>
 
             <div class="col col-md-12 mx-auto">
             
             <label for="coverImage"  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image at least 1024px X 680 px which is clear ... Remember image must be jpg or jpeg format."><AddPhotoAlternateIcon /> Add Cover Image</label>
-            <input onChange={(e)=>{setCoverImage(e)}} id="coverImage" type="file" class="form-control" autoComplete='none'/>
+            <input onChange={(e)=>{setCoverImage(e)}} id="coverImage" type="file" class="form-control" autoComplete='none' accept=".jpg, .jpeg"/>
             </div>
 
 

@@ -17,14 +17,25 @@ import TextField from '@mui/material/TextField';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 import sleep from '../Asset/Images/sleep.jpg';
 import watching from '../Asset/Images/watching.jpg';
 
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
 
 
 function Verify() {
+    // snackbar open close state
+    const [open, setOpen] = React.useState(false);
+    const [responseMessage, setResponseMessage] = React.useState(''); // initially any error or success message at snackbar
 
     // set image name initially at start
     const [imageName, setimageName] = React.useState(sleep);
@@ -35,16 +46,21 @@ function Verify() {
     // set FormData in variable 
     const [formValues, setFormValues] = React.useState({
         email : '',
-        
+        otp : '',
     })
     // based on form data two switch will change to indicate if email and pass are according to server rule when any input is given 
     const [emailCondition, setEmailRight] = React.useState(true);
     
 
 
-    // Setting email from login data
+    // Setting email from verify data
     const setTheEmail = (e)=>{
         setFormValues((prevState)=>({...prevState, email : e.target.value}))
+    }
+
+    // set otp in state
+    const setThePassword = (e)=>{
+        setFormValues((prevState)=>({...prevState, otp : e.target.value}))
     }
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -52,6 +68,69 @@ function Verify() {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     }; 
+
+
+    // handle close open of snackbar here
+    const handleClick = () => {
+        setOpen(true);
+      };
+    
+      const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+      };
+
+
+
+    // verify otp in here
+    const verifyOtp = async(e)=>{
+        const formData = new FormData();
+        if(formValues.email && formValues.otp){
+            formData.append('Email', formValues.email)
+            formData.append('OtpCode', formValues.otp)
+
+            try{
+                const response = await axios.post('/verifyOtp', formData, {
+                    headers : {
+                        'Content-Type' : 'application/json'
+                    }
+                })
+
+                if(response.data.message == 'Verification Successful !!! Please login for first time in login page.'){
+                    setResponseMessage(response.data.message)
+                    setOpen(true)
+
+                    setFormValues((prevState)=>({
+                        ...prevState,
+                        email : '',
+                        otp : '',
+                    }))
+
+                   
+
+                    setTimeout(()=>{
+                        window.location.href = '/login'
+                    },2000)
+
+
+                }else{
+                    setResponseMessage(response.data.message)
+                    setOpen(true)
+                }
+            }catch(err){
+                console.log(err)
+            }
+        }else{
+            setResponseMessage("Make sure you inserted all submission form data according to rules and no field is empty.")
+            setOpen(true)
+        }
+        
+
+        
+    }
 
     useEffect(()=>{
         if(showPassword){
@@ -146,6 +225,7 @@ function Verify() {
             label="OTP"
             autoComplete='none'
             placeholder='OTP'
+            onChange={(e)=>{setThePassword(e)}}
             size="small"
             id="standard-adornment-password"
             type={showPassword ? 'text' : 'password'}
@@ -171,14 +251,25 @@ function Verify() {
         
 
 
-        <button type="button" className="btn btn-sm btn-primary mx-auto mt-3">Verify Account</button>
+        <button onClick={(e)=>{verifyOtp(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-3">Verify Account</button>
         </div>
         </div>
 
         <sup className='mt-4 linkBtn2'>Don't Have An ID ? .... <Link className='linkBtn2' to='/registration'>Click Here</Link><br></br></sup>
         <sup className='mt-4 linkBtn2'>Already Have An ID ? .... <Link className='linkBtn2' to='/login'>Click Here</Link></sup>
      
+        
         </div>
+        <Snackbar open={open} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+        <Alert onClose={handleClose} severity="success" sx={{
+            width: '100%',
+            backgroundColor: '#c0ff1d', // Set your custom color here
+            color: '#000000a3', // Set text color for visibility
+            fontFamily: 'Cormorant Infant'
+        }}>
+        {responseMessage}
+        </Alert>
+        </Snackbar>
         </Fragment>
     )
 }
