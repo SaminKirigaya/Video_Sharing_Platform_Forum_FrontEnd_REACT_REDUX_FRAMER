@@ -36,7 +36,7 @@ const tokenSlice = createSlice ({
 
 // notifications 
 const notificationSlice = createSlice({
-    name : 'notify',
+    name : 'notifAmount',
     initialState : {
         notifAmount : 0
     },
@@ -47,10 +47,78 @@ const notificationSlice = createSlice({
     }
 })
 
+// profile Image data link
+const ProfImgSlice = createSlice({
+    name : 'proImgPath',
+    initialState : {
+        proImgPath : ''
+    },
+    reducers : {
+        clearproImgPath(state){
+            state.proImgPath = ''
+        },
+        setTheProImgPath(state, action){
+            state.proImgPath = action.payload
+        }
+    }
+})
+
+
+// cover imae data link
+const CoverImgSlice = createSlice({
+    name : 'coverImgPath',
+    initialState : {
+        coverImgPath : ''
+    },
+    reducers : {
+        clearCoverImgPath(state){
+            state.coverImgPath = ''
+        },
+        setCoverImgPath(state, action){
+            state.coverImgPath = action.payload
+        }
+    }
+})
+
+
+// username setting 
+const usernameSlice = createSlice({
+    name : 'username',
+    initialState : {
+        username : ''
+    },
+    reducers : {
+        clearusername(state){
+            state.username = ''
+        },
+        setRecentUsername(state, action){
+            state.username = action.payload
+        }
+    }
+})
+
+
+// user serial setting
+const userserialSlice = createSlice({
+    name : 'serialId',
+    initialState : {
+        serialId : ''
+    },
+    reducers : {
+        clearSerial(state){
+            state.serialId = ''
+        },
+        setSerial(state, action){
+            state.serialId = action.payload
+        }
+
+    }
+})
+
 
 // set main store here with their reducer functions
 const Store = configureStore({
-    reducer : { loginData : loginSlice.reducer, tokenData : tokenSlice.reducer, notifyData : notificationSlice.reducer}
+    reducer : { loginData : loginSlice.reducer, tokenData : tokenSlice.reducer, notifyData : notificationSlice.reducer, profImgData : ProfImgSlice.reducer, coverImgData : CoverImgSlice.reducer, usernameData : usernameSlice.reducer, userserialData : userserialSlice.reducer }
 })
 
 
@@ -58,6 +126,10 @@ const Store = configureStore({
 export const loginFunctions = loginSlice.actions;
 export const tokenFunctions = tokenSlice.actions; 
 export const notifyFunctions = notificationSlice.actions;
+export const profImgFunctions = ProfImgSlice.actions;
+export const coverImgFunctions = CoverImgSlice.actions;
+export const usernameFunctions = usernameSlice.actions;
+export const userserialFunctions = userserialSlice.actions;
 
 
 export default Store

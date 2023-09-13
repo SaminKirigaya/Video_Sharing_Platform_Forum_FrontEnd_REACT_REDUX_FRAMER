@@ -20,7 +20,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 function Nav() {
 
     // States : 
-    const isLogged = useSelector(state => state.login);
+    const isLogged = useSelector((state) => state.loginData.login);
 
     // Effects Here
     useEffect(() => {

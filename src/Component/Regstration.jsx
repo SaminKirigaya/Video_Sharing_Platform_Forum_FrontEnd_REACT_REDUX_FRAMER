@@ -148,6 +148,7 @@ function Regstration() {
                     setTimeout(()=>{
                         window.location.href = '/verify'
                     },2000)
+                    
                 }else{
                     setResponseMessage(response.data.message)
                     setOpen(true)

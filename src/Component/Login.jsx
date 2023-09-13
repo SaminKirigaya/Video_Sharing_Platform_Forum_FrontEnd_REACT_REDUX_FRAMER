@@ -1,6 +1,8 @@
 import React, { Fragment, useEffect } from 'react'
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
@@ -19,10 +21,41 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import sleep from '../Asset/Images/sleep.jpg';
 import watching from '../Asset/Images/watching.jpg';
 
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { loginFunctions } from '../Store/Store';
+import { tokenFunctions } from '../Store/Store';
+import { profImgFunctions } from '../Store/Store';
+import { coverImgFunctions } from '../Store/Store';
+import { usernameFunctions } from '../Store/Store';
+import { userserialFunctions } from '../Store/Store';
+
+import axios from 'axios';
+
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
 
 
 function Login() {
+    // Redirecting back state
+    const [nowGoBack, setNowGoBack] = React.useState(false);
+
+    // snackbar open close state
+    const [open, setOpen] = React.useState(false);
+    const [responseMessage, setResponseMessage] = React.useState(''); // initially any error or success message at snackbar
+
+    // call redux to see if he is logged in
+    var logIn = useSelector((state) => state.loginData.login)
+
+    // call redyux to see if token is there
+    var token = useSelector((state) => state.tokenData.token)
+
+    const dispatch = useDispatch();
+
+
     // set image name initially at start
     const [imageName, setimageName] = React.useState(sleep);
 
@@ -34,6 +67,8 @@ function Login() {
         email : '',
         password : '',
     })
+
+
     // based on form data two switch will change to indicate if email and pass are according to server rule when any input is given 
     const [emailCondition, setEmailRight] = React.useState(true);
     const [passCondition, setPassRight] = React.useState(true);
@@ -49,6 +84,66 @@ function Login() {
         setFormValues((prevState)=>({...prevState, password : e.target.value}));
     }
 
+
+    // trying to log in ...........................................
+    const logMeIn = async (e)=>{
+        const formData = new FormData()
+
+        if(!logIn || !token){
+            if(formValues.email && formValues.password){
+
+                formData.append('Email', formValues.email)
+                formData.append('Password', formValues.password)
+                const response = await axios.post('/logMeIn', formData, {
+                    headers : {
+                        'Content-Type' : 'application/json'
+                    }
+                })
+
+                if(response.data.message == 'Login Successful ...'){
+
+                    setResponseMessage(response.data.message)
+                    setOpen(true)
+
+                    dispatch(loginFunctions.logon())
+                    dispatch(tokenFunctions.setTokenNow(response.data.token))
+                    dispatch(usernameFunctions.setRecentUsername(response.data.username))
+                    dispatch(userserialFunctions.setSerial(response.data.serial))
+                    dispatch(profImgFunctions.setTheProImgPath(response.data.profileImage))
+                    dispatch(coverImgFunctions.setCoverImgPath(response.data.coverImg))
+
+                    setTimeout(()=>{
+                        setNowGoBack(true)
+                    }, 1800)
+                    
+                }else{
+                    setResponseMessage(response.data.message)
+                    setOpen(true)
+                }
+
+            }else{
+                setResponseMessage('Make sure to insert all form fields according to server rules and no field is empty ...')
+                setOpen(true)
+            }
+        }else{
+            setResponseMessage('It seems you are already logged in ...')
+            setOpen(true)
+        }
+        
+    }
+
+    // handle close open of snackbar here
+    const handleClick = () => {
+        setOpen(true);
+      };
+    
+      const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+      };
 
     // form design animation handling state
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -102,6 +197,7 @@ function Login() {
         }
 
     },[formValues])
+
 
     return (
         <Fragment>
@@ -182,14 +278,26 @@ function Login() {
                 
 
 
-                <button type="button" className="btn btn-sm btn-primary mx-auto mt-3">Sign In</button>
+                <button onClick={(e)=>{logMeIn(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-3">Sign In</button>
                 </div>
                 </div>
 
                 <sup className='mt-4 linkBtn2'>Don't Have An ID ? .... <Link className='linkBtn2' to='/registration'>Click Here</Link><br></br></sup>
                 <sup className='mt-4 linkBtn2'>Forgot Password ? .... <Link className='linkBtn2' to='/forgotPass'>Click Here</Link></sup>
              
+                {nowGoBack ? <Navigate to='/' replace /> : null}
+                
             </div>
+            <Snackbar open={open} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+            <Alert onClose={handleClose} severity="success" sx={{
+                width: '100%',
+                backgroundColor: '#c0ff1d', // Set your custom color here
+                color: '#000000a3', // Set text color for visibility
+                fontFamily: 'Cormorant Infant'
+            }}>
+            {responseMessage}
+            </Alert>
+            </Snackbar>
         </Fragment>
     )
 }
