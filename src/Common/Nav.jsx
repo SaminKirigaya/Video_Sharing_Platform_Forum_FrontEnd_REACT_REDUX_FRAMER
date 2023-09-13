@@ -21,6 +21,7 @@ function Nav() {
 
     // States : 
     const isLogged = useSelector((state) => state.loginData.login);
+    const playerAvatar = useSelector((state) => state.profImgData.proImgPath);
 
     // Effects Here
     useEffect(() => {
@@ -49,7 +50,16 @@ function Nav() {
                 
 
                 {isLogged ? <div className='avatarArea mt-5' data-bs-toggle="tooltip" data-bs-placement="right" title="Your Profile">
-                Avatar 
+                <Link to ='/profilePage'>
+                    <Stack direction="row" spacing={2}>
+                    
+                    <Avatar
+                        alt="Remy Sharp"
+                        src={playerAvatar}
+                        sx={{ width: 56, height: 56 }}
+                    />
+                    </Stack>
+                </Link>
                 </div> : null}
                 
 

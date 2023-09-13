@@ -50,6 +50,8 @@ function Login() {
     // call redux to see if he is logged in
     var logIn = useSelector((state) => state.loginData.login)
 
+    const profPath = useSelector((state)=>state.profImgData.proImgPath)
+    
     // call redyux to see if token is there
     var token = useSelector((state) => state.tokenData.token)
 
@@ -105,12 +107,17 @@ function Login() {
                     setResponseMessage(response.data.message)
                     setOpen(true)
 
+              
+
                     dispatch(loginFunctions.logon())
                     dispatch(tokenFunctions.setTokenNow(response.data.token))
                     dispatch(usernameFunctions.setRecentUsername(response.data.username))
                     dispatch(userserialFunctions.setSerial(response.data.serial))
-                    dispatch(profImgFunctions.setTheProImgPath(response.data.profileImage))
+                    dispatch(profImgFunctions.setTheProImgPath(response.data.profileImg))
                     dispatch(coverImgFunctions.setCoverImgPath(response.data.coverImg))
+
+                    
+                    
 
                     setTimeout(()=>{
                         setNowGoBack(true)

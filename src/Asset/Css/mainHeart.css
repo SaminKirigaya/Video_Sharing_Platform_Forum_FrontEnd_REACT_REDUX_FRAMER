@@ -138,6 +138,17 @@
 
 
 @media (min-width: 412px) and (max-width: 539px){
+    .adjustheight{
+        padding: 1rem;
+        height: 100vh !important;
+        display: flex !important;
+       flex-direction: column !important;
+        overflow-x: hidden !important;
+        overflow-y: scroll !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
     
     .avatarArea{
         min-width: 100%;
@@ -232,6 +243,18 @@
 
 
 @media (min-width: 768px) and (max-width: 819px){
+    .adjustheight{
+        padding: 1rem;
+        height: 100vh !important;
+        display: flex !important;
+       flex-direction: column !important;
+        overflow-x: hidden !important;
+        overflow-y: scroll !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+
     .avatarArea{
         min-width: 75%;
         min-height: 5vh;
@@ -279,6 +302,17 @@
 
 
 @media (min-width: 820px) and (max-width: 911px){
+    .adjustheight{
+        padding: 1rem;
+        height: 100vh !important;
+        display: flex !important;
+       flex-direction: column !important;
+        overflow-x: hidden !important;
+        overflow-y: scroll !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
     
     .avatarArea{
         min-width: 75%;
@@ -326,6 +360,17 @@
 
 
 @media (min-width: 912px) and (max-width: 1023px){
+    .adjustheight{
+        padding: 1rem;
+        height: 100vh !important;
+        display: flex !important;
+       flex-direction: column !important;
+        overflow-x: hidden !important;
+        overflow-y: scroll !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
     
     .avatarArea{
         min-width: 60%;
@@ -683,6 +728,7 @@ select{
     overflow-x: hidden;
     overflow-y: scroll;
     align-items: center;
+
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
