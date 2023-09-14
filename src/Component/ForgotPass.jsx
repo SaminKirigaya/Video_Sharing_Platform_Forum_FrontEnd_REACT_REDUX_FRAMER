@@ -26,6 +26,12 @@ import { Link } from 'react-router-dom';
 
 
 function ForgotPass() {
+  // Redirecting back state
+  const [nowGoBack, setNowGoBack] = React.useState(false);
+
+  // snackbar open close state
+  const [open, setOpen] = React.useState(false);
+  const [responseMessage, setResponseMessage] = React.useState(''); // initially any error or success message at snackbar
 
   // set FormData in variable 
   const [formValues, setFormValues] = React.useState({
@@ -35,6 +41,20 @@ function ForgotPass() {
   // based on form data two switch will change to indicate if email and pass are according to server rule when any input is given 
   const [emailCondition, setEmailRight] = React.useState(true);
 
+
+
+  // handle close open of snackbar here
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
 
   // Setting email from login data
@@ -124,7 +144,19 @@ function ForgotPass() {
       <sup className='mt-4 linkBtn2'>Don't Have An ID ? .... <Link className='linkBtn2' to='/registration'>Click Here</Link><br></br></sup>
       <sup className='mt-4 linkBtn2'>Already Have An ID ? .... <Link className='linkBtn2' to='/login'>Click Here</Link></sup>
   
+      {nowGoBack ? <Navigate to='/' replace /> : null}
     </div>
+    
+    <Snackbar open={open} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+      <Alert onClose={handleClose} severity="success" sx={{
+          width: '100%',
+          backgroundColor: '#c0ff1d', // Set your custom color here
+          color: '#000000a3', // Set text color for visibility
+          fontFamily: 'Cormorant Infant'
+      }}>
+      {responseMessage}
+      </Alert>
+    </Snackbar>
     </Fragment>
   )
 }
