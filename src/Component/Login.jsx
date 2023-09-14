@@ -144,13 +144,13 @@ function Login() {
         setOpen(true);
       };
     
-      const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-    
-        setOpen(false);
-      };
+    const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+        return;
+    }
+
+    setOpen(false);
+    };
 
     // form design animation handling state
     const handleClickShowPassword = () => setShowPassword((show) => !show);

@@ -26,6 +26,7 @@ import imageName from '../Asset/Images/catCry.jpg'
 
 import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -47,6 +48,8 @@ function ForgotPass() {
   // based on form data two switch will change to indicate if email and pass are according to server rule when any input is given 
   const [emailCondition, setEmailRight] = React.useState(null);
 
+  // get redux checking if user is logged in
+  const loggedStatus = useSelector((state)=>state.loginData.login)
 
 
   // handle close open of snackbar here
@@ -73,33 +76,48 @@ function ForgotPass() {
   // sending forgot pass mail
   const sendTheMail = async (e)=>{
     const formData = new FormData()
-    if(formValues.email && emailCondition){
-      formData.append('Email', formValues.email)
-      try{  
-        const response = await axios.post('/fortgotPassword', formData, {
-          headers : {
-            'Content-Type' : 'application/json'
+
+    if(!loggedStatus){
+
+      if(formValues.email && emailCondition){
+
+        formData.append('Email', formValues.email)
+        try{  
+          const response = await axios.post('/fortgotPassword', formData, {
+            headers : {
+              'Content-Type' : 'application/json'
+            }
+          })
+  
+          if(response.data.message == 'You were sent a new password in your mail, now you can login with that and change password in your profile.'){
+            setResponseMessage(response.data.message)
+            setOpen(true)
+  
+            setTimeout(()=>{
+              setNowGoBack(true)
+            }, 1800)
+          }else{
+            setResponseMessage(response.data.message)
+            setOpen(true)
           }
-        })
-
-        if(response.data.message == 'You were sent a new password in your mail, now you can login with that and change password in your profile.'){
-          setResponseMessage(response.data.message)
-          setOpen(true)
-
-          setTimeout(()=>{
-            setNowGoBack(true)
-          }, 1800)
-        }else{
-          setResponseMessage(response.data.message)
-          setOpen(true)
+        }catch(err){
+          console.log(err)
         }
-      }catch(err){
-        console.log(err)
+
+      }else{
+        setResponseMessage('Make sure to insert all form fields according to server rule and no field is empty ...')
+        setOpen(true)
       }
+
     }else{
-      setResponseMessage('Make sure to insert all form fields according to server rule and no field is empty ...')
-      setOpen(true)
+        setResponseMessage('You are already logged in ...')
+        setOpen(true)
+
+        setTimeout(()=>{
+          setNowGoBack(true)
+        }, 1500)
     }
+    
   }
   
   // initially start a function like component did mount at start by [ ] dependency it runs one time at start till reload ...

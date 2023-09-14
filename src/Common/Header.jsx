@@ -14,6 +14,7 @@ const Reg = React.lazy(()=>import('../Component/Regstration'));
 const ForgotPass = React.lazy(()=>import('../Component/ForgotPass'));
 const Verify = React.lazy(()=>import('../Component/Verify'));
 
+
 function loadingEffect(){
     return  <div className='container-fluid loader d-flex justify-content-center align-items-center'>
         <div className="spinner-border desLoad" style={{width: '3rem', height: '3rem'}} role="status">

@@ -105,7 +105,7 @@ function Nav() {
 
 
                 {isLogged ? <div className='mt-3' data-bs-toggle="tooltip" data-bs-placement="right" title="LogOut">
-                <LogoutIcon fontSize='large' />
+                <Link className='linkBtn' to='/logout'><LogoutIcon fontSize='large' /></Link>
                 </div> : null}
                 
 
