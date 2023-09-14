@@ -2,6 +2,8 @@ import React, { Fragment, useState, useEffect } from 'react'
 
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
@@ -22,8 +24,12 @@ import watching from '../Asset/Images/watching.jpg'
 
 import imageName from '../Asset/Images/catCry.jpg'
 
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import axios from 'axios';
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function ForgotPass() {
   // Redirecting back state
@@ -39,7 +45,7 @@ function ForgotPass() {
     
   })
   // based on form data two switch will change to indicate if email and pass are according to server rule when any input is given 
-  const [emailCondition, setEmailRight] = React.useState(true);
+  const [emailCondition, setEmailRight] = React.useState(null);
 
 
 
@@ -57,9 +63,43 @@ function ForgotPass() {
   };
 
 
+  
+
   // Setting email from login data
   const setTheEmail = (e)=>{
       setFormValues((prevState)=>({...prevState, email : e.target.value}))
+  }
+
+  // sending forgot pass mail
+  const sendTheMail = async (e)=>{
+    const formData = new FormData()
+    if(formValues.email && emailCondition){
+      formData.append('Email', formValues.email)
+      try{  
+        const response = await axios.post('/fortgotPassword', formData, {
+          headers : {
+            'Content-Type' : 'application/json'
+          }
+        })
+
+        if(response.data.message == 'You were sent a new password in your mail, now you can login with that and change password in your profile.'){
+          setResponseMessage(response.data.message)
+          setOpen(true)
+
+          setTimeout(()=>{
+            setNowGoBack(true)
+          }, 1800)
+        }else{
+          setResponseMessage(response.data.message)
+          setOpen(true)
+        }
+      }catch(err){
+        console.log(err)
+      }
+    }else{
+      setResponseMessage('Make sure to insert all form fields according to server rule and no field is empty ...')
+      setOpen(true)
+    }
   }
   
   // initially start a function like component did mount at start by [ ] dependency it runs one time at start till reload ...
@@ -90,6 +130,7 @@ function ForgotPass() {
     
 
   },[formValues])
+
 
 
   return (
@@ -137,16 +178,16 @@ function ForgotPass() {
       </Box>
       
 
-      <button type="button" className="btn btn-sm btn-primary mx-auto mt-3">Get New Pass</button>
+      <button onClick={(e)=>{sendTheMail(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-3">Get New Pass</button>
       </div>
       </div>
 
       <sup className='mt-4 linkBtn2'>Don't Have An ID ? .... <Link className='linkBtn2' to='/registration'>Click Here</Link><br></br></sup>
       <sup className='mt-4 linkBtn2'>Already Have An ID ? .... <Link className='linkBtn2' to='/login'>Click Here</Link></sup>
   
-      {nowGoBack ? <Navigate to='/' replace /> : null}
+      {nowGoBack ? <Navigate to='/login' replace /> : null}
     </div>
-    
+
     <Snackbar open={open} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
       <Alert onClose={handleClose} severity="success" sx={{
           width: '100%',
