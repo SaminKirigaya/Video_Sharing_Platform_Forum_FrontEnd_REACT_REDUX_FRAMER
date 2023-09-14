@@ -14,7 +14,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import LogoutIcon from '@mui/icons-material/Logout';
-
+import VideoSettingsIcon from '@mui/icons-material/VideoSettings';
 
 
 function Nav() {
@@ -84,6 +84,10 @@ function Nav() {
                 <div className='mt-3' data-bs-toggle="tooltip" data-bs-placement="right" title="All Categories">
                 <InterestsIcon fontSize='large' />
                 </div>
+
+                {isLogged ? <div className='mt-3' data-bs-toggle="tooltip" data-bs-placement="right" title="Your Videos">
+                <VideoSettingsIcon fontSize='large' />
+                </div> : null}
 
 
                 {isLogged ? <div className='mt-3' data-bs-toggle="tooltip" data-bs-placement="right" title="Watch Later">

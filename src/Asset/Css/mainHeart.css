@@ -1,11 +1,18 @@
 @media (min-width: 320px) and (max-width: 374px){
+    .coverImage{
+        display: block;
+        object-fit: cover !important;
+        width: 98.5%;
+        height : 100%;
+    }
+     
     
     
 .posAvatar{
     
-    position: absolute;
-    top: 20%; 
-    left: 38%;
+    position: relative;
+    top: -6%; 
+    left: 0%;
 }
 
     .coverHolder{
@@ -64,12 +71,20 @@
 
 
 @media (min-width: 375px) and (max-width: 389px){
+
+    .coverImage{
+        display: block;
+        object-fit: cover !important;
+        width: 99.5%;
+        height : 100%;
+    }
+     
     
     
 .posAvatar{
-    position: absolute;
-    top: 20%; 
-    left: 37%;
+    position: relative;
+    top: -6%; 
+    left: 0%;
 }
     .coverHolder{
 
@@ -127,11 +142,17 @@
 
 
 @media (min-width: 390px) and (max-width: 411px){
-    
+    .coverImage{
+        display: block;
+        object-fit: cover !important;
+        width: 99.5%;
+        height : 100%;
+    }
+
 .posAvatar{
-    position: absolute;
-    top: 21%; 
-    left: 37%;
+    position: relative;
+    top: -4.5%; 
+    left: 0%;
 }
     .coverHolder{
 
@@ -191,11 +212,17 @@
 
 @media (min-width: 412px) and (max-width: 539px){
     
+    .coverImage{
+        display: block;
+        object-fit: cover !important;
+        width: 99.5%;
+        height : 100%;
+    }
     
 .posAvatar{
-    position: absolute;
-    top: 22%; 
-    left: 38%;
+    position: relative;
+    top: -4.5%; 
+    left: 0%;
 }
 
     .coverHolder{
@@ -267,10 +294,16 @@
 
 
 @media (min-width: 540px) and (max-width: 767px){
+    .coverImage{
+        display: block;
+        object-fit: cover !important;
+        width: 99%;
+        height : 100%;
+    }
     .posAvatar{
-        position: absolute;
-        top: 25%; 
-        left: 41%;
+        position: relative;
+        top: -5%; 
+        left: 0%;
     }
 
     .coverHolder{
@@ -330,11 +363,17 @@
 
 
 @media (min-width: 768px) and (max-width: 819px){
+    .coverImage{
+        display: block;
+        object-fit: cover !important;
+        width: 100%;
+        height : 100%;
+    }
     .posAvatar{
 
-        position: absolute;
-        top: 25%; 
-        left: 43%;
+        position: relative;
+        top: -4%; 
+        left: 0%;
     }
     .coverHolder{
 
@@ -406,11 +445,18 @@
 
 
 @media (min-width: 820px) and (max-width: 911px){
+    .coverImage{
+        display: block;
+        object-fit: cover !important;
+        width: 100%;
+        height : 100%;
+    }
+
     .posAvatar{
 
-        position: absolute;
-        top: 26%; 
-        left: 43%;
+        position: relative;
+        top: -4%; 
+        left: 0%;
     }
 
     .coverHolder{
@@ -482,11 +528,18 @@
 
 
 @media (min-width: 912px) and (max-width: 1023px){
+    .coverImage{
+        display: block;
+        object-fit: cover !important;
+        width: 100%;
+        height : 100%;
+    }
+
     .posAvatar{
       
-        position: absolute;
-        top: 23%; 
-        left: 43%;
+        position: relative;
+        top: -3%; 
+        left: 0%;
     }
     .coverHolder{
 
@@ -557,11 +610,18 @@
 
 
 @media (min-width: 1024px) and (max-width: 1267px){
+    .coverImage{
+        display: block;
+        object-fit: cover !important;
+        width: 98%;
+        height : 100%;
+    }
+
     .posAvatar{
 
-        position: absolute;
-        top: 33%; 
-        left: 45%;
+        position: relative;
+        top: -7%; 
+        left: 0%;
     }
 
     .coverHolder{
@@ -621,11 +681,17 @@
 
 
 @media (min-width: 1268px) and (max-width: 1365px){
+    .coverImage{
+        display: block;
+        object-fit: cover !important;
+        width: 98%;
+        height : 100%;
+    }
     .posAvatar{
 
-        position: absolute;
-        top: 34%; 
-        left: 45%;
+        position: relative;
+        top: -6%; 
+        left: 0%;
     }
     
     .coverHolder{
@@ -686,11 +752,17 @@
 
 
 @media (min-width: 1366px) and (max-width: 1919px){
+    .coverImage{
+        display: block;
+        object-fit: cover !important;
+        width: 98%;
+        height : 100%;
+    }
     .posAvatar{
 
-        position: absolute;
-        top: 34%; 
-        left: 45%;
+        position: relative;
+        top: -6%; 
+        left: 0%;
     }
     .coverHolder{
 
@@ -752,11 +824,17 @@
 
 
 @media (min-width: 1920px) and (max-width: 3840px){
+    .coverImage{
+        display: block;
+        object-fit: cover !important;
+        width: 98%;
+        height : 100%;
+    }
     .posAvatar{
         
-        position: absolute;
-        top: 36%; 
-        left: 46%;
+        position: relative;
+        top: -4%; 
+        left: 0%;
     }
 
     .coverHolder{
@@ -954,8 +1032,8 @@ select{
 
   .profilePageHeight{
     padding-top: 0rem !important;
-    padding-right: 1rem;
-    padding-left: 1rem;
+    padding-right: 0rem;
+    padding-left: 0rem;
     padding-bottom: 1rem;
     max-width: 93.5vw;
     height: 100vh !important;
@@ -978,15 +1056,27 @@ select{
 
 
 
-.coverImage{
-    display: block;
-    object-fit: cover !important;
-    width: 100%;
-    height : 100%;
-}
 
 
 .welcomeTxt{
     color: #4f6616;
     font-size: 2rem;
+}
+
+.bordcol{
+    border: 0.1rem solid #96ca12;
+}
+
+.bordTop{
+    border-top: 0.2rem dotted #96ca12;
+}
+
+.linkdesGreen{
+    color:#4f6616;
+    text-decoration: none;
+}
+
+.linkdesGreen:hover{
+    color:#313f0e;
+    text-decoration: none;
 }
