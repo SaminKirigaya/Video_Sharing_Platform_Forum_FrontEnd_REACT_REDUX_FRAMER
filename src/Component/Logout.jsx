@@ -24,6 +24,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 
 function Logout() {
+  const dispatch = useDispatch();
   // States : 
   const isLogged = useSelector((state) => state.loginData.login);
   const token = useSelector((state)=>state.tokenData.token)
@@ -60,22 +61,29 @@ function Logout() {
 
     if(isLogged && token && serial){
       try{
-        const response = await axios({
-          url : `/logMeOut/${serial}`,
-          method : 'post',
-          data : {
-            token : token
+
+        const response = await axios.get(`/logMeOut/${serial}`,{
+          headers : {
+            'Content-Type' : 'application/json'
           }
-          
         })
 
         if(response.data.message == 'You have successfully logged out ...'){
           setResponseMessage(response.data.message)
           setOpen(true)
 
+
           setTimeout(()=>{
             setNowGoBack(true)
-          },1800)
+            dispatch(loginFunctions.logout())
+            dispatch(tokenFunctions.clearToken())
+            dispatch(usernameFunctions.clearusername())
+            dispatch(userserialFunctions.clearSerial())
+            dispatch(profImgFunctions.clearproImgPath())
+            dispatch(coverImgFunctions.clearCoverImgPath())
+          },1400)
+
+          
 
         }else{
 

@@ -13,7 +13,7 @@ const Logout = React.lazy(()=>import('../Component/Logout'));
 const Reg = React.lazy(()=>import('../Component/Regstration'));
 const ForgotPass = React.lazy(()=>import('../Component/ForgotPass'));
 const Verify = React.lazy(()=>import('../Component/Verify'));
-
+const ProfilePage = React.lazy(()=>import('../Component/ProfilePage'));
 
 function loadingEffect(){
     return  <div className='container-fluid loader d-flex justify-content-center align-items-center'>
@@ -44,6 +44,7 @@ function Header() {
                     <Route path='/registration' Component={()=>(<Reg />)} />
                     <Route path='/forgotPass' Component={()=>(<ForgotPass />)} />
                     <Route path='/verify' Component={()=>(<Verify />)} />
+                    <Route path='/profilePage' Component={()=>(<ProfilePage />)} />
                 </Routes>
             </Suspense>
         </div>

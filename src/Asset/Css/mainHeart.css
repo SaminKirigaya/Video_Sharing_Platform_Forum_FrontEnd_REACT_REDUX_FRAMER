@@ -1,5 +1,24 @@
 @media (min-width: 320px) and (max-width: 374px){
     
+    
+.posAvatar{
+    
+    position: absolute;
+    top: 20%; 
+    left: 38%;
+}
+
+    .coverHolder{
+
+        min-width: 83vw !important;
+        max-width : 83vw !important;
+        min-height : 25vh !important;
+        max-height: 25vh !important;
+        -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    
+    }
+    
     .avatarArea{
         min-width: 100%;
         min-height: 4.5vh;
@@ -45,6 +64,23 @@
 
 
 @media (min-width: 375px) and (max-width: 389px){
+    
+    
+.posAvatar{
+    position: absolute;
+    top: 20%; 
+    left: 37%;
+}
+    .coverHolder{
+
+        min-width: 83vw !important;
+        max-width : 83vw !important;
+        min-height : 25vh !important;
+        max-height: 25vh !important;
+        -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    
+    }
     
 
     .avatarArea{
@@ -92,6 +128,22 @@
 
 @media (min-width: 390px) and (max-width: 411px){
     
+.posAvatar{
+    position: absolute;
+    top: 21%; 
+    left: 37%;
+}
+    .coverHolder{
+
+        min-width: 83vw !important;
+        max-width : 83vw !important;
+        min-height : 25vh !important;
+        max-height: 25vh !important;
+        -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    
+    }
+    
     .avatarArea{
         min-width: 100%;
         min-height: 4.5vh;
@@ -138,6 +190,25 @@
 
 
 @media (min-width: 412px) and (max-width: 539px){
+    
+    
+.posAvatar{
+    position: absolute;
+    top: 22%; 
+    left: 38%;
+}
+
+    .coverHolder{
+
+        min-width: 83vw !important;
+        max-width : 83vw !important;
+        min-height : 26vh !important;
+        max-height: 26vh !important;
+        -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    
+    }
+
     .adjustheight{
         padding: 1rem;
         height: 100vh !important;
@@ -196,6 +267,22 @@
 
 
 @media (min-width: 540px) and (max-width: 767px){
+    .posAvatar{
+        position: absolute;
+        top: 25%; 
+        left: 41%;
+    }
+
+    .coverHolder{
+
+        min-width: 88vw !important;
+        max-width : 88vw !important;
+        min-height : 30vh !important;
+        max-height: 30vh !important;
+        -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    
+    }
     
     .avatarArea{
         min-width: 100%;
@@ -243,6 +330,23 @@
 
 
 @media (min-width: 768px) and (max-width: 819px){
+    .posAvatar{
+
+        position: absolute;
+        top: 25%; 
+        left: 43%;
+    }
+    .coverHolder{
+
+        min-width: 87vw !important;
+        max-width : 87vw !important;
+        min-height : 29vh !important;
+        max-height: 29vh !important;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    
+    }
+
     .adjustheight{
         padding: 1rem;
         height: 100vh !important;
@@ -302,6 +406,24 @@
 
 
 @media (min-width: 820px) and (max-width: 911px){
+    .posAvatar{
+
+        position: absolute;
+        top: 26%; 
+        left: 43%;
+    }
+
+    .coverHolder{
+
+        min-width: 87vw !important;
+        max-width : 87vw !important;
+        min-height : 29vh !important;
+        max-height: 29vh !important;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    
+    }
+
     .adjustheight{
         padding: 1rem;
         height: 100vh !important;
@@ -360,6 +482,23 @@
 
 
 @media (min-width: 912px) and (max-width: 1023px){
+    .posAvatar{
+      
+        position: absolute;
+        top: 23%; 
+        left: 43%;
+    }
+    .coverHolder{
+
+        min-width: 87vw !important;
+        max-width : 87vw !important;
+        min-height : 26vh !important;
+        max-height: 26vh !important;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+        
+    
+    }
     .adjustheight{
         padding: 1rem;
         height: 100vh !important;
@@ -418,6 +557,23 @@
 
 
 @media (min-width: 1024px) and (max-width: 1267px){
+    .posAvatar{
+
+        position: absolute;
+        top: 33%; 
+        left: 45%;
+    }
+
+    .coverHolder{
+
+        min-width: 95vw !important;
+        max-width : 95vw !important;
+        min-height : 40vh !important;
+        max-height: 40vh !important;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    
+    }
     
     .avatarArea{
         min-width: 95%;
@@ -465,7 +621,25 @@
 
 
 @media (min-width: 1268px) and (max-width: 1365px){
+    .posAvatar{
+
+        position: absolute;
+        top: 34%; 
+        left: 45%;
+    }
     
+    .coverHolder{
+
+        min-width: 95vw !important;
+        max-width : 95vw !important;
+        min-height : 40vh !important;
+        max-height: 40vh !important;
+        -ms-overflow-style: none;  /* IE and Edge */
+     scrollbar-width: none;  /* Firefox */
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+
     .avatarArea{
         min-width: 95%;
         min-height: 4.8vh;
@@ -512,6 +686,24 @@
 
 
 @media (min-width: 1366px) and (max-width: 1919px){
+    .posAvatar{
+
+        position: absolute;
+        top: 34%; 
+        left: 45%;
+    }
+    .coverHolder{
+
+        min-width: 95vw !important;
+        max-width : 95vw !important;
+        min-height : 40vh !important;
+        max-height: 40vh !important;
+        -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    overflow-y: auto;
+        overflow-x: auto;
+    
+    }
     
     .avatarArea{
         min-width: 95%;
@@ -560,6 +752,23 @@
 
 
 @media (min-width: 1920px) and (max-width: 3840px){
+    .posAvatar{
+        
+        position: absolute;
+        top: 36%; 
+        left: 46%;
+    }
+
+    .coverHolder{
+
+        min-width: 95vw !important;
+        max-width : 95vw !important;
+        min-height : 40vh !important;
+        max-height: 40vh !important;
+        -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    
+    }
     
     .avatarArea{
         min-width: 55%;
@@ -742,3 +951,42 @@ select{
     scrollbar-width: none;  /* Firefox */
   }
 
+
+  .profilePageHeight{
+    padding-top: 0rem !important;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+    max-width: 93.5vw;
+    height: 100vh !important;
+    display: flex;
+   flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .profilePageHeight::-webkit-scrollbar {
+    display: none;
+  }
+
+
+  .coverHolder::-webkit-scrollbar {
+    display: none;
+  }
+
+
+
+.coverImage{
+    display: block;
+    object-fit: cover !important;
+    width: 100%;
+    height : 100%;
+}
+
+
+.welcomeTxt{
+    color: #4f6616;
+    font-size: 2rem;
+}
