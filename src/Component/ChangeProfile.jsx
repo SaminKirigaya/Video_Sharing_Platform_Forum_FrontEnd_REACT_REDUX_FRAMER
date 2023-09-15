@@ -78,7 +78,46 @@ function ChangeProfile() {
             }else if(userData.profileImageName && !userData.coverImageName){
 
             }else if(userData.profileImageName && userData.coverImageName){
+                try{
+                    formData.append('Username', userData.username)
+                    formData.append('Fullname', userData.fullname)
+                    formData.append('Gender', userData.gender)
+                    formData.append('Country', userData.country)
+                    formData.append('Birth_Date', userData.dateofbirth)
+                    formData.append('Address', userData.address)
+                    formData.append('ProfileImage', userData.profileImageFile)
+                    formData.append('CoverImage', userData.coverImageFile)
 
+                    const response = await axios.post(`/setMyNewDetailsBothImg/${serial}`, formData, {
+                        headers : {
+                            'Content-Type' : 'multipart/form-data'
+                        }
+                    })
+
+                    if(response.data.message == 'Successfully new user informtation was set in server. Please log in again ...'){
+                        
+                        setResponseMessage(response.data.message)
+                        setOpen(true)
+
+
+                        setTimeout(()=>{
+                            setNowGoBack(true)
+                            dispatch(loginFunctions.logout())
+                            dispatch(tokenFunctions.clearToken())
+                            dispatch(usernameFunctions.clearusername())
+                            dispatch(userserialFunctions.clearSerial())
+                            dispatch(profImgFunctions.clearproImgPath())
+                            dispatch(coverImgFunctions.clearCoverImgPath())
+                        },1400)
+
+                    }else{
+                        setResponseMessage(response.data.message)
+                        setOpen(true)
+                    }
+
+                }catch(err){
+                    console.log(err)
+                }
             }else if(!userData.profileImageName && !userData.coverImageName){
                 try{
                     formData.append('Username', userData.username)
