@@ -121,7 +121,7 @@ function Login() {
 
                     setTimeout(()=>{
                         setNowGoBack(true)
-                    }, 1800)
+                    }, 1400)
                     
                 }else{
                     setResponseMessage(response.data.message)

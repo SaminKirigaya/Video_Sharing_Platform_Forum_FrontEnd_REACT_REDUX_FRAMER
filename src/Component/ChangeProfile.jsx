@@ -71,186 +71,193 @@ function ChangeProfile() {
     // send data to set new user details in database
     const setNewUserData = async(e)=>{
         const formData = new FormData()
-        if(submissionRule && userData.username && userData.fullname && userData.gender && userData.country && userData.dateofbirth && userData.address){
+
+        if(serial && token){
+            if(submissionRule && userData.username && userData.fullname && userData.gender && userData.country && userData.dateofbirth && userData.address){
             
-            if(!userData.profileImageName && userData.coverImageName){
-
-                try{
-                    formData.append('Username', userData.username)
-                    formData.append('Fullname', userData.fullname)
-                    formData.append('Gender', userData.gender)
-                    formData.append('Country', userData.country)
-                    formData.append('Birth_Date', userData.dateofbirth)
-                    formData.append('Address', userData.address)
-                    formData.append('CoverImage', userData.coverImageFile)
-                   
-
-                    const response = await axios.post(`/setMyNewDetailsCoverImg/${serial}`, formData, {
-                        headers : {
-                            'Content-Type' : 'multipart/form-data'
+                if(!userData.profileImageName && userData.coverImageName){
+    
+                    try{
+                        formData.append('Username', userData.username)
+                        formData.append('Fullname', userData.fullname)
+                        formData.append('Gender', userData.gender)
+                        formData.append('Country', userData.country)
+                        formData.append('Birth_Date', userData.dateofbirth)
+                        formData.append('Address', userData.address)
+                        formData.append('CoverImage', userData.coverImageFile)
+                       
+    
+                        const response = await axios.post(`/setMyNewDetailsCoverImg/${serial}`, formData, {
+                            headers : {
+                                'Content-Type' : 'multipart/form-data'
+                            }
+                        })
+    
+                        if(response.data.message == 'Successfully new user informtation was set in server. Please log in again ...'){
+                            
+                            setResponseMessage(response.data.message)
+                            setOpen(true)
+    
+    
+                            setTimeout(()=>{
+                                setNowGoBack(true)
+                                dispatch(loginFunctions.logout())
+                                dispatch(tokenFunctions.clearToken())
+                                dispatch(usernameFunctions.clearusername())
+                                dispatch(userserialFunctions.clearSerial())
+                                dispatch(profImgFunctions.clearproImgPath())
+                                dispatch(coverImgFunctions.clearCoverImgPath())
+                            },1400)
+    
+                        }else{
+                            setResponseMessage(response.data.message)
+                            setOpen(true)
                         }
-                    })
-
-                    if(response.data.message == 'Successfully new user informtation was set in server. Please log in again ...'){
-                        
-                        setResponseMessage(response.data.message)
-                        setOpen(true)
-
-
-                        setTimeout(()=>{
-                            setNowGoBack(true)
-                            dispatch(loginFunctions.logout())
-                            dispatch(tokenFunctions.clearToken())
-                            dispatch(usernameFunctions.clearusername())
-                            dispatch(userserialFunctions.clearSerial())
-                            dispatch(profImgFunctions.clearproImgPath())
-                            dispatch(coverImgFunctions.clearCoverImgPath())
-                        },1400)
-
-                    }else{
-                        setResponseMessage(response.data.message)
-                        setOpen(true)
+    
+                    }catch(err){
+                        console.log(err)
                     }
-
-                }catch(err){
-                    console.log(err)
-                }
-
-
-            }else if(userData.profileImageName && !userData.coverImageName){
-
-                try{
-                    formData.append('Username', userData.username)
-                    formData.append('Fullname', userData.fullname)
-                    formData.append('Gender', userData.gender)
-                    formData.append('Country', userData.country)
-                    formData.append('Birth_Date', userData.dateofbirth)
-                    formData.append('Address', userData.address)
-                    formData.append('ProfileImage', userData.profileImageFile)
-                   
-
-                    const response = await axios.post(`/setMyNewDetailsProfImg/${serial}`, formData, {
-                        headers : {
-                            'Content-Type' : 'multipart/form-data'
+    
+    
+                }else if(userData.profileImageName && !userData.coverImageName){
+    
+                    try{
+                        formData.append('Username', userData.username)
+                        formData.append('Fullname', userData.fullname)
+                        formData.append('Gender', userData.gender)
+                        formData.append('Country', userData.country)
+                        formData.append('Birth_Date', userData.dateofbirth)
+                        formData.append('Address', userData.address)
+                        formData.append('ProfileImage', userData.profileImageFile)
+                       
+    
+                        const response = await axios.post(`/setMyNewDetailsProfImg/${serial}`, formData, {
+                            headers : {
+                                'Content-Type' : 'multipart/form-data'
+                            }
+                        })
+    
+                        if(response.data.message == 'Successfully new user informtation was set in server. Please log in again ...'){
+                            
+                            setResponseMessage(response.data.message)
+                            setOpen(true)
+    
+    
+                            setTimeout(()=>{
+                                setNowGoBack(true)
+                                dispatch(loginFunctions.logout())
+                                dispatch(tokenFunctions.clearToken())
+                                dispatch(usernameFunctions.clearusername())
+                                dispatch(userserialFunctions.clearSerial())
+                                dispatch(profImgFunctions.clearproImgPath())
+                                dispatch(coverImgFunctions.clearCoverImgPath())
+                            },1400)
+    
+                        }else{
+                            setResponseMessage(response.data.message)
+                            setOpen(true)
                         }
-                    })
-
-                    if(response.data.message == 'Successfully new user informtation was set in server. Please log in again ...'){
-                        
-                        setResponseMessage(response.data.message)
-                        setOpen(true)
-
-
-                        setTimeout(()=>{
-                            setNowGoBack(true)
-                            dispatch(loginFunctions.logout())
-                            dispatch(tokenFunctions.clearToken())
-                            dispatch(usernameFunctions.clearusername())
-                            dispatch(userserialFunctions.clearSerial())
-                            dispatch(profImgFunctions.clearproImgPath())
-                            dispatch(coverImgFunctions.clearCoverImgPath())
-                        },1400)
-
-                    }else{
-                        setResponseMessage(response.data.message)
-                        setOpen(true)
+    
+                    }catch(err){
+                        console.log(err)
                     }
-
-                }catch(err){
-                    console.log(err)
-                }
-
-
-            }else if(userData.profileImageName && userData.coverImageName){
-
-
-                try{
-                    formData.append('Username', userData.username)
-                    formData.append('Fullname', userData.fullname)
-                    formData.append('Gender', userData.gender)
-                    formData.append('Country', userData.country)
-                    formData.append('Birth_Date', userData.dateofbirth)
-                    formData.append('Address', userData.address)
-                    formData.append('ProfileImage', userData.profileImageFile)
-                    formData.append('CoverImage', userData.coverImageFile)
-
-                    const response = await axios.post(`/setMyNewDetailsBothImg/${serial}`, formData, {
-                        headers : {
-                            'Content-Type' : 'multipart/form-data'
+    
+    
+                }else if(userData.profileImageName && userData.coverImageName){
+    
+    
+                    try{
+                        formData.append('Username', userData.username)
+                        formData.append('Fullname', userData.fullname)
+                        formData.append('Gender', userData.gender)
+                        formData.append('Country', userData.country)
+                        formData.append('Birth_Date', userData.dateofbirth)
+                        formData.append('Address', userData.address)
+                        formData.append('ProfileImage', userData.profileImageFile)
+                        formData.append('CoverImage', userData.coverImageFile)
+    
+                        const response = await axios.post(`/setMyNewDetailsBothImg/${serial}`, formData, {
+                            headers : {
+                                'Content-Type' : 'multipart/form-data'
+                            }
+                        })
+    
+                        if(response.data.message == 'Successfully new user informtation was set in server. Please log in again ...'){
+                            
+                            setResponseMessage(response.data.message)
+                            setOpen(true)
+    
+    
+                            setTimeout(()=>{
+                                setNowGoBack(true)
+                                dispatch(loginFunctions.logout())
+                                dispatch(tokenFunctions.clearToken())
+                                dispatch(usernameFunctions.clearusername())
+                                dispatch(userserialFunctions.clearSerial())
+                                dispatch(profImgFunctions.clearproImgPath())
+                                dispatch(coverImgFunctions.clearCoverImgPath())
+                            },1400)
+    
+                        }else{
+                            setResponseMessage(response.data.message)
+                            setOpen(true)
                         }
-                    })
-
-                    if(response.data.message == 'Successfully new user informtation was set in server. Please log in again ...'){
-                        
-                        setResponseMessage(response.data.message)
-                        setOpen(true)
-
-
-                        setTimeout(()=>{
-                            setNowGoBack(true)
-                            dispatch(loginFunctions.logout())
-                            dispatch(tokenFunctions.clearToken())
-                            dispatch(usernameFunctions.clearusername())
-                            dispatch(userserialFunctions.clearSerial())
-                            dispatch(profImgFunctions.clearproImgPath())
-                            dispatch(coverImgFunctions.clearCoverImgPath())
-                        },1400)
-
-                    }else{
-                        setResponseMessage(response.data.message)
-                        setOpen(true)
+    
+                    }catch(err){
+                        console.log(err)
                     }
-
-                }catch(err){
-                    console.log(err)
-                }
-
-
-            }else if(!userData.profileImageName && !userData.coverImageName){
-                try{
-                    formData.append('Username', userData.username)
-                    formData.append('Fullname', userData.fullname)
-                    formData.append('Gender', userData.gender)
-                    formData.append('Country', userData.country)
-                    formData.append('Birth_Date', userData.dateofbirth)
-                    formData.append('Address', userData.address)
-
-                    const response = await axios.post(`/setMyNewDetailsNoImg/${serial}`, formData, {
-                        headers : {
-                            'Content-Type' : 'application/json'
+    
+    
+                }else if(!userData.profileImageName && !userData.coverImageName){
+                    try{
+                        formData.append('Username', userData.username)
+                        formData.append('Fullname', userData.fullname)
+                        formData.append('Gender', userData.gender)
+                        formData.append('Country', userData.country)
+                        formData.append('Birth_Date', userData.dateofbirth)
+                        formData.append('Address', userData.address)
+    
+                        const response = await axios.post(`/setMyNewDetailsNoImg/${serial}`, formData, {
+                            headers : {
+                                'Content-Type' : 'application/json'
+                            }
+                        })
+    
+                        if(response.data.message == 'Successfully new user informtation was set in server. Please log in again ...'){
+                            
+                            setResponseMessage(response.data.message)
+                            setOpen(true)
+    
+    
+                            setTimeout(()=>{
+                                setNowGoBack(true)
+                                dispatch(loginFunctions.logout())
+                                dispatch(tokenFunctions.clearToken())
+                                dispatch(usernameFunctions.clearusername())
+                                dispatch(userserialFunctions.clearSerial())
+                                dispatch(profImgFunctions.clearproImgPath())
+                                dispatch(coverImgFunctions.clearCoverImgPath())
+                            },1400)
+    
+                        }else{
+                            setResponseMessage(response.data.message)
+                            setOpen(true)
                         }
-                    })
-
-                    if(response.data.message == 'Successfully new user informtation was set in server. Please log in again ...'){
-                        
-                        setResponseMessage(response.data.message)
-                        setOpen(true)
-
-
-                        setTimeout(()=>{
-                            setNowGoBack(true)
-                            dispatch(loginFunctions.logout())
-                            dispatch(tokenFunctions.clearToken())
-                            dispatch(usernameFunctions.clearusername())
-                            dispatch(userserialFunctions.clearSerial())
-                            dispatch(profImgFunctions.clearproImgPath())
-                            dispatch(coverImgFunctions.clearCoverImgPath())
-                        },1400)
-
-                    }else{
-                        setResponseMessage(response.data.message)
-                        setOpen(true)
+    
+                    }catch(err){
+                        console.log(err)
                     }
-
-                }catch(err){
-                    console.log(err)
                 }
+    
+            }else{
+                setResponseMessage('Make sure to not keep any input field empty ... Profile image and Cover Image are optional though .')
+                setOpen(true)
             }
-
         }else{
-            setResponseMessage('Make sure to not keep any input field empty ... Profile image and Cover Image are optional though .')
+            setResponseMessage('Seems like you are not even logged in, make sure to log in first ...')
             setOpen(true)
         }
+        
     }
     
     const fetchdata = async()=>{
