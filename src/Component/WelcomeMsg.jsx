@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 
@@ -6,9 +6,23 @@ import { useSelector } from 'react-redux';
 
 
 function WelcomeMsg() {
+
     const coverImg = useSelector((state)=>state.coverImgData.coverImgPath)
   const playerAvatar = useSelector((state) => state.profImgData.proImgPath)
   const userName = useSelector((state)=>state.usernameData.username)
+
+
+   // Effects Here
+   useEffect(() => {
+    // Initialize tooltips when the component mounts
+    window.$('[data-bs-toggle="tooltip"]').tooltip();
+
+    //  to clean up the tooltips when the component unmounts
+    return () => {
+      window.$('[data-bs-toggle="tooltip"]').tooltip('dispose');
+    };
+  }, []); // [ ] empty mean it will only run once after first render like component did mount :>
+
 
   return (
     <Fragment>

@@ -64,7 +64,7 @@ function ChangePassword() {
     <h5 className="card-title mx-auto">Change Password</h5>
 
 
-    <div class="row row-cols-1 row-cols-md-2 g-2 mx-auto mt-3">
+    <div class="row row-cols-1 row-cols-md-2 g-2 mx-auto">
         
 
 

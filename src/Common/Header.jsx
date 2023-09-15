@@ -16,6 +16,7 @@ const Verify = React.lazy(()=>import('../Component/Verify'));
 const ProfilePage = React.lazy(()=>import('../Component/ProfilePage'));
 const ChangeProfile = React.lazy(()=>import('../Component/ChangeProfile'));
 const ChangePassword = React.lazy(()=>import('../Component/ChangePassword'));
+const DeleteAccount = React.lazy(()=>import('../Component/DeleteAccount'));
 
 
 function loadingEffect(){
@@ -50,6 +51,7 @@ function Header() {
                     <Route path='/profilePage' Component={()=>(<ProfilePage />)} />
                     <Route path='/changeProfile' Component={()=>(<ChangeProfile />)} />
                     <Route path='/changePassword' Component={()=>(<ChangePassword />)} />
+                    <Route path='/deleteAccount' Component={()=>(<DeleteAccount />)} />
                 </Routes>
             </Suspense>
         </div>

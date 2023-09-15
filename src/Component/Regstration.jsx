@@ -56,7 +56,7 @@ function Regstration() {
         fullname : '',
         address : '',
         confirm_password : '',
-        date_of_birth : null,
+        date_of_birth : '',
         country : '',
         gender : '',
         profile_image : null,
@@ -206,115 +206,120 @@ function Regstration() {
         var regexPassword = /^([0-9a-zA-Z@!_]+){6,50}$/; // password
 
 
-        if(formValues.email){ // Email is valid or invalid
-            if(regexEmail.test(formValues.email)){
-                document.getElementById('email').classList.remove('is-invalid')
-                document.getElementById('email').classList.add('is-valid')
-                setSubmissionRule(true)
+        try{
+            if(formValues.email){ // Email is valid or invalid
+                if(regexEmail.test(formValues.email)){
+                    document.getElementById('email').classList.remove('is-invalid')
+                    document.getElementById('email').classList.add('is-valid')
+                    setSubmissionRule(true)
+                }else{
+                    document.getElementById('email').classList.remove('is-valid')
+                    document.getElementById('email').classList.add('is-invalid')
+                    setSubmissionRule(false)
+                }
             }else{
                 document.getElementById('email').classList.remove('is-valid')
-                document.getElementById('email').classList.add('is-invalid')
+                document.getElementById('email').classList.remove('is-invalid')
                 setSubmissionRule(false)
             }
-        }else{
-            document.getElementById('email').classList.remove('is-valid')
-            document.getElementById('email').classList.remove('is-invalid')
-            setSubmissionRule(false)
-        }
-
-
-        if(formValues.username){
-            if(regexUsername.test(formValues.username)){
-                document.getElementById('username').classList.remove('is-invalid')
-                document.getElementById('username').classList.add('is-valid')
-                setSubmissionRule(true)
+    
+    
+            if(formValues.username){
+                if(regexUsername.test(formValues.username)){
+                    document.getElementById('username').classList.remove('is-invalid')
+                    document.getElementById('username').classList.add('is-valid')
+                    setSubmissionRule(true)
+                }else{
+                    document.getElementById('username').classList.remove('is-valid')
+                    document.getElementById('username').classList.add('is-invalid')
+                    setSubmissionRule(false)
+                }
             }else{
                 document.getElementById('username').classList.remove('is-valid')
-                document.getElementById('username').classList.add('is-invalid')
+                document.getElementById('username').classList.remove('is-invalid')
                 setSubmissionRule(false)
             }
-        }else{
-            document.getElementById('username').classList.remove('is-valid')
-            document.getElementById('username').classList.remove('is-invalid')
-            setSubmissionRule(false)
-        }
-
-
-        if(formValues.fullname){
-            if(regexFullname.test(formValues.fullname)){
-                document.getElementById('fullname').classList.remove('is-invalid')
-                document.getElementById('fullname').classList.add('is-valid')
-                setSubmissionRule(true)
+    
+    
+            if(formValues.fullname){
+                if(regexFullname.test(formValues.fullname)){
+                    document.getElementById('fullname').classList.remove('is-invalid')
+                    document.getElementById('fullname').classList.add('is-valid')
+                    setSubmissionRule(true)
+                }else{
+                    document.getElementById('fullname').classList.remove('is-valid')
+                    document.getElementById('fullname').classList.add('is-invalid')
+                    setSubmissionRule(false)
+                }
             }else{
                 document.getElementById('fullname').classList.remove('is-valid')
-                document.getElementById('fullname').classList.add('is-invalid')
+                document.getElementById('fullname').classList.remove('is-invalid')
                 setSubmissionRule(false)
             }
-        }else{
-            document.getElementById('fullname').classList.remove('is-valid')
-            document.getElementById('fullname').classList.remove('is-invalid')
-            setSubmissionRule(false)
-        }
-
-
-        if(formValues.address){
-            if(regexAddress.test(formValues.address)){
-                document.getElementById('address').classList.remove('is-invalid')
-                document.getElementById('address').classList.add('is-valid')
-                setSubmissionRule(true)
+    
+    
+            if(formValues.address){
+                if(regexAddress.test(formValues.address)){
+                    document.getElementById('address').classList.remove('is-invalid')
+                    document.getElementById('address').classList.add('is-valid')
+                    setSubmissionRule(true)
+                }else{
+                    document.getElementById('address').classList.remove('is-valid')
+                    document.getElementById('address').classList.add('is-invalid')
+                    setSubmissionRule(false)
+                }
             }else{
                 document.getElementById('address').classList.remove('is-valid')
-                document.getElementById('address').classList.add('is-invalid')
+                document.getElementById('address').classList.remove('is-invalid')
                 setSubmissionRule(false)
             }
-        }else{
-            document.getElementById('address').classList.remove('is-valid')
-            document.getElementById('address').classList.remove('is-invalid')
-            setSubmissionRule(false)
-        }
-
-
-        if(formValues.password){
-            if(regexPassword.test(formValues.password)){
-                if(formValues.password.length>6 && formValues.password.length<50){
-                    document.getElementById('pass').classList.remove('is-invalid')
-                    document.getElementById('pass').classList.add('is-valid')
-                    setSubmissionRule(true)
+    
+    
+            if(formValues.password){
+                if(regexPassword.test(formValues.password)){
+                    if(formValues.password.length>6 && formValues.password.length<50){
+                        document.getElementById('pass').classList.remove('is-invalid')
+                        document.getElementById('pass').classList.add('is-valid')
+                        setSubmissionRule(true)
+                    }else{
+                        document.getElementById('pass').classList.remove('is-valid')
+                        document.getElementById('pass').classList.add('is-invalid')
+                        setSubmissionRule(false)
+                    }
+                    
                 }else{
                     document.getElementById('pass').classList.remove('is-valid')
                     document.getElementById('pass').classList.add('is-invalid')
                     setSubmissionRule(false)
                 }
-                
             }else{
                 document.getElementById('pass').classList.remove('is-valid')
-                document.getElementById('pass').classList.add('is-invalid')
+                document.getElementById('pass').classList.remove('is-invalid')
                 setSubmissionRule(false)
             }
-        }else{
-            document.getElementById('pass').classList.remove('is-valid')
-            document.getElementById('pass').classList.remove('is-invalid')
-            setSubmissionRule(false)
-        }
-
-
-
-        if(formValues.confirm_password){
-            if(formValues.confirm_password == formValues.password){
-                document.getElementById('conpass').classList.remove('is-invalid')
-                document.getElementById('conpass').classList.add('is-valid')
-                setSubmissionRule(true)
+    
+    
+    
+            if(formValues.confirm_password){
+                if(formValues.confirm_password == formValues.password){
+                    document.getElementById('conpass').classList.remove('is-invalid')
+                    document.getElementById('conpass').classList.add('is-valid')
+                    setSubmissionRule(true)
+                }else{
+                    document.getElementById('conpass').classList.remove('is-valid')
+                    document.getElementById('conpass').classList.add('is-invalid')
+                    setSubmissionRule(false)
+                }
             }else{
                 document.getElementById('conpass').classList.remove('is-valid')
-                document.getElementById('conpass').classList.add('is-invalid')
+                document.getElementById('conpass').classList.remove('is-invalid')
                 setSubmissionRule(false)
             }
-        }else{
-            document.getElementById('conpass').classList.remove('is-valid')
-            document.getElementById('conpass').classList.remove('is-invalid')
-            setSubmissionRule(false)
+    
+        }catch(err){
+            console.log(err)
         }
-
+        
 
     },[formValues])
 
