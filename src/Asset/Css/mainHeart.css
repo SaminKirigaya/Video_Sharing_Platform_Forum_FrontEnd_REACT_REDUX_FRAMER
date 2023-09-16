@@ -1116,6 +1116,7 @@ select{
 
 .videoaddtextarea{
     background-color: #c0ff1d;
+    height: 20vh;
     color: black;
     resize: none;
     border: 1px solid #5e791a !important;
@@ -1123,7 +1124,12 @@ select{
 
 .videoaddtextarea:focus{
     background-color: #c0ff1d;
+    height: 20vh;
     color: black;
     resize: none;
     border: 1px solid #5e791a !important;
+}
+
+.badgeHovcurs{
+    cursor: pointer;
 }

@@ -60,6 +60,25 @@ function YourVideos() {
       
     }
 
+    // show all tags with delete feature 
+    const showAllTags = ()=>{
+      if(videoData.tags){
+        return videoData.tags.map((each, index)=>{
+          return  <span class="badge rounded-pill bg-warning text-dark me-2" key={index}>{each}&nbsp;&nbsp;&nbsp;<span onClick={(e)=>{delThisTag(e,index)}} class="badge rounded-pill bg-secondary badgeHovcurs">X</span></span>
+        })
+      }
+    }
+
+    // det that tag
+    const delThisTag = (e, tagNo)=>{
+      let fullArray = videoData.tags
+      fullArray.splice(tagNo,1)
+
+      setVideoData((prevState)=>({...prevState, tags : fullArray}))
+
+
+    } 
+
 
     // snackbar handling 
 
@@ -195,7 +214,7 @@ function YourVideos() {
             <div class="col col-md-12 mt-1">
             <label for="tags"><b>Tags :</b></label>
             <input onChange={(e)=>(setCurrentlyInsertedTag(e.target.value))} id="tags" type="text" className="form-control mt-2 mb-2"  placeholder="Set video search tags ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide video search tags here in one or two word, after each tag enter click add button kindly ..."/>
-            <button onClick={(e)=>addNewTag(e)} type="button" class="btn btn-sm btn-primary">Add</button>
+            <button onClick={(e)=>addNewTag(e)} type="button" class="btn btn-sm btn-primary mb-1">Add</button>
             </div>
             
 
