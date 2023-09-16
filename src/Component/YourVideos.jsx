@@ -94,6 +94,21 @@ function YourVideos() {
         setOpen(false);
     };
 
+    // when close or X button clicked empty old form
+    const setFullFormEmpty = ()=>{
+      setVideoData({
+        title : '',
+        description : '',
+        videoname : '',
+        videofile : null,
+        thumbnailname : '',
+        thumbnailfile : null,
+        tags : []
+      })
+
+      setCurrentlyInsertedTag('')
+    }
+
     
      // Effects Here
      useEffect(() => {
@@ -161,7 +176,7 @@ function YourVideos() {
             <div class="modal-content bgbordermodal">
             <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">Upload Content ...</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button onClick={(e)=>{setFullFormEmpty(e)}} type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
@@ -226,7 +241,7 @@ function YourVideos() {
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
+                <button onClick={(e)=>{setFullFormEmpty(e)}} type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-sm btn-primary">Upload Video ...</button>
             </div>
             </div>
