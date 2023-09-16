@@ -42,7 +42,7 @@ function WelcomeMsg() {
         </Stack>
     </div>
 
-    <div className='mt-3 mb-3'>
+    <div className='mt-2 mb-3'>
         <p className='text-center welcomeTxt'>Welcome Home, <b>{userName}</b></p>
     </div>
 

@@ -86,7 +86,7 @@ function Nav() {
                 </div>
 
                 {isLogged ? <div className='mt-3' data-bs-toggle="tooltip" data-bs-placement="right" title="Your Videos">
-                <VideoSettingsIcon fontSize='large' />
+                <Link className='linkBtn' to='/yourVideos'><VideoSettingsIcon fontSize='large' /></Link>
                 </div> : null}
 
 
