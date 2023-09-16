@@ -130,6 +130,7 @@ function YourVideos() {
       
           xhr.open('POST', `${backendlink}/uploadmyfile/${serial}`, true)
           xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+          
 
           xhr.upload.addEventListener('progress', (event)=>{
             if(event.lengthComputable){
@@ -311,7 +312,7 @@ function YourVideos() {
 
             <div class="col col-md-12 mt-3">
             <div class="progress">
-            <div class="progress-bar bg-success" role="progressbar" style={{width: uploadProgress}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={{width: uploadProgress}}></div>
             </div>
             </div>
             
