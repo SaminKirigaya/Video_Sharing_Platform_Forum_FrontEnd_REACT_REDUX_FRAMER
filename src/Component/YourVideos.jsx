@@ -16,11 +16,14 @@ import uploadimg from '../Asset/Images/upload.png'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
-
+import addFileImg from '../Asset/Images/addfile.webp'
+import vidUrl from '../Asset/Images/AnimePahe_Jujutsu_Kaisen_-_28_360p_SubsPlease.mp4'
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
+
+  
 
 
 function YourVideos() {
@@ -31,6 +34,16 @@ function YourVideos() {
     const serial = useSelector((state)=>state.userserialData.serialId)
 
     axios.defaults.headers.common['Authorization'] = 'Bearer '+token // axios auth set
+
+    const [videoData, setVideoData] = useState({
+      title : '',
+      description : '',
+      videoname : '',
+      videofile : null,
+      thumbnailname : '',
+      thumbnailfile : null,
+      tags : []
+    })
 
     // snackbar handling 
 
@@ -130,21 +143,57 @@ function YourVideos() {
 
             <div class="col col-md-12 mx-auto">
             
-            <label for="profImage"  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a video content with .mp4 or .mkv .mpeg... Anything else extension is not supported yet. "><PlayCircleIcon /><b>Add Video Content ...</b></label>
-            <input id="profImage" type="file" class="form-control mb-2"  autoComplete='none' accept=".mp4, .mkv, .mpeg"/>
+            <label for="profImage" className='mt-2 mb-0'  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a video content with .mp4 ... Anything else extension is not supported yet. "><PlayCircleIcon /><b>Add Video Content ... (Click Me)</b></label>
+            <input onChange={(e)=>{setVideoData((prevState)=>({...prevState, videoname: e.target.value, videofile: e.target.files[0]}))}} id="profImage" type="file" class="form-control mb-2"  autoComplete='none' accept=".mp4"/>
 
 
+            <div className='mt-0'> 
             
-            <iframe width="300px" height="300px" src="" title="Getting MAD at my Girlfriend EVERY TIME she CUSSES!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>"
+            {!videoData.videofile ? <label for="profImage"><img style={{width:'100px', height: '97px'}} src={addFileImg} /></label> : <video width="245px" height="190px" controls><source src={URL.createObjectURL(videoData.videofile)} type="video/mp4" /></video>}
+            
             
             </div>
+
+
+
+            </div>
+
+
+            <div class="col col-md-12 mx-auto">
+            
+            <label for="coverImage" className='mt-2'  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a jpg or jpeg image file as thumbnail ..."><AddPhotoAlternateIcon /><b>Add Video Thumbnail ... (Click Me)</b></label>
+            <input onChange={(e)=>{setVideoData((prevState)=>({...prevState, thumbnailname: e.target.value, thumbnailfile: e.target.files[0]}))}} id="coverImage" type="file" class="form-control mb-2"  autoComplete='none' accept=".jpg, .jpeg"/>
+
+
+            <div className='mt-0'> 
+            
+            {!videoData.thumbnailfile ? <label for="coverImage"><img style={{width:'100px', height: '97px'}} src={addFileImg} /></label> : <div className='mt-2'><img style={{width:'100px', height: '97px', borderRadius: '0.5rem'}} src={URL.createObjectURL(videoData.thumbnailfile)}  /></div>}
+            
+            
+            </div>
+
+            </div>
+
+
+
+            <div class="col col-md-12 mt-1">
+            <label for="tags"><b>Tags :</b></label>
+            <input id="tags" type="text" className="form-control mt-2 mb-2"  placeholder="Set video search tags ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide video search tags here in one or two word, after each tag enter click add button kindly ..."/>
+            <button type="button" class="btn btn-sm btn-primary">Add</button>
+            </div>
+            
+
+
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-sm btn-primary">Understood</button>
+                <button type="button" class="btn btn-sm btn-primary">Upload Video ...</button>
             </div>
             </div>
+
+
+
         </div>
         </div>
 
