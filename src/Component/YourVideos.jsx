@@ -110,8 +110,10 @@ function YourVideos() {
       })
 
       setCurrentlyInsertedTag('')
+      setUploadProgress(0)
       document.getElementById('description').value = ''
       document.getElementById('title').value = ''
+
     }
 
 
@@ -157,7 +159,7 @@ function YourVideos() {
                 setUploadProgress(0)
                 document.getElementById('description').value = ''
                 document.getElementById('title').value = ''
-                
+
 
               }else{
                 setResponseMessage(response)
