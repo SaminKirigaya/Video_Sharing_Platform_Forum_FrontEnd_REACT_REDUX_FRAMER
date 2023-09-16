@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 
-import { Navigate, Link } from 'react-router-dom';
+import { Navigate, Link, Form } from 'react-router-dom';
 
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
@@ -23,12 +23,14 @@ const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
 
-  
+const backendlink = 'http://localhost:8000' // change it according to ur server
 
 
 function YourVideos() {
     const [open, setOpen] = React.useState(false); // Snackbar open close state
     const [responseMessage, setResponseMessage] = React.useState(''); // initially any error or success message at snackbar
+    const [uploadProgress, setUploadProgress] = useState(0); // upload state setting 
+    
 
     const token = useSelector((state)=>state.tokenData.token)
     const serial = useSelector((state)=>state.userserialData.serialId)
@@ -94,6 +96,7 @@ function YourVideos() {
         setOpen(false);
     };
 
+
     // when close or X button clicked empty old form
     const setFullFormEmpty = ()=>{
       setVideoData({
@@ -107,8 +110,74 @@ function YourVideos() {
       })
 
       setCurrentlyInsertedTag('')
+      document.getElementById('description').value = ''
+      document.getElementById('title').value = ''
     }
 
+
+    const UploadFile = async(e)=>{
+        if(videoData.description  && videoData.tags && videoData.thumbnailname && videoData.videoname && videoData.title ){
+          const formData = new FormData()
+          formData.append('Title', videoData.title)
+          formData.append('Description', videoData.description)
+          formData.append('Video', videoData.videofile)
+          formData.append('Thumbnail', videoData.thumbnailfile)
+          formData.append('Tags', videoData.tags)
+
+          const xhr = new XMLHttpRequest()
+      
+          xhr.open('POST', `${backendlink}/uploadmyfile/${serial}`, true)
+          xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+
+          xhr.upload.addEventListener('progress', (event)=>{
+            if(event.lengthComputable){
+              const progress = (event.loaded / event.total) * 100;
+              setUploadProgress(progress);
+            }
+          })
+
+          xhr.addEventListener('load', ()=>{
+            if(xhr.status == 200){
+              const response = JSON.parse(xhr.responseText)
+              if(response == 'Your file was successfully uploaded ...'){
+                setResponseMessage(response)
+                setOpen(true)
+
+                setVideoData({
+                  title : '',
+                  description : '',
+                  videoname : '',
+                  videofile : null,
+                  thumbnailname : '',
+                  thumbnailfile : null,
+                  tags : []
+                })
+          
+                setCurrentlyInsertedTag('')
+                setUploadProgress(0)
+                document.getElementById('description').value = ''
+                document.getElementById('title').value = ''
+                
+
+              }else{
+                setResponseMessage(response)
+                setOpen(true)
+                setUploadProgress(0)
+              }
+            }else{
+              setResponseMessage('Some error occured please try later ...')
+              setOpen(true)
+              setUploadProgress(0)
+            }
+          })
+
+          xhr.send(formData)
+
+
+
+        }
+        
+    }
     
      // Effects Here
      useEffect(() => {
@@ -182,12 +251,12 @@ function YourVideos() {
 
             <div class="col col-md-12">
             <label for="title"><b>Title :</b></label>
-            <input id="title" type="text" className="form-control mt-1 mb-2"  placeholder="Set video title ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a valid title that suit your video ..."/>
+            <input onChange={(e)=>{setVideoData((prevState)=>({...prevState, title: e.target.value}))}} id="title" type="text" className="form-control mt-1 mb-2"  placeholder="Set video title ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a valid title that suit your video ..."/>
             </div>
 
             <div class="col col-md-12">
             <label for="description"><b>Description :</b></label>
-            <textarea id="description" type="text" className="form-control mt-1 mb-2 videoaddtextarea"  placeholder="Set video discription ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide description that suits your video ... in 200 words."></textarea>
+            <textarea onChange={(e)=>{setVideoData((prevState)=>({...prevState, description : e.target.value}))}} id="description" type="text" className="form-control mt-1 mb-2 videoaddtextarea"  placeholder="Set video discription ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide description that suits your video ... in 200 words."></textarea>
             </div>
             
 
@@ -199,7 +268,7 @@ function YourVideos() {
 
             <div className='mt-0'> 
             
-            {!videoData.videofile ? <label for="profImage"><img style={{width:'100px', height: '97px'}} src={addFileImg} /></label> : <video width="245px" height="190px" controls><source src={URL.createObjectURL(videoData.videofile)} type="video/mp4" /></video>}
+            {!videoData.videofile ? <label for="profImage"><img style={{width:'80px', height: '80px'}} src={addFileImg} /></label> : <video width="245px" height="190px" controls><source src={URL.createObjectURL(videoData.videofile)} type="video/mp4" /></video>}
             
             
             </div>
@@ -217,7 +286,7 @@ function YourVideos() {
 
             <div className='mt-0'> 
             
-            {!videoData.thumbnailfile ? <label for="coverImage"><img style={{width:'100px', height: '97px'}} src={addFileImg} /></label> : <div className='mt-2'><img style={{width:'100px', height: '97px', borderRadius: '0.5rem'}} src={URL.createObjectURL(videoData.thumbnailfile)}  /></div>}
+            {!videoData.thumbnailfile ? <label for="coverImage"><img style={{width:'80px', height: '80px'}} src={addFileImg} /></label> : <div className='mt-2'><img style={{width:'100px', height: '97px', borderRadius: '0.5rem'}} src={URL.createObjectURL(videoData.thumbnailfile)}  /></div>}
             
             
             </div>
@@ -238,11 +307,17 @@ function YourVideos() {
               {videoData.tags ? showAllTags() : null}
             </div>
 
+            <div class="col col-md-12 mt-3">
+            <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" style={{width: uploadProgress}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            </div>
+            
 
             </div>
             <div class="modal-footer">
                 <button onClick={(e)=>{setFullFormEmpty(e)}} type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-sm btn-primary">Upload Video ...</button>
+                <button onClick={(e)=>{UploadFile(e)}} type="button" class="btn btn-sm btn-primary">Upload Video ...</button>
             </div>
             </div>
 
@@ -255,6 +330,17 @@ function YourVideos() {
 
     </div>
     </div>
+
+    <Snackbar open={open} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+    <Alert onClose={handleClose} severity="success" sx={{
+        width: '100%',
+        backgroundColor: '#c0ff1d', // Set your custom color here
+        color: '#000000a3', // Set text color for visibility
+        fontFamily: 'Cormorant Infant'
+    }}>
+    {responseMessage}
+    </Alert>
+    </Snackbar>
 
     </Fragment>
   )
