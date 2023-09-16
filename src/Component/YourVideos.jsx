@@ -17,7 +17,7 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
 import addFileImg from '../Asset/Images/addfile.webp'
-import vidUrl from '../Asset/Images/AnimePahe_Jujutsu_Kaisen_-_28_360p_SubsPlease.mp4'
+
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
