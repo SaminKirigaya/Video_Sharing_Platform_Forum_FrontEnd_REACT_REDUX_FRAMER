@@ -45,6 +45,22 @@ function YourVideos() {
       tags : []
     })
 
+    const [currentlyInsertedTag, setCurrentlyInsertedTag] = useState('')
+
+    const addNewTag = (e)=>{ // add tag to old tags state than make input field vanish 
+      if(currentlyInsertedTag){
+
+        const newTags = [...videoData.tags, currentlyInsertedTag];
+    
+        setVideoData((prevState)=>({...prevState, tags: newTags }))
+        setCurrentlyInsertedTag('')
+        document.getElementById('tags').value = ''
+        
+      } 
+      
+    }
+
+
     // snackbar handling 
 
     const handleClick = () => {
@@ -178,11 +194,15 @@ function YourVideos() {
 
             <div class="col col-md-12 mt-1">
             <label for="tags"><b>Tags :</b></label>
-            <input id="tags" type="text" className="form-control mt-2 mb-2"  placeholder="Set video search tags ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide video search tags here in one or two word, after each tag enter click add button kindly ..."/>
-            <button type="button" class="btn btn-sm btn-primary">Add</button>
+            <input onChange={(e)=>(setCurrentlyInsertedTag(e.target.value))} id="tags" type="text" className="form-control mt-2 mb-2"  placeholder="Set video search tags ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide video search tags here in one or two word, after each tag enter click add button kindly ..."/>
+            <button onClick={(e)=>addNewTag(e)} type="button" class="btn btn-sm btn-primary">Add</button>
             </div>
             
 
+            <div class="col col-md-12 mt-1">
+              {/* show which tag added here*/}
+              {videoData.tags ? showAllTags() : null}
+            </div>
 
 
             </div>
