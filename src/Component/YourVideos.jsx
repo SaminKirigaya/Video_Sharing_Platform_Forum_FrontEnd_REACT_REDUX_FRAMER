@@ -141,8 +141,8 @@ function YourVideos() {
           xhr.addEventListener('load', ()=>{
             if(xhr.status == 200){
               const response = JSON.parse(xhr.responseText)
-              if(response == 'Your file was successfully uploaded ...'){
-                setResponseMessage(response)
+              if(response.message == 'Your file was successfully uploaded ...'){
+                setResponseMessage(response.message)
                 setOpen(true)
 
                 setVideoData({
@@ -162,7 +162,7 @@ function YourVideos() {
 
 
               }else{
-                setResponseMessage(response)
+                setResponseMessage(response.message)
                 setOpen(true)
                 setUploadProgress(0)
               }
