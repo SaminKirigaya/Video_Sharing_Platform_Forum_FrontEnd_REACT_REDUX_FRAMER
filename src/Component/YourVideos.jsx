@@ -185,7 +185,7 @@ function YourVideos() {
         <div class="card" style={{width: '16rem', height: '16rem'}}>
 
         <div style={{maxWidth: '100%', minWidth: '100%', maxHeight: '50%', minHeight:'50%'}}>
-        <img style={{width:'100%',height:'100%', objectFit: 'fill'}} src={each.thumbnailLink} alt="Card image cap" />
+        <img style={{width:'100%',height:'100%', objectFit: 'fill', borderTopLeftRadius: '0.3rem', borderTopRightRadius: '0.3rem'}} src={each.thumbnailLink} alt="Card image cap" />
         </div>
         
         <div className='loveemo d-flex justify-content-center align-items-center' data-bs-toggle="tooltip" data-bs-placement="right" title={genareteLikedAmount(each.likeamount)}>
