@@ -49,12 +49,25 @@ const genareteLikedAmount = (bigAmount)=>{
   }
 }
 
+// convert huge disliked amount to K or M
+const genareteDisLikedAmount = (bigAmount)=>{
+  if (bigAmount>1000000){
+    return Math.floor(bigAmount/1000000)+"M"
+  }else if(bigAmount>1000){
+    return Math.floor(bigAmount/1000)+"K"
+  }else{
+    return bigAmount
+  }
+}
+
+
 
 function YourVideos() {
     const [open, setOpen] = React.useState(false); // Snackbar open close state
     const [responseMessage, setResponseMessage] = React.useState(''); // initially any error or success message at snackbar
     const [uploadProgress, setUploadProgress] = useState(0); // upload state setting 
-    const [oldVideos, setOldVideos] = useState([])
+    const [oldVideos, setOldVideos] = useState([]) //old uploaded vids from rest api
+    const [uploadSuccess, setUploadSuccess] = useState(false)
 
     const token = useSelector((state)=>state.tokenData.token)
     const serial = useSelector((state)=>state.userserialData.serialId)
@@ -175,7 +188,7 @@ function YourVideos() {
         <FavoriteIcon />
         </div>
 
-        <div className='loveemo2 d-flex justify-content-center align-items-center'  data-bs-toggle="tooltip" data-bs-placement="right" title="0">
+        <div className='loveemo2 d-flex justify-content-center align-items-center'  data-bs-toggle="tooltip" data-bs-placement="right" title={genareteDisLikedAmount(each.dislikedamount)}>
         <HeartBrokenIcon />
         </div>
 
@@ -243,6 +256,7 @@ function YourVideos() {
           
                 setCurrentlyInsertedTag('')
                 setUploadProgress(0)
+                setUploadSuccess(true)
                 document.getElementById('description').value = ''
                 document.getElementById('title').value = ''
 
@@ -281,9 +295,14 @@ function YourVideos() {
         return () => {
           window.$('[data-bs-toggle="tooltip"]').tooltip('dispose');
         };
+
       }, []); // [ ] empty mean it will only run once after first render like component did mount :>
 
 
+      useEffect(()=>{
+        getOldVideosData()
+        setUploadSuccess(false)
+      },[uploadSuccess])
 
   return (
     <Fragment>
