@@ -1183,3 +1183,18 @@ select{
     border-radius: 0.4rem;
 
 }
+
+
+.loveemo4{
+    position: absolute;
+    top: 42%;
+    left: 41%;
+    background-color: transparent;
+    min-width: 16%;
+    max-width: 16%;
+    min-height: 14%;
+    max-height: 14%;
+    border-radius: 0.4rem;
+    color: white;
+    border: 0.2rem solid white;
+}

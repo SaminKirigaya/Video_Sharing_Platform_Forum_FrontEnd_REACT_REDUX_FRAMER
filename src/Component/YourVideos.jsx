@@ -14,12 +14,16 @@ import WelcomeMsg from './WelcomeMsg';
 import uploadimg from '../Asset/Images/upload.png'
 
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import PlayCircleIcon from '@mui/icons-material/PlayCircle';
+
 
 import addFileImg from '../Asset/Images/uploadVideo.png'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
 import AlarmOnIcon from '@mui/icons-material/AlarmOn';
+import PlayCircleIcon from '@mui/icons-material/PlayCircle';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+
+
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -192,9 +196,15 @@ function YourVideos() {
         <HeartBrokenIcon />
         </div>
 
-        <div className='loveemo3 d-flex justify-content-center align-items-center'>
+        <div className='loveemo3 d-flex justify-content-center align-items-center' onClick={(e)=>{addThisToWatchlist(e, each._id)}}>
         <AlarmOnIcon />
         </div>
+
+        <Link to={"/seeMyThisVideo/"+each._id}>
+        <div className='loveemo4 d-flex justify-content-center align-items-center'>
+        <PlayArrowIcon fontSize='large'/>
+        </div>
+        </Link>
 
         <div class="card-body" style={{backgroundColor: '#c0ff1d'}}>
           <h5 class="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}><Stack direction="row" spacing={2}>
@@ -214,7 +224,31 @@ function YourVideos() {
       })
     }
 
+    //upload this video serial to my later watch list
+    const addThisToWatchlist = async(e, serialVideo)=>{
+      try{
+        const response = await axios({
+          url :`/addThisToWatchList/${serial}`,
+          method : 'post', 
+          data : {
+            videoSerial : serialVideo
+          }
+        })
 
+        if(response.data.message == 'success'){
+          setResponseMessage('Successfully Added This Video To Watch Later List ...')
+          setOpen(true)
+        }else{
+          setResponseMessage(response.data.message)
+          setOpen(true)
+        }
+      }catch(err){
+        console.log(err)
+      }
+    }
+
+
+    // uploading file rest api calling
     const UploadFile = async(e)=>{
         if(videoData.description  && videoData.tags && videoData.thumbnailname && videoData.videoname && videoData.title ){
           const formData = new FormData()
