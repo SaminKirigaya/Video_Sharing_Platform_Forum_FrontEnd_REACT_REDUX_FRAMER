@@ -28,6 +28,28 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const backendlink = 'http://localhost:8000' // change it according to ur server
 
 
+const generatePlainDate = (unusualDate)=>{ // format utc based date to user date 
+  const newDate = new Date(unusualDate)
+
+  const year = newDate.getFullYear()
+  const month = (newDate.getMonth()+1).toString().padStart(2,"0")
+  const date = newDate.getDate().toString().padStart(2,"0")
+
+  return `${date}-${month}-${year}`
+}
+
+// convert huge like amount to K or M
+const genareteLikedAmount = (bigAmount)=>{
+  if (bigAmount>1000000){
+    return Math.floor(bigAmount/1000000)+"M"
+  }else if(bigAmount>1000){
+    return Math.floor(bigAmount/1000)+"K"
+  }else{
+    return bigAmount
+  }
+}
+
+
 function YourVideos() {
     const [open, setOpen] = React.useState(false); // Snackbar open close state
     const [responseMessage, setResponseMessage] = React.useState(''); // initially any error or success message at snackbar
@@ -120,6 +142,8 @@ function YourVideos() {
 
     }
 
+    // Rest api to call for all old uploaded videos
+
     const getOldVideosData = async(e)=>{
       try{
         const response = await axios.get(`/getOldUploadedVideos/${serial}`,{
@@ -134,6 +158,49 @@ function YourVideos() {
         console.log(err)
       }
     }
+
+
+
+    // show all old videos in card format
+    const showAllOldVideosInCard = ()=>{
+      return oldVideos.map((each)=>{
+        return  <div className='col d-flex justify-content-center mb-5'> 
+        <div class="card" style={{width: '16rem', height: '16rem'}}>
+
+        <div style={{maxWidth: '100%', minWidth: '100%', maxHeight: '50%', minHeight:'50%'}}>
+        <img style={{width:'100%',height:'100%', objectFit: 'fill'}} src={each.thumbnailLink} alt="Card image cap" />
+        </div>
+        
+        <div className='loveemo d-flex justify-content-center align-items-center' data-bs-toggle="tooltip" data-bs-placement="right" title={genareteLikedAmount(each.likeamount)}>
+        <FavoriteIcon />
+        </div>
+
+        <div className='loveemo2 d-flex justify-content-center align-items-center'  data-bs-toggle="tooltip" data-bs-placement="right" title="0">
+        <HeartBrokenIcon />
+        </div>
+
+        <div className='loveemo3 d-flex justify-content-center align-items-center'>
+        <AlarmOnIcon />
+        </div>
+
+        <div class="card-body" style={{backgroundColor: '#c0ff1d'}}>
+          <h5 class="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}><Stack direction="row" spacing={2}>
+
+          <Avatar
+              alt="Remy Sharp"
+              src={playerAvatar}
+              sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
+          />
+          </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{username}<p style={{fontSize: '0.6rem'}}>Uploaded At : {generatePlainDate(each.uploadingDate)}</p></span></h5>
+          
+          <p class="card-text smollTitle">{each.title}</p>
+          
+        </div>
+        </div>
+        </div>
+      })
+    }
+
 
     const UploadFile = async(e)=>{
         if(videoData.description  && videoData.tags && videoData.thumbnailname && videoData.videoname && videoData.title ){
@@ -358,119 +425,7 @@ function YourVideos() {
 
         <div className='row row-cols-1 row-cols-md-4 mb-5 d-flex justify-content-start'>
 
-
-          <div className='col d-flex justify-content-center mb-5'> 
-          <div class="card" style={{width: '16rem', height: '16rem'}}>
-
-          <div style={{maxWidth: '100%', minWidth: '100%', maxHeight: '50%', minHeight:'50%'}}>
-          <img style={{width:'100%',height:'100%', objectFit: 'fill'}} src="http://localhost:8000/public/images/1694591942731-wallpaperflare.com_wallpaper (12).jpg" alt="Card image cap" />
-          </div>
-          
-          <div className='loveemo d-flex justify-content-center align-items-center' data-bs-toggle="tooltip" data-bs-placement="right" title="0">
-          <FavoriteIcon />
-          </div>
-
-          <div className='loveemo2 d-flex justify-content-center align-items-center'  data-bs-toggle="tooltip" data-bs-placement="right" title="0">
-          <HeartBrokenIcon />
-          </div>
-
-          <div className='loveemo3 d-flex justify-content-center align-items-center'>
-          <AlarmOnIcon />
-          </div>
-
-          <div class="card-body" style={{backgroundColor: '#c0ff1d'}}>
-            <h5 class="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}><Stack direction="row" spacing={2}>
-
-            <Avatar
-                alt="Remy Sharp"
-                src={playerAvatar}
-                sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
-            />
-            </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{username}<p style={{fontSize: '0.6rem'}}>Uploaded At : 12-12-2023</p></span></h5>
-            
-            <p class="card-text smollTitle">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            
-          </div>
-          </div>
-          </div>
-
-
-          
-
-          <div className='col d-flex justify-content-center mb-5'> 
-          <div class="card" style={{width: '16rem', height: '16rem'}}>
-
-          <div style={{maxWidth: '100%', minWidth: '100%', maxHeight: '50%', minHeight:'50%'}}>
-          <img style={{width:'100%',height:'100%', objectFit: 'fill'}} src="http://localhost:8000/public/images/1694591942731-wallpaperflare.com_wallpaper (12).jpg" alt="Card image cap" />
-          </div>
-          
-          <div className='loveemo d-flex justify-content-center align-items-center' data-bs-toggle="tooltip" data-bs-placement="right" title="0">
-          <FavoriteIcon />
-          </div>
-
-          <div className='loveemo2 d-flex justify-content-center align-items-center'  data-bs-toggle="tooltip" data-bs-placement="right" title="0">
-          <HeartBrokenIcon />
-          </div>
-
-          <div className='loveemo3 d-flex justify-content-center align-items-center'>
-          <AlarmOnIcon />
-          </div>
-
-          <div class="card-body" style={{backgroundColor: '#c0ff1d'}}>
-            <h5 class="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}><Stack direction="row" spacing={2}>
-
-            <Avatar
-                alt="Remy Sharp"
-                src={playerAvatar}
-                sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
-            />
-            </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{username}<p style={{fontSize: '0.6rem'}}>Uploaded At : 12-12-2023</p></span></h5>
-            
-            <p class="card-text smollTitle">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            
-          </div>
-          </div>
-          </div>
-
-
-
-
-
-          <div className='col d-flex justify-content-center mb-5'> 
-          <div class="card" style={{width: '16rem', height: '16rem'}}>
-
-          <div style={{maxWidth: '100%', minWidth: '100%', maxHeight: '50%', minHeight:'50%'}}>
-          <img style={{width:'100%',height:'100%', objectFit: 'fill'}} src="http://localhost:8000/public/images/1694591942731-wallpaperflare.com_wallpaper (12).jpg" alt="Card image cap" />
-          </div>
-          
-          <div className='loveemo d-flex justify-content-center align-items-center' data-bs-toggle="tooltip" data-bs-placement="right" title="0">
-          <FavoriteIcon />
-          </div>
-
-          <div className='loveemo2 d-flex justify-content-center align-items-center'  data-bs-toggle="tooltip" data-bs-placement="right" title="0">
-          <HeartBrokenIcon />
-          </div>
-
-          <div className='loveemo3 d-flex justify-content-center align-items-center'>
-          <AlarmOnIcon />
-          </div>
-
-          <div class="card-body" style={{backgroundColor: '#c0ff1d'}}>
-            <h5 class="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}><Stack direction="row" spacing={2}>
-
-            <Avatar
-                alt="Remy Sharp"
-                src={playerAvatar}
-                sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
-            />
-            </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{username}<p style={{fontSize: '0.6rem'}}>Uploaded At : 12-12-2023</p></span></h5>
-            
-            <p class="card-text smollTitle">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            
-          </div>
-          </div>
-          </div>
-
+          {oldVideos ? showAllOldVideosInCard() : <p>You Didn't Posted Any Video Yet ...</p>}
 
 
 
