@@ -32,7 +32,7 @@ function YourVideos() {
     const [open, setOpen] = React.useState(false); // Snackbar open close state
     const [responseMessage, setResponseMessage] = React.useState(''); // initially any error or success message at snackbar
     const [uploadProgress, setUploadProgress] = useState(0); // upload state setting 
-    
+    const [oldVideos, setOldVideos] = useState([])
 
     const token = useSelector((state)=>state.tokenData.token)
     const serial = useSelector((state)=>state.userserialData.serialId)
@@ -120,6 +120,20 @@ function YourVideos() {
 
     }
 
+    const getOldVideosData = async(e)=>{
+      try{
+        const response = await axios.get(`/getOldUploadedVideos/${serial}`,{
+          headers : {
+            'Content-Type' : 'application/json'
+          }
+        })
+        if(response.data.message == 'success'){
+          setOldVideos(response.data.oldVideos)
+        }
+      }catch(err){
+        console.log(err)
+      }
+    }
 
     const UploadFile = async(e)=>{
         if(videoData.description  && videoData.tags && videoData.thumbnailname && videoData.videoname && videoData.title ){
@@ -188,9 +202,14 @@ function YourVideos() {
     
      // Effects Here
      useEffect(() => {
+
         // Initialize tooltips when the component mounts
         window.$('[data-bs-toggle="tooltip"]').tooltip();
     
+
+        getOldVideosData()
+
+
         //  to clean up the tooltips when the component unmounts
         return () => {
           window.$('[data-bs-toggle="tooltip"]').tooltip('dispose');
@@ -338,6 +357,8 @@ function YourVideos() {
         </div>
 
         <div className='row row-cols-1 row-cols-md-4 mb-5 d-flex justify-content-start'>
+
+
           <div className='col d-flex justify-content-center mb-5'> 
           <div class="card" style={{width: '16rem', height: '16rem'}}>
 
@@ -374,27 +395,29 @@ function YourVideos() {
           </div>
 
 
+          
+
           <div className='col d-flex justify-content-center mb-5'> 
           <div class="card" style={{width: '16rem', height: '16rem'}}>
+
           <div style={{maxWidth: '100%', minWidth: '100%', maxHeight: '50%', minHeight:'50%'}}>
-          <img style={{width:'100%',height:'100%',objectFit: 'fill'}}  src="http://localhost:8000/public/videos/1694935584066-h3.jpg" />
+          <img style={{width:'100%',height:'100%', objectFit: 'fill'}} src="http://localhost:8000/public/images/1694591942731-wallpaperflare.com_wallpaper (12).jpg" alt="Card image cap" />
+          </div>
+          
+          <div className='loveemo d-flex justify-content-center align-items-center' data-bs-toggle="tooltip" data-bs-placement="right" title="0">
+          <FavoriteIcon />
           </div>
 
-          <div className='loveemo d-flex justify-content-center'>
-          asdadadasd
+          <div className='loveemo2 d-flex justify-content-center align-items-center'  data-bs-toggle="tooltip" data-bs-placement="right" title="0">
+          <HeartBrokenIcon />
           </div>
 
-          <div className='loveemo2 d-flex justify-content-center'>
-          asdadadasd
+          <div className='loveemo3 d-flex justify-content-center align-items-center'>
+          <AlarmOnIcon />
           </div>
-
-          <div className='loveemo3 d-flex justify-content-center'>
-          asdadadasd
-          </div>
-
 
           <div class="card-body" style={{backgroundColor: '#c0ff1d'}}>
-            <h5 class="card-title d-flex flex-row"><Stack direction="row" spacing={2}>
+            <h5 class="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}><Stack direction="row" spacing={2}>
 
             <Avatar
                 alt="Remy Sharp"
@@ -402,11 +425,54 @@ function YourVideos() {
                 sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
             />
             </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{username}<p style={{fontSize: '0.6rem'}}>Uploaded At : 12-12-2023</p></span></h5>
+            
             <p class="card-text smollTitle">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             
           </div>
           </div>
           </div>
+
+
+
+
+
+          <div className='col d-flex justify-content-center mb-5'> 
+          <div class="card" style={{width: '16rem', height: '16rem'}}>
+
+          <div style={{maxWidth: '100%', minWidth: '100%', maxHeight: '50%', minHeight:'50%'}}>
+          <img style={{width:'100%',height:'100%', objectFit: 'fill'}} src="http://localhost:8000/public/images/1694591942731-wallpaperflare.com_wallpaper (12).jpg" alt="Card image cap" />
+          </div>
+          
+          <div className='loveemo d-flex justify-content-center align-items-center' data-bs-toggle="tooltip" data-bs-placement="right" title="0">
+          <FavoriteIcon />
+          </div>
+
+          <div className='loveemo2 d-flex justify-content-center align-items-center'  data-bs-toggle="tooltip" data-bs-placement="right" title="0">
+          <HeartBrokenIcon />
+          </div>
+
+          <div className='loveemo3 d-flex justify-content-center align-items-center'>
+          <AlarmOnIcon />
+          </div>
+
+          <div class="card-body" style={{backgroundColor: '#c0ff1d'}}>
+            <h5 class="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}><Stack direction="row" spacing={2}>
+
+            <Avatar
+                alt="Remy Sharp"
+                src={playerAvatar}
+                sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
+            />
+            </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{username}<p style={{fontSize: '0.6rem'}}>Uploaded At : 12-12-2023</p></span></h5>
+            
+            <p class="card-text smollTitle">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            
+          </div>
+          </div>
+          </div>
+
+
+
 
 
         </div>
