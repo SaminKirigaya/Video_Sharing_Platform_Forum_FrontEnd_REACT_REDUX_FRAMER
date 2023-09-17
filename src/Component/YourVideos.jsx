@@ -16,8 +16,10 @@ import uploadimg from '../Asset/Images/upload.png'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
-import addFileImg from '../Asset/Images/addfile.webp'
-
+import addFileImg from '../Asset/Images/uploadVideo.png'
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
+import AlarmOnIcon from '@mui/icons-material/AlarmOn';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -34,6 +36,8 @@ function YourVideos() {
 
     const token = useSelector((state)=>state.tokenData.token)
     const serial = useSelector((state)=>state.userserialData.serialId)
+    const username = useSelector((state)=>state.usernameData.username)
+    const playerAvatar = useSelector((state) => state.profImgData.proImgPath)
 
     axios.defaults.headers.common['Authorization'] = 'Bearer '+token // axios auth set
 
@@ -271,7 +275,7 @@ function YourVideos() {
 
             <div className='mt-0'> 
             
-            {!videoData.videofile ? <label for="profImage"><img style={{width:'80px', height: '80px'}} src={addFileImg} /></label> : <video width="245px" height="190px" controls><source src={URL.createObjectURL(videoData.videofile)} type="video/mp4" /></video>}
+            {!videoData.videofile ? <label for="profImage"><img style={{width:'80px', height: '80px', borderRadius: '0.4rem'}} src={addFileImg} /></label> : <video width="245px" height="190px" controls><source src={URL.createObjectURL(videoData.videofile)} type="video/mp4" /></video>}
             
             
             </div>
@@ -289,7 +293,7 @@ function YourVideos() {
 
             <div className='mt-0'> 
             
-            {!videoData.thumbnailfile ? <label for="coverImage"><img style={{width:'80px', height: '80px'}} src={addFileImg} /></label> : <div className='mt-2'><img style={{width:'100px', height: '97px', borderRadius: '0.5rem'}} src={URL.createObjectURL(videoData.thumbnailfile)}  /></div>}
+            {!videoData.thumbnailfile ? <label for="coverImage"><img style={{width:'80px', height: '80px', borderRadius: '0.4rem'}} src={addFileImg} /></label> : <div className='mt-2'><img style={{width:'100px', height: '97px', borderRadius: '0.5rem'}} src={URL.createObjectURL(videoData.thumbnailfile)}  /></div>}
             
             
             </div>
@@ -329,6 +333,83 @@ function YourVideos() {
         </div>
         </div>
 
+        <div className='mt-3 mb-3'>
+        <p className='text-center welcomeTxt'><b>Your Videos ...</b></p>
+        </div>
+
+        <div className='row row-cols-1 row-cols-md-4 mb-5 d-flex justify-content-start'>
+          <div className='col d-flex justify-content-center mb-5'> 
+          <div class="card" style={{width: '16rem', height: '16rem'}}>
+
+          <div style={{maxWidth: '100%', minWidth: '100%', maxHeight: '50%', minHeight:'50%'}}>
+          <img style={{width:'100%',height:'100%', objectFit: 'fill'}} src="http://localhost:8000/public/images/1694591942731-wallpaperflare.com_wallpaper (12).jpg" alt="Card image cap" />
+          </div>
+          
+          <div className='loveemo d-flex justify-content-center align-items-center' data-bs-toggle="tooltip" data-bs-placement="right" title="0">
+          <FavoriteIcon />
+          </div>
+
+          <div className='loveemo2 d-flex justify-content-center align-items-center'  data-bs-toggle="tooltip" data-bs-placement="right" title="0">
+          <HeartBrokenIcon />
+          </div>
+
+          <div className='loveemo3 d-flex justify-content-center align-items-center'>
+          <AlarmOnIcon />
+          </div>
+
+          <div class="card-body" style={{backgroundColor: '#c0ff1d'}}>
+            <h5 class="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}><Stack direction="row" spacing={2}>
+
+            <Avatar
+                alt="Remy Sharp"
+                src={playerAvatar}
+                sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
+            />
+            </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{username}<p style={{fontSize: '0.6rem'}}>Uploaded At : 12-12-2023</p></span></h5>
+            
+            <p class="card-text smollTitle">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            
+          </div>
+          </div>
+          </div>
+
+
+          <div className='col d-flex justify-content-center mb-5'> 
+          <div class="card" style={{width: '16rem', height: '16rem'}}>
+          <div style={{maxWidth: '100%', minWidth: '100%', maxHeight: '50%', minHeight:'50%'}}>
+          <img style={{width:'100%',height:'100%',objectFit: 'fill'}}  src="http://localhost:8000/public/videos/1694935584066-h3.jpg" />
+          </div>
+
+          <div className='loveemo d-flex justify-content-center'>
+          asdadadasd
+          </div>
+
+          <div className='loveemo2 d-flex justify-content-center'>
+          asdadadasd
+          </div>
+
+          <div className='loveemo3 d-flex justify-content-center'>
+          asdadadasd
+          </div>
+
+
+          <div class="card-body" style={{backgroundColor: '#c0ff1d'}}>
+            <h5 class="card-title d-flex flex-row"><Stack direction="row" spacing={2}>
+
+            <Avatar
+                alt="Remy Sharp"
+                src={playerAvatar}
+                sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
+            />
+            </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{username}<p style={{fontSize: '0.6rem'}}>Uploaded At : 12-12-2023</p></span></h5>
+            <p class="card-text smollTitle">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            
+          </div>
+          </div>
+          </div>
+
+
+        </div>
         
 
     </div>

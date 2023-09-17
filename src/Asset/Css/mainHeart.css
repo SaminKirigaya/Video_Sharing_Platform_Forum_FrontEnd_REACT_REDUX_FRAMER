@@ -1133,3 +1133,53 @@ select{
 .badgeHovcurs{
     cursor: pointer;
 }
+
+.smollUsername{
+    font-size: 0.9rem;
+ 
+}
+
+.smollTitle{
+    font-size: 0.7rem;
+}
+
+.loveemo{
+    position: absolute;
+    top: 4%;
+    left: 83%;
+    background-color: #c0ff1d;
+    min-width: 13%;
+    max-width: 13%;
+    min-height: 12%;
+    max-height: 16%;
+    border-radius: 0.4rem;
+
+}
+
+
+.loveemo2{
+    position: absolute;
+    top: 19%;
+    left: 83%;
+    background-color: #c0ff1d;
+    min-width: 13%;
+    max-width: 13%;
+    min-height: 12%;
+    max-height: 16%;
+    border-radius: 0.4rem;
+
+}
+
+
+.loveemo3{
+    position: absolute;
+    top: 34%;
+    left: 83%;
+    background-color: #c0ff1d;
+    min-width: 13%;
+    max-width: 13%;
+    min-height: 12%;
+    max-height: 16%;
+    border-radius: 0.4rem;
+
+}
