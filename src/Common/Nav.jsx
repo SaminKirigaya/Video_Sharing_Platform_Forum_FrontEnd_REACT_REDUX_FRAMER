@@ -44,12 +44,12 @@ function Nav() {
             <div className='container-fluid mainNav'>
 
 
-                <div data-bs-toggle="tooltip" data-bs-placement="right" title="Have A Nice Day !!!">
+                <div data-bs-toggle="tooltip">
                 <Link className='linkBtn' to='/'><OndemandVideoIcon fontSize='large'/></Link>
                 </div>
                 
 
-                {isLogged ? <div className='avatarArea mt-5' data-bs-toggle="tooltip" data-bs-placement="right" title="Your Profile">
+                {isLogged ? <div className='avatarArea mt-5'>
                 <Link to ='/profilePage'>
                     <Stack direction="row" spacing={2}>
                     
@@ -64,39 +64,39 @@ function Nav() {
                 
 
 
-                {!isLogged ? <div className='mt-5' data-bs-toggle="tooltip" data-bs-placement="right" title="LogIn" >
+                {!isLogged ? <div className='mt-5'>
                 <Link className='linkBtn' to='/login'><AccountCircleIcon fontSize='large' /></Link>
                 </div> : null}
                 
 
 
-                {!isLogged ? <div className='mt-3' data-bs-toggle="tooltip" data-bs-placement="right" title="Verify Account">
+                {!isLogged ? <div className='mt-3'>
                 <Link className='linkBtn' to='/verify'><VerifiedIcon fontSize='large' /></Link>
                 </div> : null}
                 
 
 
-                <div className='mt-3' data-bs-toggle="tooltip" data-bs-placement="right" title="Home">
+                <div className='mt-3'>
                 <HomeIcon fontSize='large'/>
                 </div>
 
 
-                <div className='mt-3' data-bs-toggle="tooltip" data-bs-placement="right" title="All Categories">
+                <div className='mt-3'>
                 <InterestsIcon fontSize='large' />
                 </div>
 
-                {isLogged ? <div className='mt-3' data-bs-toggle="tooltip" data-bs-placement="right" title="Your Videos">
+                {isLogged ? <div className='mt-3'>
                 <Link className='linkBtn' to='/yourVideos'><VideoSettingsIcon fontSize='large' /></Link>
                 </div> : null}
 
 
-                {isLogged ? <div className='mt-3' data-bs-toggle="tooltip" data-bs-placement="right" title="Watch Later">
+                {isLogged ? <div className='mt-3'>
                 <WatchLaterIcon fontSize='large' />
                 </div> : null}
                 
 
 
-                {isLogged ? <div className='mt-3' data-bs-toggle="tooltip" data-bs-placement="right" title="Liked Videos">
+                {isLogged ? <div className='mt-3'>
                 <ThumbUpAltIcon fontSize='large' />
                 </div> : null}
 
@@ -108,7 +108,7 @@ function Nav() {
                 
 
 
-                {isLogged ? <div className='mt-3' data-bs-toggle="tooltip" data-bs-placement="right" title="LogOut">
+                {isLogged ? <div className='mt-3' >
                 <Link className='linkBtn' to='/logout'><LogoutIcon fontSize='large' /></Link>
                 </div> : null}
                 

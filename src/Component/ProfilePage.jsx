@@ -20,9 +20,30 @@ function generateSpace(){
 
 function ProfilePage() {
   
+  const [BigDisp, setBigDisp] = useState('')
+  const [FirstJust, setFirstJust] = useState('')
+  const [SecondJust, setSecondJust] = useState('')
+  const [ThirdJust, setThirdJust] = useState('')
+
+
 
   // Effects Here
   useEffect(() => {
+    if(window.innerWidth>750){
+      setFirstJust('end')
+      setSecondJust('start')
+      setThirdJust('end')
+    }else{
+      setFirstJust('center')
+      setSecondJust('center')
+      setThirdJust('center')
+    }
+
+    if(window.innerWidth>1000){
+      setBigDisp('500px')
+    }else{
+      setBigDisp('18rem')
+    }
     // Initialize tooltips when the component mounts
     window.$('[data-bs-toggle="tooltip"]').tooltip();
 
@@ -43,9 +64,9 @@ function ProfilePage() {
 
             <div className='row row-cols-1 row-cols-md-2 mb-5'>
 
-              <div className='col d-flex justify-content-end'>
+              <div className='col d-flex' style={{justifyContent: FirstJust}}>
 
-              <div class="card mb-3 bordcol" style={{maxWidth: '500px'}}>
+              <div class="card mb-3 bordcol" style={{maxWidth: BigDisp}}>
               <div class="row g-0">
                 <div class="col-md-4">
                 <div className='mx-auto text-center d-flex justify-content-center align-items-center pt-4'>
@@ -76,8 +97,8 @@ function ProfilePage() {
               </div>
               </div>
 
-              <div className='col d-flex justify-content-start'>
-              <div class="card mb-3 bordcol" style={{maxWidth: '500px'}}>
+              <div className='col d-flex' style={{justifyContent: SecondJust}}>
+              <div class="card mb-3 bordcol" style={{maxWidth: BigDisp}}>
               <div class="row g-0">
                 <div class="col-md-4">
                 <div className='mx-auto text-center d-flex justify-content-center align-items-center pt-4'>
@@ -109,8 +130,8 @@ function ProfilePage() {
 
               </div>
 
-              <div className='col d-flex justify-content-end'>
-              <div class="card mb-3 bordcol" style={{maxWidth: '500px'}}>
+              <div className='col d-flex' style={{justifyContent: ThirdJust}}>
+              <div class="card mb-3 bordcol" style={{maxWidth: BigDisp }}>
               <div class="row g-0">
                 <div class="col-md-4">
                 <div className='mx-auto text-center d-flex justify-content-center align-items-center pt-4'>
