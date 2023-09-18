@@ -32,41 +32,12 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const backendlink = 'http://localhost:8000' // change it according to ur server
 
 
-const generatePlainDate = (unusualDate)=>{ // format utc based date to user date 
-  const newDate = new Date(unusualDate)
 
-  const year = newDate.getFullYear()
-  const month = (newDate.getMonth()+1).toString().padStart(2,"0")
-  const date = newDate.getDate().toString().padStart(2,"0")
-
-  return `${date}-${month}-${year}`
-}
-
-// convert huge like amount to K or M
-const genareteLikedAmount = (bigAmount)=>{
-  if (bigAmount>1000000){
-    return Math.floor(bigAmount/1000000)+"M"
-  }else if(bigAmount>1000){
-    return Math.floor(bigAmount/1000)+"K"
-  }else{
-    return bigAmount
-  }
-}
-
-// convert huge disliked amount to K or M
-const genareteDisLikedAmount = (bigAmount)=>{
-  if (bigAmount>1000000){
-    return Math.floor(bigAmount/1000000)+"M"
-  }else if(bigAmount>1000){
-    return Math.floor(bigAmount/1000)+"K"
-  }else{
-    return bigAmount
-  }
-}
 
 
 
 function YourVideos() {
+
     const [open, setOpen] = React.useState(false); // Snackbar open close state
     const [responseMessage, setResponseMessage] = React.useState(''); // initially any error or success message at snackbar
     const [uploadProgress, setUploadProgress] = useState(0); // upload state setting 
@@ -91,7 +62,41 @@ function YourVideos() {
       tags : []
     })
 
+
     const [currentlyInsertedTag, setCurrentlyInsertedTag] = useState('')
+
+
+    const generatePlainDate = (unusualDate)=>{ // format utc based date to user date 
+      const newDate = new Date(unusualDate)
+    
+      const year = newDate.getFullYear()
+      const month = (newDate.getMonth()+1).toString().padStart(2,"0")
+      const date = newDate.getDate().toString().padStart(2,"0")
+    
+      return `${date}-${month}-${year}`
+    }
+    
+    // convert huge like amount to K or M
+    const genareteLikedAmount = (bigAmount)=>{
+      if (bigAmount>1000000){
+        return Math.floor(bigAmount/1000000)+"M"
+      }else if(bigAmount>1000){
+        return Math.floor(bigAmount/1000)+"K"
+      }else{
+        return bigAmount
+      }
+    }
+    
+    // convert huge disliked amount to K or M
+    const genareteDisLikedAmount = (bigAmount)=>{
+      if (bigAmount>1000000){
+        return Math.floor(bigAmount/1000000)+"M"
+      }else if(bigAmount>1000){
+        return Math.floor(bigAmount/1000)+"K"
+      }else{
+        return bigAmount
+      }
+    }
 
     const addNewTag = (e)=>{ // add tag to old tags state than make input field vanish 
       if(currentlyInsertedTag){
@@ -190,11 +195,11 @@ function YourVideos() {
         <img style={{width:'100%',height:'100%', objectFit: 'fill', borderTopLeftRadius: '0.3rem', borderTopRightRadius: '0.3rem'}} src={each.thumbnailLink} alt="Card image cap" />
         </div>
         
-        <div className='loveemo d-flex justify-content-center align-items-center' data-bs-toggle="tooltip" data-bs-placement="right" title={genareteLikedAmount(each.likeamount)}>
+        <div className='loveemo d-flex justify-content-center align-items-center' data-bs-toggle="tooltip" data-bs-placement="left" title={genareteLikedAmount(each.likeamount)}>
         <FavoriteIcon />
         </div>
 
-        <div className='loveemo2 d-flex justify-content-center align-items-center'  data-bs-toggle="tooltip" data-bs-placement="right" title={genareteDisLikedAmount(each.dislikedamount)}>
+        <div className='loveemo2 d-flex justify-content-center align-items-center'  data-bs-toggle="tooltip" data-bs-placement="left" title={genareteDisLikedAmount(each.dislikedamount)}>
         <HeartBrokenIcon />
         </div>
 
@@ -349,6 +354,14 @@ function YourVideos() {
         getOldVideosData()
         setUploadSuccess(false)
       },[uploadSuccess])
+
+      useEffect(()=>{
+        window.$('[data-bs-toggle="tooltip"]').tooltip('dispose');
+        window.$('[data-bs-toggle="tooltip"]').tooltip();
+        genareteLikedAmount()
+        genareteDisLikedAmount()
+        generatePlainDate()
+      },[oldVideos])
 
   return (
     <Fragment>
