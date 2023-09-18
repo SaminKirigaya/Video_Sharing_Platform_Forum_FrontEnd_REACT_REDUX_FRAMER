@@ -1,4 +1,87 @@
 @media (min-width: 320px) and (max-width: 374px){
+    .videoPlayer{
+        position: absolute;
+        top: 14%;
+        left: 13%;
+        width: 74%;
+        height: 22%;
+    
+    }
+    .icons{
+        position: relative;
+        top: 121%;
+        left: 77%;
+        min-width: 20%;
+        max-width: 20%;
+    
+        min-height: 29%;
+        max-height: 29%;
+    
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons2{
+        position: relative;
+        top: 92%;
+        left: 54%;
+        min-width: 20%;
+        max-width: 20%;
+    
+        min-height: 29%;
+        max-height: 29%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons3{
+        position: relative;
+        top: 63%;
+        left: 3%;
+        min-width: 20%;
+        max-width: 20%;
+    
+        min-height: 29%;
+        max-height: 29%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons4{
+        position: relative;
+        top: 34%;
+        left: 27%;
+        min-width: 20%;
+        max-width: 20%;
+        min-height: 29%;
+        max-height: 29%;
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+        color: #89b617;
+    }
+    
+    
+    .videoBox{
+        min-width: 62vw;
+        max-width: 62vw;
+        min-height: 20vh;
+        max-height: 20vh;
+       
+        border-radius: 0.5rem;
+    
+        border: 0.09rem solid #4f6616;
+    
+    }
+
     .coverImage{
         display: block;
         object-fit: cover !important;
@@ -71,6 +154,87 @@
 
 
 @media (min-width: 375px) and (max-width: 389px){
+    .videoPlayer{
+        position: absolute;
+        top: 16%;
+        left: 13%;
+        width: 74%;
+        height: 22%;
+    
+    }
+    .icons{
+        position: relative;
+        top: 121%;
+        left: 77%;
+        min-width: 20%;
+        max-width: 20%;
+    
+        min-height: 31%;
+        max-height: 31%;
+    
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons2{
+        position: relative;
+        top: 92%;
+        left: 54%;
+        min-width: 20%;
+        max-width: 20%;
+    
+        min-height: 31%;
+        max-height: 31%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons3{
+        position: relative;
+        top: 60%;
+        left: 3%;
+        min-width: 20%;
+        max-width: 20%;
+    
+        min-height: 31%;
+        max-height: 31%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons4{
+        position: relative;
+        top: 30%;
+        left: 27%;
+        min-width: 20%;
+        max-width: 20%;
+        min-height: 31%;
+        max-height: 31%;
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+        color: #89b617;
+    }
+
+    .videoBox{
+        min-width: 62vw;
+        max-width: 62vw;
+        min-height: 20vh;
+        max-height: 20vh;
+ 
+        border-radius: 0.5rem;
+    
+        border: 0.09rem solid #4f6616;
+    
+    }
 
     .coverImage{
         display: block;
@@ -142,6 +306,87 @@
 
 
 @media (min-width: 390px) and (max-width: 411px){
+    .videoPlayer{
+        position: absolute;
+        top: 13%;
+        left: 11%;
+        width: 78%;
+        height: 21%;
+    }
+    .icons{
+        position: relative;
+        top: 121%;
+        left: 77%;
+        min-width: 20%;
+        max-width: 20%;
+    
+        min-height: 31%;
+        max-height: 31%;
+    
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons2{
+        position: relative;
+        top: 92%;
+        left: 54%;
+        min-width: 20%;
+        max-width: 20%;
+    
+        min-height: 31%;
+        max-height: 31%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons3{
+        position: relative;
+        top: 60%;
+        left: 3%;
+        min-width: 20%;
+        max-width: 20%;
+    
+        min-height: 31%;
+        max-height: 31%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons4{
+        position: relative;
+        top: 30%;
+        left: 27%;
+        min-width: 20%;
+        max-width: 20%;
+        min-height: 31%;
+        max-height: 31%;
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+        color: #89b617;
+    }
+
+    
+    .videoBox{
+        min-width: 64vw;
+        max-width: 64vw;
+        min-height: 20vh;
+        max-height: 20vh;
+    
+        border-radius: 0.5rem;
+    
+        border: 0.09rem solid #4f6616;
+    
+    }
     .coverImage{
         display: block;
         object-fit: cover !important;
@@ -211,7 +456,88 @@
 
 
 @media (min-width: 412px) and (max-width: 539px){
+    .videoPlayer{
+        position: absolute;
+        top: 12%;
+        left: 11%;
+        width: 78%;
+        height: 21%;
+    }
+    .icons{
+        position: relative;
+        top: 122%;
+        left: 77%;
+        min-width: 20%;
+        max-width: 20%;
     
+        min-height: 31%;
+        max-height: 31%;
+    
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons2{
+        position: relative;
+        top: 92%;
+        left: 54%;
+        min-width: 20%;
+        max-width: 20%;
+    
+        min-height: 31%;
+        max-height: 31%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons3{
+        position: relative;
+        top: 60%;
+        left: 3%;
+        min-width: 20%;
+        max-width: 20%;
+    
+        min-height: 31%;
+        max-height: 31%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons4{
+        position: relative;
+        top: 30%;
+        left: 27%;
+        min-width: 20%;
+        max-width: 20%;
+        min-height: 31%;
+        max-height: 31%;
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+        color: #89b617;
+    }
+
+
+    .videoBox{
+        min-width: 64vw;
+        max-width: 64vw;
+        min-height: 20vh;
+        max-height: 20vh;
+      
+        border-radius: 0.5rem;
+    
+        border: 0.09rem solid #4f6616;
+    
+    }
+
     .coverImage{
         display: block;
         object-fit: cover !important;
@@ -294,6 +620,90 @@
 
 
 @media (min-width: 540px) and (max-width: 767px){
+    .videoPlayer{
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    width: 80%;
+    height: 30%;
+}
+
+    .icons{
+        position: relative;
+        top: 112%;
+        left: 77%;
+        min-width: 14%;
+        max-width: 14%;
+    
+        min-height: 27%;
+        max-height: 27%;
+    
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons2{
+        position: relative;
+        top: 85%;
+        left: 54%;
+        min-width: 14%;
+        max-width: 14%;
+    
+        min-height: 27%;
+        max-height: 27%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons3{
+        position: relative;
+        top: 58%;
+        left: 8%;
+        min-width: 14%;
+        max-width: 14%;
+    
+        min-height: 27%;
+        max-height: 27%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons4{
+        position: relative;
+        top: 31%;
+        left: 31%;
+        min-width: 14%;
+        max-width: 14%;
+        min-height: 27%;
+        max-height: 27%;
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+        color: #89b617;
+    }
+
+
+    .videoBox{
+        min-width: 69vw;
+        max-width: 69vw;
+        min-height: 28vh;
+        max-height: 28vh;
+   
+        border-radius: 0.5rem;
+    
+        border: 0.09rem solid #4f6616;
+    
+    }
+
+
     .coverImage{
         display: block;
         object-fit: cover !important;
@@ -363,6 +773,90 @@
 
 
 @media (min-width: 768px) and (max-width: 819px){
+    .videoPlayer{
+        position: absolute;
+        top: 9.7%;
+        left: 10%;
+        width: 80%;
+        height: 30%;
+    }
+    
+    
+    .icons{
+        position: relative;
+        top: 112%;
+        left: 77%;
+        min-width: 14%;
+        max-width: 14%;
+    
+        min-height: 27%;
+        max-height: 27%;
+    
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons2{
+        position: relative;
+        top: 85%;
+        left: 54%;
+        min-width: 14%;
+        max-width: 14%;
+    
+        min-height: 27%;
+        max-height: 27%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons3{
+        position: relative;
+        top: 58%;
+        left: 8%;
+        min-width: 14%;
+        max-width: 14%;
+    
+        min-height: 27%;
+        max-height: 27%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons4{
+        position: relative;
+        top: 31%;
+        left: 31%;
+        min-width: 14%;
+        max-width: 14%;
+        min-height: 27%;
+        max-height: 27%;
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+        color: #89b617;
+    }
+
+
+    .videoBox{
+        min-width: 69vw;
+        max-width: 69vw;
+        min-height: 28vh;
+        max-height: 28vh;
+
+        border-radius: 0.5rem;
+    
+        border: 0.09rem solid #4f6616;
+    
+    }
+
     .coverImage{
         display: block;
         object-fit: cover !important;
@@ -445,6 +939,89 @@
 
 
 @media (min-width: 820px) and (max-width: 911px){
+    .videoPlayer{
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        width: 80%;
+        height: 28%;
+    }
+
+    .icons{
+        position: relative;
+        top: 108%;
+        left: 77%;
+        min-width: 14%;
+        max-width: 14%;
+    
+        min-height: 23%;
+        max-height: 23%;
+    
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons2{
+        position: relative;
+        top: 85%;
+        left: 54%;
+        min-width: 14%;
+        max-width: 14%;
+    
+        min-height: 23%;
+        max-height: 23%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons3{
+        position: relative;
+        top: 62%;
+        left: 8%;
+        min-width: 14%;
+        max-width: 14%;
+    
+        min-height: 23%;
+        max-height: 23%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons4{
+        position: relative;
+        top: 39%;
+        left: 31%;
+        min-width: 14%;
+        max-width: 14%;
+        min-height: 23%;
+        max-height: 23%;
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+        color: #89b617;
+    }
+
+
+    .videoBox{
+        min-width: 69vw;
+        max-width: 69vw;
+        min-height: 28vh;
+        max-height: 28vh;
+   
+        border-radius: 0.5rem;
+    
+        border: 0.09rem solid #4f6616;
+    
+    }
+
     .coverImage{
         display: block;
         object-fit: cover !important;
@@ -528,6 +1105,89 @@
 
 
 @media (min-width: 912px) and (max-width: 1023px){
+    .videoPlayer{
+        position: absolute;
+        top: 8%;
+        left: 10%;
+        width: 80%;
+        height: 28.5%;
+    }
+
+    .icons{
+        position: relative;
+        top: 108%;
+        left: 77%;
+        min-width: 14%;
+        max-width: 14%;
+    
+        min-height: 23%;
+        max-height: 23%;
+    
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons2{
+        position: relative;
+        top: 85%;
+        left: 54%;
+        min-width: 14%;
+        max-width: 14%;
+    
+        min-height: 23%;
+        max-height: 23%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons3{
+        position: relative;
+        top: 62%;
+        left: 8%;
+        min-width: 14%;
+        max-width: 14%;
+    
+        min-height: 23%;
+        max-height: 23%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons4{
+        position: relative;
+        top: 39%;
+        left: 31%;
+        min-width: 14%;
+        max-width: 14%;
+        min-height: 23%;
+        max-height: 23%;
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+        color: #89b617;
+    }
+
+
+    .videoBox{
+        min-width: 69vw;
+        max-width: 69vw;
+        min-height: 28vh;
+        max-height: 28vh;
+      
+        border-radius: 0.5rem;
+    
+        border: 0.09rem solid #4f6616;
+    
+    }
+
     .coverImage{
         display: block;
         object-fit: cover !important;
@@ -610,6 +1270,89 @@
 
 
 @media (min-width: 1024px) and (max-width: 1267px){
+    .videoPlayer{
+        position: absolute;
+        top: 19%;
+        left: 13%;
+        width: 74%;
+        height: 50.5%;
+    }
+
+    .icons{
+        position: relative;
+        top: 108%;
+        left: 77%;
+        min-width: 10%;
+        max-width: 10%;
+    
+        min-height: 23%;
+        max-height: 23%;
+    
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons2{
+        position: relative;
+        top: 85%;
+        left: 56%;
+        min-width: 10%;
+        max-width: 10%;
+    
+        min-height: 23%;
+        max-height: 23%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons3{
+        position: relative;
+        top: 62%;
+        left: 12%;
+        min-width: 10%;
+        max-width: 10%;
+    
+        min-height: 23%;
+        max-height: 23%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons4{
+        position: relative;
+        top: 39%;
+        left: 34%;
+        min-width: 10%;
+        max-width: 10%;
+        min-height: 23%;
+        max-height: 23%;
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+        color: #89b617;
+    }
+
+    .videoBox{
+        min-width: 69vw;
+        max-width: 69vw;
+        min-height: 50vh;
+        max-height: 50vh;
+      
+        border-radius: 0.5rem;
+    
+        border: 0.09rem solid #4f6616;
+    
+    }
+
+
     .coverImage{
         display: block;
         object-fit: cover !important;
@@ -681,6 +1424,89 @@
 
 
 @media (min-width: 1268px) and (max-width: 1365px){
+    .videoPlayer{
+        position: absolute;
+        top: 17%;
+        left: 13%;
+        width: 74%;
+        height: 56.5%;
+    }
+
+    .icons{
+        position: relative;
+        top: 108%;
+        left: 77%;
+        min-width: 7%;
+        max-width: 7%;
+    
+        min-height: 17%;
+        max-height: 17%;
+    
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons2{
+        position: relative;
+        top: 91%;
+        left: 56%;
+        min-width: 7%;
+        max-width: 7%;
+    
+        min-height: 17%;
+        max-height: 17%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons3{
+        position: relative;
+        top: 74%;
+        left: 14%;
+        min-width: 7%;
+        max-width: 7%;
+    
+        min-height: 17%;
+        max-height: 17%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons4{
+        position: relative;
+        top: 57%;
+        left: 34%;
+        min-width: 7%;
+        max-width: 7%;
+        min-height: 17%;
+        max-height: 17%;
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+        color: #89b617;
+    }
+
+
+    .videoBox{
+        min-width: 69vw;
+        max-width: 69vw;
+        min-height: 55vh;
+        max-height: 55vh;
+      
+        border-radius: 0.5rem;
+    
+        border: 0.09rem solid #4f6616;
+    
+    }
+
     .coverImage{
         display: block;
         object-fit: cover !important;
@@ -752,6 +1578,89 @@
 
 
 @media (min-width: 1366px) and (max-width: 1919px){
+    .videoPlayer{
+        position: absolute;
+        top: 17%;
+        left: 13%;
+        width: 74%;
+        height: 56.5%;
+    }
+
+    .icons{
+        position: relative;
+        top: 108%;
+        left: 77%;
+        min-width: 7%;
+        max-width: 7%;
+    
+        min-height: 17%;
+        max-height: 17%;
+    
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons2{
+        position: relative;
+        top: 91%;
+        left: 56%;
+        min-width: 7%;
+        max-width: 7%;
+    
+        min-height: 17%;
+        max-height: 17%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons3{
+        position: relative;
+        top: 74%;
+        left: 14%;
+        min-width: 7%;
+        max-width: 7%;
+    
+        min-height: 17%;
+        max-height: 17%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons4{
+        position: relative;
+        top: 57%;
+        left: 34%;
+        min-width: 7%;
+        max-width: 7%;
+        min-height: 17%;
+        max-height: 17%;
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+        color: #89b617;
+    }
+
+    .videoBox{
+        min-width: 69vw;
+        max-width: 69vw;
+        min-height: 55vh;
+        max-height: 55vh;
+    
+        border-radius: 0.5rem;
+    
+        border: 0.09rem solid #4f6616;
+    
+    }
+
+
     .coverImage{
         display: block;
         object-fit: cover !important;
@@ -824,6 +1733,89 @@
 
 
 @media (min-width: 1920px) and (max-width: 3840px){
+    .videoPlayer{
+        position: absolute;
+        top: 11%;
+        left: 13%;
+        width: 74%;
+        height: 55.3%;
+    }
+    .icons{
+        position: relative;
+        top: 108%;
+        left: 77%;
+        min-width: 7%;
+        max-width: 7%;
+    
+        min-height: 17%;
+        max-height: 17%;
+    
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons2{
+        position: relative;
+        top: 91%;
+        left: 56%;
+        min-width: 7%;
+        max-width: 7%;
+    
+        min-height: 17%;
+        max-height: 17%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons3{
+        position: relative;
+        top: 74%;
+        left: 14%;
+        min-width: 7%;
+        max-width: 7%;
+    
+        min-height: 17%;
+        max-height: 17%;
+    
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+    
+        color: #89b617;
+    }
+    
+    .icons4{
+        position: relative;
+        top: 57%;
+        left: 34%;
+        min-width: 7%;
+        max-width: 7%;
+        min-height: 17%;
+        max-height: 17%;
+        border: 0.13rem solid #89b617;
+        border-radius: 50%;
+        color: #89b617;
+    }
+
+
+    .videoBox{
+        min-width: 69vw;
+        max-width: 69vw;
+        min-height: 55vh;
+        max-height: 55vh;
+
+        border-radius: 0.5rem;
+    
+        border: 0.09rem solid #4f6616;
+    
+    }
+
+
     .coverImage{
         display: block;
         object-fit: cover !important;
@@ -1202,3 +2194,25 @@ select{
 .fontcol{
     color: #415806;
 }
+
+.searchbtn{
+    background-color: #c0ff1d;
+    border: 0.09rem solid #415806;
+    color: #415806;
+}
+
+.searchtotal{
+    margin-top: 3rem;
+    width: 100% !important;
+}
+
+.totalbox{
+    width: 85vw;
+
+}
+
+.bgsearch{
+    background-color: white !important;
+}
+
+

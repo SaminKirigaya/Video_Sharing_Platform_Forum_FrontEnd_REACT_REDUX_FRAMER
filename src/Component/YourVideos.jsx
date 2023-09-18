@@ -72,6 +72,7 @@ function YourVideos() {
     const [uploadProgress, setUploadProgress] = useState(0); // upload state setting 
     const [oldVideos, setOldVideos] = useState([]) //old uploaded vids from rest api
     const [uploadSuccess, setUploadSuccess] = useState(false)
+    const [thewidth, setWidth] = useState('')
 
     const token = useSelector((state)=>state.tokenData.token)
     const serial = useSelector((state)=>state.userserialData.serialId)
@@ -182,7 +183,7 @@ function YourVideos() {
     const showAllOldVideosInCard = ()=>{
 
       return oldVideos.map((each)=>{
-        return  <div className='col d-flex justify-content-center mb-5'> 
+        return  <div className='col d-flex justify-content-center mb-5' style={{width: thewidth}}> 
         <div class="card" style={{width: '16rem', height: '16rem'}}>
 
         <div style={{maxWidth: '100%', minWidth: '100%', maxHeight: '50%', minHeight:'50%'}}>
@@ -318,6 +319,16 @@ function YourVideos() {
     
      // Effects Here
      useEffect(() => {
+
+        if(window.innerWidth>710 && window.innerWidth<800){
+          setWidth('13.5rem')
+        }else if(window.innerWidth>810 && window.innerWidth<900){
+          setWidth('14.5rem')
+        }else if(window.innerWidth>900 && window.innerWidth<1000){
+          setWidth('16rem')
+        }else{
+          setWidth('')
+        }
 
         // Initialize tooltips when the component mounts
         window.$('[data-bs-toggle="tooltip"]').tooltip();
@@ -477,7 +488,7 @@ function YourVideos() {
         <p className='text-center welcomeTxt'><b>Your Videos ...</b></p>
         </div>
 
-        <div className='row row-cols-1 row-cols-md-4 mb-5 d-flex justify-content-start'>
+        <div className='row row-cols-1 row-cols-md-4 mb-5 d-flex justify-content-start p-3'>
 
           {oldVideos ? showAllOldVideosInCard() : null}
           {oldVideos.length<1 ? <div className='d-flex mx-auto w-100 justify-content-center'><p className='mx-auto fontcol'>You Didn't Post Any Video Yet ...</p></div>:null}
