@@ -180,6 +180,7 @@ function YourVideos() {
 
     // show all old videos in card format
     const showAllOldVideosInCard = ()=>{
+
       return oldVideos.map((each)=>{
         return  <div className='col d-flex justify-content-center mb-5'> 
         <div class="card" style={{width: '16rem', height: '16rem'}}>
@@ -478,8 +479,8 @@ function YourVideos() {
 
         <div className='row row-cols-1 row-cols-md-4 mb-5 d-flex justify-content-start'>
 
-          {oldVideos ? showAllOldVideosInCard() : <p>You Didn't Posted Any Video Yet ...</p>}
-
+          {oldVideos ? showAllOldVideosInCard() : null}
+          {oldVideos.length<1 ? <div className='d-flex mx-auto w-100 justify-content-center'><p className='mx-auto fontcol'>You Didn't Post Any Video Yet ...</p></div>:null}
 
 
 
