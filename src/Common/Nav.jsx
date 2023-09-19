@@ -77,7 +77,7 @@ function Nav() {
 
 
                 <div className='mt-3'>
-                <HomeIcon fontSize='large'/>
+                <Link className='linkBtn' to='/'><HomeIcon fontSize='large'/></Link>
                 </div>
 
 

@@ -17,7 +17,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
-
+import SendIcon from '@mui/icons-material/Send';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -42,6 +42,11 @@ export default function SeeMyThisVideo() {
         videouploadtime : null,
         tags:[]
     })
+
+    const [resMargin, setResMargin] = useState('')
+    const [paddingRes, setPaddingRes] = useState('')
+    const [responsiveReplyBox, setResponsiveReply] = useState('')
+
     
     // convert huge like amount to K or M
   const genareteLikedAmount = (bigAmount)=>{
@@ -129,7 +134,10 @@ export default function SeeMyThisVideo() {
             if(response.data.message == 'success'){
                 setResponseMessage('Successfully deleted the video ...')
                 setOpen(true)
-                setNowGoBack(true)
+                setTimeout(()=>{
+                    setNowGoBack(true)
+                },1100)
+                
             }
 
         }catch(err){
@@ -194,11 +202,66 @@ export default function SeeMyThisVideo() {
       const setNewDesc = (e)=>{
         setVideoData((prevState)=>({...prevState, videodescription: e.target.value}))
       }
+
+      //send new video detail info
+      const sendNewInfo=async(e, videoSerial)=>{
+        const formData = new FormData()
+        try{
+            formData.append('newTitle', videoData.videotitle)
+            formData.append('newDesc', videoData.videodescription)
+            formData.append('tags', videoData.tags)
+            formData.append('videoSl', videoSerial)
+
+            const response = await axios.post(`/setNewDetails/${serial}`, formData, {
+                headers : {
+                    'Content-Type' : 'application/json'
+                }
+            })
+
+            if(response.data.message == 'success'){
+                setResponseMessage('Successfully updated your video details ...')
+                setOpen(true)
+
+                getThisVideoData()
+                
+
+            }else{
+                setResponseMessage(response.data.message)
+                setOpen(true)
+            }
+        }catch(error){
+            console.log(error)
+        }
+      }
     
     // Effects Here
     useEffect(() => {
+        if(window.innerWidth<767){
+          setResponsiveReply('80%')
+        }else{
+          setResponsiveReply('90%')
+        }
 
-        
+        if(window.innerWidth<539){
+          //2.5
+          setPaddingRes('2.5rem')
+        }else if(window.innerWidth>539 && window.innerWidth<767){
+          // 3.5
+          setPaddingRes('3.5rem')
+        }else if(window.innerWidth>767 && window.innerWidth<911){
+          //4.5
+          setPaddingRes('4.5rem')
+        }else if(window.innerWidth>911){
+          //5
+          setPaddingRes('5rem')
+        }
+
+
+        if(window.innerWidth<540){
+          setResMargin('1.5rem')
+        }else if(window.innerWidth>541){
+          setResMargin('2.5rem')
+        }
 
         // Initialize tooltips when the component mounts
         window.$('[data-bs-toggle="tooltip"]').tooltip();
@@ -231,7 +294,7 @@ export default function SeeMyThisVideo() {
     <SearchBar /> 
     
     <div className='videoBox mx-auto mt-3'>
-    <iframe className='videoPlayer' src={videoData.videourl} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
+    <iframe width="100%" height="100%" src={videoData.videourl} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
     
     <div className='d-flex justify-content-center align-items-center icons' data-bs-toggle="modal" data-bs-target="#staticBackdrop"> 
     <SettingsIcon fontSize='large'/>
@@ -257,10 +320,131 @@ export default function SeeMyThisVideo() {
     
     <hr></hr>
 
+    <div style={{padding: paddingRes, borderBottom: '0.1rem solid #c0ff1d'}}>
+    
+    <div className='row row-cols-1 row-cols-md-1' style={{marginTop: resMargin, marginLeft: '0.5rem'}}>
+      <div className='col col-md-12'>
+        <h5>Title : {videoData.videotitle}</h5>
+      </div>
+    </div>
 
+    <div className='row row-cols-1 row-cols-md-1' style={{marginTop: '1rem', marginLeft: '0.5rem', whiteSpace:'pre-line'}}>
+      <div className='col col-md-12' style={{whiteSpace : 'pre-line'}}>
+        <p>{videoData.videodescription}</p>
+      </div>
+    </div>
+
+    </div>
+
+    <div style={{padding: '0.3rem'}}>
+
+    <div className='row row-cols-1 row-cols-md-1' style={{marginTop: resMargin, marginLeft: '0.5rem'}}>
+    <h5 className='mx-auto text-center' style={{marginBottom: '2rem', color:'#42590a'}}>All Comments </h5>
     
 
 
+
+
+
+
+
+
+    <div>
+
+    {/*card col loop each reply has one card with col */}
+    <div className='col col-md-12' style={{whiteSpace : 'pre-line', marginBottom:'2rem'}}>
+    <div class="card" style={{width: '98.5%'}}>
+    
+    <div class="card-body">
+      <h5 class="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}>
+      <Stack direction="row" spacing={2}>
+
+          <Avatar
+              alt="Remy Sharp"
+              src="commenters avatar"
+              sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
+          />
+          </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>"commenters username"<p style={{fontSize: '0.6rem'}}>Commented At : commenting time </p></span>
+      </h5>
+      <p class="card-text" style={{whiteSpace: 'pre-line'}}>Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      
+    </div>
+
+    <div  class="card-body d-flex justify-content-start align-items-center">
+    <p><span class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><FavoriteIcon/> 797M</span> <span class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><HeartBrokenIcon fontSize='medium'/> 999M</span> <span class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Reply <SendIcon fontSize='medium'/></span> <span class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><DeleteSweepIcon fontSize='medium'/></span> </p>
+    </div>
+
+
+    {/* hidden input area */}
+    <div id="inputindexNo"  class="card-body d-flex justify-content-center align-items-center">
+    
+    <input type="text" class="form-control bgsearch" placeholder="Send Reply" aria-label="Send Reply Bar" aria-describedby="button-addon2" />
+    <button class="btn searchbtn" type="button" id="button-addon2"><SendIcon /></button>
+    
+    
+    </div>
+
+
+    </div>
+    </div>
+
+    {/*card col loop each reply has one card with col */}
+    
+
+
+    {/*comments reply */}
+    <div className='col col-md-12' style={{whiteSpace : 'pre-line', marginBottom:'2rem'}}>
+    <div class="card ms-auto me-3" style={{width: responsiveReplyBox}}>
+    
+
+    <div class="card-body">
+      <h5 class="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}>
+      <Stack direction="row" spacing={2}>
+
+          <Avatar
+              alt="Remy Sharp"
+              src="commenters avatar"
+              sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
+          />
+          </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>"Replier username"<p style={{fontSize: '0.6rem'}}>Replied At : commenting time </p></span>
+      </h5>
+      <p class="card-text" style={{whiteSpace: 'pre-line'}}>Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      
+    </div>
+
+    <div  class="card-body d-flex justify-content-start align-items-center">
+    <p><span class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><FavoriteIcon/> 797M</span> <span class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><HeartBrokenIcon fontSize='medium'/> 999M</span> </p>
+    </div>
+
+
+
+    </div>
+    </div>
+
+
+    {/*comment replier ends*/}
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    </div>
+    
+    </div>
 
     
     </div>
@@ -330,7 +514,7 @@ export default function SeeMyThisVideo() {
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
-            <button  type="button" class="btn btn-sm btn-primary">Update Video ...</button>
+            <button onClick={(e)=>{sendNewInfo(e, videoSerial)}} type="button" class="btn btn-sm btn-primary">Update Video ...</button>
         </div>
         </div>
 

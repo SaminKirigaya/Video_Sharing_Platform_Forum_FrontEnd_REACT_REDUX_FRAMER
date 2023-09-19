@@ -385,6 +385,7 @@ function Regstration() {
                 <option value="Canada">Canada</option>
                 <option value="Phillipines">Phillipines</option>
                 <option value="Spain">Spain</option>
+                <option value="Australia">Australia</option>
                 <option value="Argentina">Argentina</option>
                 <option value="Brazil">Brazil</option>
                 <option value="Uruguay">Uruguay</option>
