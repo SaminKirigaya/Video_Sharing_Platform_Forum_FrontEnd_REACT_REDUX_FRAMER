@@ -17,8 +17,10 @@ const ProfilePage = React.lazy(()=>import('../Component/ProfilePage'));
 const ChangeProfile = React.lazy(()=>import('../Component/ChangeProfile'));
 const ChangePassword = React.lazy(()=>import('../Component/ChangePassword'));
 const DeleteAccount = React.lazy(()=>import('../Component/DeleteAccount'));
-const YourVideos = React.lazy(()=>import('../Component/YourVideos'))
-const SeeMyThisVideo = React.lazy(()=>import('../Component/SeeMyThisVideo'))
+const YourVideos = React.lazy(()=>import('../Component/YourVideos'));
+const SeeMyThisVideo = React.lazy(()=>import('../Component/SeeMyThisVideo'));
+const SeeServerThisVideo = React.lazy(()=>import('../Component/SeeServerThisVideo'));
+
 
 function loadingEffect(){
     return  <div className='container-fluid loader d-flex justify-content-center align-items-center'>
@@ -55,6 +57,7 @@ function Header() {
                     <Route path='/deleteAccount' Component={()=>(<DeleteAccount />)} />
                     <Route path='/yourVideos' Component={()=>(<YourVideos />)} />
                     <Route path='/seeMyThisVideo/:videoSerial' Component={()=>(<SeeMyThisVideo />)} />
+                    <Route path='/seeServerThisVideo/:videoSerial' Component={()=>(<SeeServerThisVideo />)}/>
                 </Routes>
             </Suspense>
         </div>

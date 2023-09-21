@@ -321,6 +321,20 @@ export default function SeeMyThisVideo() {
     <hr></hr>
 
     <div style={{padding: paddingRes, borderBottom: '0.1rem solid #c0ff1d'}}>
+
+
+      
+    <p className='d-flex flex-row' style={{marginTop: '2rem'}}>
+    <Stack direction="row" spacing={2}>
+                    
+    <Avatar
+        alt="Remy Sharp"
+        src={playerAvatar}
+        sx={{ width: 56, height: 56 }}
+    />
+    </Stack> <span className='ms-3'><b>{username}</b><br></br><span style={{fontSize:'0.7rem'}}>Uplodaded At : {generatePlainDate(videoData.videouploadtime)}</span></span>
+    </p>
+
     
     <div className='row row-cols-1 row-cols-md-1' style={{marginTop: resMargin, marginLeft: '0.5rem'}}>
       <div className='col col-md-12'>
@@ -328,9 +342,9 @@ export default function SeeMyThisVideo() {
       </div>
     </div>
 
-    <div className='row row-cols-1 row-cols-md-1' style={{marginTop: '1rem', marginLeft: '0.5rem', whiteSpace:'pre-line'}}>
+    <div className='row row-cols-1 row-cols-md-1' style={{marginTop: '0.5rem', marginLeft: '0.5rem', whiteSpace:'pre-line'}}>
       <div className='col col-md-12' style={{whiteSpace : 'pre-line'}}>
-        <p>{videoData.videodescription}</p>
+        <p style={{fontSize: '0.8rem'}}>{videoData.videodescription}</p>
       </div>
     </div>
 
@@ -353,7 +367,7 @@ export default function SeeMyThisVideo() {
 
     {/*card col loop each reply has one card with col */}
     <div className='col col-md-12' style={{whiteSpace : 'pre-line', marginBottom:'2rem'}}>
-    <div class="card" style={{width: '98.5%'}}>
+    <div class="card" style={{width: '98.5%', border: '0.12rem solid #c0ff1d'}}>
     
     <div class="card-body">
       <h5 class="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}>
@@ -366,7 +380,7 @@ export default function SeeMyThisVideo() {
           />
           </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>"commenters username"<p style={{fontSize: '0.6rem'}}>Commented At : commenting time </p></span>
       </h5>
-      <p class="card-text" style={{whiteSpace: 'pre-line'}}>Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <p class="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem'}}>Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.</p>
       
     </div>
 
@@ -394,7 +408,7 @@ export default function SeeMyThisVideo() {
 
     {/*comments reply */}
     <div className='col col-md-12' style={{whiteSpace : 'pre-line', marginBottom:'2rem'}}>
-    <div class="card ms-auto me-3" style={{width: responsiveReplyBox}}>
+    <div class="card ms-auto me-3" style={{width: responsiveReplyBox, border: '0.12rem solid #c0ff1d'}}>
     
 
     <div class="card-body">
@@ -408,7 +422,7 @@ export default function SeeMyThisVideo() {
           />
           </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>"Replier username"<p style={{fontSize: '0.6rem'}}>Replied At : commenting time </p></span>
       </h5>
-      <p class="card-text" style={{whiteSpace: 'pre-line'}}>Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <p class="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem'}}>Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.</p>
       
     </div>
 

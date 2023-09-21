@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import Pagination from 'react-js-pagination';
 
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
@@ -26,13 +27,31 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 
+const makeItSmoll = (stringVal)=>{
+  var changedVal = ''
+  if(stringVal.length>43){
+    for(let i=0; i<43; i++){
+      changedVal += stringVal[i]
+    }
+    changedVal += '  '+'...'
+    return changedVal
+  }else{
+    return stringVal
+  }
+}
+
 function Home() {
   const [open, setOpen] = React.useState(false); // Snackbar open close state
   const [responseMessage, setResponseMessage] = React.useState(''); // initially any error or success message at snackbar
     const [oldVideos, setOldVideos] = useState([]) //old uploaded vids from rest api
     const [thewidth, setWidth] = useState('')
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 20; // Number of items to display per page
+
     const token = useSelector((state)=>state.tokenData.token)
     const serial = useSelector((state)=>state.userserialData.serialId)
+
+    
     
     axios.defaults.headers.common['Authorization'] = 'Bearer '+token // axios auth set
     
@@ -57,6 +76,7 @@ function Home() {
       }
     }
     
+
     // convert huge disliked amount to K or M
     const genareteDisLikedAmount = (bigAmount)=>{
       if (bigAmount>1000000){
@@ -86,6 +106,11 @@ function Home() {
         console.log(err)
       }
     }
+
+    // Handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
     //upload this video serial to my later watch list
     const addThisToWatchlist = async(e, serialVideo)=>{
@@ -120,9 +145,13 @@ function Home() {
 
     // show all old videos in card format
     const showAllOldVideosInCard = ()=>{
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      const currentData = oldVideos.slice(startIndex, endIndex);
+      
 
-      return oldVideos.map((each)=>{
-        return  <div className='col d-flex justify-content-center mb-5' style={{width: thewidth}}> 
+      return currentData.map((each, index)=>{
+        return  <div className='col d-flex justify-content-center mb-5' style={{width: thewidth}} key={index}> 
         <div class="card" style={{width: '16rem', height: '16rem'}}>
 
         <div style={{maxWidth: '100%', minWidth: '100%', maxHeight: '50%', minHeight:'50%'}}>
@@ -157,7 +186,7 @@ function Home() {
           />
           </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{each.username}<p style={{fontSize: '0.6rem'}}>Uploaded At : {generatePlainDate(each.uploadingDate)}</p></span></h5>
           
-          <p class="card-text smollTitle">{each.title}</p>
+          <p class="card-text smollTitle">{makeItSmoll(each.title)}</p>
           
         </div>
         </div>
@@ -186,11 +215,11 @@ function Home() {
     useEffect(() => {
 
       if(window.innerWidth>710 && window.innerWidth<800){
-        setWidth('13.5rem')
+        setWidth('13rem')
       }else if(window.innerWidth>810 && window.innerWidth<900){
-        setWidth('14.5rem')
+        setWidth('14rem')
       }else if(window.innerWidth>900 && window.innerWidth<1000){
-        setWidth('16rem')
+        setWidth('15.6rem')
       }else{
         setWidth('')
       }
@@ -219,6 +248,7 @@ function Home() {
 
 
     return (
+      
         <Fragment>
         <div className='container-fluid pages flex-column'>
         <div className='profilePageHeight'>
@@ -236,6 +266,19 @@ function Home() {
 
         </div>
 
+
+        <Pagination
+        activePage={currentPage}
+        itemsCountPerPage={itemsPerPage}
+        totalItemsCount={oldVideos.length}
+        pageRangeDisplayed={5}
+        onChange={handlePageChange}
+        itemClass="page-item"
+        linkClass="page-link mx-auto"
+        innerClass="pagination mx-auto text-center"
+
+        
+        />
 
 
         </div>

@@ -34,6 +34,18 @@ const backendlink = 'http://localhost:8000' // change it according to ur server
 
 
 
+const makeItSmoll = (stringVal)=>{
+  var changedVal = ''
+  if(stringVal.length>43){
+    for(let i=0; i<43; i++){
+      changedVal += stringVal[i]
+    }
+    changedVal += '  '+'...'
+    return changedVal
+  }else{
+    return stringVal
+  }
+}
 
 
 function YourVideos() {
@@ -187,8 +199,8 @@ function YourVideos() {
     // show all old videos in card format
     const showAllOldVideosInCard = ()=>{
 
-      return oldVideos.map((each)=>{
-        return  <div className='col d-flex justify-content-center mb-5' style={{width: thewidth}}> 
+      return oldVideos.map((each, index)=>{
+        return  <div className='col d-flex justify-content-center mb-5' style={{width: thewidth}} key={index}> 
         <div class="card" style={{width: '16rem', height: '16rem'}}>
 
         <div style={{maxWidth: '100%', minWidth: '100%', maxHeight: '50%', minHeight:'50%'}}>
@@ -223,7 +235,7 @@ function YourVideos() {
           />
           </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{username}<p style={{fontSize: '0.6rem'}}>Uploaded At : {generatePlainDate(each.uploadingDate)}</p></span></h5>
           
-          <p class="card-text smollTitle">{each.title}</p>
+          <p class="card-text smollTitle">{makeItSmoll(each.title)}</p>
           
         </div>
         </div>
