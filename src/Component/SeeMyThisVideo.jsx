@@ -31,6 +31,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 export default function SeeMyThisVideo() {
     const [open, setOpen] = React.useState(false); // Snackbar open close state
     const [responseMessage, setResponseMessage] = React.useState(''); // initially any error or success message at snackbar
+    
     // Redirecting back state
   const [nowGoBack, setNowGoBack] = React.useState(false);
     const [videoData, setVideoData] = useState({

@@ -2371,7 +2371,7 @@
 
 @media (min-width: 1268px) and (max-width: 1365px){
     .imageSamevid{
-        object-fit: fill;  min-width: 28vw; max-height: 8vw; opacity:0.7; 
+        object-fit: fill;  min-width: 29vw; max-height: 8vw; opacity:0.7; 
         border-radius: 0.4rem;
     }
 
@@ -2635,7 +2635,7 @@
 
 @media (min-width: 1366px) and (max-width: 1919px){
     .imageSamevid{
-        object-fit: fill;  min-width: 28vw; max-height: 8vw; opacity:0.5; 
+        object-fit: fill;  min-width: 29vw; max-height: 8vw; opacity:0.5; 
         border-radius: 0.4rem;
     }
 
@@ -2899,7 +2899,7 @@
 
 @media (min-width: 1920px) and (max-width: 3840px){
     .imageSamevid{
-        object-fit: fill;  min-width: 28vw; max-height: 8vw; opacity:0.5; 
+        object-fit: fill;  min-width: 29vw; max-height: 8vw; opacity:0.5; 
         border-radius: 0.4rem;
     }
 
