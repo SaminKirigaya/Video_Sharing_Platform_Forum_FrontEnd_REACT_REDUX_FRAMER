@@ -32,11 +32,14 @@ function SeeServerThisVideo() {
   const [responsiveReplyBox, setResponsiveReply] = useState('')
   const [open, setOpen] = React.useState(false); // Snackbar open close state
   const [responseMessage, setResponseMessage] = React.useState(''); // initially any error or success message at snackbar
-
+  const [brokenTags, setBrokenTags] = useState({
+    tags: []
+  })
   
   const token = useSelector((state)=>state.tokenData.token)
   const serial = useSelector((state)=>state.userserialData.serialId)
   const {videoSerial} = useParams()
+
 
   const [videoData, setVideoData] = useState({
     videourl : '',
@@ -45,8 +48,32 @@ function SeeServerThisVideo() {
     videolike : 0,
     videodislike : 0,
     videouploadtime : null,
-    tags:[]
+    tags: '',
+    videoUploader : '',
+    videoUploaderImage : '',
+    sameVids : []
 })
+
+
+      // call for this video data 
+      const getThisVideoData = async()=>{
+        try{
+            const response = await axios({
+                url : `/getThisVideoDataMainVideoSeeingPage`,
+                method : 'post',
+                data : {
+                    videoSl : videoSerial
+                }
+            }) 
+            if(response.data.message == 'success'){
+
+                setVideoData((prevState)=>({...prevState, videourl: response.data.videourl, videotitle: response.data.videotitle, videodescription: response.data.videodescription, videolike: response.data.videolike, videodislike: response.data.videodislike, videouploadtime: response.data.videouploadtime, videoUploader: response.data.videousername, videoUploaderImage: response.data.videouserimage, tags : response.data.videotags, sameVids: response.data.sameTypeVids}))
+            }
+            
+        }catch(err){
+            console.log(err)
+        }
+    }
 
 
       // convert huge like amount to K or M
@@ -99,7 +126,68 @@ function SeeServerThisVideo() {
       setOpen(false);
   };
 
+  const titleBreaker = (oldData)=>{
+    if(oldData.length>12){
+      
+  
+        return oldData.slice(0,12)+' ....'
+      
+
+    }else{
+      return oldData
+    }
+  }
+
+  // generating same type of videos beside video box
+  const generateSameTypeVids = ()=>{
+    
+    if (videoData.sameVids.length>0){
+      return  videoData.sameVids.map((each, index)=>{
+        return  <div className='col' key={index}>
+        <div class="card" style={{minWidth: '100%'}}>
+    
+        <div style={{position: 'relative', top: '0%', left:'0%'}}>
+          <img className='imageSamevid' src={each.thumbnailLink} />
+        </div>
+    
+    
+        <div style={{position:'absolute', top: '-3%', left: '0%'}}>
+          <div class="card-body minWidTxt">
+            <p class="card-title d-flex flex-row" style={{wordBreak: 'break-all'}}><Stack direction="row" spacing={2}>
+                          
+            <Avatar
+                alt="Remy Sharp"
+                src={each.profileImage}
+                sx={{ width: 35, height: 35 }}
+            />
+            </Stack>  <span className='ms-2'><b>{titleBreaker(each.title)}</b></span></p>
+            
+            <div className='mx-auto text-center' style={{position: 'relative', top: '30%', color: 'green'}}>
+            <Link className='linkBtn' to={'/seeServerThisVideo/'+each._id}><PlayArrowIcon fontSize='large'/></Link>
+            </div>
+        </div>
+        
+        </div>
+        </div>
+        </div>
+      })
+    }
+  }
+
+
+   const showTagBadges = ()=>{
+    if(videoData.tags.includes(',')){
+      let splitting = videoData.tags.split(',')
+      
+      return  splitting.map((each)=>{
+        return  <span class="badge rounded-pill bg-success me-1">{each}</span>
+      })
+    }else{
+      return  <span class="badge rounded-pill bg-success me-1">{videoData.tags}</span>
+    }
+
    
+   }
 
 
   // Effects Here
@@ -114,7 +202,7 @@ function SeeServerThisVideo() {
   
     // Initialize tooltips when the component mounts
     window.$('[data-bs-toggle="tooltip"]').tooltip();
-
+    getThisVideoData()
 
 
     //  to clean up the tooltips when the component unmounts
@@ -125,6 +213,23 @@ function SeeServerThisVideo() {
   }, []); // [ ] empty mean it will only run once after first render like component did mount :>
 
 
+  useEffect(()=>{
+    window.$('[data-bs-toggle="tooltip"]').tooltip('dispose');
+    window.$('[data-bs-toggle="tooltip"]').tooltip();
+    genareteLikedAmount()
+    genareteDisLikedAmount()
+    generatePlainDate()
+  },[videoData.videolike, videoData.videodislike, videoData.videouploadtime])
+
+
+
+  useEffect(()=>{
+    window.$('[data-bs-toggle="tooltip"]').tooltip('dispose');
+    window.$('[data-bs-toggle="tooltip"]').tooltip(); 
+
+    getThisVideoData()
+    
+  },[videoSerial])
 
   return (
     <Fragment>
@@ -136,15 +241,15 @@ function SeeServerThisVideo() {
 
     <div className='mx-auto' style={{minWidth: '95%', maxWidth: '95%', padding: '2rem'}}>
     {/* enter video tags which type in badges here ... */}
-    <span class="badge rounded-pill bg-success me-1">Success</span><span class="badge rounded-pill bg-success me-1">Success</span><span class="badge rounded-pill bg-success me-1">Success</span><span class="badge rounded-pill bg-success me-1">Success</span><span class="badge rounded-pill bg-success me-1">Success</span><span class="badge rounded-pill bg-success me-1">Success</span><span class="badge rounded-pill bg-success me-1">Success</span><span class="badge rounded-pill bg-success me-1">Success</span><span class="badge rounded-pill bg-success me-1">Success</span><span class="badge rounded-pill bg-success me-1">Success</span><span class="badge rounded-pill bg-success me-1">Success</span><span class="badge rounded-pill bg-success me-1">Success</span><span class="badge rounded-pill bg-success me-1">Success</span>
+    {showTagBadges()}
+    
     </div>
 
 
 
 
-
     <div className='videoBox2'>
-    <iframe width="100%" height="100%" src='http://localhost:8000/public/videos/1695157953513-AnimePahe_Jujutsu_Kaisen_-_32_360p_SubsPlease.mp4' allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowTransparency allowFullScreen></iframe>
+    <iframe width="100%" height="100%" src={videoData.videourl} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowTransparency allowFullScreen></iframe>
     </div>
 
     <div className='sameVideos2'>
@@ -155,218 +260,10 @@ function SeeServerThisVideo() {
 
 
     {/* each col each video link of same tye */}
-    <div className='col'>
-    <div class="card" style={{minWidth: '100%'}}>
-
-    <div style={{position: 'relative', top: '0%', left:'0%'}}>
-      <img className='imageSamevid' src="http://localhost:8000/public/videos/1695157987742-b1414dccb7ad99b581aa21932fefb3a8--lack-dragonball-z.jpg" />
-    </div>
-
-
-    <div style={{position:'absolute', top: '-3%', left: '0%'}}>
-      <div class="card-body minWidTxt">
-        <p class="card-title d-flex flex-row" style={{wordBreak: 'break-all'}}><Stack direction="row" spacing={2}>
-                      
-        <Avatar
-            alt="Remy Sharp"
-            src='someone'
-            sx={{ width: 35, height: 35 }}
-        />
-        </Stack>  <span className='ms-2'><b>Card titleasa</b></span></p>
-        
-        <div className='mx-auto text-center' style={{position: 'relative', top: '30%', color: 'green'}}>
-        <PlayArrowIcon fontSize='large'/>
-        </div>
-    </div>
     
-    </div>
-    </div>
-    </div>
     {/* each col each video link of same tye */}
 
-    <div className='col'>
-    <div class="card" style={{minWidth: '100%'}}>
-
-    <div style={{position: 'relative', top: '0%', left:'0%'}}>
-      <img className='imageSamevid' src="http://localhost:8000/public/videos/1695157987742-b1414dccb7ad99b581aa21932fefb3a8--lack-dragonball-z.jpg" />
-    </div>
-
-
-    <div style={{position:'absolute', top: '-3%', left: '0%'}}>
-      <div class="card-body minWidTxt">
-        <p class="card-title d-flex flex-row" style={{wordBreak: 'break-all'}}><Stack direction="row" spacing={2}>
-                      
-        <Avatar
-            alt="Remy Sharp"
-            src='someone'
-            sx={{ width: 35, height: 35 }}
-        />
-        </Stack>  <span className='ms-2'><b>Card titleasa</b></span></p>
-        
-        <div className='mx-auto text-center' style={{position: 'relative', top: '30%', color: 'green'}}>
-        <PlayArrowIcon fontSize='large'/>
-        </div>
-    </div>
-    
-    </div>
-    </div>
-    </div><div className='col'>
-    <div class="card" style={{minWidth: '100%'}}>
-
-    <div style={{position: 'relative', top: '0%', left:'0%'}}>
-      <img className='imageSamevid' src="http://localhost:8000/public/videos/1695157987742-b1414dccb7ad99b581aa21932fefb3a8--lack-dragonball-z.jpg" />
-    </div>
-
-
-    <div style={{position:'absolute', top: '-3%', left: '0%'}}>
-      <div class="card-body minWidTxt">
-        <p class="card-title d-flex flex-row" style={{wordBreak: 'break-all'}}><Stack direction="row" spacing={2}>
-                      
-        <Avatar
-            alt="Remy Sharp"
-            src='someone'
-            sx={{ width: 35, height: 35 }}
-        />
-        </Stack>  <span className='ms-2'><b>Card titleasa</b></span></p>
-        
-        <div className='mx-auto text-center' style={{position: 'relative', top: '30%', color: 'green'}}>
-        <PlayArrowIcon fontSize='large'/>
-        </div>
-    </div>
-    
-    </div>
-    </div>
-    </div><div className='col'>
-    <div class="card" style={{minWidth: '100%'}}>
-
-    <div style={{position: 'relative', top: '0%', left:'0%'}}>
-      <img className='imageSamevid' src="http://localhost:8000/public/videos/1695157987742-b1414dccb7ad99b581aa21932fefb3a8--lack-dragonball-z.jpg" />
-    </div>
-
-
-    <div style={{position:'absolute', top: '-3%', left: '0%'}}>
-      <div class="card-body minWidTxt">
-        <p class="card-title d-flex flex-row" style={{wordBreak: 'break-all'}}><Stack direction="row" spacing={2}>
-                      
-        <Avatar
-            alt="Remy Sharp"
-            src='someone'
-            sx={{ width: 35, height: 35 }}
-        />
-        </Stack>  <span className='ms-2'><b>Card titleasa</b></span></p>
-        
-        <div className='mx-auto text-center' style={{position: 'relative', top: '30%', color: 'green'}}>
-        <PlayArrowIcon fontSize='large'/>
-        </div>
-    </div>
-    
-    </div>
-    </div>
-    </div><div className='col'>
-    <div class="card" style={{minWidth: '100%'}}>
-
-    <div style={{position: 'relative', top: '0%', left:'0%'}}>
-      <img className='imageSamevid' src="http://localhost:8000/public/videos/1695157987742-b1414dccb7ad99b581aa21932fefb3a8--lack-dragonball-z.jpg" />
-    </div>
-
-
-    <div style={{position:'absolute', top: '-3%', left: '0%'}}>
-      <div class="card-body minWidTxt">
-        <p class="card-title d-flex flex-row" style={{wordBreak: 'break-all'}}><Stack direction="row" spacing={2}>
-                      
-        <Avatar
-            alt="Remy Sharp"
-            src='someone'
-            sx={{ width: 35, height: 35 }}
-        />
-        </Stack>  <span className='ms-2'><b>Card titleasa</b></span></p>
-        
-        <div className='mx-auto text-center' style={{position: 'relative', top: '30%', color: 'green'}}>
-        <PlayArrowIcon fontSize='large'/>
-        </div>
-    </div>
-    
-    </div>
-    </div>
-    </div><div className='col'>
-    <div class="card" style={{minWidth: '100%'}}>
-
-    <div style={{position: 'relative', top: '0%', left:'0%'}}>
-      <img className='imageSamevid' src="http://localhost:8000/public/videos/1695157987742-b1414dccb7ad99b581aa21932fefb3a8--lack-dragonball-z.jpg" />
-    </div>
-
-
-    <div style={{position:'absolute', top: '-3%', left: '0%'}}>
-      <div class="card-body minWidTxt">
-        <p class="card-title d-flex flex-row" style={{wordBreak: 'break-all'}}><Stack direction="row" spacing={2}>
-                      
-        <Avatar
-            alt="Remy Sharp"
-            src='someone'
-            sx={{ width: 35, height: 35 }}
-        />
-        </Stack>  <span className='ms-2'><b>Card titleasa</b></span></p>
-        
-        <div className='mx-auto text-center' style={{position: 'relative', top: '30%', color: 'green'}}>
-        <PlayArrowIcon fontSize='large'/>
-        </div>
-    </div>
-    
-    </div>
-    </div>
-    </div><div className='col'>
-    <div class="card" style={{minWidth: '100%'}}>
-
-    <div style={{position: 'relative', top: '0%', left:'0%'}}>
-      <img className='imageSamevid' src="http://localhost:8000/public/videos/1695157987742-b1414dccb7ad99b581aa21932fefb3a8--lack-dragonball-z.jpg" />
-    </div>
-
-
-    <div style={{position:'absolute', top: '-3%', left: '0%'}}>
-      <div class="card-body minWidTxt">
-        <p class="card-title d-flex flex-row" style={{wordBreak: 'break-all'}}><Stack direction="row" spacing={2}>
-                      
-        <Avatar
-            alt="Remy Sharp"
-            src='someone'
-            sx={{ width: 35, height: 35 }}
-        />
-        </Stack>  <span className='ms-2'><b>Card titleasa</b></span></p>
-        
-        <div className='mx-auto text-center' style={{position: 'relative', top: '30%', color: 'green'}}>
-        <PlayArrowIcon fontSize='large'/>
-        </div>
-    </div>
-    
-    </div>
-    </div>
-    </div>
-
-
-
-
-
-
-
-
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    {generateSameTypeVids()}
 
 
 
@@ -384,13 +281,13 @@ function SeeServerThisVideo() {
 
     
     
-    <div className='d-flex justify-content-center align-items-center iconmain1' data-bs-toggle="tooltip" data-bs-placement="right" title=''> 
+    <div className='d-flex justify-content-center align-items-center iconmain1' data-bs-toggle="tooltip" data-bs-placement="right" title={genareteDisLikedAmount(videoData.videolike)}> 
     <FavoriteIcon fontSize='large'/> 
     </div>
 
     
 
-    <div className='d-flex justify-content-center align-items-center iconmain2' data-bs-toggle="tooltip" data-bs-placement="right" title=''> 
+    <div className='d-flex justify-content-center align-items-center iconmain2' data-bs-toggle="tooltip" data-bs-placement="right" title={genareteLikedAmount(videoData.videodislike)}> 
     <HeartBrokenIcon fontSize='large'/>
     </div>
 
@@ -405,78 +302,13 @@ function SeeServerThisVideo() {
                     
     <Avatar
         alt="Remy Sharp"
-        src='someone'
+        src={videoData.videoUploaderImage}
         sx={{ width: 56, height: 56 }}
     />
-    </Stack> <span className='ms-3'>username user<br></br><span style={{fontSize:'0.7rem'}}>Uplodaded At : 12-03-2012</span></span>
+    </Stack> <span className='ms-3'><b>{videoData.videoUploader}</b><br></br><span style={{fontSize:'0.7rem'}}>Uplodaded At : {generatePlainDate(videoData.videouploadtime)}</span></span>
     </p>
-    <p style={{whiteSpace: 'pre-line', fontWeight: 'bold'}}>Title : NEW PUPPY MADE OUR TODDLER SICK?! </p>
-    <p style={{whiteSpace: 'pre-line', fontSize: '0.8rem'}}>More AMAZING Videos! 👇
-
-    LETTING OUR 2 YEAR OLD CONTROL OUR DAY
-    👉   •   
-    
-     • LETTING OUR 2 YEAR OLD CONTROL OUR DAY   
-    
-    24 HOURS AFTER TAKING TODDLER BINKY
-    👉   •   
-    
-     • 24 HOURS AFTER TAKING TODDLER BINKY  
-    
-    Toddler Night Time Routine - BYE BYE BINKY
-    👉   •   
-    
-     • Toddler Night Time Routine - BYE BYE ...  
-    
-    2 YEAR OLD WASHING HER FIRST CAR
-    👉   •   
-    
-     • 2 YEAR OLD WASHING HER FIRST CAR    
-    
-    
-    Watch our RECENT VIDEOS  ➡ https://bit.ly/42Oh9AO
-    Watch Our POPULAR VIDEOS! ➡ https://bit.ly/3pQUo0E
-    Watch Our CHALLENGES  ➡ https://bit.ly/3InJSoe
-    
-    FOLLOW IᑎᔕTᗩGᖇᗩᗰ HERE ☟
-    Family ➡ https://www.instagram.com/thechurcofa...
-    Lanie       ➡https://www.instagram.com/laniechurco/
-    Nick  ➡ https://www.instagram.com/nickchurco/
-    Blakeley    ➡ https://www.instagram.com/blakeley_ch...
-    
-    FaceBook - https://www.facebook.com/TheChurcoFamily
-    
-    BUSINESS INQUIRIES ➡ thechurcofamily@emctalent.com
-    
-    Welcome To The #ChurcoFamily YouTube Channel. We are a fun loving family based in Georgia. 
-    
-    We are all about family and we want you to join Nick, Lanie, Blakeley and baby Bryer on this journey as we grow our family and enjoy all the wonders that come along with it.
-    
-    Join us everyday as we navigate through life and enjoy everything the world has to offer!
-    
-    #challenge #churcofamily #churco
-    
-    Check out AMAZING Videos from our friends below! 👇
-    
-    Royalty Family - TESTING Insane GADGETS from the Future!
-    •   
-    
-     • Testing Insane GADGETS from the Future!  
-    
-    Fun Squad Family - Yes Day DISASTER! 🫣 Saying YES to my KIDS for 24 hrs! Ft.  @JazzySkye  
-    •   
-    
-     • Yes Day DISASTER! 🫣 Saying YES to my ...  
-    
-    The Ninja Fam! - Are the Ninja Kidz Adopted? The true story
-    •   
-    
-     • Are the Ninja Kidz Adopted? The true ...  
-    
-    The Churco Family
-      
-    
-     / @thechurcofamily  </p>
+    <p style={{whiteSpace: 'pre-line', fontWeight: 'bold'}}>Title : {videoData.videotitle} </p>
+    <p style={{whiteSpace: 'pre-line', fontSize: '0.8rem'}}> {videoData.videodescription}</p>
     </div>
 
 

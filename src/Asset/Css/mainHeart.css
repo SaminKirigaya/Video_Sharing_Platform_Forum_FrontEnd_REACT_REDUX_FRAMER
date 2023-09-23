@@ -1027,6 +1027,7 @@
 
     .minWidTxt{
         min-width: 100%;
+        margin-left: 0.45rem;
     }
 
     .allComments{
@@ -1292,6 +1293,7 @@
 
     .minWidTxt{
         min-width: 130%;
+        margin-left: -0.5rem;
     }
 
 
@@ -1568,6 +1570,7 @@
 
     .minWidTxt{
         min-width: 140%;
+        margin-left: -0.5rem;
     }
 
 
@@ -1844,6 +1847,7 @@
 
     .minWidTxt{
         min-width: 155%;
+        margin-left: -0.5rem;
     }
 
     .allComments{
@@ -2114,6 +2118,8 @@
 
     .minWidTxt{
         min-width: 175%;
+        margin-left: -0.5rem;
+        margin-top: -0.5rem;
     }
 
 
@@ -2377,6 +2383,8 @@
 
     .minWidTxt{
         min-width: 219%;
+        margin-left: -0.5rem;
+        margin-top: -0.5rem;
     }
     
     .allComments{
@@ -2641,6 +2649,8 @@
 
     .minWidTxt{
         min-width: 220%;
+        margin-left: -0.5rem;
+        margin-top: -0.5rem;
     }
 
 
@@ -2905,6 +2915,8 @@
 
     .minWidTxt{
         min-width: 300%;
+        margin-left: -0.5rem;
+        margin-top: -0.5rem;
     }
 
     .allComments{
