@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import { Link } from 'react-router-dom'
+
 import axios from 'axios'
 
 import HomeIcon from '@mui/icons-material/Home';
@@ -15,6 +16,8 @@ import VerifiedIcon from '@mui/icons-material/Verified';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import LogoutIcon from '@mui/icons-material/Logout';
 import VideoSettingsIcon from '@mui/icons-material/VideoSettings';
+import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
+import NotificationImportantIcon from '@mui/icons-material/NotificationImportant';
 
 
 function Nav() {
@@ -22,6 +25,7 @@ function Nav() {
     // States : 
     const isLogged = useSelector((state) => state.loginData.login);
     const playerAvatar = useSelector((state) => state.profImgData.proImgPath);
+    const notificationAmount = useSelector((state)=> state.notifyData.notifAmount);
 
     // Effects Here
     useEffect(() => {
@@ -85,10 +89,7 @@ function Nav() {
                 <InterestsIcon fontSize='large' />
                 </div>
 
-                {isLogged ? <div className='mt-3'>
-                <Link className='linkBtn' to='/yourVideos'><VideoSettingsIcon fontSize='large' /></Link>
-                </div> : null}
-
+                
 
                 {isLogged ? <div className='mt-3'>
                 <WatchLaterIcon fontSize='large' />
@@ -99,6 +100,13 @@ function Nav() {
                 {isLogged ? <div className='mt-3'>
                 <ThumbUpAltIcon fontSize='large' />
                 </div> : null}
+
+
+                {isLogged ? notificationAmount>0 ? <div className='mt-3'>
+                <Link className='linkBtn' to='/goNotificationPage'><NotificationImportantIcon fontSize='large' /></Link>
+                </div> : <div className='mt-3'>
+                <Link className='linkBtn' to='/goNotificationPage'><CircleNotificationsIcon fontSize='large' /></Link>
+                </div>  : null}
 
 
                 {isLogged ? <div className='mt-3'>
