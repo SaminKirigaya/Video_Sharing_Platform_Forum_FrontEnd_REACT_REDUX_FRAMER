@@ -29,17 +29,23 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 
 function SeeServerThisVideo() {
+  // Redirecting back state
+  const [nowGoBack, setNowGoBack] = React.useState(false);
   const [responsiveReplyBox, setResponsiveReply] = useState('')
   const [open, setOpen] = React.useState(false); // Snackbar open close state
   const [responseMessage, setResponseMessage] = React.useState(''); // initially any error or success message at snackbar
+  const [stringComment, setStringComment] = useState('')
   const [brokenTags, setBrokenTags] = useState({
     tags: []
   })
+  const [eventSuccess, setEventSuccess] = useState(false)
   
   const token = useSelector((state)=>state.tokenData.token)
   const serial = useSelector((state)=>state.userserialData.serialId)
   const {videoSerial} = useParams()
 
+  const [showHideComment, setShowHideComment] = useState(false)
+  const [commentReplay, setCommentReplay] = useState('')
 
   const [videoData, setVideoData] = useState({
     videourl : '',
@@ -48,16 +54,26 @@ function SeeServerThisVideo() {
     videolike : 0,
     videodislike : 0,
     videouploadtime : null,
+    totalViews : 0,
     tags: '',
     videoUploader : '',
     videoUploaderImage : '',
     sameVids : []
 })
 
+  const [videoComs, setVideoComs] = useState({
+    videoComs : [],
+    comsReply : []
+  })
+
+  const [colWidth, setColWidth] = useState('')
+
 
       // call for this video data 
       const getThisVideoData = async()=>{
+        
         try{
+            
             const response = await axios({
                 url : `/getThisVideoDataMainVideoSeeingPage`,
                 method : 'post',
@@ -65,16 +81,70 @@ function SeeServerThisVideo() {
                     videoSl : videoSerial
                 }
             }) 
+            
             if(response.data.message == 'success'){
 
-                setVideoData((prevState)=>({...prevState, videourl: response.data.videourl, videotitle: response.data.videotitle, videodescription: response.data.videodescription, videolike: response.data.videolike, videodislike: response.data.videodislike, videouploadtime: response.data.videouploadtime, videoUploader: response.data.videousername, videoUploaderImage: response.data.videouserimage, tags : response.data.videotags, sameVids: response.data.sameTypeVids}))
+                setVideoData((prevState)=>({...prevState, videourl: response.data.videourl, videotitle: response.data.videotitle, videodescription: response.data.videodescription, videolike: response.data.videolike, videodislike: response.data.videodislike, videouploadtime: response.data.videouploadtime, videoUploader: response.data.videousername, videoUploaderImage: response.data.videouserimage, tags : response.data.videotags, sameVids: response.data.sameTypeVids, totalViews: response.data.totalViews}))
             }
             
         }catch(err){
             console.log(err)
         }
+      
     }
 
+    // call for add comments regarding this video
+    const getThisVideoComms = async()=>{
+      try{
+        const res = await axios({
+          url : `/getThisVideoComsMainPage`,
+          method : 'post',
+          data : {
+              videoSl : videoSerial
+          }
+      }) 
+      const [response] = await Promise.all([res])
+      if(response.data.message == 'success'){
+          await Promise.all(
+          setVideoComs((prevState)=>({...prevState, videoComs : response.data.comments}))
+          )
+      }
+
+     
+
+      }catch(err){
+        console.log(err)
+      }
+    }
+    
+    
+
+      // generate commenting time format
+      const generateCommentingTime = (oldTime)=>{
+        var amorpm = ''
+        const oldOne = new Date(oldTime) 
+        const year = oldOne.getFullYear()
+        const month = (oldOne.getMonth()+1).toString().padStart(2,"0")
+        const day = oldOne.getDate().toString().padStart(2,"0")
+        var hours = oldOne.getHours()
+        if(hours>12){
+          hours = (hours-12).toString()
+          amorpm = 'pm'
+        }else if(hours<12){
+          hours = (hours).toString()
+          amorpm = 'am'
+        }else if(hours == 0){
+          hours = (hours).toString()
+          amorpm = 'am'
+        }else if(hours == 12){
+          hours = '12'
+          amorpm = 'pm'
+        }
+
+        const minutes = oldOne.getMinutes().toString()
+
+        return  `${day}-${month}-${year}, ${hours}:${minutes} ${amorpm}`
+      }
 
       // convert huge like amount to K or M
       const genareteLikedAmount = (bigAmount)=>{
@@ -174,8 +244,494 @@ function SeeServerThisVideo() {
     }
   }
 
+  // giving love react
+  const giveLoveReact = async(e, videoSerial)=>{
+    if(token){
+      try{
+        const response = await axios({
+          url : `/likeThisVideo/${serial}`,
+          method : 'post',
+          data : {
+            videoSl : videoSerial
+          }
+        })
+        if(response.data.message == 'success'){
+          setEventSuccess(true)
+        }
+      }catch(err){
+        console.log(err)
+      }
+    }else{
+      setResponseMessage('You are not logged in yet, please log in first ...')
+      setOpen(true)
+    }
+  }
 
-   const showTagBadges = ()=>{
+
+  // giving dis love react
+  const giveDisLoveReact = async(e, videoSerial)=>{
+    if(token){
+      try{
+        const response = await axios({
+          url : `/dislikeThisVideo/${serial}`,
+          method : 'post',
+          data : {
+            videoSl : videoSerial
+          }
+        })
+        if(response.data.message == 'success'){
+          setEventSuccess(true)
+        }
+      }catch(err){
+        console.log(err)
+      }
+    }else{
+      setResponseMessage('You are not logged in yet, please log in first ...')
+      setOpen(true)
+    }
+  }
+
+  // give report at post 
+  
+  const giveReport = async(e, videoSerial)=>{
+    if(token){
+      try{
+        const response = await axios({
+          url : `/reportThisVideo/${serial}`,
+          method : 'post',
+          data : {
+            videoSl : videoSerial
+          }
+        })
+        if(response.data.message == 'success'){
+          setResponseMessage('Successfully reported the video ...')
+          setOpen(true)
+          
+          setEventSuccess(true)
+          
+        }
+        else if(response.data.message == 'Already reported ...'){
+          setResponseMessage('You already reported the video ...')
+          setOpen(true)
+          
+        }
+      }catch(err){
+        console.log(err)
+      }
+    }else{
+      setResponseMessage('You are not logged in yet, please log in first ...')
+      setOpen(true)
+    }
+  }
+
+  // sending a comment 
+  const sendComment = async(e)=>{
+    if(token && serial){
+    if(stringComment.length>1){
+    try{
+      const response = await axios({
+        url : `/sendThisComment/${serial}`,
+        method : 'post',
+        data : {
+          comment : stringComment,
+          videoSl : videoSerial,
+        }
+      })
+      if(response.data.message == 'success'){
+        setResponseMessage('Successfully Commented ...')
+        setOpen(true)
+        setEventSuccess(true)
+
+        setStringComment('')
+        document.getElementById('comment').value = ''
+      }else{
+        setResponseMessage(response.data.message)
+        setOpen(true)
+      }
+    }catch(err){
+      console.log(err)
+    }
+  }
+  }else{
+    setResponseMessage('You need to log in to comment in a post ...')
+    setOpen(true)
+  }
+  }
+
+  // setting comments rely and sending 
+  const sendCommentReplay = async (e, commentId, inputboxId)=>{
+    if(token && serial){
+    if(commentReplay.length>1){
+      try{
+        const response = await axios({
+          url : `/sendThisCommentReplay/${serial}`,
+          method : 'post',
+          data : {
+            commentid : commentId,
+            replay : commentReplay,
+            videoSl : videoSerial,
+          }
+        })
+        if(response.data.message == 'success'){
+          setResponseMessage('Successfully Replied ...')
+          setOpen(true)
+          setEventSuccess(true)
+  
+          setCommentReplay('')
+          document.getElementById(inputboxId).value = ''
+        }else{
+          setResponseMessage(response.data.message)
+          setOpen(true)
+        }
+      }catch(err){
+        console.log(err)
+      }
+    }
+    }else{
+      setResponseMessage('You need to log in to replay in comment in a post ...')
+      setOpen(true)
+    }
+  }
+
+  const showMeReplyArea = (e, idName)=>{ // toggle on off replying area
+    if(!showHideComment){
+      setShowHideComment(true)
+      document.getElementById(idName).classList.remove('d-none')
+      document.getElementById(idName).classList.add('d-flex')
+    }else{
+      setShowHideComment(false)
+      document.getElementById(idName).classList.remove('d-flex')
+      document.getElementById(idName).classList.add('d-none')
+    }
+  }
+
+
+  // send love to a comment specific
+  const sendLoveToComment = async(e, idNo) =>{
+    if(token && serial){
+
+
+      try{
+        const response = await axios({
+          url : `/sendThisCommentLove/${serial}`,
+          method : 'post',
+          data : {
+            commentid : idNo,
+            videoSl : videoSerial,
+          }
+        })
+        if(response.data.message == 'success'){
+          
+          setEventSuccess(true)
+  
+        
+        }
+      }catch(err){
+        console.log(err)
+      }
+
+
+
+    }else{
+      setResponseMessage('You need to log in to react in a comment of a post ...')
+      setOpen(true)
+    }
+  }
+
+
+  
+  // send love to a comment specific
+  const sendDisloveToComment = async(e, idNo) =>{
+    if(token && serial){
+
+      try{
+        const response = await axios({
+          url : `/sendThisCommentADislove/${serial}`,
+          method : 'post',
+          data : {
+            commentid : idNo,
+            videoSl : videoSerial,
+          }
+        })
+        if(response.data.message == 'success'){
+          
+          setEventSuccess(true)
+  
+        
+        }
+      }catch(err){
+        console.log(err)
+      }
+
+
+
+    }else{
+      setResponseMessage('You need to log in to react in a comment of a post ...')
+      setOpen(true)
+    }
+  }
+
+  // Give love to specific replay
+  const sendReplayLove = async(e, idNo)=>{
+    if(token && serial){
+
+
+      try{
+        const response = await axios({
+          url : `/sendThisCommentReplayLove/${serial}`,
+          method : 'post',
+          data : {
+            replayid : idNo,
+            videoSl : videoSerial,
+          }
+        })
+        if(response.data.message == 'success'){
+          
+          setEventSuccess(true)
+  
+        
+        }
+      }catch(err){
+        console.log(err)
+      }
+
+
+
+    }else{
+      setResponseMessage('You need to log in to react in a comment replay of a post ...')
+      setOpen(true)
+    }
+
+  }
+
+  // Give dislove to a specific replay
+  const sendReplayDislove = async(e, idNo)=>{
+    if(token && serial){
+
+      try{
+        const response = await axios({
+          url : `/sendThisCommentReplayDislove/${serial}`,
+          method : 'post',
+          data : {
+            replayid : idNo,
+            videoSl : videoSerial,
+          }
+        })
+        if(response.data.message == 'success'){
+          
+          setEventSuccess(true)
+  
+        
+        }
+      }catch(err){
+        console.log(err)
+      }
+
+
+
+    }else{
+      setResponseMessage('You need to log in to react in a comment replay of a post ...')
+      setOpen(true)
+    }
+
+  }
+
+
+  // generate each comment replay 
+  const generateEachCommentReplay = (commentData, index)=>{
+    
+    if(commentData.replay && commentData.replay.length>0){
+      return  commentData.replay.map((each)=>{
+        return    <div className='col col-md-12' style={{whiteSpace : 'pre-line', marginBottom:'2rem'}}>
+        <div class="card ms-auto me-3" style={{width: responsiveReplyBox, border: '0.12rem solid #c0ff1d'}}>
+        
+    
+        <div class="card-body">
+          <h5 class="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}>
+          <Stack direction="row" spacing={2}>
+    
+              <Avatar
+                  alt="Remy Sharp"
+                  src={each.whoGivingImage}
+                  sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
+              />
+              </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{each.whoGivingUsername}<p style={{fontSize: '0.6rem'}}>Replied At : {generateCommentingTime(each.replayingTime)} </p></span>
+          </h5>
+          <p class="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem'}}>{each.replay}</p>
+          
+        </div>
+    
+        <div  class="card-body d-flex justify-content-start align-items-center">
+        <p><span onClick={(e)=>{sendReplayLove(e, each._id)}} class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><FavoriteIcon/> {genareteLikedAmount(each.replayLove)}</span> <span onClick={(e)=>{sendReplayDislove(e, each._id)}} class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><HeartBrokenIcon fontSize='medium'/> {genareteDisLikedAmount(each.replayDislove)}</span> </p>
+        </div>
+    
+    
+    
+        </div>
+        </div>
+
+
+      })  
+    }
+  }
+
+  
+
+  // generating comments 
+  const generateAllComments = ()=>{
+    if(videoComs.videoComs.length>1){
+      return  videoComs.videoComs.map((each,index)=>{
+        return    <div style={{display:'flex', flexDirection:'column', minWidth:colWidth, maxWidth:colWidth, justifyContent:'center'}}>
+
+    
+
+        {/*card col loop each reply has one card with col */}
+        <div className='col col-md-12' style={{whiteSpace : 'pre-line', marginBottom:'2rem'}}>
+        <div class="card" style={{width: '98.5%', border: '0.12rem solid #c0ff1d'}}>
+        
+        <div class="card-body">
+          <h5 class="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}>
+          <Stack direction="row" spacing={2}>
+    
+              <Avatar
+                  alt="Remy Sharp"
+                  src={each.whoGivingImage}
+                  sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
+              />
+              </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{each.whoGivingUsername}<p style={{fontSize: '0.6rem'}}>Commented At : {generateCommentingTime(each.commentingTime)}</p></span>
+          </h5>
+          <p class="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem'}}>{each.comment}</p>
+          
+        </div>
+    
+        <div  class="card-body d-flex justify-content-start align-items-center">
+        <p><span onClick={(e)=>{sendLoveToComment(e, each._id)}} class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><FavoriteIcon/> {genareteLikedAmount(each.commentLove)}</span> <span onClick={(e)=>{sendDisloveToComment(e, each._id)}} class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><HeartBrokenIcon fontSize='medium'/> {genareteDisLikedAmount(each.commentDislove)}</span> <span onClick={(e)=>{showMeReplyArea(e, `inputindexNo${index}replyarea`)}} class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Reply <SendIcon fontSize='medium'/></span> </p>
+        </div>
+    
+    
+        {/* hidden input area */}
+        <div id={"inputindexNo"+index+"replyarea"}  class="card-body d-none justify-content-center align-items-center">
+        
+        <input id={"inputindexNo"+index+"replyarea"+"messagebox"} onChange={(e)=>{setCommentReplay(e.target.value)}} type="text" class="form-control bgsearch" placeholder="Send Reply" aria-label="Send Reply Bar" aria-describedby="button-addon2" />
+        <button onClick={(e)=>{sendCommentReplay(e, `${each._id}`, `inputindexNo${index}replyareamessagebox`)}} class="btn searchbtn" type="button" id="button-addon2"><SendIcon /></button>
+        
+        
+        </div>
+    
+    
+        </div>
+        </div>
+    
+        {/*card col loop each reply has one card with col */}
+        
+    
+    
+        {/*comments reply */}
+        {generateEachCommentReplay(each, index)}
+        
+    
+    
+        {/*comment replier ends*/}
+    
+        </div>
+    
+      })
+    }else if(videoComs.videoComs && videoComs.videoComs[0]){
+      
+      return    <div style={{display:'flex', flexDirection:'column',minWidth:colWidth, maxWidth:colWidth, justifyContent:'center'}}>
+
+    
+
+        {/*card col loop each reply has one card with col */}
+        <div className='col col-md-12' style={{whiteSpace : 'pre-line', marginBottom:'2rem'}}>
+        <div class="card" style={{width: '98.5%', border: '0.12rem solid #c0ff1d'}}>
+        
+        <div class="card-body">
+          <h5 class="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}>
+          <Stack direction="row" spacing={2}>
+    
+              <Avatar
+                  alt="Remy Sharp"
+                  src={videoComs.videoComs[0].whoGivingImage}
+                  sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
+              />
+              </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{videoComs.videoComs[0].whoGivingUsername}<p style={{fontSize: '0.6rem'}}>Commented At : {generateCommentingTime(videoComs.videoComs[0].commentingTime)}</p></span>
+          </h5>
+          <p class="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem'}}>{videoComs.videoComs[0].comment}</p>
+          
+        </div>
+    
+        <div  class="card-body d-flex justify-content-start align-items-center">
+        <p><span onClick={(e)=>{sendLoveToComment(e, videoComs.videoComs[0]._id)}} class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><FavoriteIcon/> {genareteLikedAmount(videoComs.videoComs[0].commentLove)}</span> <span onClick={(e)=>{sendDisloveToComment(e, videoComs.videoComs[0]._id)}} class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><HeartBrokenIcon fontSize='medium'/> {genareteDisLikedAmount(videoComs.videoComs[0].commentDislove)}</span> <span onClick={(e)=>{showMeReplyArea(e, `inputindexNo1replyarea`)}} class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Reply <SendIcon fontSize='medium'/></span> </p>
+        </div>
+    
+    
+        {/* hidden input area */}
+        <div id={"inputindexNo1replyarea"}  class="card-body d-none justify-content-center align-items-center">
+        
+        <input id={"inputindexNo1replyareamessagebox"} onChange={(e)=>{setCommentReplay(e.target.value)}} type="text" class="form-control bgsearch" placeholder="Send Reply" aria-label="Send Reply Bar" aria-describedby="button-addon2" />
+        <button onClick={(e)=>{sendCommentReplay(e, `${videoComs.videoComs[0]._id}`, `inputindexNo1replyareamessagebox`)}} class="btn searchbtn" type="button" id="button-addon2"><SendIcon /></button>
+        
+        
+        </div>
+    
+    
+        </div>
+        </div>
+    
+        {/*card col loop each reply has one card with col */}
+        
+    
+    
+        {/*comments reply */}
+        {generateEachCommentReplay(videoComs.videoComs[0], 1)}
+        
+    
+    
+        {/*comment replier ends*/}
+    
+        </div>
+    }else if(!videoComs.videoComs[0]){
+      return    <div style={{display:'flex', flexDirection:'column',minWidth:colWidth, maxWidth:colWidth, justifyContent:'center'}}>
+
+    
+
+        {/*card col loop each reply has one card with col */}
+        <div className='col col-md-12' style={{whiteSpace : 'pre-line', marginBottom:'2rem'}}>
+        <div class="card" style={{width: '98.5%', border: '0.12rem solid #c0ff1d'}}>
+        
+        <div class="card-body">
+          
+          <p class="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem'}}>Kindly Be Considerate While You Comment In Other's Post ... </p>
+          
+        </div>
+    
+       
+    
+    
+        {/* hidden input area */}
+       
+    
+    
+        </div>
+        </div>
+    
+        {/*card col loop each reply has one card with col */}
+        
+    
+    
+        {/*comments reply */}
+        
+        
+    
+    
+        {/*comment replier ends*/}
+    
+        </div>
+    }
+  }
+
+   const showTagBadges = ()=>{ // showing tag at top of video
     if(videoData.tags.includes(',')){
       let splitting = videoData.tags.split(',')
       
@@ -192,6 +748,13 @@ function SeeServerThisVideo() {
 
   // Effects Here
   useEffect(() => {
+
+    if(window.innerWidth>1000){
+      setColWidth('86vw')
+    }else{
+      setColWidth('78vw')
+    }
+
     if(window.innerWidth<767){
       setResponsiveReply('80%')
     }else{
@@ -203,6 +766,8 @@ function SeeServerThisVideo() {
     // Initialize tooltips when the component mounts
     window.$('[data-bs-toggle="tooltip"]').tooltip();
     getThisVideoData()
+
+    getThisVideoComms()
 
 
     //  to clean up the tooltips when the component unmounts
@@ -226,10 +791,13 @@ function SeeServerThisVideo() {
   useEffect(()=>{
     window.$('[data-bs-toggle="tooltip"]').tooltip('dispose');
     window.$('[data-bs-toggle="tooltip"]').tooltip(); 
+    setEventSuccess(false)
 
     getThisVideoData()
+    getThisVideoComms()
     
-  },[videoSerial])
+    
+  },[videoSerial, eventSuccess])
 
   return (
     <Fragment>
@@ -249,7 +817,7 @@ function SeeServerThisVideo() {
 
 
     <div className='videoBox2'>
-    <iframe width="100%" height="100%" src={videoData.videourl} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowTransparency allowFullScreen></iframe>
+    <iframe id="videoIframe" width="100%" height="100%" src={videoData.videourl} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowTransparency allowFullScreen></iframe>
     </div>
 
     <div className='sameVideos2'>
@@ -281,17 +849,17 @@ function SeeServerThisVideo() {
 
     
     
-    <div className='d-flex justify-content-center align-items-center iconmain1' data-bs-toggle="tooltip" data-bs-placement="right" title={genareteDisLikedAmount(videoData.videolike)}> 
+    <div onClick={(e)=>{giveLoveReact(e, videoSerial)}} className='d-flex justify-content-center align-items-center iconmain1' data-bs-toggle="tooltip" data-bs-placement="right" title={genareteDisLikedAmount(videoData.videolike)}> 
     <FavoriteIcon fontSize='large'/> 
     </div>
 
     
 
-    <div className='d-flex justify-content-center align-items-center iconmain2' data-bs-toggle="tooltip" data-bs-placement="right" title={genareteLikedAmount(videoData.videodislike)}> 
+    <div onClick={(e)=>{giveDisLoveReact(e, videoSerial)}} className='d-flex justify-content-center align-items-center iconmain2' data-bs-toggle="tooltip" data-bs-placement="right" title={genareteLikedAmount(videoData.videodislike)}> 
     <HeartBrokenIcon fontSize='large'/>
     </div>
 
-    <div className='d-flex justify-content-center align-items-center iconmain3'> 
+    <div onClick={(e)=>{giveReport(e, videoSerial)}} className='d-flex justify-content-center align-items-center iconmain3'> 
     <FlagIcon fontSize='large'/>
     </div>
 
@@ -305,7 +873,7 @@ function SeeServerThisVideo() {
         src={videoData.videoUploaderImage}
         sx={{ width: 56, height: 56 }}
     />
-    </Stack> <span className='ms-3'><b>{videoData.videoUploader}</b><br></br><span style={{fontSize:'0.7rem'}}>Uplodaded At : {generatePlainDate(videoData.videouploadtime)}</span></span>
+    </Stack> <span className='ms-3'><b>{videoData.videoUploader}</b><br></br><span style={{fontSize:'0.7rem'}}>Uplodaded At : {generatePlainDate(videoData.videouploadtime)}</span><br></br><span style={{fontSize:'0.7rem'}}>Total Views : {videoData.totalViews}</span></span>
     </p>
     <p style={{whiteSpace: 'pre-line', fontWeight: 'bold'}}>Title : {videoData.videotitle} </p>
     <p style={{whiteSpace: 'pre-line', fontSize: '0.8rem'}}> {videoData.videodescription}</p>
@@ -316,8 +884,8 @@ function SeeServerThisVideo() {
       <h5>Comments ...</h5>
       <div id="inputindexNo"  class="card-body d-flex justify-content-center align-items-center" style={{width:'100%'}}>
     
-    <input type="text" class="form-control bgsearch" placeholder="Send Comment" aria-label="Send Comment Bar" aria-describedby="button-addon2" />
-    <button class="btn searchbtn" type="button" id="button-addon2"><SendIcon /></button>
+    <input id="comment" onChange={(e)=>{setStringComment(e.target.value)}} type="text" class="form-control bgsearch" placeholder="Send Comment" aria-label="Send Comment Bar" aria-describedby="button-addon2" />
+    <button onClick={(e)=>{sendComment(e)}} class="btn searchbtn" type="button" id="button-addon2"><SendIcon /></button>
     
     
     </div>
@@ -328,92 +896,16 @@ function SeeServerThisVideo() {
 
     <div className='allComments mx-auto' style={{padding: '2rem'}}>
 
-    <div className='row row-cols-1 row-cols-md-1'>
+    <div className='row row-cols-1 row-cols-md-1 justify-content-center'>
       
 
 
-
+    {generateAllComments()}
 
     
-    <div>
-
-    {/*card col loop each reply has one card with col */}
-    <div className='col col-md-12' style={{whiteSpace : 'pre-line', marginBottom:'2rem'}}>
-    <div class="card" style={{width: '98.5%', border: '0.12rem solid #c0ff1d'}}>
-    
-    <div class="card-body">
-      <h5 class="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}>
-      <Stack direction="row" spacing={2}>
-
-          <Avatar
-              alt="Remy Sharp"
-              src="commenters avatar"
-              sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
-          />
-          </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>"commenters username"<p style={{fontSize: '0.6rem'}}>Commented At : commenting time </p></span>
-      </h5>
-      <p class="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem'}}>Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      
-    </div>
-
-    <div  class="card-body d-flex justify-content-start align-items-center">
-    <p><span class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><FavoriteIcon/> 797M</span> <span class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><HeartBrokenIcon fontSize='medium'/> 999M</span> <span class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Reply <SendIcon fontSize='medium'/></span> </p>
-    </div>
-
-
-    {/* hidden input area */}
-    <div id="inputindexNo"  class="card-body d-flex justify-content-center align-items-center">
-    
-    <input type="text" class="form-control bgsearch" placeholder="Send Reply" aria-label="Send Reply Bar" aria-describedby="button-addon2" />
-    <button class="btn searchbtn" type="button" id="button-addon2"><SendIcon /></button>
-    
-    
-    </div>
-
-
-    </div>
-    </div>
-
-    {/*card col loop each reply has one card with col */}
     
 
 
-    {/*comments reply */}
-    <div className='col col-md-12' style={{whiteSpace : 'pre-line', marginBottom:'2rem'}}>
-    <div class="card ms-auto me-3" style={{width: responsiveReplyBox, border: '0.12rem solid #c0ff1d'}}>
-    
-
-    <div class="card-body">
-      <h5 class="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}>
-      <Stack direction="row" spacing={2}>
-
-          <Avatar
-              alt="Remy Sharp"
-              src="commenters avatar"
-              sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
-          />
-          </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>"Replier username"<p style={{fontSize: '0.6rem'}}>Replied At : commenting time </p></span>
-      </h5>
-      <p class="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem'}}>Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      
-    </div>
-
-    <div  class="card-body d-flex justify-content-start align-items-center">
-    <p><span class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><FavoriteIcon/> 797M</span> <span class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><HeartBrokenIcon fontSize='medium'/> 999M</span> </p>
-    </div>
-
-
-
-    </div>
-    </div>
-
-
-    {/*comment replier ends*/}
-
-    </div>
-
-
-
 
 
 
@@ -426,6 +918,7 @@ function SeeServerThisVideo() {
     </div>
     </div>
 
+    {nowGoBack ? <Navigate to='/' replace /> : null}
 
     <Snackbar open={open} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
     <Alert onClose={handleClose} severity="success" sx={{

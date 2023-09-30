@@ -89,6 +89,9 @@ function Nav() {
                 <InterestsIcon fontSize='large' />
                 </div>
 
+                {isLogged ? <div className='mt-3'>
+                <Link className='linkBtn' to='/yourVideos'><VideoSettingsIcon fontSize='large' /></Link>
+                </div> : null}
                 
 
                 {isLogged ? <div className='mt-3'>

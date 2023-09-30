@@ -37,6 +37,7 @@ export default function SeeMyThisVideo() {
     const [videoData, setVideoData] = useState({
         videourl : '',
         videotitle : '',
+        totalViews: 0,
         videodescription : '',
         videolike : 0,
         videodislike : 0,
@@ -113,7 +114,7 @@ export default function SeeMyThisVideo() {
             }) 
             if(response.data.message == 'success'){
 
-                setVideoData((prevState)=>({...prevState, videourl: response.data.videourl, videotitle: response.data.videotitle, videodescription: response.data.videodescription, videolike: response.data.videolike, videodislike: response.data.videodislike, videouploadtime: response.data.videouploadtime}))
+                setVideoData((prevState)=>({...prevState, videourl: response.data.videourl, videotitle: response.data.videotitle, videodescription: response.data.videodescription, videolike: response.data.videolike, videodislike: response.data.videodislike, videouploadtime: response.data.videouploadtime, totalViews: response.data.totalViews}))
             }
             
         }catch(err){
@@ -333,7 +334,7 @@ export default function SeeMyThisVideo() {
         src={playerAvatar}
         sx={{ width: 56, height: 56 }}
     />
-    </Stack> <span className='ms-3'><b>{username}</b><br></br><span style={{fontSize:'0.7rem'}}>Uplodaded At : {generatePlainDate(videoData.videouploadtime)}</span></span>
+    </Stack> <span className='ms-3'><b>{username}</b><br></br><span style={{fontSize:'0.7rem'}}>Uplodaded At : {generatePlainDate(videoData.videouploadtime)}</span><br></br><span style={{fontSize:'0.7rem'}}>Total Views : {videoData.totalViews}</span></span>
     </p>
 
     
