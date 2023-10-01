@@ -20,6 +20,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 
 
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -40,10 +41,10 @@ const makeItSmoll = (stringVal)=>{
 
 
 
-function SearchResult() {
-    const {searchText} = useParams()
+function WatchLater() {
+    
     const [open, setOpen] = React.useState(false); // Snackbar open close state
-  const [responseMessage, setResponseMessage] = React.useState(''); // initially any error or success message at snackbar
+    const [responseMessage, setResponseMessage] = React.useState(''); // initially any error or success message at snackbar
     const [oldVideos, setOldVideos] = useState([]) //old uploaded vids from rest api
     const [thewidth, setWidth] = useState('')
     const [currentPage, setCurrentPage] = useState(1);
@@ -94,20 +95,26 @@ function SearchResult() {
     // Rest api to call for all old uploaded videos
 
     const getOldVideosData = async(e)=>{
-      try{
-        const response = await axios({
-            url : `/searchedVideos`,
-            method : 'post',
-            data : {
-                searchText : searchText
-            }
-        })
-        if(response.data.message == 'success'){
-          setOldVideos(response.data.oldVideos)
+        if(serial && token){
+            try{
+                const response = await axios({
+                    url : `/watchLater/${serial}`,
+                    method : 'post',
+                    data : {
+                        userId : serial
+                    }
+                })
+                if(response.data.message == 'success'){
+                    setOldVideos(response.data.oldVideos)
+                }
+                }catch(err){
+                console.log(err)
+                }
+        }else{
+            setResponseMessage('Please log in first to see your bookmarked videos ...')
+            setOpen(true)
         }
-      }catch(err){
-        console.log(err)
-      }
+      
     }
 
     // Handle page change
@@ -249,6 +256,8 @@ function SearchResult() {
         generatePlainDate()
       },[oldVideos])
 
+
+
   return (
     <Fragment>
     <div className='container-fluid pages flex-column'>
@@ -260,8 +269,8 @@ function SearchResult() {
 
         <div className='row row-cols-1 row-cols-md-4 mb-5 d-flex justify-content-start p-3'>
 
-          {oldVideos ? showAllOldVideosInCard() : null}
-          {oldVideos.length<1 ? <div className='d-flex mx-auto w-100 justify-content-center'><p className='mx-auto fontcol'>Some Error Occured Or It Seems The Server Has No Video Uploaded ...</p></div>:null}
+          {oldVideos ? showAllOldVideosInCard() : <div className='d-flex mx-auto w-100 justify-content-center'><p className='mx-auto fontcol'>No such video matches according to your search data ... 😖</p></div>}
+          {oldVideos.length<1 ? <div className='d-flex mx-auto w-100 justify-content-center'><p className='mx-auto fontcol'>Some Error Occured Or It Seems The Server Has No Video Uploaded As Your Search Data ... 😖</p></div>:null}
 
 
 
@@ -301,4 +310,4 @@ function SearchResult() {
   )
 }
 
-export default SearchResult
+export default WatchLater

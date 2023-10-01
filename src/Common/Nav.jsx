@@ -95,7 +95,7 @@ function Nav() {
                 
 
                 {isLogged ? <div className='mt-3'>
-                <WatchLaterIcon fontSize='large' />
+                <Link className='linkBtn' to='/watchLater'><WatchLaterIcon fontSize='large' /></Link>
                 </div> : null}
                 
 

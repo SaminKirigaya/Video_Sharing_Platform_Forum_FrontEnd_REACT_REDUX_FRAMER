@@ -21,6 +21,7 @@ const YourVideos = React.lazy(()=>import('../Component/YourVideos'));
 const SeeMyThisVideo = React.lazy(()=>import('../Component/SeeMyThisVideo'));
 const SeeServerThisVideo = React.lazy(()=>import('../Component/SeeServerThisVideo'));
 const SearchResult = React.lazy(()=>import('../Component/SearchResult'));
+const WatchLater = React.lazy(()=>import('../Component/WatchLater'));
 
 function loadingEffect(){
     return  <div className='container-fluid loader d-flex justify-content-center align-items-center'>
@@ -59,6 +60,7 @@ function Header() {
                     <Route path='/seeMyThisVideo/:videoSerial' Component={()=>(<SeeMyThisVideo />)} />
                     <Route path='/seeServerThisVideo/:videoSerial' Component={()=>(<SeeServerThisVideo />)}/>
                     <Route path='/searchResult/:searchText' Component={()=>(<SearchResult />)} />
+                    <Route path='/watchLater' Component={()=>(<WatchLater />)} />
                 </Routes>
             </Suspense>
         </div>
