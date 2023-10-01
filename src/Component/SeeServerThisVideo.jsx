@@ -35,9 +35,7 @@ function SeeServerThisVideo() {
   const [open, setOpen] = React.useState(false); // Snackbar open close state
   const [responseMessage, setResponseMessage] = React.useState(''); // initially any error or success message at snackbar
   const [stringComment, setStringComment] = useState('')
-  const [brokenTags, setBrokenTags] = useState({
-    tags: []
-  })
+  
   const [eventSuccess, setEventSuccess] = useState(false)
   
   const token = useSelector((state)=>state.tokenData.token)
@@ -141,7 +139,7 @@ function SeeServerThisVideo() {
           amorpm = 'pm'
         }
 
-        const minutes = oldOne.getMinutes().toString()
+        const minutes = oldOne.getMinutes().toString().padStart(2,"0")
 
         return  `${day}-${month}-${year}, ${hours}:${minutes} ${amorpm}`
       }
@@ -873,7 +871,7 @@ function SeeServerThisVideo() {
         src={videoData.videoUploaderImage}
         sx={{ width: 56, height: 56 }}
     />
-    </Stack> <span className='ms-3'><b>{videoData.videoUploader}</b><br></br><span style={{fontSize:'0.7rem'}}>Uplodaded At : {generatePlainDate(videoData.videouploadtime)}</span><br></br><span style={{fontSize:'0.7rem'}}>Total Views : {videoData.totalViews}</span></span>
+    </Stack> <span className='ms-3'><b>{videoData.videoUploader}</b><br></br><span style={{fontSize:'0.7rem'}}>Uplodaded At : {generateCommentingTime(videoData.videouploadtime)}</span><br></br><span style={{fontSize:'0.7rem'}}>Total Views : {videoData.totalViews}</span></span>
     </p>
     <p style={{whiteSpace: 'pre-line', fontWeight: 'bold'}}>Title : {videoData.videotitle} </p>
     <p style={{whiteSpace: 'pre-line', fontSize: '0.8rem'}}> {videoData.videodescription}</p>
