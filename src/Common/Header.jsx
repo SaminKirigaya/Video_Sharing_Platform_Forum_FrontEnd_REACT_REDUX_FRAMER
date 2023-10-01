@@ -20,7 +20,7 @@ const DeleteAccount = React.lazy(()=>import('../Component/DeleteAccount'));
 const YourVideos = React.lazy(()=>import('../Component/YourVideos'));
 const SeeMyThisVideo = React.lazy(()=>import('../Component/SeeMyThisVideo'));
 const SeeServerThisVideo = React.lazy(()=>import('../Component/SeeServerThisVideo'));
-
+const SearchResult = React.lazy(()=>import('../Component/SearchResult'));
 
 function loadingEffect(){
     return  <div className='container-fluid loader d-flex justify-content-center align-items-center'>
@@ -58,6 +58,7 @@ function Header() {
                     <Route path='/yourVideos' Component={()=>(<YourVideos />)} />
                     <Route path='/seeMyThisVideo/:videoSerial' Component={()=>(<SeeMyThisVideo />)} />
                     <Route path='/seeServerThisVideo/:videoSerial' Component={()=>(<SeeServerThisVideo />)}/>
+                    <Route path='/searchResult/:searchText' Component={()=>(<SearchResult />)} />
                 </Routes>
             </Suspense>
         </div>
