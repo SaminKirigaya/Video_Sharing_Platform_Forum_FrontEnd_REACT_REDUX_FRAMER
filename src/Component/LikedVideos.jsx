@@ -17,7 +17,7 @@ import AlarmOnIcon from '@mui/icons-material/AlarmOn';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
-
+import WelcomeMsg from './WelcomeMsg';
 
 
 
@@ -41,7 +41,7 @@ const makeItSmoll = (stringVal)=>{
 
 
 
-function WatchLater() {
+function LikedVideos() {
     
     const [open, setOpen] = React.useState(false); // Snackbar open close state
     const [responseMessage, setResponseMessage] = React.useState(''); // initially any error or success message at snackbar
@@ -98,7 +98,7 @@ function WatchLater() {
         if(serial && token){
             try{
                 const response = await axios({
-                    url : `/watchLater/${serial}`,
+                    url : `/likedVideos/${serial}`,
                     method : 'post',
                     data : {
                         userId : serial
@@ -111,7 +111,7 @@ function WatchLater() {
                 console.log(err)
                 }
         }else{
-            setResponseMessage('Please log in first to see your bookmarked videos ...')
+            setResponseMessage('Please log in first to see your liked videos ...')
             setOpen(true)
         }
       
@@ -260,17 +260,19 @@ function WatchLater() {
 
   return (
     <Fragment>
+    
     <div className='container-fluid pages flex-column'>
         <div className='profilePageHeight'>
 
-
+        <WelcomeMsg/>
         <SearchBar />
 
+        <h5 className='mx-auto text-center mt-4 mb-4 welcomeTxt'>Liked Videos ...</h5>
 
-        <div className='row row-cols-1 row-cols-md-4 mb-5 d-flex justify-content-start p-3'>
+        <div className='row row-cols-1 row-cols-md-4 mb-5 d-flex justify-content-center p-3'>
 
-          {oldVideos ? showAllOldVideosInCard() : <div className='d-flex mx-auto w-100 justify-content-center'><p className='mx-auto fontcol'>No such video matches according to your search data ... 😖</p></div>}
-          {oldVideos.length<1 ? <div className='d-flex mx-auto w-100 justify-content-center'><p className='mx-auto fontcol'>Some Error Occured Or It Seems The Server Has No Video Uploaded As Your Search Data ... 😖</p></div>:null}
+          {oldVideos ? showAllOldVideosInCard() : <div className='d-flex mx-auto w-100 justify-content-center'><p className='mx-auto fontcol'>It Seems You Have Not Reacted Love In Any Videos So Far ... 😖</p></div>}
+          {oldVideos.length<1 ? <div className='d-flex mx-auto w-100 justify-content-center'><p className='mx-auto fontcol'>Some Error Occured Or It Seems You Have Not Reacted Love In Any Videos So Far ... 😖</p></div>:null}
 
 
 
@@ -310,4 +312,4 @@ function WatchLater() {
   )
 }
 
-export default WatchLater
+export default LikedVideos

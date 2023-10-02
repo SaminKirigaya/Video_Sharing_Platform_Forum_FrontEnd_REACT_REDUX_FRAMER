@@ -101,7 +101,7 @@ function Nav() {
 
 
                 {isLogged ? <div className='mt-3'>
-                <ThumbUpAltIcon fontSize='large' />
+                <Link className='linkBtn' to='/likedVideos'><ThumbUpAltIcon fontSize='large' /></Link>
                 </div> : null}
 
 
