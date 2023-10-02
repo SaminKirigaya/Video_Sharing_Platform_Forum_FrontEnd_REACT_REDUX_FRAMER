@@ -22,7 +22,10 @@ const SeeMyThisVideo = React.lazy(()=>import('../Component/SeeMyThisVideo'));
 const SeeServerThisVideo = React.lazy(()=>import('../Component/SeeServerThisVideo'));
 const SearchResult = React.lazy(()=>import('../Component/SearchResult'));
 const WatchLater = React.lazy(()=>import('../Component/WatchLater'));
-const LikedVideos = React.lazy(()=>import('../Component/LikedVideos'))
+const LikedVideos = React.lazy(()=>import('../Component/LikedVideos'));
+const Category = React.lazy(()=>import('../Component/Category'));
+const SearchBasedUsername = React.lazy(()=>import('../Component/SearchBasedUsername'));
+const SearchBasedOnTag = React.lazy(()=>import('../Component/SearchBasedOnTag'))
 
 function loadingEffect(){
     return  <div className='container-fluid loader d-flex justify-content-center align-items-center'>
@@ -63,6 +66,9 @@ function Header() {
                     <Route path='/searchResult/:searchText' Component={()=>(<SearchResult />)} />
                     <Route path='/watchLater' Component={()=>(<WatchLater />)} />
                     <Route path='/likedVideos' Component={()=>(<LikedVideos />)} />
+                    <Route path='/selectCatagory' Component={()=>(<Category />)} />
+                    <Route path='/searchResultUsername/:searchText' Component={()=>(<SearchBasedUsername />)} />
+                    <Route path='/searchResultTagType/:searchText' Component={()=>(<SearchBasedOnTag />)} />
                 </Routes>
             </Suspense>
         </div>

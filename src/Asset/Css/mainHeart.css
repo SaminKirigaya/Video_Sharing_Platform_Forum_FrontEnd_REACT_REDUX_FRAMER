@@ -3519,3 +3519,8 @@ select{
 .sameVideos2::-webkit-scrollbar{
     display: none;
 }
+
+.hoverdes{
+    text-decoration: none;
+    color: white !important;
+}

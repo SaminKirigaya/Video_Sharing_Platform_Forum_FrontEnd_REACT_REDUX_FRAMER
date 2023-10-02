@@ -86,7 +86,7 @@ function Nav() {
 
 
                 <div className='mt-3'>
-                <InterestsIcon fontSize='large' />
+                <Link className='linkBtn' to='/selectCatagory'><InterestsIcon fontSize='large' /></Link>
                 </div>
 
                 {isLogged ? <div className='mt-3'>
