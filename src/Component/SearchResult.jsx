@@ -17,7 +17,7 @@ import AlarmOnIcon from '@mui/icons-material/AlarmOn';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
-import WelcomeMsg from './WelcomeMsg';
+
 
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -258,7 +258,7 @@ function SearchResult() {
     <div className='container-fluid pages flex-column'>
         <div className='profilePageHeight'>
 
-        <WelcomeMsg />
+        
         <SearchBar />
 
         <h5 className='mx-auto text-center mt-4 mb-4 welcomeTxt'>Search Result ...</h5>
