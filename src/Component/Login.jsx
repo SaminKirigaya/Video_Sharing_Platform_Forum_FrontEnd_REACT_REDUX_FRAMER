@@ -30,6 +30,7 @@ import { profImgFunctions } from '../Store/Store';
 import { coverImgFunctions } from '../Store/Store';
 import { usernameFunctions } from '../Store/Store';
 import { userserialFunctions } from '../Store/Store';
+import { notifyFunctions }  from '../Store/Store';
 
 import axios from 'axios';
 
@@ -86,6 +87,7 @@ function Login() {
         setFormValues((prevState)=>({...prevState, password : e.target.value}));
     }
 
+    
 
     // trying to log in ...........................................
     const logMeIn = async (e)=>{
@@ -115,7 +117,7 @@ function Login() {
                     dispatch(userserialFunctions.setSerial(response.data.serial))
                     dispatch(profImgFunctions.setTheProImgPath(response.data.profileImg))
                     dispatch(coverImgFunctions.setCoverImgPath(response.data.coverImg))
-
+                    dispatch(notifyFunctions.setNewNotif(response.data.notificationTotal))
                     
                     
 

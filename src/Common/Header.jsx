@@ -25,7 +25,8 @@ const WatchLater = React.lazy(()=>import('../Component/WatchLater'));
 const LikedVideos = React.lazy(()=>import('../Component/LikedVideos'));
 const Category = React.lazy(()=>import('../Component/Category'));
 const SearchBasedUsername = React.lazy(()=>import('../Component/SearchBasedUsername'));
-const SearchBasedOnTag = React.lazy(()=>import('../Component/SearchBasedOnTag'))
+const SearchBasedOnTag = React.lazy(()=>import('../Component/SearchBasedOnTag'));
+const Notification = React.lazy(()=>import('../Component/Notification'));
 
 function loadingEffect(){
     return  <div className='container-fluid loader d-flex justify-content-center align-items-center'>
@@ -69,6 +70,7 @@ function Header() {
                     <Route path='/selectCatagory' Component={()=>(<Category />)} />
                     <Route path='/searchResultUsername/:searchText' Component={()=>(<SearchBasedUsername />)} />
                     <Route path='/searchResultTagType/:searchText' Component={()=>(<SearchBasedOnTag />)} />
+                    <Route path='/goNotificationPage' Component={()=>(<Notification />)} />
                 </Routes>
             </Suspense>
         </div>
