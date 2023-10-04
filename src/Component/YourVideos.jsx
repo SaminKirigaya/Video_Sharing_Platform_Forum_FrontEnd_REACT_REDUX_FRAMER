@@ -127,7 +127,7 @@ function YourVideos() {
     const showAllTags = ()=>{
       if(videoData.tags){
         return videoData.tags.map((each, index)=>{
-          return  <span class="badge rounded-pill bg-warning text-dark me-2" key={index}>{each}&nbsp;&nbsp;&nbsp;<span onClick={(e)=>{delThisTag(e,index)}} class="badge rounded-pill bg-secondary badgeHovcurs">X</span></span>
+          return  <span className="badge rounded-pill bg-warning text-dark me-2" key={index}>{each}&nbsp;&nbsp;&nbsp;<span onClick={(e)=>{delThisTag(e,index)}} className="badge rounded-pill bg-secondary badgeHovcurs">X</span></span>
         })
       }
     }
@@ -201,7 +201,7 @@ function YourVideos() {
 
       return oldVideos.map((each, index)=>{
         return  <div className='col d-flex justify-content-center mb-5' style={{width: thewidth}} key={index}> 
-        <div class="card" style={{width: '16rem', height: '16rem'}}>
+        <div className="card" style={{width: '16rem', height: '16rem'}}>
 
         <div style={{maxWidth: '100%', minWidth: '100%', maxHeight: '50%', minHeight:'50%'}}>
         <img style={{width:'100%',height:'100%', objectFit: 'fill', borderTopLeftRadius: '0.3rem', borderTopRightRadius: '0.3rem'}} src={each.thumbnailLink} alt="Card image cap" />
@@ -225,8 +225,8 @@ function YourVideos() {
         </div>
         </Link>
 
-        <div class="card-body" style={{backgroundColor: '#c0ff1d'}}>
-          <h5 class="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}><Stack direction="row" spacing={2}>
+        <div className="card-body" style={{backgroundColor: '#c0ff1d'}}>
+          <h5 className="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}><Stack direction="row" spacing={2}>
 
           <Avatar
               alt="Remy Sharp"
@@ -235,7 +235,7 @@ function YourVideos() {
           />
           </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{username}<p style={{fontSize: '0.6rem'}}>Uploaded At : {generatePlainDate(each.uploadingDate)}</p></span></h5>
           
-          <p class="card-text smollTitle">{makeItSmoll(each.title)}</p>
+          <p className="card-text smollTitle">{makeItSmoll(each.title)}</p>
           
         </div>
         </div>
@@ -389,9 +389,9 @@ function YourVideos() {
 
         <div className='col d-flex justify-content-center'> {/* start of upload card column */}
 
-        <div class="card mb-3 bordcol" style={{maxWidth: '500px'}}>
-        <div class="row g-0">
-          <div class="col-md-4">
+        <div className="card mb-3 bordcol" style={{maxWidth: '500px'}}>
+        <div className="row g-0">
+          <div className="col-md-4">
           <div className='mx-auto text-center d-flex justify-content-center align-items-center pt-4'>
           <Stack direction="row" spacing={2}>
   
@@ -404,15 +404,15 @@ function YourVideos() {
           </div>
           
           </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Upload</h5>
-              <p class="card-text">You can upload any sorts of videos as you like make sure to respect other's and follow community guidelines, if 30 people report your video the video will be automatically removed ...</p>
+          <div className="col-md-8">
+            <div className="card-body">
+              <h5 className="card-title">Upload</h5>
+              <p className="card-text">You can upload any sorts of videos as you like make sure to respect other's and follow community guidelines, if 30 people report your video the video will be automatically removed ...</p>
               
             </div>
-            <div class="card-body bordTop">
+            <div className="card-body bordTop">
               
-              <button type='button' data-bs-toggle="modal" data-bs-target="#staticBackdrop" className='linkdesGreen bgbordertrans' ><p class="card-text">Click Here ... </p></button>
+              <button type='button' data-bs-toggle="modal" data-bs-target="#staticBackdrop" className='linkdesGreen bgbordertrans' ><p className="card-text">Click Here ... </p></button>
               
             </div>
           </div>
@@ -423,30 +423,30 @@ function YourVideos() {
 
         </div>
         {/* Modal */}
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content bgbordermodal">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Upload Content ...</h5>
-                <button onClick={(e)=>{setFullFormEmpty(e)}} type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div className="modal-content bgbordermodal">
+            <div className="modal-header">
+                <h5 className="modal-title" id="staticBackdropLabel">Upload Content ...</h5>
+                <button onClick={(e)=>{setFullFormEmpty(e)}} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
 
-            <div class="col col-md-12">
+            <div className="col col-md-12">
             <label for="title"><b>Title :</b></label>
             <input onChange={(e)=>{setVideoData((prevState)=>({...prevState, title: e.target.value}))}} id="title" type="text" className="form-control mt-1 mb-2"  placeholder="Set video title ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a valid title that suit your video ..."/>
             </div>
 
-            <div class="col col-md-12">
+            <div className="col col-md-12">
             <label for="description"><b>Description :</b></label>
             <textarea onChange={(e)=>{setVideoData((prevState)=>({...prevState, description : e.target.value}))}} id="description" type="text" className="form-control mt-1 mb-2 videoaddtextarea"  placeholder="Set video discription ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide description that suits your video ... in 200 words."></textarea>
             </div>
             
 
-            <div class="col col-md-12 mx-auto">
+            <div className="col col-md-12 mx-auto">
             
             <label for="profImage" className='mt-2 mb-0'  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a video content with .mp4 ... Anything else extension is not supported yet. "><PlayCircleIcon /><b>Add Video Content ... (Click Me)</b></label>
-            <input onChange={(e)=>{setVideoData((prevState)=>({...prevState, videoname: e.target.value, videofile: e.target.files[0]}))}} id="profImage" type="file" class="form-control mb-2"  autoComplete='none' accept=".mp4"/>
+            <input onChange={(e)=>{setVideoData((prevState)=>({...prevState, videoname: e.target.value, videofile: e.target.files[0]}))}} id="profImage" type="file" className="form-control mb-2"  autoComplete='none' accept=".mp4"/>
 
 
             <div className='mt-0'> 
@@ -461,10 +461,10 @@ function YourVideos() {
             </div>
 
 
-            <div class="col col-md-12 mx-auto">
+            <div className="col col-md-12 mx-auto">
             
             <label for="coverImage" className='mt-2'  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a jpg or jpeg image file as thumbnail ..."><AddPhotoAlternateIcon /><b>Add Video Thumbnail ... (Click Me)</b></label>
-            <input onChange={(e)=>{setVideoData((prevState)=>({...prevState, thumbnailname: e.target.value, thumbnailfile: e.target.files[0]}))}} id="coverImage" type="file" class="form-control mb-2"  autoComplete='none' accept=".jpg, .jpeg"/>
+            <input onChange={(e)=>{setVideoData((prevState)=>({...prevState, thumbnailname: e.target.value, thumbnailfile: e.target.files[0]}))}} id="coverImage" type="file" className="form-control mb-2"  autoComplete='none' accept=".jpg, .jpeg"/>
 
 
             <div className='mt-0'> 
@@ -478,29 +478,29 @@ function YourVideos() {
 
 
 
-            <div class="col col-md-12 mt-1">
+            <div className="col col-md-12 mt-1">
             <label for="tags"><b>Tags :</b></label>
             <input onChange={(e)=>(setCurrentlyInsertedTag(e.target.value))} id="tags" type="text" className="form-control mt-2 mb-2"  placeholder="Set video search tags (lower case letters) ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide video search tags here in one or two word, after each tag enter click add button kindly ..."/>
-            <button onClick={(e)=>addNewTag(e)} type="button" class="btn btn-sm btn-primary mb-1">Add</button>
+            <button onClick={(e)=>addNewTag(e)} type="button" className="btn btn-sm btn-primary mb-1">Add</button>
             </div>
             
 
-            <div class="col col-md-12 mt-1">
+            <div className="col col-md-12 mt-1">
               {/* show which tag added here*/}
               {videoData.tags ? showAllTags() : null}
             </div>
 
-            <div class="col col-md-12 mt-3">
-            <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={{width: uploadProgress}}></div>
+            <div className="col col-md-12 mt-3">
+            <div className="progress">
+            <div className="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={{width: uploadProgress}}></div>
             </div>
             </div>
             
 
             </div>
-            <div class="modal-footer">
-                <button onClick={(e)=>{setFullFormEmpty(e)}} type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
-                <button onClick={(e)=>{UploadFile(e)}} type="button" class="btn btn-sm btn-primary">Upload Video ...</button>
+            <div className="modal-footer">
+                <button onClick={(e)=>{setFullFormEmpty(e)}} type="button" className="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
+                <button onClick={(e)=>{UploadFile(e)}} type="button" className="btn btn-sm btn-primary">Upload Video ...</button>
             </div>
             </div>
 

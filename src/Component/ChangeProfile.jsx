@@ -405,23 +405,23 @@ function ChangeProfile() {
         <h5 className="card-title mx-auto">Change Profile</h5>
 
     
-        <div class="row row-cols-1 row-cols-md-2 g-2 mx-auto mt-3">
+        <div className="row row-cols-1 row-cols-md-2 g-2 mx-auto mt-3">
             
 
             
 
-            <div class="col col-md-12">
+            <div className="col col-md-12">
             
-            <input id="username" onChange={(e)=>{setTheUserData((prevState)=>({...prevState, username: e.target.value}))}} value={userData.username} type="text" class="form-control" placeholder="User Name" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a Unique username also it can only have a-z or A-Z or 0-9, It can only have _ as a special character no space is allowed ..."/>
+            <input id="username" onChange={(e)=>{setTheUserData((prevState)=>({...prevState, username: e.target.value}))}} value={userData.username} type="text" className="form-control" placeholder="User Name" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a Unique username also it can only have a-z or A-Z or 0-9, It can only have _ as a special character no space is allowed ..."/>
             </div>
 
-            <div class="col col-md-12">
+            <div className="col col-md-12">
             
-            <input id="fullname" onChange={(e)=>{setTheUserData((prevState)=>({...prevState, fullname: e.target.value}))}} value={userData.fullname} type="text" class="form-control" placeholder="Full Name" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide your full name it must not have any special characters and must not have any numbers ..."/>
+            <input id="fullname" onChange={(e)=>{setTheUserData((prevState)=>({...prevState, fullname: e.target.value}))}} value={userData.fullname} type="text" className="form-control" placeholder="Full Name" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide your full name it must not have any special characters and must not have any numbers ..."/>
             </div>
 
-            <div class="col-6">
-                <select onChange={(e)=>{setTheUserData((prevState)=>({...prevState, gender: e.target.value}))}} value={userData.gender} class="form-select" aria-label="Default select example">
+            <div className="col-6">
+                <select onChange={(e)=>{setTheUserData((prevState)=>({...prevState, gender: e.target.value}))}} value={userData.gender} className="form-select" aria-label="Default select example">
                 <option disabled={true}>Gender</option>
                 <option selected disabled={true}>{userData.gender}</option>
                 <option value="Male">Male</option>
@@ -429,8 +429,8 @@ function ChangeProfile() {
                 <option value="Others">Others</option>
                 </select>
             </div>
-            <div class="col-6">
-                <select onChange={(e)=>{setTheUserData((prevState)=>({...prevState, country: e.target.value}))}} class="form-select" value={userData.country} aria-label="Default select example">
+            <div className="col-6">
+                <select onChange={(e)=>{setTheUserData((prevState)=>({...prevState, country: e.target.value}))}} className="form-select" value={userData.country} aria-label="Default select example">
                 <option disabled={true}>Country</option>
                 <option selected disabled={true}>{userData.country}</option>
                 <option value="United States">United States</option>
@@ -453,24 +453,24 @@ function ChangeProfile() {
                 </select>
             </div>
 
-            <div class="col col-md-6">
+            <div className="col col-md-6">
             
-            <input type="date" onChange={(e)=>{setTheUserData((prevState)=>({...prevState, dateofbirth: e.target.value}))}} value={formatDate(userData.dateofbirth)} class="form-control"  placeholder="Date of Birth" autoComplete='none'/>
+            <input type="date" onChange={(e)=>{setTheUserData((prevState)=>({...prevState, dateofbirth: e.target.value}))}} value={formatDate(userData.dateofbirth)} className="form-control"  placeholder="Date of Birth" autoComplete='none'/>
             </div>
 
-            <div class="col col-md-6">
+            <div className="col col-md-6">
             
-            <input id="address" onChange={(e)=>{setTheUserData((prevState)=>({...prevState, address: e.target.value}))}} value={userData.address}  type="text" class="form-control"  placeholder="Address" autoComplete='none'/>
+            <input id="address" onChange={(e)=>{setTheUserData((prevState)=>({...prevState, address: e.target.value}))}} value={userData.address}  type="text" className="form-control"  placeholder="Address" autoComplete='none'/>
             </div>
 
 
-            <div class="col col-md-12 mx-auto">
+            <div className="col col-md-12 mx-auto">
             
             <label for="profImage"  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image of jpg or jpeg format less than 1 MB ... Without jpeg or jpg it won't work."><AddPhotoAlternateIcon /> Add Profile Image "Optional"</label>
-            <input onChange={(e)=>{setTheUserData((prevState)=>({...prevState, profileImageName: e.target.value, profileImageFile : e.target.files[0] }))}}  id="profImage" type="file" class="form-control"  autoComplete='none' accept=".jpg, .jpeg"/>
+            <input onChange={(e)=>{setTheUserData((prevState)=>({...prevState, profileImageName: e.target.value, profileImageFile : e.target.files[0] }))}}  id="profImage" type="file" className="form-control"  autoComplete='none' accept=".jpg, .jpeg"/>
             </div>
 
-            <div class="col col-md-12 mx-auto">
+            <div className="col col-md-12 mx-auto">
             
             <label for="coverImage"  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image at least 1024px X 680 px which is clear ... Remember image must be jpg or jpeg format."><AddPhotoAlternateIcon /> Add Cover Image "Optional"</label>
             <input onChange={(e)=>{setTheUserData((prevState)=>({...prevState, coverImageName: e.target.value, coverImageFile: e.target.files[0] }))}} id="coverImage" type="file" class="form-control" autoComplete='none' accept=".jpg, .jpeg"/>

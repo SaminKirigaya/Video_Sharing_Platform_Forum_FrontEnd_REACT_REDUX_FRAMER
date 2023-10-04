@@ -66,9 +66,9 @@ function ProfilePage() {
 
               <div className='col d-flex' style={{justifyContent: FirstJust}}>
 
-              <div class="card mb-3 bordcol" style={{maxWidth: BigDisp}}>
-              <div class="row g-0">
-                <div class="col-md-4">
+              <div className="card mb-3 bordcol" style={{maxWidth: BigDisp}}>
+              <div className="row g-0">
+                <div className="col-md-4">
                 <div className='mx-auto text-center d-flex justify-content-center align-items-center pt-4'>
                 <Stack direction="row" spacing={2}>
         
@@ -81,15 +81,15 @@ function ProfilePage() {
                 </div>
                 
                 </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">Profile Settings</h5>
-                    <p class="card-text">You can always change your profile information in here. Make sure to provide true information. Also, old data can never be turned back.</p>
+                <div className="col-md-8">
+                  <div className="card-body">
+                    <h5 className="card-title">Profile Settings</h5>
+                    <p className="card-text">You can always change your profile information in here. Make sure to provide true information. Also, old data can never be turned back.</p>
                     
                   </div>
-                  <div class="card-body bordTop">
+                  <div className="card-body bordTop">
                     
-                    <Link className='linkdesGreen' to='/changeProfile'><p class="card-text">Click Here ... </p></Link>
+                    <Link className='linkdesGreen' to='/changeProfile'><p className="card-text">Click Here ... </p></Link>
                     
                   </div>
                 </div>
@@ -98,9 +98,9 @@ function ProfilePage() {
               </div>
 
               <div className='col d-flex' style={{justifyContent: SecondJust}}>
-              <div class="card mb-3 bordcol" style={{maxWidth: BigDisp}}>
-              <div class="row g-0">
-                <div class="col-md-4">
+              <div className="card mb-3 bordcol" style={{maxWidth: BigDisp}}>
+              <div className="row g-0">
+                <div className="col-md-4">
                 <div className='mx-auto text-center d-flex justify-content-center align-items-center pt-4'>
                 <Stack direction="row" spacing={2}>
         
@@ -113,15 +113,15 @@ function ProfilePage() {
                 </div>
                 
                 </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">Change Password</h5>
-                    <p class="card-text">Feel unsafe about your password ??? Change in here !!! {generateSpace()}</p>
+                <div className="col-md-8">
+                  <div className="card-body">
+                    <h5 className="card-title">Change Password</h5>
+                    <p className="card-text">Feel unsafe about your password ??? Change in here !!! {generateSpace()}</p>
                     
                   </div>
-                  <div class="card-body bordTop">
+                  <div className="card-body bordTop">
                     
-                  <Link className='linkdesGreen' to='/changePassword'><p class="card-text">Click Here ... </p></Link>
+                  <Link className='linkdesGreen' to='/changePassword'><p className="card-text">Click Here ... </p></Link>
                     
                   </div>
                 </div>
@@ -131,9 +131,9 @@ function ProfilePage() {
               </div>
 
               <div className='col d-flex' style={{justifyContent: ThirdJust}}>
-              <div class="card mb-3 bordcol" style={{maxWidth: BigDisp }}>
-              <div class="row g-0">
-                <div class="col-md-4">
+              <div className="card mb-3 bordcol" style={{maxWidth: BigDisp }}>
+              <div className="row g-0">
+                <div className="col-md-4">
                 <div className='mx-auto text-center d-flex justify-content-center align-items-center pt-4'>
                 <Stack direction="row" spacing={2}>
         
@@ -146,15 +146,15 @@ function ProfilePage() {
                 </div>
                 
                 </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">Delete Account</h5>
-                    <p class="card-text">Already have another account ??? Don't want to keep this account for safety issues ??? You can delete anytime in here ...</p>
+                <div className="col-md-8">
+                  <div className="card-body">
+                    <h5 className="card-title">Delete Account</h5>
+                    <p className="card-text">Already have another account ??? Don't want to keep this account for safety issues ??? You can delete anytime in here ...</p>
                     
                   </div>
-                  <div class="card-body bordTop">
+                  <div className="card-body bordTop">
                     
-                  <Link className='linkdesGreen' to='/deleteAccount'><p class="card-text">Click Here ... </p></Link>
+                  <Link className='linkdesGreen' to='/deleteAccount'><p className="card-text">Click Here ... </p></Link>
                     
                   </div>
                 </div>

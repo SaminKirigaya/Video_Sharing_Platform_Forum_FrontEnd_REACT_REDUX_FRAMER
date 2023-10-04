@@ -262,7 +262,7 @@ export default function SeeMyThisVideo() {
       const showAllTags = ()=>{
         if(videoData.tags){
           return videoData.tags.map((each, index)=>{
-            return  <span class="badge rounded-pill bg-warning text-dark me-2" key={index}>{each}&nbsp;&nbsp;&nbsp;<span onClick={(e)=>{delThisTag(e,index)}} class="badge rounded-pill bg-secondary badgeHovcurs">X</span></span>
+            return  <span className="badge rounded-pill bg-warning text-dark me-2" key={index}>{each}&nbsp;&nbsp;&nbsp;<span onClick={(e)=>{delThisTag(e,index)}} className="badge rounded-pill bg-secondary badgeHovcurs">X</span></span>
           })
         }
       }
@@ -636,11 +636,11 @@ export default function SeeMyThisVideo() {
     if(commentData.replay && commentData.replay.length>0){
       return  commentData.replay.map((each)=>{
         return    <div className='col col-md-12' style={{whiteSpace : 'pre-line', marginBottom:'2rem'}}>
-        <div class="card ms-auto me-3" style={{width: responsiveReplyBox, border: '0.12rem solid #c0ff1d'}}>
+        <div className="card ms-auto me-3" style={{width: responsiveReplyBox, border: '0.12rem solid #c0ff1d'}}>
         
     
-        <div class="card-body">
-          <h5 class="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}>
+        <div className="card-body">
+          <h5 className="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}>
           <Stack direction="row" spacing={2}>
     
               <Avatar
@@ -650,12 +650,12 @@ export default function SeeMyThisVideo() {
               />
               </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{each.whoGivingUsername}<p style={{fontSize: '0.6rem'}}>Replied At : {generateCommentingTime(each.replayingTime)} </p></span>
           </h5>
-          <p class="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem'}}>{each.replay}</p>
+          <p className="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem'}}>{each.replay}</p>
           
         </div>
     
-        <div  class="card-body d-flex justify-content-start align-items-center">
-        <p><span onClick={(e)=>{sendReplayLove(e, each._id)}} class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><FavoriteIcon/> {genareteLikedAmount(each.replayLove)}</span> <span onClick={(e)=>{sendReplayDislove(e, each._id)}} class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><HeartBrokenIcon fontSize='medium'/> {genareteDisLikedAmount(each.replayDislove)}</span> <span onClick={(e)=>{deleteThisReplay(e, each._id)}} class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Delete <DeleteSweepIcon fontSize='medium'/></span></p>
+        <div  className="card-body d-flex justify-content-start align-items-center">
+        <p><span onClick={(e)=>{sendReplayLove(e, each._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><FavoriteIcon/> {genareteLikedAmount(each.replayLove)}</span> <span onClick={(e)=>{sendReplayDislove(e, each._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><HeartBrokenIcon fontSize='medium'/> {genareteDisLikedAmount(each.replayDislove)}</span> <span onClick={(e)=>{deleteThisReplay(e, each._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Delete <DeleteSweepIcon fontSize='medium'/></span></p>
         </div>
     
     
@@ -680,10 +680,10 @@ export default function SeeMyThisVideo() {
 
         {/*card col loop each reply has one card with col */}
         <div className='col col-md-12' style={{whiteSpace : 'pre-line', marginBottom:'2rem'}}>
-        <div class="card" style={{width: '98.5%', border: '0.12rem solid #c0ff1d'}}>
+        <div className="card" style={{width: '98.5%', border: '0.12rem solid #c0ff1d'}}>
         
-        <div class="card-body">
-          <h5 class="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}>
+        <div className="card-body">
+          <h5 className="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}>
           <Stack direction="row" spacing={2}>
     
               <Avatar
@@ -693,20 +693,20 @@ export default function SeeMyThisVideo() {
               />
               </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{each.whoGivingUsername}<p style={{fontSize: '0.6rem'}}>Commented At : {generateCommentingTime(each.commentingTime)}</p></span>
           </h5>
-          <p class="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem'}}>{each.comment}</p>
+          <p className="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem'}}>{each.comment}</p>
           
         </div>
     
-        <div  class="card-body d-flex justify-content-start align-items-center">
-        <p><span onClick={(e)=>{sendLoveToComment(e, each._id)}} class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><FavoriteIcon/> {genareteLikedAmount(each.commentLove)}</span> <span onClick={(e)=>{sendDisloveToComment(e, each._id)}} class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><HeartBrokenIcon fontSize='medium'/> {genareteDisLikedAmount(each.commentDislove)}</span> <span onClick={(e)=>{showMeReplyArea(e, `inputindexNo${index}replyarea`)}} class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Reply <SendIcon fontSize='medium'/></span> <span onClick={(e)=>{deleteThisComment(e, each._id)}} class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Delete <DeleteSweepIcon fontSize='medium'/></span> </p>
+        <div  className="card-body d-flex justify-content-start align-items-center">
+        <p><span onClick={(e)=>{sendLoveToComment(e, each._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><FavoriteIcon/> {genareteLikedAmount(each.commentLove)}</span> <span onClick={(e)=>{sendDisloveToComment(e, each._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><HeartBrokenIcon fontSize='medium'/> {genareteDisLikedAmount(each.commentDislove)}</span> <span onClick={(e)=>{showMeReplyArea(e, `inputindexNo${index}replyarea`)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Reply <SendIcon fontSize='medium'/></span> <span onClick={(e)=>{deleteThisComment(e, each._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Delete <DeleteSweepIcon fontSize='medium'/></span> </p>
         </div>
     
     
         {/* hidden input area */}
-        <div id={"inputindexNo"+index+"replyarea"}  class="card-body d-none justify-content-center align-items-center">
+        <div id={"inputindexNo"+index+"replyarea"}  className="card-body d-none justify-content-center align-items-center">
         
-        <input id={"inputindexNo"+index+"replyarea"+"messagebox"} onChange={(e)=>{setCommentReplay(e.target.value)}} type="text" class="form-control bgsearch" placeholder="Send Reply" aria-label="Send Reply Bar" aria-describedby="button-addon2" />
-        <button onClick={(e)=>{sendCommentReplay(e, `${each._id}`, `inputindexNo${index}replyareamessagebox`)}} class="btn searchbtn" type="button" id="button-addon2"><SendIcon /></button>
+        <input id={"inputindexNo"+index+"replyarea"+"messagebox"} onChange={(e)=>{setCommentReplay(e.target.value)}} type="text" className="form-control bgsearch" placeholder="Send Reply" aria-label="Send Reply Bar" aria-describedby="button-addon2" />
+        <button onClick={(e)=>{sendCommentReplay(e, `${each._id}`, `inputindexNo${index}replyareamessagebox`)}} className="btn searchbtn" type="button" id="button-addon2"><SendIcon /></button>
         
         
         </div>
@@ -737,10 +737,10 @@ export default function SeeMyThisVideo() {
 
         {/*card col loop each reply has one card with col */}
         <div className='col col-md-12' style={{whiteSpace : 'pre-line', marginBottom:'2rem'}}>
-        <div class="card" style={{width: '98.5%', border: '0.12rem solid #c0ff1d'}}>
+        <div className="card" style={{width: '98.5%', border: '0.12rem solid #c0ff1d'}}>
         
-        <div class="card-body">
-          <h5 class="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}>
+        <div className="card-body">
+          <h5 className="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}>
           <Stack direction="row" spacing={2}>
     
               <Avatar
@@ -750,20 +750,20 @@ export default function SeeMyThisVideo() {
               />
               </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{videoComs.videoComs[0].whoGivingUsername}<p style={{fontSize: '0.6rem'}}>Commented At : {generateCommentingTime(videoComs.videoComs[0].commentingTime)}</p></span>
           </h5>
-          <p class="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem'}}>{videoComs.videoComs[0].comment}</p>
+          <p className="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem'}}>{videoComs.videoComs[0].comment}</p>
           
         </div>
     
-        <div  class="card-body d-flex justify-content-start align-items-center">
-        <p><span onClick={(e)=>{sendLoveToComment(e, videoComs.videoComs[0]._id)}} class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><FavoriteIcon/> {genareteLikedAmount(videoComs.videoComs[0].commentLove)}</span> <span onClick={(e)=>{sendDisloveToComment(e, videoComs.videoComs[0]._id)}} class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><HeartBrokenIcon fontSize='medium'/> {genareteDisLikedAmount(videoComs.videoComs[0].commentDislove)}</span> <span onClick={(e)=>{showMeReplyArea(e, `inputindexNo1replyarea`)}} class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Reply <SendIcon fontSize='medium'/></span> <span onClick={(e)=>{deleteThisComment(e, videoComs.videoComs[0]._id)}} class="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Delete <DeleteSweepIcon fontSize='medium'/></span></p>
+        <div  className="card-body d-flex justify-content-start align-items-center">
+        <p><span onClick={(e)=>{sendLoveToComment(e, videoComs.videoComs[0]._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><FavoriteIcon/> {genareteLikedAmount(videoComs.videoComs[0].commentLove)}</span> <span onClick={(e)=>{sendDisloveToComment(e, videoComs.videoComs[0]._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><HeartBrokenIcon fontSize='medium'/> {genareteDisLikedAmount(videoComs.videoComs[0].commentDislove)}</span> <span onClick={(e)=>{showMeReplyArea(e, `inputindexNo1replyarea`)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Reply <SendIcon fontSize='medium'/></span> <span onClick={(e)=>{deleteThisComment(e, videoComs.videoComs[0]._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Delete <DeleteSweepIcon fontSize='medium'/></span></p>
         </div>
     
     
         {/* hidden input area */}
-        <div id={"inputindexNo1replyarea"}  class="card-body d-none justify-content-center align-items-center">
+        <div id={"inputindexNo1replyarea"}  className="card-body d-none justify-content-center align-items-center">
         
-        <input id={"inputindexNo1replyareamessagebox"} onChange={(e)=>{setCommentReplay(e.target.value)}} type="text" class="form-control bgsearch" placeholder="Send Reply" aria-label="Send Reply Bar" aria-describedby="button-addon2" />
-        <button onClick={(e)=>{sendCommentReplay(e, `${videoComs.videoComs[0]._id}`, `inputindexNo1replyareamessagebox`)}} class="btn searchbtn" type="button" id="button-addon2"><SendIcon /></button>
+        <input id={"inputindexNo1replyareamessagebox"} onChange={(e)=>{setCommentReplay(e.target.value)}} type="text" className="form-control bgsearch" placeholder="Send Reply" aria-label="Send Reply Bar" aria-describedby="button-addon2" />
+        <button onClick={(e)=>{sendCommentReplay(e, `${videoComs.videoComs[0]._id}`, `inputindexNo1replyareamessagebox`)}} className="btn searchbtn" type="button" id="button-addon2"><SendIcon /></button>
         
         
         </div>
@@ -791,11 +791,11 @@ export default function SeeMyThisVideo() {
 
         {/*card col loop each reply has one card with col */}
         <div className='col col-md-12' style={{whiteSpace : 'pre-line', marginBottom:'2rem'}}>
-        <div class="card" style={{width: '98.5%', border: '0.12rem solid #c0ff1d'}}>
+        <div className="card" style={{width: '98.5%', border: '0.12rem solid #c0ff1d'}}>
         
-        <div class="card-body">
+        <div className="card-body">
           
-          <p class="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem'}}>Kindly Be Considerate While You Comment In Other's Post ... </p>
+          <p className="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem'}}>Kindly Be Considerate While You Comment In Other's Post ... </p>
           
         </div>
     
@@ -959,10 +959,10 @@ export default function SeeMyThisVideo() {
     <div className='row row-cols-1 row-cols-md-1' style={{marginTop: resMargin, marginLeft: '0.5rem'}}>
     <h5 className='mx-auto text-center' style={{marginBottom: '2rem', color:'#42590a'}}>All Comments </h5>
     
-    <div id="inputindexNo"  class="card-body d-flex justify-content-center align-items-center" style={{width:'100%'}}>
+    <div id="inputindexNo"  className="card-body d-flex justify-content-center align-items-center" style={{width:'100%'}}>
     
-    <input id="comment" onChange={(e)=>{setStringComment(e.target.value)}} type="text" class="form-control bgsearch" placeholder="Send Comment" aria-label="Send Comment Bar" aria-describedby="button-addon2" />
-    <button onClick={(e)=>{sendComment(e)}} class="btn searchbtn" type="button" id="button-addon2"><SendIcon /></button>
+    <input id="comment" onChange={(e)=>{setStringComment(e.target.value)}} type="text" className="form-control bgsearch" placeholder="Send Comment" aria-label="Send Comment Bar" aria-describedby="button-addon2" />
+    <button onClick={(e)=>{sendComment(e)}} className="btn searchbtn" type="button" id="button-addon2"><SendIcon /></button>
     
     
     </div>
@@ -1021,18 +1021,18 @@ export default function SeeMyThisVideo() {
 
 
     {/* Modal */}
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content bgbordermodal">
-        <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Update Content ...</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div className="modal-content bgbordermodal">
+        <div className="modal-header">
+            <h5 className="modal-title" id="staticBackdropLabel">Update Content ...</h5>
+            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
 
         
 
-        <div class="col col-md-12 mx-auto">
+        <div className="col col-md-12 mx-auto">
         
         
         <div className='mt-0'> 
@@ -1048,12 +1048,12 @@ export default function SeeMyThisVideo() {
 
 
 
-        <div class="col col-md-12">
+        <div className="col col-md-12">
         <label for="title"><b>Title :</b></label>
         <input onChange={(e)=>{setNewTitle(e)}} value={videoData.videotitle} id="title" type="text" className="form-control mt-1 mb-2"  placeholder="Set video title ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a valid title that suit your video ..."/>
         </div>
 
-        <div class="col col-md-12">
+        <div className="col col-md-12">
         <label for="description"><b>Description :</b></label>
         <textarea onChange={(e)=>{setNewDesc(e)}} value={videoData.videodescription} id="description" type="text" className="form-control mt-1 mb-2 videoaddtextarea"  placeholder="Set video discription ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide description that suits your video ... in 200 words."></textarea>
         </div>
@@ -1061,14 +1061,14 @@ export default function SeeMyThisVideo() {
 
 
 
-        <div class="col col-md-12 mt-1">
+        <div className="col col-md-12 mt-1">
         <label for="tags"><b>Tags :</b></label>
         <input onChange={(e)=>(setCurrentlyInsertedTag(e.target.value))} id="tags" type="text" className="form-control mt-2 mb-2"  placeholder="Set video search tags ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide video search tags here in one or two word, after each tag enter click add button kindly ..."/>
-        <button onClick={(e)=>addNewTag(e)} type="button" class="btn btn-sm btn-primary mb-1">Add</button>
+        <button onClick={(e)=>addNewTag(e)} type="button" className="btn btn-sm btn-primary mb-1">Add</button>
         </div>
         
 
-        <div class="col col-md-12 mt-1">
+        <div className="col col-md-12 mt-1">
           {/* show which tag added here*/}
           {videoData.tags ? showAllTags() : null}
         </div>
@@ -1077,9 +1077,9 @@ export default function SeeMyThisVideo() {
         
 
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
-            <button onClick={(e)=>{sendNewInfo(e, videoSerial)}} type="button" class="btn btn-sm btn-primary">Update Video ...</button>
+        <div className="modal-footer">
+            <button type="button" className="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
+            <button onClick={(e)=>{sendNewInfo(e, videoSerial)}} type="button" className="btn btn-sm btn-primary">Update Video ...</button>
         </div>
         </div>
 

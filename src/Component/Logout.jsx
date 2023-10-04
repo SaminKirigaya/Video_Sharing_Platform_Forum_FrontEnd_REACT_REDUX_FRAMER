@@ -132,7 +132,7 @@ function Logout() {
       <div className="card-body d-flex justify-content-center flex-column">
       <h5 className="card-title mx-auto">Sign Out</h5>
 
-      <div class="col col-md-12">
+      <div className="col col-md-12">
           <p className='text-center'>You sure you want to log out ??? Once sign out all unsaved data will be cleared ...</p>
       
       </div>

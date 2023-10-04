@@ -162,7 +162,7 @@ function LikedVideos() {
 
       return currentData.map((each, index)=>{
         return  <div className='col d-flex justify-content-center mb-5' style={{width: thewidth}} key={index}> 
-        <div class="card" style={{width: '16rem', height: '16rem'}}>
+        <div className="card" style={{width: '16rem', height: '16rem'}}>
 
         <div style={{maxWidth: '100%', minWidth: '100%', maxHeight: '50%', minHeight:'50%'}}>
         <img style={{width:'100%',height:'100%', objectFit: 'fill', borderTopLeftRadius: '0.3rem', borderTopRightRadius: '0.3rem'}} src={each.thumbnailLink} alt="Card image cap" />
@@ -186,8 +186,8 @@ function LikedVideos() {
         </div>
         </Link>
 
-        <div class="card-body" style={{backgroundColor: '#c0ff1d'}}>
-          <h5 class="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}><Stack direction="row" spacing={2}>
+        <div className="card-body" style={{backgroundColor: '#c0ff1d'}}>
+          <h5 className="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}><Stack direction="row" spacing={2}>
 
           <Avatar
               alt="Remy Sharp"
@@ -196,7 +196,7 @@ function LikedVideos() {
           />
           </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{each.username}<p style={{fontSize: '0.6rem'}}>Uploaded At : {generatePlainDate(each.uploadingDate)}</p></span></h5>
           
-          <p class="card-text smollTitle">{makeItSmoll(each.title)}</p>
+          <p className="card-text smollTitle">{makeItSmoll(each.title)}</p>
           
         </div>
         </div>

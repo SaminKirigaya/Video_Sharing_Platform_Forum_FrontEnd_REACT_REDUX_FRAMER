@@ -233,18 +233,18 @@ function ChangePassword() {
     <h5 className="card-title mx-auto">Change Password</h5>
 
 
-    <div class="row row-cols-1 row-cols-md-2 g-2 mx-auto">
+    <div className="row row-cols-1 row-cols-md-2 g-2 mx-auto">
         
 
 
-        <div class="col col-md-12">
+        <div className="col col-md-12">
         <div className='eye' onClick={(e)=>{passState ? setpassState(false) : setpassState(true)}}>{passState ? <VisibilityOffIcon /> : <VisibilityIcon />}</div>
-        <input onChange={(e)=>{setTheFormvalues((prevState)=>({...prevState, oldPassword : e.target.value }))}} id="OldPassword" type="text" class="form-control" placeholder="Old Password" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide your old password here ..."/>
+        <input onChange={(e)=>{setTheFormvalues((prevState)=>({...prevState, oldPassword : e.target.value }))}} id="OldPassword" type="text" className="form-control" placeholder="Old Password" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide your old password here ..."/>
         </div>
 
-        <div class="col col-md-12">
+        <div className="col col-md-12">
         <div className='eye' onClick={(e)=>{passState2 ? setpassState2(false) : setpassState2(true)}}>{passState2 ? <VisibilityOffIcon /> : <VisibilityIcon />}</div>
-        <input onChange={(e)=>{setTheFormvalues((prevState)=>({...prevState, newPassword : e.target.value }))}} id="NewPassword" type="text" class="form-control" placeholder="New Password" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide your new password here ..."/>
+        <input onChange={(e)=>{setTheFormvalues((prevState)=>({...prevState, newPassword : e.target.value }))}} id="NewPassword" type="text" className="form-control" placeholder="New Password" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide your new password here ..."/>
         </div>
 
 

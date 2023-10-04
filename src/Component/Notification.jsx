@@ -87,9 +87,9 @@ function Notification() {
         if(notification.length>1){
             return notification.map((each)=>{
                 return  <div className='col'>
-                <div class="card mb-3 mx-auto" style={{maxWidth: '80%'}}>
-                <div class="row g-0">
-                  <div class="col-md-2 d-flex align-items-center justify-content-center">
+                <div className="card mb-3 mx-auto" style={{maxWidth: '80%'}}>
+                <div className="row g-0">
+                  <div className="col-md-2 d-flex align-items-center justify-content-center">
                     <div className='d-flex justify-content-center pt-2 mx-auto ps-1'>
                         <Stack direction="row" spacing={2}>
                         <Avatar
@@ -100,10 +100,10 @@ function Notification() {
                         </Stack>
                     </div>
                   </div>
-                  <div class="col-md-10">
-                    <div class="card-body">
-                      <h5 class="card-title">{each.whoGivingUsername}</h5>
-                      <p class="card-text">{each.reason} <br></br><Link to={'/seeServerThisVideo/'+each.videoSerial} className='btn btn-sm btn-primary mx-auto mt-4'> View It </Link> </p>
+                  <div className="col-md-10">
+                    <div className="card-body">
+                      <h5 className="card-title">{each.whoGivingUsername}</h5>
+                      <p className="card-text">{each.reason} <br></br><Link to={'/seeServerThisVideo/'+each.videoSerial} className='btn btn-sm btn-primary mx-auto mt-4'> View It </Link> </p>
                       
                     </div>
                   </div>
@@ -113,9 +113,9 @@ function Notification() {
             })
         }else if(notification[0]){
             return  <div className='col'>
-                <div class="card mb-3 mx-auto" style={{maxWidth: '80%'}}>
-                <div class="row g-0">
-                  <div class="col-md-2 d-flex align-items-center justify-content-center">
+                <div className="card mb-3 mx-auto" style={{maxWidth: '80%'}}>
+                <div className="row g-0">
+                  <div className="col-md-2 d-flex align-items-center justify-content-center">
                     <div className='d-flex justify-content-center pt-2 mx-auto ps-1'>
                         <Stack direction="row" spacing={2}>
                         <Avatar
@@ -126,10 +126,10 @@ function Notification() {
                         </Stack>
                     </div>
                   </div>
-                  <div class="col-md-10">
-                    <div class="card-body">
-                      <h5 class="card-title">{notification[0].whoGivingUsername}</h5>
-                      <p class="card-text">{notification[0].reason} <br></br><Link to={'/seeServerThisVideo/'+notification[0].videoSerial} className='btn btn-sm btn-primary mx-auto mt-4'> View It </Link></p>
+                  <div className="col-md-10">
+                    <div className="card-body">
+                      <h5 className="card-title">{notification[0].whoGivingUsername}</h5>
+                      <p className="card-text">{notification[0].reason} <br></br><Link to={'/seeServerThisVideo/'+notification[0].videoSerial} className='btn btn-sm btn-primary mx-auto mt-4'> View It </Link></p>
                       
                     </div>
                   </div>

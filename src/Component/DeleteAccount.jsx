@@ -138,7 +138,7 @@ function DeleteAccount() {
       <div className="card-body d-flex justify-content-center flex-column">
       <h5 className="card-title mx-auto">Delete Account</h5>
 
-      <div class="col col-md-12">
+      <div className="col col-md-12">
           <p className='text-center'>You sure you want to delete your account ??? Once deleted no old data can be returned to current state ...</p>
       
       </div>
