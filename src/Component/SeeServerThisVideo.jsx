@@ -44,6 +44,7 @@ function SeeServerThisVideo() {
 
   const [showHideComment, setShowHideComment] = useState(false)
   const [commentReplay, setCommentReplay] = useState('')
+  const [iframemargin, setIframemargin] = useState('')
 
   const [videoData, setVideoData] = useState({
     videourl : '',
@@ -746,6 +747,9 @@ function SeeServerThisVideo() {
 
   // Effects Here
   useEffect(() => {
+    if(window.innerWidth<540){
+      setIframemargin('1rem')
+    }
 
     if(window.innerWidth>1000){
       setColWidth('86vw')
@@ -815,7 +819,7 @@ function SeeServerThisVideo() {
 
 
     <div className='videoBox2'>
-    <iframe id="videoIframe" width="100%" height="100%" src={videoData.videourl} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowTransparency allowFullScreen></iframe>
+    <iframe id="videoIframe" width="100%" height="100%" style={{marginLeft:iframemargin}} src={videoData.videourl} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowTransparency allowFullScreen></iframe>
     </div>
 
     <div className='sameVideos2'>

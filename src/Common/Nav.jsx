@@ -19,6 +19,7 @@ import VideoSettingsIcon from '@mui/icons-material/VideoSettings';
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 import NotificationImportantIcon from '@mui/icons-material/NotificationImportant';
 
+import { notifyFunctions }  from '../Store/Store';
 
 function Nav() {
 
@@ -26,20 +27,55 @@ function Nav() {
     const isLogged = useSelector((state) => state.loginData.login);
     const playerAvatar = useSelector((state) => state.profImgData.proImgPath);
     const notificationAmount = useSelector((state)=> state.notifyData.notifAmount);
+    const token = useSelector((state)=>state.tokenData.token)
+    const serial = useSelector((state)=>state.userserialData.serialId)
+    const dispatch = useDispatch()
+
+    axios.defaults.headers.common['Authorization'] = 'Bearer '+token
+
+    const callForNotificationApi = async()=>{
+        if(serial && token){
+            try{
+                const   response = await axios({
+                    url : `/getNewNotificationNumber/${serial}`,
+                    method : 'get',
+                })
+
+                if(response.data.message == 'success'){
+                    dispatch(notifyFunctions.setNewNotif(response.data.notificationTotal))
+                }
+
+            }catch(err){
+                throw err
+            }
+        }
+    }
 
     // Effects Here
     useEffect(() => {
         // Initialize tooltips when the component mounts
         window.$('[data-bs-toggle="tooltip"]').tooltip();
     
+        const intervalId = setInterval(() => {
+            // Your interval logic here
+            if(isLogged){
+                callForNotificationApi()
+            }
+            
+
+            }, 50000);
+
+
         //  to clean up the tooltips when the component unmounts
         return () => {
           window.$('[data-bs-toggle="tooltip"]').tooltip('dispose');
+          clearInterval(intervalId);
         };
       }, []); // [ ] empty mean it will only run once after first render like component did mount :>
  
 
-
+    //setting interval of 50s for each comment number api
+    
 
 
     return (
@@ -106,7 +142,7 @@ function Nav() {
 
 
                 {isLogged ? notificationAmount>0 ? <div className='mt-3'>
-                <Link className='linkBtn' to='/goNotificationPage'><NotificationImportantIcon fontSize='large' /></Link>
+                <Link className='linkBtn noticonred' to='/goNotificationPage'><NotificationImportantIcon fontSize='large' /></Link>
                 </div> : <div className='mt-3'>
                 <Link className='linkBtn' to='/goNotificationPage'><CircleNotificationsIcon fontSize='large' /></Link>
                 </div>  : null}

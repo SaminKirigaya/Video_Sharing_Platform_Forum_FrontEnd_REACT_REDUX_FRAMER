@@ -71,7 +71,7 @@ function Notification() {
 
                     setTimeout(()=>{
                         setNowGoBack(true)
-                    }, 1400)
+                    }, 1900)
                 }
 
             }catch(err){
@@ -167,6 +167,8 @@ function Notification() {
         }
         
     },[notificationAmount])
+
+
   return (
     <Fragment>
     <div className='container-fluid pages flex-column'>

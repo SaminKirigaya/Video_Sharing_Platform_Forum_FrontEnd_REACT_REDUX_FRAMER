@@ -3524,3 +3524,7 @@ select{
     text-decoration: none;
     color: white !important;
 }
+
+.noticonred{
+    color: red !important;
+}
