@@ -20,6 +20,7 @@ import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 import NotificationImportantIcon from '@mui/icons-material/NotificationImportant';
 
 import { notifyFunctions }  from '../Store/Store';
+import { motion } from 'framer-motion';
 
 function Nav() {
 
@@ -84,12 +85,12 @@ function Nav() {
             <div className='container-fluid mainNav'>
 
 
-                <div data-bs-toggle="tooltip">
+                <motion.div whileHover={{scale:1.2}} transition={{type:'spring', stiffness:700}} data-bs-toggle="tooltip">
                 <Link className='linkBtn' to='/'><OndemandVideoIcon fontSize='large'/></Link>
-                </div>
+                </motion.div>
                 
 
-                {isLogged ? <div className='avatarArea mt-5'>
+                {isLogged ? <motion.div whileHover={{scale:1}} transition={{type:'spring', stiffness:700}} className='avatarArea mt-5'>
                 <Link to ='/profilePage'>
                     <Stack direction="row" spacing={2}>
                     
@@ -100,52 +101,52 @@ function Nav() {
                     />
                     </Stack>
                 </Link>
-                </div> : null}
+                </motion.div> : null}
                 
 
 
-                {!isLogged ? <div className='mt-5'>
+                {!isLogged ? <motion.div whileHover={{scale:1.2}} transition={{type:'spring', stiffness:700}} className='mt-5'>
                 <Link className='linkBtn' to='/login'><AccountCircleIcon fontSize='large' /></Link>
-                </div> : null}
+                </motion.div> : null}
                 
 
 
-                {!isLogged ? <div className='mt-3'>
+                {!isLogged ? <motion.div whileHover={{scale:1.2}} transition={{type:'spring', stiffness:700}} className='mt-3'>
                 <Link className='linkBtn' to='/verify'><VerifiedIcon fontSize='large' /></Link>
-                </div> : null}
+                </motion.div> : null}
                 
 
 
-                <div className='mt-3'>
+                <motion.div whileHover={{scale:1.2}} transition={{type:'spring', stiffness:700}} className='mt-3'>
                 <Link className='linkBtn' to='/'><HomeIcon fontSize='large'/></Link>
-                </div>
+                </motion.div>
 
 
-                <div className='mt-3'>
+                <motion.div whileHover={{scale:1.2}} transition={{type:'spring', stiffness:700}} className='mt-3'>
                 <Link className='linkBtn' to='/selectCatagory'><InterestsIcon fontSize='large' /></Link>
-                </div>
+                </motion.div>
 
-                {isLogged ? <div className='mt-3'>
+                {isLogged ? <motion.div whileHover={{scale:1.2}} transition={{type:'spring', stiffness:700}} className='mt-3'>
                 <Link className='linkBtn' to='/yourVideos'><VideoSettingsIcon fontSize='large' /></Link>
-                </div> : null}
+                </motion.div> : null}
                 
 
-                {isLogged ? <div className='mt-3'>
+                {isLogged ? <motion.div whileHover={{scale:1.2}} transition={{type:'spring', stiffness:700}} className='mt-3'>
                 <Link className='linkBtn' to='/watchLater'><WatchLaterIcon fontSize='large' /></Link>
-                </div> : null}
+                </motion.div> : null}
                 
 
 
-                {isLogged ? <div className='mt-3'>
+                {isLogged ? <motion.div whileHover={{scale:1.2}} transition={{type:'spring', stiffness:700}} className='mt-3'>
                 <Link className='linkBtn' to='/likedVideos'><ThumbUpAltIcon fontSize='large' /></Link>
-                </div> : null}
+                </motion.div> : null}
 
 
-                {isLogged ? notificationAmount>0 ? <div className='mt-3'>
+                {isLogged ? notificationAmount>0 ? <motion.div whileHover={{scale:1.2}} transition={{type:'spring', stiffness:700}} className='mt-3'>
                 <Link className='linkBtn noticonred' to='/goNotificationPage'><NotificationImportantIcon fontSize='large' /></Link>
-                </div> : <div className='mt-3'>
+                </motion.div> : <motion.div whileHover={{scale:1.2}} transition={{type:'spring', stiffness:700}} className='mt-3'>
                 <Link className='linkBtn' to='/goNotificationPage'><CircleNotificationsIcon fontSize='large' /></Link>
-                </div>  : null}
+                </motion.div>  : null}
 
 
                 {isLogged ? <div className='mt-3'>
@@ -155,9 +156,9 @@ function Nav() {
                 
 
 
-                {isLogged ? <div className='mt-3' >
+                {isLogged ? <motion.div whileHover={{scale:1.2}} transition={{type:'spring', stiffness:700}} className='mt-3' >
                 <Link className='linkBtn' to='/logout'><LogoutIcon fontSize='large' /></Link>
-                </div> : null}
+                </motion.div> : null}
                 
                 
 

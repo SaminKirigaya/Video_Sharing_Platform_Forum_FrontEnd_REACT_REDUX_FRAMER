@@ -20,7 +20,7 @@ import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
 import AlarmOnIcon from '@mui/icons-material/AlarmOn';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, useAnimate } from 'framer-motion'
 
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -52,6 +52,7 @@ function Home() {
     const token = useSelector((state)=>state.tokenData.token)
     const serial = useSelector((state)=>state.userserialData.serialId)
 
+    const [scope, Animate] = useAnimate()
     
     
     axios.defaults.headers.common['Authorization'] = 'Bearer '+token // axios auth set
@@ -128,6 +129,7 @@ function Home() {
     // Handle page change
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+    Animate('.againAnime', {opacity: [0,1]}, {duration:1.3})
   };
 
     //upload this video serial to my later watch list
@@ -169,7 +171,7 @@ function Home() {
       
 
       return currentData.map((each, index)=>{
-        return  <motion.div variants={item} transition={{duration: 1.3}} className='col d-flex justify-content-center mb-5' style={{width: thewidth}} key={index}> 
+        return  <motion.div variants={item} transition={{duration: 1.3}} className='col d-flex justify-content-center mb-5 againAnime' style={{width: thewidth}} key={index}> 
         <motion.div whileHover={{scale:1.065}} transition={{type: 'spring', stiffness: 300}} className="card" style={{width: '16rem', height: '16rem'}}>
 
         <motion.div style={{maxWidth: '100%', minWidth: '100%', maxHeight: '50%', minHeight:'50%'}}>
@@ -210,6 +212,7 @@ function Home() {
         </div>
         </motion.div>
         </motion.div>
+        
       })
     }
   
@@ -277,9 +280,11 @@ function Home() {
 
 
         
-        <motion.div variants={container} initial="hidden" animate="show" className='row row-cols-1 row-cols-md-4 mb-5 d-flex justify-content-start p-3'>
+        <motion.div variants={container} initial="hidden" animate="show" className='row row-cols-1 row-cols-md-4 mb-5 d-flex justify-content-start p-3' ref={scope}>
+          
 
           {oldVideos ? showAllOldVideosInCard() : null}
+          
           {oldVideos.length<1 ? <div className='d-flex mx-auto w-100 justify-content-center'><p className='mx-auto fontcol'>Some Error Occured Or It Seems The Server Has No Video Uploaded ...</p></div>:null}
 
         </motion.div>
