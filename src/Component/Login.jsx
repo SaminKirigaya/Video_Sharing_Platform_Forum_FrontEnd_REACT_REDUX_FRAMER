@@ -16,7 +16,7 @@ import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
+import { motion } from 'framer-motion'
 
 import sleep from '../Asset/Images/sleep.jpg';
 import watching from '../Asset/Images/watching.jpg';
@@ -210,7 +210,7 @@ function Login() {
 
     return (
         <Fragment>
-            <div className='container-fluid pages flex-column'>
+            <motion.div animate={{x : [-400, 0]}} transition={{duration:0.3, type: 'spring', stiffness: 250}} className='container-fluid pages flex-column'>
                 <div className="card d-flex justify-content-center cardBd" style={{width: "18rem"}}>
                 
                 <div className='mx-auto mt-4'>
@@ -287,7 +287,7 @@ function Login() {
                 
 
 
-                <button onClick={(e)=>{logMeIn(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-3">Sign In</button>
+                <motion.button whileHover={{scale:1.05}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{logMeIn(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-3">Sign In</motion.button>
                 </div>
                 </div>
 
@@ -296,7 +296,7 @@ function Login() {
              
                 {nowGoBack ? <Navigate to='/' replace /> : null}
                 
-            </div>
+            </motion.div>
             <Snackbar open={open} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
             <Alert onClose={handleClose} severity="success" sx={{
                 width: '100%',
