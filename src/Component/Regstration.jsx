@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-
+import { motion } from 'framer-motion';
 
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
@@ -47,6 +47,22 @@ function Regstration() {
         profile_image : null,
         cover_image : null, 
     })
+
+    const container = {
+        hidden: { opacity: 0 },
+        show: {
+          opacity: 1,
+          transition: {
+            staggerChildren: 0.1
+          }
+        }
+      }
+      
+      const item = {
+        hidden: { opacity: 0 },
+        show: { opacity: 1 }
+      }
+      
 
 
 
@@ -327,7 +343,7 @@ function Regstration() {
 
     return (
         <Fragment>
-        <div className='container-fluid pages flex-column'>
+        <motion.div animate={{x : [-400, 0]}} transition={{duration:0.3, type: 'spring', stiffness: 250}} className='container-fluid pages flex-column'>
         <div className='adjustheight'>
         <div className="card d-flex justify-content-center cardBd" style={{width: "18rem"}}>
         
@@ -349,36 +365,36 @@ function Regstration() {
         <h5 className="card-title mx-auto">SIGN UP</h5>
 
     
-        <div className="row row-cols-1 row-cols-md-2 g-2 mx-auto mt-3">
+        <motion.div variants={container} initial="hidden" animate="show" className="row row-cols-1 row-cols-md-2 g-2 mx-auto mt-3">
             <div className="col col-md-12">
                 <sup>It may take few seconds to send you the reply message and otp after clicking sign up in order to verify everything. So, please don't panic and kindly wait few seconds.</sup>
             
             </div>
 
-            <div className="col col-md-12">
+            <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-12">
             
             <input id="email" onChange={(e)=>{setTheMail(e)}} type="email" className="form-control"  placeholder="@Email" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a valid Email or else you will not be able to verify your account with OTP or get a new password after forgetting password ... Remember Email is unchangable in future."/>
-            </div>
+            </motion.div>
 
-            <div className="col col-md-12">
+            <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-12">
             
             <input id="username" onChange={(e)=>{setTheUsername(e)}} type="text" className="form-control" placeholder="User Name" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a Unique username also it can only have a-z or A-Z or 0-9, It can only have _ as a special character no space is allowed ..."/>
-            </div>
+            </motion.div>
 
-            <div className="col col-md-12">
+            <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-12">
             
             <input id="fullname" onChange={(e)=>{setTheFullname(e)}} type="text" className="form-control" placeholder="Full Name" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide your full name it must not have any special characters and must not have any numbers ..."/>
-            </div>
+            </motion.div>
 
-            <div className="col-6">
+            <motion.div variants={item} transition={{duration: 1.3}} className="col-6">
                 <select onChange={(e)=>{setTheGender(e)}} className="form-select" aria-label="Default select example">
                 <option selected disabled={true}>Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Others">Others</option>
                 </select>
-            </div>
-            <div className="col-6">
+            </motion.div>
+            <motion.div variants={item} transition={{duration: 1.3}} className="col-6">
                 <select onChange={(e)=>{setTheCountry(e)}} className="form-select" aria-label="Default select example">
                 <option selected disabled={true}>Country</option>
                 <option value="United States">United States</option>
@@ -400,47 +416,47 @@ function Regstration() {
                 <option value="India">India</option>
                 <option value="Pakistan">Pakistan</option>
                 </select>
-            </div>
+            </motion.div>
 
-            <div className="col col-md-6">
+            <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-6">
             
             <input onChange={(e)=>{setTheDateofBirth(e)}} type="date" className="form-control"  placeholder="Date of Birth" autoComplete='none'/>
-            </div>
+            </motion.div>
 
-            <div className="col col-md-6">
+            <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-6">
             
             <input id="address" onChange={(e)=>{setTheAddress(e)}} type="text" className="form-control"  placeholder="Address" autoComplete='none'/>
-            </div>
+            </motion.div>
 
 
-            <div className="col col-md-12 mx-auto">
+            <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-12 mx-auto">
             
             <label for="profImage"  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image of jpg or jpeg format less than 1 MB ... Without jpeg or jpg it won't work."><AddPhotoAlternateIcon /> Add Profile Image</label>
             <input onChange={(e)=>{setProfileImage(e)}} id="profImage" type="file" className="form-control"  autoComplete='none' accept=".jpg, .jpeg"/>
-            </div>
+            </motion.div>
 
-            <div className="col col-md-12 mx-auto">
+            <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-12 mx-auto">
             
             <label for="coverImage"  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image at least 1024px X 680 px which is clear ... Remember image must be jpg or jpeg format."><AddPhotoAlternateIcon /> Add Cover Image</label>
             <input onChange={(e)=>{setCoverImage(e)}} id="coverImage" type="file" className="form-control" autoComplete='none' accept=".jpg, .jpeg"/>
-            </div>
+            </motion.div>
 
 
-            <div className="col col-md-12">
+            <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-12">
             <div className='eye' onClick={(e)=>{passState ? setpassState(false) : setpassState(true)}}>{passState ? <VisibilityOffIcon /> : <VisibilityIcon />}</div>
             <input onChange={(e)=>{setThePassword(e)}} id="pass" type="text" className="form-control"  placeholder="Password" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Your password can only contain a-z, A-Z, 0-9 with no spaces at times of special characters only @!_ is allowed. Also, password must be atleast 6 digit long and highest 50 digit long. "/>
-            </div>
+            </motion.div>
 
-            <div className="col col-md-12 mt-0">
+            <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-12 mt-0">
             <div className='eye' onClick={(e)=>{passState2 ? setpassState2(false) : setpassState2(true)}}>{passState2 ? <VisibilityOffIcon /> : <VisibilityIcon />}</div>
             <input onChange={(e)=>{setTheConfirmPassword(e)}} id="conpass" type="text" className="form-control"  placeholder="Confirm Password" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Your confirm password must be same as password ..."/>
-            </div>
+            </motion.div>
 
-        </div>
+        </motion.div>
         
 
 
-        <button onClick={(e)=>{signMeUp(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-4">Sign Up</button>
+        <motion.button whileHover={{scale:1.05}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{signMeUp(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-4">Sign Up</motion.button>
         </div>
         </div>
 
@@ -462,7 +478,7 @@ function Regstration() {
     </Snackbar>
 
 
-    </div>
+    </motion.div>
         </Fragment>
     )
 }
