@@ -44,11 +44,11 @@ function Header() {
         <BrowserRouter>
         <Fragment>
 
-        <div>
+        <div className='zabove'>
             <Nav />
         </div>
 
-        <div>
+        <div className='zbelow'>
             <Suspense fallback={loadingEffect()}>
                 <Routes>
                     <Route path='/' Component={()=>(<Home />)} />

@@ -373,29 +373,29 @@ function Regstration() {
 
             <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-12">
             
-            <input id="email" onChange={(e)=>{setTheMail(e)}} type="email" className="form-control"  placeholder="@Email" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a valid Email or else you will not be able to verify your account with OTP or get a new password after forgetting password ... Remember Email is unchangable in future."/>
+            <motion.input whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}} id="email" onChange={(e)=>{setTheMail(e)}} type="email" className="form-control"  placeholder="@Email" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a valid Email or else you will not be able to verify your account with OTP or get a new password after forgetting password ... Remember Email is unchangable in future."/>
             </motion.div>
 
             <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-12">
             
-            <input id="username" onChange={(e)=>{setTheUsername(e)}} type="text" className="form-control" placeholder="User Name" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a Unique username also it can only have a-z or A-Z or 0-9, It can only have _ as a special character no space is allowed ..."/>
+            <motion.input whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}} id="username" onChange={(e)=>{setTheUsername(e)}} type="text" className="form-control" placeholder="User Name" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a Unique username also it can only have a-z or A-Z or 0-9, It can only have _ as a special character no space is allowed ..."/>
             </motion.div>
 
             <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-12">
             
-            <input id="fullname" onChange={(e)=>{setTheFullname(e)}} type="text" className="form-control" placeholder="Full Name" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide your full name it must not have any special characters and must not have any numbers ..."/>
+            <motion.input whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}} id="fullname" onChange={(e)=>{setTheFullname(e)}} type="text" className="form-control" placeholder="Full Name" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide your full name it must not have any special characters and must not have any numbers ..."/>
             </motion.div>
 
             <motion.div variants={item} transition={{duration: 1.3}} className="col-6">
-                <select onChange={(e)=>{setTheGender(e)}} className="form-select" aria-label="Default select example">
+                <motion.select whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}} onChange={(e)=>{setTheGender(e)}} className="form-select" aria-label="Default select example">
                 <option selected disabled={true}>Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Others">Others</option>
-                </select>
+                </motion.select>
             </motion.div>
             <motion.div variants={item} transition={{duration: 1.3}} className="col-6">
-                <select onChange={(e)=>{setTheCountry(e)}} className="form-select" aria-label="Default select example">
+                <motion.select whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}} onChange={(e)=>{setTheCountry(e)}} className="form-select" aria-label="Default select example">
                 <option selected disabled={true}>Country</option>
                 <option value="United States">United States</option>
                 <option value="Canada">Canada</option>
@@ -415,41 +415,41 @@ function Regstration() {
                 <option value="Bangladesh">Bangladesh</option>
                 <option value="India">India</option>
                 <option value="Pakistan">Pakistan</option>
-                </select>
+                </motion.select>
             </motion.div>
 
             <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-6">
             
-            <input onChange={(e)=>{setTheDateofBirth(e)}} type="date" className="form-control"  placeholder="Date of Birth" autoComplete='none'/>
+            <motion.input whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}} onChange={(e)=>{setTheDateofBirth(e)}} type="date" className="form-control"  placeholder="Date of Birth" autoComplete='none'/>
             </motion.div>
 
             <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-6">
             
-            <input id="address" onChange={(e)=>{setTheAddress(e)}} type="text" className="form-control"  placeholder="Address" autoComplete='none'/>
+            <motion.input whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}} id="address" onChange={(e)=>{setTheAddress(e)}} type="text" className="form-control"  placeholder="Address" autoComplete='none'/>
             </motion.div>
 
 
             <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-12 mx-auto">
             
             <label for="profImage"  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image of jpg or jpeg format less than 1 MB ... Without jpeg or jpg it won't work."><AddPhotoAlternateIcon /> Add Profile Image</label>
-            <input onChange={(e)=>{setProfileImage(e)}} id="profImage" type="file" className="form-control"  autoComplete='none' accept=".jpg, .jpeg"/>
+            <motion.input whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}} onChange={(e)=>{setProfileImage(e)}} id="profImage" type="file" className="form-control"  autoComplete='none' accept=".jpg, .jpeg"/>
             </motion.div>
 
             <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-12 mx-auto">
             
             <label for="coverImage"  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image at least 1024px X 680 px which is clear ... Remember image must be jpg or jpeg format."><AddPhotoAlternateIcon /> Add Cover Image</label>
-            <input onChange={(e)=>{setCoverImage(e)}} id="coverImage" type="file" className="form-control" autoComplete='none' accept=".jpg, .jpeg"/>
+            <motion.input whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}} onChange={(e)=>{setCoverImage(e)}} id="coverImage" type="file" className="form-control" autoComplete='none' accept=".jpg, .jpeg"/>
             </motion.div>
 
 
             <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-12">
             <div className='eye' onClick={(e)=>{passState ? setpassState(false) : setpassState(true)}}>{passState ? <VisibilityOffIcon /> : <VisibilityIcon />}</div>
-            <input onChange={(e)=>{setThePassword(e)}} id="pass" type="text" className="form-control"  placeholder="Password" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Your password can only contain a-z, A-Z, 0-9 with no spaces at times of special characters only @!_ is allowed. Also, password must be atleast 6 digit long and highest 50 digit long. "/>
+            <motion.input whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}} onChange={(e)=>{setThePassword(e)}} id="pass" type="text" className="form-control"  placeholder="Password" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Your password can only contain a-z, A-Z, 0-9 with no spaces at times of special characters only @!_ is allowed. Also, password must be atleast 6 digit long and highest 50 digit long. "/>
             </motion.div>
 
             <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-12 mt-0">
             <div className='eye' onClick={(e)=>{passState2 ? setpassState2(false) : setpassState2(true)}}>{passState2 ? <VisibilityOffIcon /> : <VisibilityIcon />}</div>
-            <input onChange={(e)=>{setTheConfirmPassword(e)}} id="conpass" type="text" className="form-control"  placeholder="Confirm Password" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Your confirm password must be same as password ..."/>
+            <motion.input whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}} onChange={(e)=>{setTheConfirmPassword(e)}} id="conpass" type="text" className="form-control"  placeholder="Confirm Password" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Your confirm password must be same as password ..."/>
             </motion.div>
 
         </motion.div>
