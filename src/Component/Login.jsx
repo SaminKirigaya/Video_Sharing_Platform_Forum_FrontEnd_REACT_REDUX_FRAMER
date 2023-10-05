@@ -210,8 +210,8 @@ function Login() {
 
     return (
         <Fragment>
-            <motion.div animate={{x : [-400, 0]}} transition={{duration:0.3, type: 'spring', stiffness: 250}} className='container-fluid pages flex-column'>
-                <div className="card d-flex justify-content-center cardBd" style={{width: "18rem"}}>
+            <motion.div  className='container-fluid pages flex-column'>
+                <motion.div animate={{x : [-400, 0]}} transition={{duration:0.3, type: 'spring', stiffness: 250}} className="card d-flex justify-content-center cardBd" style={{width: "18rem"}}>
                 
                 <div className='mx-auto mt-4'>
                 <Stack direction="row" spacing={2}>
@@ -289,7 +289,7 @@ function Login() {
 
                 <motion.button whileHover={{scale:1.05}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{logMeIn(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-3">Sign In</motion.button>
                 </div>
-                </div>
+                </motion.div>
 
                 <sup className='mt-4 linkBtn2'>Don't Have An ID ? .... <Link className='linkBtn2' to='/registration'>Click Here</Link><br></br></sup>
                 <sup className='mt-4 linkBtn2'>Forgot Password ? .... <Link className='linkBtn2' to='/forgotPass'>Click Here</Link></sup>

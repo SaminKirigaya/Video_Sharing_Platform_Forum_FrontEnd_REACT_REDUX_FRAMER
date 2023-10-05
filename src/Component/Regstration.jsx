@@ -343,9 +343,9 @@ function Regstration() {
 
     return (
         <Fragment>
-        <motion.div animate={{x : [-400, 0]}} transition={{duration:0.3, type: 'spring', stiffness: 250}} className='container-fluid pages flex-column'>
-        <div className='adjustheight'>
-        <div className="card d-flex justify-content-center cardBd" style={{width: "18rem"}}>
+        <motion.div  className='container-fluid pages flex-column'>
+        <motion.div animate={{x : [-400, 0]}} transition={{duration:0.3, type: 'spring', stiffness: 250}} className='adjustheight'>
+        <motion.div  className="card d-flex justify-content-center cardBd" style={{width: "18rem"}}>
         
         <div className='mx-auto mt-4'>
 
@@ -458,12 +458,12 @@ function Regstration() {
 
         <motion.button whileHover={{scale:1.05}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{signMeUp(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-4">Sign Up</motion.button>
         </div>
-        </div>
+        </motion.div>
 
         <sup className='mt-4 linkBtn2'>Already Have ID ? .... <Link className='linkBtn2' to='/login'>Click Here</Link><br></br></sup>
         <sup className='mt-4 linkBtn2'>Forgot Password ? .... <Link className='linkBtn2' to='/forgotPass'>Click Here</Link></sup>
     
-    </div>
+    </motion.div>
 
 
     <Snackbar open={open} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
