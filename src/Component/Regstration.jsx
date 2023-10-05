@@ -47,6 +47,7 @@ function Regstration() {
         profile_image : null,
         cover_image : null, 
     })
+    
 
     const container = {
         hidden: { opacity: 0 },

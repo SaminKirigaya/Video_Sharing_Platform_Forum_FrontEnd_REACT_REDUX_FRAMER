@@ -8,6 +8,8 @@ import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
+import { motion } from 'framer-motion';
+
 import { Navigate, Link, Form } from 'react-router-dom';
 import SearchBar from './SearchBar';
 
@@ -18,8 +20,7 @@ import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
 import AlarmOnIcon from '@mui/icons-material/AlarmOn';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-
-
+import { AnimatePresence } from 'framer-motion'
 
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -76,6 +77,23 @@ function Home() {
       }
     }
     
+
+    const container = {
+      hidden: { opacity: 0 },
+      show: {
+        opacity: 1,
+        transition: {
+          staggerChildren: 1
+        }
+      }
+    }
+    
+    const item = {
+      hidden: { opacity: 0 },
+      show: { opacity: 1 }
+    }
+    
+
 
     // convert huge disliked amount to K or M
     const genareteDisLikedAmount = (bigAmount)=>{
@@ -151,35 +169,36 @@ function Home() {
       
 
       return currentData.map((each, index)=>{
-        return  <div className='col d-flex justify-content-center mb-5' style={{width: thewidth}} key={index}> 
-        <div className="card" style={{width: '16rem', height: '16rem'}}>
+        return  <motion.div variants={item} transition={{duration: 1.3}} className='col d-flex justify-content-center mb-5' style={{width: thewidth}} key={index}> 
+        <motion.div whileHover={{scale:1.065}} transition={{type: 'spring', stiffness: 300}} className="card" style={{width: '16rem', height: '16rem'}}>
 
-        <div style={{maxWidth: '100%', minWidth: '100%', maxHeight: '50%', minHeight:'50%'}}>
+        <motion.div style={{maxWidth: '100%', minWidth: '100%', maxHeight: '50%', minHeight:'50%'}}>
         <img style={{width:'100%',height:'100%', objectFit: 'fill', borderTopLeftRadius: '0.3rem', borderTopRightRadius: '0.3rem'}} src={each.thumbnailLink} alt="Card image cap" />
-        </div>
+        </motion.div>
         
-        <div className='loveemo d-flex justify-content-center align-items-center' data-bs-toggle="tooltip" data-bs-placement="left" title={genareteLikedAmount(each.likeamount)}>
+        <motion.div whileHover={{scale:1.1}} transition={{type: 'spring', stiffness: 1000}} className='loveemo d-flex justify-content-center align-items-center' data-bs-toggle="tooltip" data-bs-placement="left" title={genareteLikedAmount(each.likeamount)}>
         <FavoriteIcon />
-        </div>
+        </motion.div>
 
-        <div className='loveemo2 d-flex justify-content-center align-items-center'  data-bs-toggle="tooltip" data-bs-placement="left" title={genareteDisLikedAmount(each.dislikedamount)}>
+        <motion.div whileHover={{scale:1.1}} transition={{type: 'spring', stiffness: 1000}} className='loveemo2 d-flex justify-content-center align-items-center'  data-bs-toggle="tooltip" data-bs-placement="left" title={genareteDisLikedAmount(each.dislikedamount)}>
         <HeartBrokenIcon />
-        </div>
+        </motion.div>
 
-        <div className='loveemo3 d-flex justify-content-center align-items-center' onClick={(e)=>{addThisToWatchlist(e, each._id)}}>
+        <motion.div whileHover={{scale:1.1}} transition={{type: 'spring', stiffness: 1000}} className='loveemo3 d-flex justify-content-center align-items-center' onClick={(e)=>{addThisToWatchlist(e, each._id)}}>
         <AlarmOnIcon />
-        </div>
+        </motion.div>
 
         <Link to={"/seeServerThisVideo/"+each._id}>
-        <div className='loveemo4 d-flex justify-content-center align-items-center'>
+        <motion.div whileHover={{scale:1.1}} transition={{type: 'spring', stiffness: 1000}} className='loveemo4 d-flex justify-content-center align-items-center'>
         <PlayArrowIcon fontSize='large'/>
-        </div>
+        </motion.div>
         </Link>
 
         <div className="card-body" style={{backgroundColor: '#c0ff1d'}}>
           <h5 className="card-title d-flex flex-row" style={{borderBottom: '0.1rem solid #5e791a'}}><Stack direction="row" spacing={2}>
 
           <Avatar
+              
               alt="Remy Sharp"
               src={each.playerAvatar}
               sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
@@ -189,8 +208,8 @@ function Home() {
           <p className="card-text smollTitle">{makeItSmoll(each.title)}</p>
           
         </div>
-        </div>
-        </div>
+        </motion.div>
+        </motion.div>
       })
     }
   
@@ -257,15 +276,14 @@ function Home() {
         <SearchBar />
 
 
-        <div className='row row-cols-1 row-cols-md-4 mb-5 d-flex justify-content-start p-3'>
+        
+        <motion.div variants={container} initial="hidden" animate="show" className='row row-cols-1 row-cols-md-4 mb-5 d-flex justify-content-start p-3'>
 
           {oldVideos ? showAllOldVideosInCard() : null}
           {oldVideos.length<1 ? <div className='d-flex mx-auto w-100 justify-content-center'><p className='mx-auto fontcol'>Some Error Occured Or It Seems The Server Has No Video Uploaded ...</p></div>:null}
 
-
-
-        </div>
-
+        </motion.div>
+        
 
         <Pagination
         activePage={currentPage}

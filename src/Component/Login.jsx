@@ -237,7 +237,7 @@ function Login() {
                 noValidate
                 
                 >
-                <div>
+                <motion.div whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}}>
                 <TextField
                 error = {!emailCondition ? true : null}
                 data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a valid Email or else login will not be allowed ..."
@@ -247,11 +247,11 @@ function Login() {
                 autoComplete="none"
                 onChange={(e)=>{setTheEmail(e)}}
                 />
-                </div>
+                </motion.div>
                 
                 </Box>
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', marginLeft : '0.9rem'}}>
-                <div>
+                <motion.div whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}}>
 
                     <FormControl sx={{ m: 1, width: '25ch' }} variant="standard" placeholder="Password">
                     <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
@@ -279,7 +279,7 @@ function Login() {
                     />
                 </FormControl>
 
-                </div>
+                </motion.div>
                 </Box>
               
 

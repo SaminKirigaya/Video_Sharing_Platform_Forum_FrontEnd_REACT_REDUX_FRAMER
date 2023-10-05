@@ -231,8 +231,8 @@ function SeeServerThisVideo() {
             />
             </Stack>  <span className='ms-2'><b>{titleBreaker(each.title)}</b></span></p>
             
-            <div className='mx-auto text-center' style={{position: 'relative', top: '30%', color: 'green'}}>
-            <Link className='linkBtn' to={'/seeServerThisVideo/'+each._id}><PlayArrowIcon fontSize='large'/></Link>
+            <div className='mx-auto text-center d-flex justify-content-center' style={{position: 'relative', top: '30%', color: 'green'}}>
+            <Link className='linkBtn mx-auto d-flex justify-content-center' to={'/seeServerThisVideo/'+each._id}><PlayArrowIcon fontSize='large'/></Link>
             </div>
         </div>
         

@@ -181,7 +181,7 @@ function ForgotPass() {
       noValidate
       
       >
-      <div>
+      <motion.div whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}}>
       <TextField
       error = {!emailCondition ? true : null}
       data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a the Email with which you created your account and where you were given an OTP ... Remember a new password will be sent to you in there. After Login with that you can change your password in profile menu 😁"
@@ -192,7 +192,7 @@ function ForgotPass() {
       autoComplete="none"
       onChange={(e)=>{setTheEmail(e)}}
       />
-      </div>
+      </motion.div>
       
       </Box>
       

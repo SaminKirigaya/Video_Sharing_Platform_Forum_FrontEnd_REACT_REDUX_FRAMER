@@ -13,6 +13,7 @@ import { profImgFunctions } from '../Store/Store';
 import { coverImgFunctions } from '../Store/Store';
 import { usernameFunctions } from '../Store/Store';
 import { userserialFunctions } from '../Store/Store';
+import { motion } from 'framer-motion'
 
 import axios from 'axios';
 
@@ -115,7 +116,7 @@ function Logout() {
   return (
     <Fragment>
       <div className='container-fluid pages flex-column'>
-      <div className="card d-flex justify-content-center cardBd" style={{width: "18rem"}}>
+      <motion.div animate={{x : [-400, 0]}} transition={{duration:0.3, type: 'spring', stiffness: 250}} className="card d-flex justify-content-center cardBd" style={{width: "18rem"}}>
       
       <div className='mx-auto mt-4'>
       <Stack direction="row" spacing={2}>
@@ -138,9 +139,9 @@ function Logout() {
       </div>
 
 
-      <button onClick={(e)=>{signMeOut(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-3">Sign Out</button>
+      <motion.button whileHover={{scale:1.05}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{signMeOut(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-3">Sign Out</motion.button>
       </div>
-      </div>
+      </motion.div>
 
       {nowGoBack ? <Navigate to='/login' replace /> : null}
       {!isLogged ? <Navigate to='/login' replace /> : null}

@@ -203,7 +203,7 @@ function Verify() {
         noValidate
         
         >
-        <div>
+        <motion.div whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}}>
         <TextField
         error = {!emailCondition ? true : null}
         data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide the Email with which you created your account also an OTP was sent there ..."
@@ -214,11 +214,11 @@ function Verify() {
         autoComplete="none"
         onChange={(e)=>{setTheEmail(e)}}
         />
-        </div>
+        </motion.div>
         
         </Box>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', marginLeft : '0.9rem'}}>
-        <div>
+        <motion.div whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}}>
 
             <FormControl sx={{ m: 1, width: '25ch' }} variant="standard" placeholder="OTP">
             <InputLabel htmlFor="standard-adornment-password">OTP</InputLabel>
@@ -245,7 +245,7 @@ function Verify() {
             />
         </FormControl>
 
-        </div>
+        </motion.div>
         </Box>
       
 
