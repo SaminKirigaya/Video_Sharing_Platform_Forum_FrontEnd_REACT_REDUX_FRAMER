@@ -1,6 +1,4 @@
 
-https://github.com/SaminKirigaya/Video_Sharing_Platform_Forum_FrontEnd_REACT_REDUX_FRAMER/assets/104618775/ae9eb358-d07e-4c19-91a7-dd713fac9e3a
-
 # Video Sharing Platform Like Forum/Youtube With REACT REDUX FRAMER Motion.
 
 This project, is for building a video sharing server with live notification and full authentication and authorization based also.
