@@ -9,6 +9,7 @@ Here, we will add like, dislike, comment, comment like, comment dislike, reply, 
 
 - Full Authentication and Authorization based.
 - Uploading video.
+- Login or any sorts of form page related registration where you insert password there is a sleeping cat , if you click eye to see password it will wake up to watch your password.
 - Video Love React Add.
 - Video Dislove React.
 - Commenting.
