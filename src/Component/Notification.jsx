@@ -11,8 +11,8 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
 import { notifyFunctions }  from '../Store/Store';
-
-
+import { motion } from 'framer-motion'
+import { callForNotificationApi } from './NotificationApi'
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -87,10 +87,10 @@ function Notification() {
         if(notification.length>1){
             return notification.map((each)=>{
                 return  <div className='col'>
-                <div className="card mb-3 mx-auto" style={{maxWidth: '80%'}}>
+                <motion.div whileHover={{scale:1.065,backgroundColor:'#f4f6f4'}} transition={{type: 'spring', stiffness: 500}} className="card mb-3 mx-auto" style={{maxWidth: '80%'}}>
                 <div className="row g-0">
                   <div className="col-md-2 d-flex align-items-center justify-content-center">
-                    <div className='d-flex justify-content-center pt-2 mx-auto ps-1'>
+                    <motion.div whileHover={{scale:1.065}} transition={{type: 'spring', stiffness: 1000}} className='d-flex justify-content-center pt-2 mx-auto ps-1'>
                         <Stack direction="row" spacing={2}>
                         <Avatar
                         alt="Remy Sharp"
@@ -98,25 +98,26 @@ function Notification() {
                         sx={{ width: 60, height: 60 }}
                         />
                         </Stack>
-                    </div>
+                    </motion.div>
                   </div>
                   <div className="col-md-10">
                     <div className="card-body">
-                      <h5 className="card-title">{each.whoGivingUsername}</h5>
-                      <p className="card-text">{each.reason} <br></br><Link to={'/seeServerThisVideo/'+each.videoSerial} className='btn btn-sm btn-primary mx-auto mt-4'> View It </Link> </p>
-                      
+                      <h5 className="card-title headLine">{each.whoGivingUsername}</h5>
+                      <p className="card-text normalLine">{each.reason}</p>
+                      <motion.p whileHover={{scale:1.05}} transition={{type: 'spring', stiffness: 1000}}><Link to={'/seeServerThisVideo/'+each.videoSerial} className='btn btn-sm btn-primary mx-auto mt-4 headLine'> View It </Link></motion.p>
+
                     </div>
                   </div>
                 </div>
-                </div>
+                </motion.div>
                 </div>
             })
         }else if(notification[0]){
             return  <div className='col'>
-                <div className="card mb-3 mx-auto" style={{maxWidth: '80%'}}>
+                <motion.div whileHover={{scale:1.065,backgroundColor:'#f4f6f4'}} transition={{type: 'spring', stiffness: 500}} className="card mb-3 mx-auto" style={{maxWidth: '80%'}}>
                 <div className="row g-0">
                   <div className="col-md-2 d-flex align-items-center justify-content-center">
-                    <div className='d-flex justify-content-center pt-2 mx-auto ps-1'>
+                    <motion.div whileHover={{scale:1.065}} transition={{type: 'spring', stiffness: 1000}} className='d-flex justify-content-center pt-2 mx-auto ps-1'>
                         <Stack direction="row" spacing={2}>
                         <Avatar
                         alt="Remy Sharp"
@@ -124,17 +125,18 @@ function Notification() {
                         sx={{ width: 60, height: 60 }}
                         />
                         </Stack>
-                    </div>
+                    </motion.div>
                   </div>
                   <div className="col-md-10">
                     <div className="card-body">
-                      <h5 className="card-title">{notification[0].whoGivingUsername}</h5>
-                      <p className="card-text">{notification[0].reason} <br></br><Link to={'/seeServerThisVideo/'+notification[0].videoSerial} className='btn btn-sm btn-primary mx-auto mt-4'> View It </Link></p>
+                      <h5 className="card-title headLine">{notification[0].whoGivingUsername}</h5>
+                      <p className="card-text normalLine">{notification[0].reason}</p>
+                      <motion.p whileHover={{scale:1.05}} transition={{type: 'spring', stiffness: 1000}}><Link to={'/seeServerThisVideo/'+notification[0].videoSerial} className='btn btn-sm btn-primary mx-auto mt-4 headLine'> View It </Link></motion.p>
                       
                     </div>
                   </div>
                 </div>
-                </div>
+                </motion.div>
                 </div>
         }
     }
@@ -155,8 +157,22 @@ function Notification() {
 
 
     useEffect(()=>{
+        const intervalID = setInterval(() => {
+            // Your interval logic here
+            
+                console.log('send api')
+                callForNotificationApi(serial, token, dispatch)
+      
+            
+      
+            }, 50000);
+
         if(notificationAmount>0){
             getAllNotification()
+        }
+
+        return()=>{
+            clearInterval(intervalID)
         }
         
     },[])
@@ -177,11 +193,11 @@ function Notification() {
     <WelcomeMsg/>
     <SearchBar />
 
-    <h5 className='mx-auto text-center mt-4 mb-4 welcomeTxt'>Notifications ...</h5>
+    <h5 className='mx-auto text-center mt-4 mb-4 welcomeTxt headLine'>Notifications ...</h5>
 
     {notificationAmount>0 ? <div className='mx-auto mt-4 mb-2 d-flex justify-content-center align-items-center' style={{minWidth: '95%', maxWidth: '95%'}}>
     {/* if anyone want to search with username */}
-    <button onClick={(e)=>{clearOldNotis(e)}} type="button" className='btn btn-sm btn-primary mx-auto mt-4'> Clear All Notifications </button>
+    <motion.button whileHover={{scale:1.05}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{clearOldNotis(e)}} type="button" className='btn btn-sm btn-primary mx-auto mt-4 headLine'> Clear All Notifications </motion.button>
     
     </div> : null}
     
@@ -190,7 +206,7 @@ function Notification() {
 
     <div id='usnameBox' className='mx-auto mt-4 mb-2 ps-md-2' style={{minWidth: '95%', maxWidth: '95%'}}>
         
-        {notificationAmount==0 ? <div className='d-flex mx-auto mb-4 w-100 justify-content-center'><p className='mx-auto fontcol text-center'>You have no new notification ... Make sure to view, comment, react with other .</p></div> : <div className='d-flex mx-auto mb-4 w-100 justify-content-center'>
+        {notificationAmount==0 ? <div className='d-flex mx-auto mb-4 w-100 justify-content-center'><p className='mx-auto fontcol text-center normalLine'>You have no new notification ... Make sure to view, comment, react with other .</p></div> : <div className='d-flex mx-auto mb-4 w-100 justify-content-center'>
         <div className='row row-cols-1 row-cols-md-1 justify-content-center' style={{ minWidth:'80%'}}>
 
 
@@ -210,11 +226,11 @@ function Notification() {
 
 
     {/* Go back button */}
-    <div className='mx-auto mt-4 mb-5 d-flex justify-content-center align-items-center' style={{minWidth: '95%', maxWidth: '95%'}}>
+    <motion.div whileHover={{scale:1.05}} transition={{type: 'spring', stiffness: 1000}} className='mx-auto mt-4 mb-5 d-flex justify-content-center align-items-center' style={{minWidth: '95%', maxWidth: '95%'}}>
         {/* if anyone want to search with username */}
-        <Link to='/' className='btn btn-sm btn-primary mx-auto mt-4'><ArrowBackIcon /> Go Back</Link>
+        <Link to='/' className='btn btn-sm btn-primary mx-auto mt-4 headLine'><ArrowBackIcon /> Go Back</Link>
         
-        </div>
+        </motion.div>
     
     </div>
     {nowGoBack ? <Navigate to='/' replace /> : null}

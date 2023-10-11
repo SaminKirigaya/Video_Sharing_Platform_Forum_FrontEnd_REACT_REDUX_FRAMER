@@ -6,11 +6,17 @@ import SearchBar from './SearchBar';
 import SearchIcon from '@mui/icons-material/Search';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
+import {motion, useAnimate, AnimatePresence} from 'framer-motion'
+
 
 function Category() {
     const [usname, setUsname] = useState(false)
     const [tagbox, setTagbox] = useState(false)
     const [searchText, setSearchText] = useState('')
+
+    const [scope, Animate] = useAnimate()
+    const [scope2, Animate2] = useAnimate()
+
     const SelectUsername = (e)=>{
         if(usname){
             setUsname(false)
@@ -34,22 +40,30 @@ function Category() {
 
     useEffect(()=>{
         if(usname){
-            document.getElementById('tagBox').classList.add('d-none')
+            
             document.getElementById('usnameinputbox').classList.remove('d-none')
+            Animate('.againAnime',{opacity:[0,1], display:'block', y:[-30,0]},{duration:1.3,type:'spring',stiffness:400})
             
         }else{
-            document.getElementById('tagBox').classList.remove('d-none')
-            document.getElementById('usnameinputbox').classList.add('d-none')
+            Animate('.againAnime',{opacity:[1,0], y:[0,-30]},{duration:1.3,type:'spring',stiffness:400})
+            setTimeout(()=>{
+                document.getElementById('usnameinputbox').classList.add('d-none')
+            },100)
+            
         }
     },[usname])
 
     useEffect(()=>{
         if(tagbox){
-            document.getElementById('usnameBox').classList.add('d-none')
+           
             document.getElementById('tagLinkBox').classList.remove('d-none')
+            Animate2('.secondAnime',{opacity:[0,1], display:'block', y:[-30,0]},{duration:1.3,type:'spring',stiffness:400})
+
         }else{
-            document.getElementById('usnameBox').classList.remove('d-none')
-            document.getElementById('tagLinkBox').classList.add('d-none')
+            Animate2('.secondAnime',{opacity:[1,0], y:[0,-30]},{duration:1.3,type:'spring',stiffness:400})
+            setTimeout(()=>{
+                document.getElementById('tagLinkBox').classList.add('d-none')
+            },100)
         }
     },[tagbox])
 
@@ -60,13 +74,14 @@ function Category() {
 
         <SearchBar />
 
-        <h5 className='mx-auto text-center mt-4 mb-4 welcomeTxt'>Select Categories ...</h5>
+        <h5 className='mx-auto text-center mt-4 mb-4 welcomeTxt headLine'>Select Categories ...</h5>
 
-        <div id='usnameBox' className='mx-auto mt-4 mb-2 ps-md-2' style={{minWidth: '95%', maxWidth: '95%'}}>
+        <AnimatePresence>
+        <motion.div id='usnameBox' className='mx-auto mt-4 mb-2 ps-md-2' style={{minWidth: '95%', maxWidth: '95%'}} ref={scope}>
         {/* if anyone want to search with username */}
-        <span className="badge rounded-pill bg-success me-1"> &nbsp;<input checked={usname} onChange={(e)=>{SelectUsername(e)}}  type="checkbox" value="" id="flexCheckIndeterminate"/> &nbsp;Select By Username ?</span>
+        <span className="badge rounded-pill bg-success me-1 normalLine"> &nbsp;<input checked={usname} onChange={(e)=>{SelectUsername(e)}}  type="checkbox" value="" id="flexCheckIndeterminate"/> &nbsp;Select By Username ?</span>
         
-        <div id="usnameinputbox" className='mt-3 d-none'>
+        <div id="usnameinputbox" className='mt-3 d-none againAnime'>
             <div className='row row-cols-1 row-cols-md-6'>
             <div className='col col-md-6'>
             <input onChange={(e)=>{setSearchText(e.target.value)}} type="text" class="form-control bgsearch" placeholder="Search By Username ..." aria-label="Search Bar" aria-describedby="button-addon2" />
@@ -77,14 +92,16 @@ function Category() {
             
         </div>
 
-        </div>
+        </motion.div>
+        </AnimatePresence>
 
 
-        <div id='tagBox' className='mx-auto mt-4 mb-2 ps-md-2' style={{minWidth: '95%', maxWidth: '95%'}}>
+        <AnimatePresence>
+        <motion.div id='tagBox' className='mx-auto mt-4 mb-2 ps-md-2' style={{minWidth: '95%', maxWidth: '95%'}} ref={scope2}>
         {/* if anyone want to search with username */}
-        <span className="badge rounded-pill bg-success me-1"> &nbsp;<input checked={tagbox} onChange={(e)=>{SelectTagbox(e)}} type="checkbox" value="anime" id="flexCheckIndeterminate"/> &nbsp;See All Categories ?</span>
+        <span className="badge rounded-pill bg-success me-1 normalLine"> &nbsp;<input checked={tagbox} onChange={(e)=>{SelectTagbox(e)}} type="checkbox" value="anime" id="flexCheckIndeterminate"/> &nbsp;See All Categories ?</span>
         
-        <div id="tagLinkBox" className='mt-3'>
+        <div id="tagLinkBox" className='mt-3 secondAnime normalLine'>
         <Link to={'/searchResultTagType/'+'anime'} className="badge rounded-pill bg-success me-1 hoverdes mb-2" type="button" id="button-addon2"> Anime <KeyboardDoubleArrowRightIcon fontSize='small'/></Link>
         <Link to={'/searchResultTagType/'+'cartoon'} className="badge rounded-pill bg-success me-1 hoverdes mb-2" type="button" id="button-addon2"> Cartoon <KeyboardDoubleArrowRightIcon fontSize='small'/></Link>
         <Link to={'/searchResultTagType/'+'movie'} className="badge rounded-pill bg-success me-1 hoverdes mb-2" type="button" id="button-addon2"> Movie <KeyboardDoubleArrowRightIcon fontSize='small'/></Link>
@@ -125,14 +142,15 @@ function Category() {
         <Link to={'/searchResultTagType/'+'relegious'} className="badge rounded-pill bg-success me-1 hoverdes mb-2" type="button" id="button-addon2"> Relegious <KeyboardDoubleArrowRightIcon fontSize='small'/></Link>
         </div>
 
-        </div>
+        </motion.div>
 
+        </AnimatePresence>
 
-        <div className='mx-auto mt-4 d-flex justify-content-center align-items-center' style={{minWidth: '95%', maxWidth: '95%'}}>
+        <motion.div whileHover={{scale:[1.1,1]}} transition={{type:'spring',stiffness:400}} className='mx-auto mt-4 d-flex justify-content-center align-items-center' style={{minWidth: '95%', maxWidth: '95%'}}>
         {/* if anyone want to search with username */}
-        <Link to='/' className='btn btn-sm btn-primary mx-auto mt-4'><ArrowBackIcon /> Go Back</Link>
+        <Link to='/' className='btn btn-sm btn-primary mx-auto mt-4 headLine'><ArrowBackIcon /> Go Back</Link>
         
-        </div>
+        </motion.div>
 
     </div>
     </div>

@@ -192,7 +192,7 @@ function Verify() {
         
 
         <div className="card-body d-flex justify-content-center flex-column">
-        <h5 className="card-title mx-auto">VERIFY ACCOUNT</h5>
+        <h5 className="card-title mx-auto headLine">Verify Account</h5>
 
     
         <Box
@@ -253,12 +253,12 @@ function Verify() {
         
 
 
-        <motion.button whileHover={{scale:1.05}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{verifyOtp(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-3">Verify Account</motion.button>
+        <motion.button whileHover={{scale:1.05}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{verifyOtp(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-3 headLine">Verify Account</motion.button>
         </div>
         </motion.div>
 
-        <sup className='mt-4 linkBtn2'>Don't Have An ID ? .... <Link className='linkBtn2' to='/registration'>Click Here</Link><br></br></sup>
-        <sup className='mt-4 linkBtn2'>Already Have An ID ? .... <Link className='linkBtn2' to='/login'>Click Here</Link></sup>
+        <sup className='mt-4 linkBtn2 normalLine'>Don't Have An ID ? .... <Link className='linkBtn2' to='/registration'>Click Here</Link><br></br></sup>
+        <sup className='mt-4 linkBtn2 normalLine'>Already Have An ID ? .... <Link className='linkBtn2' to='/login'>Click Here</Link></sup>
      
         
         </div>

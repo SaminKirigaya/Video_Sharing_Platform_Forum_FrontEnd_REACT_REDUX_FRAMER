@@ -15,6 +15,7 @@ import { usernameFunctions } from '../Store/Store';
 import { userserialFunctions } from '../Store/Store';
 import { motion } from 'framer-motion'
 
+import { callForNotificationApi } from './NotificationApi';
 import axios from 'axios';
 
 
@@ -103,12 +104,24 @@ function Logout() {
 
   // Effects Here
   useEffect(() => {
+
+    const intervalID = setInterval(() => {
+      // Your interval logic here
+      
+          console.log('send api')
+          callForNotificationApi(serial, token, dispatch)
+
+      
+
+      }, 50000);
+
     // Initialize tooltips when the component mounts
     window.$('[data-bs-toggle="tooltip"]').tooltip();
 
     //  to clean up the tooltips when the component unmounts
     return () => {
       window.$('[data-bs-toggle="tooltip"]').tooltip('dispose');
+      clearInterval(intervalID)
     };
   }, []); // [ ] empty mean it will only run once after first render like component did mount :>
 
@@ -118,7 +131,7 @@ function Logout() {
       <div className='container-fluid pages flex-column'>
       <motion.div animate={{x : [-400, 0]}} transition={{duration:0.3, type: 'spring', stiffness: 250}} className="card d-flex justify-content-center cardBd" style={{width: "18rem"}}>
       
-      <div className='mx-auto mt-4'>
+      <motion.div whileHover={{scale:1.1}} transition={{type: 'spring', stiffness: 1000}} className='mx-auto mt-4'>
       <Stack direction="row" spacing={2}>
       
       <Avatar
@@ -127,19 +140,19 @@ function Logout() {
           sx={{ width: 56, height: 56 }}
       />
       </Stack>
-      </div>
+      </motion.div>
       
 
       <div className="card-body d-flex justify-content-center flex-column">
-      <h5 className="card-title mx-auto">Sign Out</h5>
+      <h5 className="card-title mx-auto headLine">Sign Out</h5>
 
       <div className="col col-md-12">
-          <p className='text-center'>You sure you want to log out ??? Once sign out all unsaved data will be cleared ...</p>
+          <p className='text-center normalLine'>You sure you want to log out ??? Once sign out all unsaved data will be cleared ...</p>
       
       </div>
 
 
-      <motion.button whileHover={{scale:1.05}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{signMeOut(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-3">Sign Out</motion.button>
+      <motion.button whileHover={{scale:1.05}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{signMeOut(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-3 headLine">Sign Out</motion.button>
       </div>
       </motion.div>
 

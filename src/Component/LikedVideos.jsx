@@ -17,7 +17,10 @@ import AlarmOnIcon from '@mui/icons-material/AlarmOn';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
+import { motion, useAnimate} from 'framer-motion'
+
 import WelcomeMsg from './WelcomeMsg';
+import { callForNotificationApi } from './NotificationApi';
 
 
 
@@ -53,10 +56,27 @@ function LikedVideos() {
     const token = useSelector((state)=>state.tokenData.token)
     const serial = useSelector((state)=>state.userserialData.serialId)
 
-    
+    const dispatch = useDispatch()
+    const [scope, Animate] = useAnimate()
     
     axios.defaults.headers.common['Authorization'] = 'Bearer '+token // axios auth set
     
+    const container = {
+      hidden: { opacity: 0 },
+      show: {
+        opacity: 1,
+        transition: {
+          staggerChildren: 0.2
+        }
+      }
+    }
+    
+    const item = {
+      hidden: { opacity: 0 },
+      show: { opacity: 1 }
+    }
+    
+
     const generatePlainDate = (unusualDate)=>{ // format utc based date to user date 
       const newDate = new Date(unusualDate)
     
@@ -120,6 +140,7 @@ function LikedVideos() {
     // Handle page change
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+    Animate('.againAnime', {opacity: [0,1]}, {duration:1.3})
   };
 
     //upload this video serial to my later watch list
@@ -161,29 +182,29 @@ function LikedVideos() {
       
 
       return currentData.map((each, index)=>{
-        return  <div className='col d-flex justify-content-center mb-5' style={{width: thewidth}} key={index}> 
-        <div className="card" style={{width: '16rem', height: '16rem'}}>
+        return (<motion.div key={index} variants={item} transition={{duration: 1.3}} className='col d-flex justify-content-center mb-5 againAnime' style={{width: thewidth}}> 
+        <motion.div whileHover={{scale:1.065}} transition={{type: 'spring', stiffness: 300}} className="card" style={{width: '16rem', height: '16rem'}}>
 
         <div style={{maxWidth: '100%', minWidth: '100%', maxHeight: '50%', minHeight:'50%'}}>
         <img style={{width:'100%',height:'100%', objectFit: 'fill', borderTopLeftRadius: '0.3rem', borderTopRightRadius: '0.3rem'}} src={each.thumbnailLink} alt="Card image cap" />
         </div>
         
-        <div className='loveemo d-flex justify-content-center align-items-center' data-bs-toggle="tooltip" data-bs-placement="left" title={genareteLikedAmount(each.likeamount)}>
+        <motion.div whileHover={{scale:1.1}} transition={{type: 'spring', stiffness: 1000}} className='loveemo d-flex justify-content-center align-items-center' data-bs-toggle="tooltip" data-bs-placement="left" title={genareteLikedAmount(each.likeamount)}>
         <FavoriteIcon />
-        </div>
+        </motion.div>
 
-        <div className='loveemo2 d-flex justify-content-center align-items-center'  data-bs-toggle="tooltip" data-bs-placement="left" title={genareteDisLikedAmount(each.dislikedamount)}>
+        <motion.div whileHover={{scale:1.1}} transition={{type: 'spring', stiffness: 1000}} className='loveemo2 d-flex justify-content-center align-items-center'  data-bs-toggle="tooltip" data-bs-placement="left" title={genareteDisLikedAmount(each.dislikedamount)}>
         <HeartBrokenIcon />
-        </div>
+        </motion.div>
 
-        <div className='loveemo3 d-flex justify-content-center align-items-center' onClick={(e)=>{addThisToWatchlist(e, each._id)}}>
+        <motion.div whileHover={{scale:1.1}} transition={{type: 'spring', stiffness: 1000}} className='loveemo3 d-flex justify-content-center align-items-center' onClick={(e)=>{addThisToWatchlist(e, each._id)}}>
         <AlarmOnIcon />
-        </div>
+        </motion.div>
 
         <Link to={"/seeServerThisVideo/"+each._id}>
-        <div className='loveemo4 d-flex justify-content-center align-items-center'>
+        <motion.div whileHover={{scale:1.1}} transition={{type: 'spring', stiffness: 1000}} className='loveemo4 d-flex justify-content-center align-items-center'>
         <PlayArrowIcon fontSize='large'/>
-        </div>
+        </motion.div>
         </Link>
 
         <div className="card-body" style={{backgroundColor: '#c0ff1d'}}>
@@ -194,13 +215,13 @@ function LikedVideos() {
               src={each.playerAvatar}
               sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
           />
-          </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{each.username}<p style={{fontSize: '0.6rem'}}>Uploaded At : {generatePlainDate(each.uploadingDate)}</p></span></h5>
+          </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername headLine'>{each.username}<p style={{fontSize: '0.6rem',fontFamily: 'PT Serif'}}>Uploaded At : {generatePlainDate(each.uploadingDate)}</p></span></h5>
           
-          <p className="card-text smollTitle">{makeItSmoll(each.title)}</p>
+          <p className="card-text smollTitle normalLine">{makeItSmoll(each.title)}</p>
           
         </div>
-        </div>
-        </div>
+        </motion.div>
+        </motion.div>)
       })
     }
   
@@ -224,6 +245,16 @@ function LikedVideos() {
     // Effects Here
     useEffect(() => {
 
+      const intervalID = setInterval(() => {
+        // Your interval logic here
+        
+            console.log('send api')
+            callForNotificationApi(serial, token, dispatch)
+  
+        
+  
+        }, 50000);
+
       if(window.innerWidth>710 && window.innerWidth<800){
         setWidth('13rem')
       }else if(window.innerWidth>810 && window.innerWidth<900){
@@ -244,6 +275,7 @@ function LikedVideos() {
         //  to clean up the tooltips when the component unmounts
         return () => {
           window.$('[data-bs-toggle="tooltip"]').tooltip('dispose');
+          clearInterval(intervalID)
         };
       }, []); // [ ] empty mean it will only run once after first render like component did mount :>
  
@@ -267,16 +299,18 @@ function LikedVideos() {
         <WelcomeMsg/>
         <SearchBar />
 
-        <h5 className='mx-auto text-center mt-4 mb-4 welcomeTxt'>Liked Videos ...</h5>
+        <h5 className='mx-auto text-center mt-4 mb-4 welcomeTxt headLine'>Liked Videos ...</h5>
 
-        <div className='row row-cols-1 row-cols-md-4 mb-5 d-flex justify-content-center p-3'>
+        <motion.div ref={scope} variants={container} initial="hidden" animate="show" className='row row-cols-1 row-cols-md-4 mb-5 d-flex justify-content-center p-3'>
 
-          {oldVideos ? showAllOldVideosInCard() : <div className='d-flex mx-auto w-100 justify-content-center'><p className='mx-auto fontcol'>It Seems You Have Not Reacted Love In Any Videos So Far ... 😖</p></div>}
-          {oldVideos.length<1 ? <div className='d-flex mx-auto w-100 justify-content-center'><p className='mx-auto fontcol'>Some Error Occured Or It Seems You Have Not Reacted Love In Any Videos So Far ... 😖</p></div>:null}
+          
+          {oldVideos ? showAllOldVideosInCard() : <div className='d-flex mx-auto w-100 justify-content-center'><p className='mx-auto fontcol normalLine'>It Seems You Have Not Reacted Love In Any Videos So Far ... 😖</p></div>}
+      
+          {oldVideos.length<1 ? <div className='d-flex mx-auto w-100 justify-content-center'><p className='mx-auto fontcol normalLine'>Some Error Occured Or It Seems You Have Not Reacted Love In Any Videos So Far ... 😖</p></div>:null}
 
 
 
-        </div>
+        </motion.div>
 
 
         <Pagination
@@ -285,7 +319,7 @@ function LikedVideos() {
         totalItemsCount={oldVideos.length}
         pageRangeDisplayed={5}
         onChange={handlePageChange}
-        itemClass="page-item"
+        itemClass="mb-5 page-item"
         linkClass="page-link mx-auto"
         innerClass="pagination mx-auto text-center"
 

@@ -363,12 +363,12 @@ function Regstration() {
         
 
         <div className="card-body d-flex justify-content-center flex-column">
-        <h5 className="card-title mx-auto">SIGN UP</h5>
+        <h5 className="card-title mx-auto headLine">Sign Up</h5>
 
     
         <motion.div variants={container} initial="hidden" animate="show" className="row row-cols-1 row-cols-md-2 g-2 mx-auto mt-3">
-            <div className="col col-md-12">
-                <sup>It may take few seconds to send you the reply message and otp after clicking sign up in order to verify everything. So, please don't panic and kindly wait few seconds.</sup>
+            <div className="col col-md-12 normalLine">
+                <sup className='normalLine'>It may take few seconds to send you the reply message and otp after clicking sign up in order to verify everything. So, please don't panic and kindly wait few seconds.</sup>
             
             </div>
 
@@ -432,13 +432,13 @@ function Regstration() {
 
             <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-12 mx-auto">
             
-            <label for="profImage"  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image of jpg or jpeg format less than 1 MB ... Without jpeg or jpg it won't work."><AddPhotoAlternateIcon /> Add Profile Image</label>
+            <label for="profImage" className='normalLine'  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image of jpg or jpeg format less than 1 MB ... Without jpeg or jpg it won't work."><AddPhotoAlternateIcon /> Add Profile Image</label>
             <motion.input whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}} onChange={(e)=>{setProfileImage(e)}} id="profImage" type="file" className="form-control"  autoComplete='none' accept=".jpg, .jpeg"/>
             </motion.div>
 
             <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-12 mx-auto">
             
-            <label for="coverImage"  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image at least 1024px X 680 px which is clear ... Remember image must be jpg or jpeg format."><AddPhotoAlternateIcon /> Add Cover Image</label>
+            <label for="coverImage" className='normalLine' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image at least 1024px X 680 px which is clear ... Remember image must be jpg or jpeg format."><AddPhotoAlternateIcon /> Add Cover Image</label>
             <motion.input whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}} onChange={(e)=>{setCoverImage(e)}} id="coverImage" type="file" className="form-control" autoComplete='none' accept=".jpg, .jpeg"/>
             </motion.div>
 
@@ -457,12 +457,12 @@ function Regstration() {
         
 
 
-        <motion.button whileHover={{scale:1.05}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{signMeUp(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-4">Sign Up</motion.button>
+        <motion.button whileHover={{scale:1.05}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{signMeUp(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-4 headLine">Sign Up</motion.button>
         </div>
         </motion.div>
 
-        <sup className='mt-4 linkBtn2'>Already Have ID ? .... <Link className='linkBtn2' to='/login'>Click Here</Link><br></br></sup>
-        <sup className='mt-4 linkBtn2'>Forgot Password ? .... <Link className='linkBtn2' to='/forgotPass'>Click Here</Link></sup>
+        <sup className='mt-4 linkBtn2 normalLine'>Already Have ID ? .... <Link className='linkBtn2' to='/login'>Click Here</Link><br></br></sup>
+        <sup className='mt-4 linkBtn2 normalLine'>Forgot Password ? .... <Link className='linkBtn2' to='/forgotPass'>Click Here</Link></sup>
     
     </motion.div>
 

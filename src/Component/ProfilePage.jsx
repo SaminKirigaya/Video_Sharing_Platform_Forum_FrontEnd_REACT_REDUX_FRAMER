@@ -9,6 +9,11 @@ import passChange from '../Asset/Images/passchange.jpg'
 import deleteIcon from '../Asset/Images/deleteAccount.jpg'
 
 import WelcomeMsg from './WelcomeMsg';
+import {motion} from 'framer-motion'
+import { notifyFunctions }  from '../Store/Store';
+import { callForNotificationApi } from './NotificationApi';
+
+
 
 function generateSpace(){
   var space = ' '
@@ -24,11 +29,27 @@ function ProfilePage() {
   const [FirstJust, setFirstJust] = useState('')
   const [SecondJust, setSecondJust] = useState('')
   const [ThirdJust, setThirdJust] = useState('')
+  const token = useSelector((state)=>state.tokenData.token)
+  const serial = useSelector((state)=>state.userserialData.serialId)
+  const dispatch = useDispatch()
 
+  axios.defaults.headers.common['Authorization'] = 'Bearer '+token
 
 
   // Effects Here
   useEffect(() => {
+
+      const intervalID = setInterval(() => {
+      // Your interval logic here
+      
+          console.log('send api')
+          callForNotificationApi(serial, token, dispatch)
+
+      
+
+      }, 50000);
+
+
     if(window.innerWidth>750){
       setFirstJust('end')
       setSecondJust('start')
@@ -50,6 +71,7 @@ function ProfilePage() {
     //  to clean up the tooltips when the component unmounts
     return () => {
       window.$('[data-bs-toggle="tooltip"]').tooltip('dispose');
+      clearInterval(intervalID)
     };
   }, []); // [ ] empty mean it will only run once after first render like component did mount :>
 
@@ -64,12 +86,12 @@ function ProfilePage() {
 
             <div className='row row-cols-1 row-cols-md-2 mb-5'>
 
-              <div className='col d-flex' style={{justifyContent: FirstJust}}>
+              <motion.div animate={{x:[-1000,0]}} transition={{type:'spring'}}  className='col d-flex' style={{justifyContent: FirstJust}}>
 
-              <div className="card mb-3 bordcol" style={{maxWidth: BigDisp}}>
-              <div className="row g-0">
+              <motion.div whileHover={{backgroundColor:'#f7f7f7',scale:1.05}} transition={{type:'spring',stiffness:700}} className="card mb-3 bordcol" style={{maxWidth: BigDisp}}>
+              <motion.div className="row g-0">
                 <div className="col-md-4">
-                <div className='mx-auto text-center d-flex justify-content-center align-items-center pt-4'>
+                <motion.div whileHover={{scale:1.1}} transition={{type:'spring', stiffness:800}} className='mx-auto text-center d-flex justify-content-center align-items-center pt-4'>
                 <Stack direction="row" spacing={2}>
         
                 <Avatar
@@ -78,30 +100,30 @@ function ProfilePage() {
                     sx={{ width: 65, height: 65, border: '0.15rem solid #c0ff1d' }}
                 />
                 </Stack>
-                </div>
+                </motion.div>
                 
                 </div>
                 <div className="col-md-8">
                   <div className="card-body">
-                    <h5 className="card-title">Profile Settings</h5>
-                    <p className="card-text">You can always change your profile information in here. Make sure to provide true information. Also, old data can never be turned back.</p>
+                    <h5 className="card-title headLine">Profile Settings</h5>
+                    <p className="card-text normalLine">You can always change your profile information in here. Make sure to provide true information. Also, old data can never be turned back.</p>
                     
                   </div>
                   <div className="card-body bordTop">
                     
-                    <Link className='linkdesGreen' to='/changeProfile'><p className="card-text">Click Here ... </p></Link>
+                    <Link className='linkdesGreen' to='/changeProfile'><p className="card-text headLine">Click Here ... </p></Link>
                     
                   </div>
                 </div>
-              </div>
-              </div>
-              </div>
+              </motion.div>
+              </motion.div>
+              </motion.div>
 
-              <div className='col d-flex' style={{justifyContent: SecondJust}}>
-              <div className="card mb-3 bordcol" style={{maxWidth: BigDisp}}>
+              <motion.div animate={{x:[1000,0]}} transition={{type:'spring'}} className='col d-flex' style={{justifyContent: SecondJust}}>
+              <motion.div whileHover={{backgroundColor:'#f7f7f7',scale:1.05}} transition={{type:'spring',stiffness:700}} className="card mb-3 bordcol" style={{maxWidth: BigDisp}}>
               <div className="row g-0">
                 <div className="col-md-4">
-                <div className='mx-auto text-center d-flex justify-content-center align-items-center pt-4'>
+                <motion.div whileHover={{scale:1.1}} transition={{type:'spring', stiffness:800}} className='mx-auto text-center d-flex justify-content-center align-items-center pt-4'>
                 <Stack direction="row" spacing={2}>
         
                 <Avatar
@@ -110,31 +132,31 @@ function ProfilePage() {
                     sx={{ width: 65, height: 65, border: '0.15rem solid #c0ff1d' }}
                 />
                 </Stack>
-                </div>
+                </motion.div>
                 
                 </div>
                 <div className="col-md-8">
                   <div className="card-body">
-                    <h5 className="card-title">Change Password</h5>
-                    <p className="card-text">Feel unsafe about your password ??? Change in here !!! {generateSpace()}</p>
+                    <h5 className="card-title headLine">Change Password</h5>
+                    <p className="card-text normalLine">Feel unsafe about your password ??? Change in here !!! {generateSpace()}</p>
                     
                   </div>
                   <div className="card-body bordTop">
                     
-                  <Link className='linkdesGreen' to='/changePassword'><p className="card-text">Click Here ... </p></Link>
+                  <Link className='linkdesGreen' to='/changePassword'><p className="card-text headLine">Click Here ... </p></Link>
                     
                   </div>
                 </div>
               </div>
-              </div>
+              </motion.div>
 
-              </div>
+              </motion.div>
 
-              <div className='col d-flex' style={{justifyContent: ThirdJust}}>
-              <div className="card mb-3 bordcol" style={{maxWidth: BigDisp }}>
+              <motion.div animate={{x:[-1000,0]}} transition={{type:'spring'}} className='col d-flex' style={{justifyContent: ThirdJust}}>
+              <motion.div whileHover={{backgroundColor:'#f7f7f7',scale:1.05}} transition={{type:'spring',stiffness:700}} className="card mb-3 bordcol" style={{maxWidth: BigDisp }}>
               <div className="row g-0">
                 <div className="col-md-4">
-                <div className='mx-auto text-center d-flex justify-content-center align-items-center pt-4'>
+                <motion.div whileHover={{scale:1.1}} transition={{type:'spring', stiffness:800}} className='mx-auto text-center d-flex justify-content-center align-items-center pt-4'>
                 <Stack direction="row" spacing={2}>
         
                 <Avatar
@@ -143,30 +165,30 @@ function ProfilePage() {
                     sx={{ width: 65, height: 65, border: '0.15rem solid #c0ff1d' }}
                 />
                 </Stack>
-                </div>
+                </motion.div>
                 
                 </div>
                 <div className="col-md-8">
                   <div className="card-body">
-                    <h5 className="card-title">Delete Account</h5>
-                    <p className="card-text">Already have another account ??? Don't want to keep this account for safety issues ??? You can delete anytime in here ...</p>
+                    <h5 className="card-title headLine">Delete Account</h5>
+                    <p className="card-text normalLine">Already have another account ??? Don't want to keep this account for safety issues ??? You can delete anytime in here ...</p>
                     
                   </div>
                   <div className="card-body bordTop">
                     
-                  <Link className='linkdesGreen' to='/deleteAccount'><p className="card-text">Click Here ... </p></Link>
+                  <Link className='linkdesGreen' to='/deleteAccount'><p className="card-text headLine">Click Here ... </p></Link>
                     
                   </div>
                 </div>
               </div>
-              </div>
+              </motion.div>
               
-              </div>
+              </motion.div>
               
 
             </div>
 
-
+        
 
         </div>
         </div>

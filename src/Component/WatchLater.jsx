@@ -20,6 +20,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import WelcomeMsg from './WelcomeMsg';
 
 import { motion, useAnimate } from 'framer-motion'
+import { callForNotificationApi } from './NotificationApi';
 
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -53,6 +54,7 @@ function WatchLater() {
 
     const token = useSelector((state)=>state.tokenData.token)
     const serial = useSelector((state)=>state.userserialData.serialId)
+    const dispatch = useDispatch()
 
     const [scope, Animate] = useAnimate()
 
@@ -213,9 +215,9 @@ function WatchLater() {
               src={each.playerAvatar}
               sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
           />
-          </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{each.username}<p style={{fontSize: '0.6rem'}}>Uploaded At : {generatePlainDate(each.uploadingDate)}</p></span></h5>
+          </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername headLine'>{each.username}<p style={{fontSize: '0.6rem',fontFamily: 'PT Serif'}}>Uploaded At : {generatePlainDate(each.uploadingDate)}</p></span></h5>
           
-          <p className="card-text smollTitle">{makeItSmoll(each.title)}</p>
+          <p className="card-text smollTitle normalLine">{makeItSmoll(each.title)}</p>
           
         </div>
         </motion.div>
@@ -243,6 +245,14 @@ function WatchLater() {
     // Effects Here
     useEffect(() => {
 
+      const intervalID = setInterval(() => {
+        // Your interval logic here
+        
+            console.log('send api')
+            callForNotificationApi(serial, token, dispatch)
+  
+        }, 50000);
+
       if(window.innerWidth>710 && window.innerWidth<800){
         setWidth('13rem')
       }else if(window.innerWidth>810 && window.innerWidth<900){
@@ -263,6 +273,7 @@ function WatchLater() {
         //  to clean up the tooltips when the component unmounts
         return () => {
           window.$('[data-bs-toggle="tooltip"]').tooltip('dispose');
+          clearInterval(intervalID)
         };
       }, []); // [ ] empty mean it will only run once after first render like component did mount :>
  
@@ -286,12 +297,12 @@ function WatchLater() {
         <WelcomeMsg/>
         <SearchBar />
 
-        <h5 className='mx-auto text-center mt-4 mb-4 welcomeTxt'>Bookmarked Videos ...</h5>
+        <h5 className='mx-auto text-center mt-4 mb-4 welcomeTxt headLine'>Bookmarked Videos ...</h5>
 
         <motion.div variants={container} initial="hidden" animate="show" className='row row-cols-1 row-cols-md-4 mb-5 d-flex justify-content-center p-3' ref={scope}>
 
-          {oldVideos ? showAllOldVideosInCard() : <div className='d-flex mx-auto w-100 justify-content-center'><p className='mx-auto fontcol'>It Seems You Have No Video In Watch List... 😖</p></div>}
-          {oldVideos.length<1 ? <div className='d-flex mx-auto w-100 justify-content-center'><p className='mx-auto fontcol'>Some Error Occured Or It Seems You Have No Video In Watch List ... 😖</p></div>:null}
+          {oldVideos ? showAllOldVideosInCard() : <div className='d-flex mx-auto w-100 justify-content-center'><p className='mx-auto fontcol normalLine'>It Seems You Have No Video In Watch List... 😖</p></div>}
+          {oldVideos.length<1 ? <div className='d-flex mx-auto w-100 justify-content-center'><p className='mx-auto fontcol normalLine'>Some Error Occured Or It Seems You Have No Video In Watch List ... 😖</p></div>:null}
 
 
 
@@ -304,7 +315,7 @@ function WatchLater() {
         totalItemsCount={oldVideos.length}
         pageRangeDisplayed={5}
         onChange={handlePageChange}
-        itemClass="page-item"
+        itemClass="mb-5 page-item"
         linkClass="page-link mx-auto"
         innerClass="pagination mx-auto text-center"
 

@@ -27,6 +27,9 @@ const Category = React.lazy(()=>import('../Component/Category'));
 const SearchBasedUsername = React.lazy(()=>import('../Component/SearchBasedUsername'));
 const SearchBasedOnTag = React.lazy(()=>import('../Component/SearchBasedOnTag'));
 const Notification = React.lazy(()=>import('../Component/Notification'));
+const GlowIcon = React.lazy(()=>import('../Component/GlowIcon'));
+const TermsCondition = React.lazy(()=>import('../Component/TermsCondition'))
+
 
 function loadingEffect(){
     return  <div className='container-fluid loader d-flex justify-content-center align-items-center'>
@@ -46,6 +49,10 @@ function Header() {
 
         <div className='zabove'>
             <Nav />
+        </div>
+
+        <div>
+            <GlowIcon />
         </div>
 
         <div className='zbelow'>
@@ -71,6 +78,8 @@ function Header() {
                     <Route path='/searchResultUsername/:searchText' Component={()=>(<SearchBasedUsername />)} />
                     <Route path='/searchResultTagType/:searchText' Component={()=>(<SearchBasedOnTag />)} />
                     <Route path='/goNotificationPage' Component={()=>(<Notification />)} />
+                    <Route path='/termsandcondition' Component={()=>(<TermsCondition />)} />
+
                 </Routes>
             </Suspense>
         </div>

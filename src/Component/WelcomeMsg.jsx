@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react'
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-
+import { motion } from 'framer-motion'
 import { useSelector } from 'react-redux';
 
 
@@ -27,11 +27,14 @@ function WelcomeMsg() {
   return (
     <Fragment>
 
-    <div className='coverHolder d-flex justify-content-center'>
+    
+    <motion.div animate={{x: [-1000,0]}} transition={{type: 'spring'}} className='coverHolder d-flex justify-content-center'>
         <img className='coverImage' src={coverImg} />
-    </div>
+    </motion.div>
+    
 
-    <div className='d-flex mx-auto posAvatar'>
+    
+    <motion.div animate={{x: [-1000,0]}} transition={{type: 'spring'}} className='d-flex mx-auto posAvatar'>
         <Stack direction="row" spacing={2}>
 
         <Avatar
@@ -40,11 +43,12 @@ function WelcomeMsg() {
             sx={{ width: 75, height: 75, border: '0.15rem solid #c0ff1d' }}
         />
         </Stack>
-    </div>
+    </motion.div>
+    
 
-    <div className='mt-2 mb-3'>
-        <p className='text-center welcomeTxt'>Welcome Home, <b>{userName}</b></p>
-    </div>
+    <motion.div animate={{opacity: [0,1]}} transition={{duration:1.5}} className='mt-2 mb-3'>
+        <p className='text-center welcomeTxt headLine'>Welcome Home, <b>{userName}</b></p>
+    </motion.div>
 
     </Fragment>
   )

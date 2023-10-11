@@ -170,7 +170,7 @@ function ForgotPass() {
       
 
       <div className="card-body d-flex justify-content-center flex-column">
-      <h5 className="card-title mx-auto">FORGOT PASSWORD</h5>
+      <h5 className="card-title mx-auto headLine">Forgot Password</h5>
 
 
       <Box
@@ -197,12 +197,12 @@ function ForgotPass() {
       </Box>
       
 
-      <motion.button whileHover={{scale:1.05}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{sendTheMail(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-3">Get New Pass</motion.button>
+      <motion.button whileHover={{scale:1.05}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{sendTheMail(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-3 headLine">Get New Pass</motion.button>
       </div>
       </motion.div>
 
-      <sup className='mt-4 linkBtn2'>Don't Have An ID ? .... <Link className='linkBtn2' to='/registration'>Click Here</Link><br></br></sup>
-      <sup className='mt-4 linkBtn2'>Already Have An ID ? .... <Link className='linkBtn2' to='/login'>Click Here</Link></sup>
+      <sup className='mt-4 linkBtn2 normalLine'>Don't Have An ID ? .... <Link className='linkBtn2' to='/registration'>Click Here</Link><br></br></sup>
+      <sup className='mt-4 linkBtn2 normalLine'>Already Have An ID ? .... <Link className='linkBtn2' to='/login'>Click Here</Link></sup>
   
       {nowGoBack ? <Navigate to='/login' replace /> : null}
     </div>

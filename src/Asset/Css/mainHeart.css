@@ -1,4 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Cormorant+Infant&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif&display=swap');
+
 @media (min-width: 320px) and (max-width: 374px){
+
+    .onmostTop{
+        z-index: 500;
+        position: absolute;
+        top:90%;
+        left:85%;
+        display:flex;
+        min-width:9.5vw;
+        min-height: 9.5vw;
+        border-radius: 50%;
+        background: linear-gradient( 90deg,rgb(0, 238, 255),rgb(0, 60, 255),rgb(197, 6, 255));
+        animation: pewpew 1.8s ease-in-out infinite;
+        filter: blur(200);
+    }
+
+    .insideRound{
+        z-index: 900;
+        position: absolute;
+        top:90.24%;
+        left:85.47%;
+        display:flex;
+        min-width:8.5vw;
+        min-height: 8.5vw;
+        border-radius: 50%;
+        background-color: white;
+    }
     
 .allComments{
     position: relative;
@@ -211,6 +240,17 @@
     scrollbar-width: none;  /* Firefox */
     
     }
+
+    .coverHolder2{
+
+        min-width: 83vw !important;
+        max-width : 83vw !important;
+        min-height : 10vh !important;
+       
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    
+    }
     
     .avatarArea{
         min-width: 100%;
@@ -257,6 +297,31 @@
 
 
 @media (min-width: 375px) and (max-width: 389px){
+    .onmostTop{
+        z-index: 500;
+        position: absolute;
+        top:90%;
+        left:85%;
+        display:flex;
+        min-width:9.5vw;
+        min-height: 9.5vw;
+        border-radius: 50%;
+        background: linear-gradient( 90deg,rgb(0, 238, 255),rgb(0, 60, 255),rgb(197, 6, 255));
+        animation: pewpew 1.8s ease-in-out infinite;
+        filter: blur(200);
+    }
+
+    .insideRound{
+        z-index: 900;
+        position: absolute;
+        top:90.2%;
+        left:85.47%;
+        display:flex;
+        min-width:8.5vw;
+        min-height: 8.5vw;
+        border-radius: 50%;
+        background-color: white;
+    }
         
 .allComments{
     position: relative;
@@ -465,6 +530,16 @@
     
     }
     
+    .coverHolder2{
+
+        min-width: 83vw !important;
+        max-width : 83vw !important;
+        min-height : 10vh !important;
+       
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    
+    }
 
     .avatarArea{
         min-width: 100%;
@@ -510,6 +585,32 @@
 
 
 @media (min-width: 390px) and (max-width: 411px){
+    .onmostTop{
+        z-index: 500;
+        position: absolute;
+        top:90%;
+        left:85%;
+        display:flex;
+        min-width:9.5vw;
+        min-height: 9.5vw;
+        border-radius: 50%;
+        background: linear-gradient( 90deg,rgb(0, 238, 255),rgb(0, 60, 255),rgb(197, 6, 255));
+        animation: pewpew 1.8s ease-in-out infinite;
+        filter: blur(200);
+    }
+
+    .insideRound{
+        z-index: 900;
+        position: absolute;
+        top:90.24%;
+        left:85.55%;
+        display:flex;
+        min-width:8.5vw;
+        min-height: 8.5vw;
+        border-radius: 50%;
+        background-color: white;
+    }
+    
     .allComments{
         position: relative;
         top: -7%;
@@ -712,6 +813,17 @@
     
     }
     
+    .coverHolder2{
+
+        min-width: 83vw !important;
+        max-width : 83vw !important;
+        min-height : 10vh !important;
+      
+        -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    
+    }
+
     .avatarArea{
         min-width: 100%;
         min-height: 4.5vh;
@@ -758,6 +870,31 @@
 
 
 @media (min-width: 412px) and (max-width: 539px){
+    .onmostTop{
+        z-index: 500;
+        position: absolute;
+        top:90%;
+        left:85%;
+        display:flex;
+        min-width:9.5vw;
+        min-height: 9.5vw;
+        border-radius: 50%;
+        background: linear-gradient( 90deg,rgb(0, 238, 255),rgb(0, 60, 255),rgb(197, 6, 255));
+        animation: pewpew 1.8s ease-in-out infinite;
+        filter: blur(200);
+    }
+    
+    .insideRound{
+        z-index: 900;
+        position: absolute;
+        top:90.24%;
+        left:85.55%;
+        display:flex;
+        min-width:8.5vw;
+        min-height: 8.5vw;
+        border-radius: 50%;
+        background-color: white;
+    }
     .allComments{
         position: relative;
         top: -7%;
@@ -962,6 +1099,17 @@
     
     }
 
+    .coverHolder2{
+
+        min-width: 83vw !important;
+        max-width : 83vw !important;
+        min-height : 10vh !important;
+      
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    
+    } 
+
     .adjustheight{
         padding: 1rem;
         height: 100vh !important;
@@ -1020,6 +1168,32 @@
 
 
 @media (min-width: 540px) and (max-width: 767px){
+    .onmostTop{
+        z-index: 500;
+        position: absolute;
+        top:90%;
+        left:88%;
+        display:flex;
+        min-width: 6.5vw;
+        min-height: 6.5vw;
+        border-radius: 50%;
+        background: linear-gradient( 90deg,rgb(0, 238, 255),rgb(0, 60, 255),rgb(197, 6, 255));
+        animation: pewpew 1.8s ease-in-out infinite;
+        filter: blur(200);
+    }
+
+    .insideRound{
+        z-index: 900;
+        position: absolute;
+        top:90.35%;
+        left:88.43%;
+        display:flex;
+        min-width:5.5vw;
+        min-height: 5.5vw;
+        border-radius: 50%;
+        background-color: white;
+    }
+    
     .imageSamevid{
         object-fit: fill;  min-width: 28vw; max-height: 21vw; opacity:0.5; 
         border-radius: 0.4rem;
@@ -1239,6 +1413,17 @@
     scrollbar-width: none;  /* Firefox */
     
     }
+
+    .coverHolder2{
+
+        min-width: 88vw !important;
+        max-width : 88vw !important;
+        min-height : 10vh !important;
+       
+        -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    
+    }
     
     .avatarArea{
         min-width: 100%;
@@ -1286,6 +1471,33 @@
 
 
 @media (min-width: 768px) and (max-width: 819px){
+    .onmostTop{
+        z-index: 500;
+        position: absolute;
+        top:90%;
+        left:88%;
+        display:flex;
+        min-width: 6.5vw;
+        min-height: 6.5vw;
+        border-radius: 50%;
+        background: linear-gradient( 90deg,rgb(0, 238, 255),rgb(0, 60, 255),rgb(197, 6, 255));
+        animation: pewpew 1.8s ease-in-out infinite;
+        filter: blur(200);
+    }
+
+    .insideRound{
+        z-index: 900;
+        position: absolute;
+        top:90.36%;
+        left:88.48%;
+        display:flex;
+        min-width:5.5vw;
+        min-height: 5.5vw;
+        border-radius: 50%;
+        background-color: white;
+    }
+
+    
     .imageSamevid{
         object-fit: fill;  min-width: 28vw; max-height: 14vw; opacity:0.5; 
         border-radius: 0.4rem;
@@ -1504,6 +1716,17 @@
     
     }
 
+    .coverHolder2{
+
+        min-width: 87vw !important;
+        max-width : 87vw !important;
+        min-height : 10vh !important;
+        
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    
+    }
+
     .adjustheight{
         padding: 1rem;
         height: 100vh !important;
@@ -1563,6 +1786,32 @@
 
 
  @media (min-width: 820px) and (max-width: 911px){
+    .onmostTop{
+        z-index: 500;
+        position: absolute;
+        top:91%;
+        left:88%;
+        display:flex;
+        min-width:6.5vw;
+        min-height: 6.5vw;
+        border-radius: 50%;
+        background: linear-gradient( 90deg,rgb(0, 238, 255),rgb(0, 60, 255),rgb(197, 6, 255));
+        animation: pewpew 1.8s ease-in-out infinite;
+        filter: blur(200);
+    }
+
+    .insideRound{
+        z-index: 900;
+        position: absolute;
+        top:91.36%;
+        left:88.48%;
+        display:flex;
+        min-width:5.5vw;
+        min-height: 5.5vw;
+        border-radius: 50%;
+        background-color: white;
+    }
+    
     .imageSamevid{
         object-fit: fill;  min-width: 28vw; max-height: 14vw; opacity:0.5; 
         border-radius: 0.4rem;
@@ -1782,6 +2031,17 @@
     
     }
 
+    .coverHolder2{
+
+        min-width: 87vw !important;
+        max-width : 87vw !important;
+        min-height : 10vh !important;
+        
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    
+    }
+
     .adjustheight{
         padding: 1rem;
         height: 100vh !important;
@@ -1840,6 +2100,32 @@
 
 
 @media (min-width: 912px) and (max-width: 1023px){
+    .onmostTop{
+        z-index: 500;
+        position: absolute;
+        top:91%;
+        left:89%;
+        display:flex;
+        min-width:6.5vw;
+        min-height: 6.5vw;
+        border-radius: 50%;
+        background: linear-gradient( 90deg,rgb(0, 238, 255),rgb(0, 60, 255),rgb(197, 6, 255));
+        animation: pewpew 1.8s ease-in-out infinite;
+        filter: blur(200);
+    }
+
+    .insideRound{
+        z-index: 900;
+        position: absolute;
+        top:91.33%;
+        left:89.53%;
+        display:flex;
+        min-width:5.5vw;
+        min-height: 5.5vw;
+        border-radius: 50%;
+        background-color: white;
+    }
+    
     .imageSamevid{
         object-fit: fill;  min-width: 28vw; max-height: 14vw; opacity:0.5; 
         border-radius: 0.4rem;
@@ -2111,6 +2397,32 @@
 
 
 @media (min-width: 1024px) and (max-width: 1267px){
+    .onmostTop{
+        z-index: 500;
+        position: absolute;
+        top:86%;
+        left:92%;
+        display:flex;
+        min-width:4.5vw;
+        min-height: 4.5vw;
+        border-radius: 50%;
+        background: linear-gradient( 90deg,rgb(0, 238, 255),rgb(0, 60, 255),rgb(197, 6, 255));
+        animation: pewpew 1.8s ease-in-out infinite;
+        filter: blur(200);
+    }
+
+    .insideRound{
+        z-index: 900;
+        position: absolute;
+        top:86.9%;
+        left:92.5%;
+        display:flex;
+        min-width: 3.5vw;
+        min-height: 3.5vw;
+        border-radius: 50%;
+        background-color: white;
+    }
+    
     .imageSamevid{
         object-fit: fill;  min-width: 28vw; max-height: 9vw; opacity:0.5; 
         border-radius: 0.4rem;
@@ -2376,6 +2688,33 @@
 
 
 @media (min-width: 1268px) and (max-width: 1365px){
+    .onmostTop{
+        z-index: 500;
+        position: absolute;
+        top:86%;
+        left:92%;
+        display:flex;
+        min-width:3.5vw;
+        min-height: 3.5vw;
+        border-radius: 50%;
+        background: linear-gradient( 90deg,rgb(0, 238, 255),rgb(0, 60, 255),rgb(197, 6, 255));
+        animation: pewpew 1.8s ease-in-out infinite;
+        filter: blur(200);
+    }
+
+    .insideRound{
+        z-index: 900;
+        position: absolute;
+        top:86.5%;
+        left:92.3%;
+        display:flex;
+        min-width: 2.9vw;
+        min-height: 2.9vw;
+        border-radius: 50%;
+        background-color: white;
+    }
+    
+
     .imageSamevid{
         object-fit: fill;  min-width: 29vw; max-height: 8vw; opacity:0.7; 
         border-radius: 0.4rem;
@@ -2642,6 +2981,33 @@
 
 
 @media (min-width: 1366px) and (max-width: 1919px){
+    .onmostTop{
+        z-index: 500;
+        position: absolute;
+        top:86%;
+        left:92%;
+        display:flex;
+        min-width:3.5vw;
+        min-height: 3.5vw;
+        border-radius: 50%;
+        background: linear-gradient( 90deg,rgb(0, 238, 255),rgb(0, 60, 255),rgb(197, 6, 255));
+        animation: pewpew 1.8s ease-in-out infinite;
+        filter: blur(200);
+    }
+
+    .insideRound{
+        z-index: 900;
+        position: absolute;
+        top:86.6%;
+        left:92.3%;
+        display:flex;
+        min-width: 2.9vw;
+        min-height: 2.9vw;
+        border-radius: 50%;
+        background-color: white;
+    }
+    
+    
     .imageSamevid{
         object-fit: fill;  min-width: 29vw; max-height: 8vw; opacity:0.5; 
         border-radius: 0.4rem;
@@ -2908,6 +3274,32 @@
 
 
 @media (min-width: 1920px) and (max-width: 3840px){
+    .onmostTop{
+        z-index: 500;
+        position: absolute;
+        top:86%;
+        left:92%;
+        display:flex;
+        min-width:3.5vw;
+        min-height: 3.5vw;
+        border-radius: 50%;
+        background: linear-gradient( 90deg,rgb(0, 238, 255),rgb(0, 60, 255),rgb(197, 6, 255));
+        animation: pewpew 1.8s ease-in-out infinite;
+        filter: blur(200);
+    }
+
+    .insideRound{
+        z-index: 900;
+        position: absolute;
+        top:86.6%;
+        left:92.3%;
+        display:flex;
+        min-width: 2.9vw;
+        min-height: 2.9vw;
+        border-radius: 50%;
+        background-color: white;
+    }
+    
     .imageSamevid{
         object-fit: fill;  min-width: 29vw; max-height: 8vw; opacity:0.5; 
         border-radius: 0.4rem;
@@ -3266,13 +3658,17 @@
 
 
 input{
+    font-family: 'PT Serif', serif;
     background-color: #c0ff1d !important;
     border-color: #000000a3 !important;
 }
 select{
+    font-family: 'PT Serif', serif;
     background-color: #c0ff1d !important;
     border-color: #000000a3 !important;
 }
+
+
 
 .eye{
     position: relative !important;
@@ -3536,3 +3932,24 @@ select{
 .zbelow{
     z-index: 100;
 }
+
+.headLine{
+    font-family: 'Berkshire Swash', cursive;
+}
+
+.normalLine{
+    font-family: 'PT Serif', serif;
+}
+
+
+
+@keyframes pewpew {
+    0%{
+        filter: hue-rotate(0deg);
+    }
+    100%{
+
+        filter: hue-rotate(360deg);
+    }
+}
+

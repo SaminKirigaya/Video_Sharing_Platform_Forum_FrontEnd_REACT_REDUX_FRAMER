@@ -29,48 +29,22 @@ function Nav() {
     const playerAvatar = useSelector((state) => state.profImgData.proImgPath);
     const notificationAmount = useSelector((state)=> state.notifyData.notifAmount);
     const token = useSelector((state)=>state.tokenData.token)
-    const serial = useSelector((state)=>state.userserialData.serialId)
-    const dispatch = useDispatch()
+    
 
     axios.defaults.headers.common['Authorization'] = 'Bearer '+token
 
-    const callForNotificationApi = async()=>{
-        if(serial && token){
-            try{
-                const   response = await axios({
-                    url : `/getNewNotificationNumber/${serial}`,
-                    method : 'get',
-                })
-
-                if(response.data.message == 'success'){
-                    dispatch(notifyFunctions.setNewNotif(response.data.notificationTotal))
-                }
-
-            }catch(err){
-                throw err
-            }
-        }
-    }
 
     // Effects Here
     useEffect(() => {
         // Initialize tooltips when the component mounts
         window.$('[data-bs-toggle="tooltip"]').tooltip();
     
-        const intervalId = setInterval(() => {
-            // Your interval logic here
-            if(isLogged){
-                callForNotificationApi()
-            }
-            
-
-            }, 50000);
-
+        
 
         //  to clean up the tooltips when the component unmounts
         return () => {
-          window.$('[data-bs-toggle="tooltip"]').tooltip('dispose');
-          clearInterval(intervalId);
+            window.$('[data-bs-toggle="tooltip"]').tooltip('dispose');
+        
         };
       }, []); // [ ] empty mean it will only run once after first render like component did mount :>
  

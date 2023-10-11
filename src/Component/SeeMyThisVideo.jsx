@@ -19,6 +19,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
 import SendIcon from '@mui/icons-material/Send';
 
+import {AnimatePresence, motion, useAnimate} from 'framer-motion'
+import { callForNotificationApi } from './NotificationApi';
+
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
@@ -37,12 +40,13 @@ export default function SeeMyThisVideo() {
       comsReply : []
     })
   
+    const dispatch = useDispatch()
     const [colWidth, setColWidth] = useState('')
 
     
   const [showHideComment, setShowHideComment] = useState(false)
   const [commentReplay, setCommentReplay] = useState('')
-  
+  const [scope,Animate] = useAnimate()
 
     // Redirecting back state
   const [nowGoBack, setNowGoBack] = React.useState(false);
@@ -262,7 +266,7 @@ export default function SeeMyThisVideo() {
       const showAllTags = ()=>{
         if(videoData.tags){
           return videoData.tags.map((each, index)=>{
-            return  <span className="badge rounded-pill bg-warning text-dark me-2" key={index}>{each}&nbsp;&nbsp;&nbsp;<span onClick={(e)=>{delThisTag(e,index)}} className="badge rounded-pill bg-secondary badgeHovcurs">X</span></span>
+            return  <span className="badge rounded-pill bg-warning text-dark me-2 headLine" key={index}>{each}&nbsp;&nbsp;&nbsp;<span onClick={(e)=>{delThisTag(e,index)}} className="badge rounded-pill bg-secondary badgeHovcurs normalLine">X</span></span>
           })
         }
       }
@@ -385,6 +389,7 @@ export default function SeeMyThisVideo() {
         setEventSuccess(true)
 
         setStringComment('')
+        Animate('.againAnime', {opacity: [0,1]}, {duration:1.5})
         document.getElementById('comment').value = ''
       }else{
         setResponseMessage(response.data.message)
@@ -421,6 +426,7 @@ export default function SeeMyThisVideo() {
           setEventSuccess(true)
   
           setCommentReplay('')
+          Animate('.againAnime', {opacity: [0,1]}, {duration:1.5})
           document.getElementById(inputboxId).value = ''
         }else{
           setResponseMessage(response.data.message)
@@ -594,6 +600,7 @@ export default function SeeMyThisVideo() {
 
         if(response.data.message == 'success'){
           setEventSuccess(true)
+          Animate('.againAnime', {opacity: [0,1]}, {duration:1.5})
         }
       }catch(err){
         console.log(err)
@@ -634,8 +641,8 @@ export default function SeeMyThisVideo() {
   const generateEachCommentReplay = (commentData, index)=>{
     
     if(commentData.replay && commentData.replay.length>0){
-      return  commentData.replay.map((each)=>{
-        return    <div className='col col-md-12' style={{whiteSpace : 'pre-line', marginBottom:'2rem'}}>
+      return  commentData.replay.map((each,index)=>{
+        return    <motion.div key={index} whileHover={{scale:1.02}} animate={{opacity:[0,1]}} transition={{type:'spring', stiffness:400}} className='col col-md-12 againAnime' style={{whiteSpace : 'pre-line', marginBottom:'2rem'}}>
         <div className="card ms-auto me-3" style={{width: responsiveReplyBox, border: '0.12rem solid #c0ff1d'}}>
         
     
@@ -648,20 +655,20 @@ export default function SeeMyThisVideo() {
                   src={each.whoGivingImage}
                   sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
               />
-              </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{each.whoGivingUsername}<p style={{fontSize: '0.6rem'}}>Replied At : {generateCommentingTime(each.replayingTime)} </p></span>
+              </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername headLine'>{each.whoGivingUsername}<p style={{fontSize: '0.6rem',fontFamily: 'PT Serif'}}>Replied At : {generateCommentingTime(each.replayingTime)} </p></span>
           </h5>
-          <p className="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem'}}>{each.replay}</p>
+          <p className="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem',fontFamily: 'PT Serif'}}>{each.replay}</p>
           
         </div>
     
         <div  className="card-body d-flex justify-content-start align-items-center">
-        <p><span onClick={(e)=>{sendReplayLove(e, each._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><FavoriteIcon/> {genareteLikedAmount(each.replayLove)}</span> <span onClick={(e)=>{sendReplayDislove(e, each._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><HeartBrokenIcon fontSize='medium'/> {genareteDisLikedAmount(each.replayDislove)}</span> <span onClick={(e)=>{deleteThisReplay(e, each._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Delete <DeleteSweepIcon fontSize='medium'/></span></p>
+        <p><motion.span whileHover={{scale:1.15}} transition={{type:'spring', stiffness:400}} onClick={(e)=>{sendReplayLove(e, each._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><FavoriteIcon/> {genareteLikedAmount(each.replayLove)}</motion.span> <motion.span whileHover={{scale:1.15}} transition={{type:'spring', stiffness:400}} onClick={(e)=>{sendReplayDislove(e, each._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><HeartBrokenIcon fontSize='medium'/> {genareteDisLikedAmount(each.replayDislove)}</motion.span> <motion.span whileHover={{scale:1.15}} transition={{type:'spring', stiffness:400}} onClick={(e)=>{deleteThisReplay(e, each._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Delete <DeleteSweepIcon fontSize='medium'/></motion.span></p>
         </div>
     
     
     
         </div>
-        </div>
+        </motion.div>
 
 
       })  
@@ -672,14 +679,16 @@ export default function SeeMyThisVideo() {
 
   // generating comments 
   const generateAllComments = ()=>{
-    if(videoComs.videoComs.length>1){
-      return  videoComs.videoComs.map((each,index)=>{
-        return    <div style={{display:'flex', flexDirection:'column', minWidth:colWidth, maxWidth:colWidth, justifyContent:'center'}}>
-
     
+    if(videoComs.videoComs.length>1){
+      
+      return  videoComs.videoComs.map((each,index)=>{
+        
+        return <motion.div key={index} layout style={{display:'flex', flexDirection:'column', minWidth:colWidth, maxWidth:colWidth, justifyContent:'center'}} ref={scope}>
 
+  
         {/*card col loop each reply has one card with col */}
-        <div className='col col-md-12' style={{whiteSpace : 'pre-line', marginBottom:'2rem'}}>
+        <motion.div whileHover={{scale:1.02}} animate={{opacity:[0,1]}} transition={{type:'spring', stiffness:400}} className='col col-md-12 againAnime' style={{whiteSpace : 'pre-line', marginBottom:'2rem'}}>
         <div className="card" style={{width: '98.5%', border: '0.12rem solid #c0ff1d'}}>
         
         <div className="card-body">
@@ -691,29 +700,29 @@ export default function SeeMyThisVideo() {
                   src={each.whoGivingImage}
                   sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
               />
-              </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{each.whoGivingUsername}<p style={{fontSize: '0.6rem'}}>Commented At : {generateCommentingTime(each.commentingTime)}</p></span>
+              </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername headLine'>{each.whoGivingUsername}<p style={{fontSize: '0.6rem', fontFamily: 'PT Serif'}}>Commented At : {generateCommentingTime(each.commentingTime)}</p></span>
           </h5>
-          <p className="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem'}}>{each.comment}</p>
+          <p className="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem',fontFamily: 'PT Serif'}}>{each.comment}</p>
           
         </div>
     
         <div  className="card-body d-flex justify-content-start align-items-center">
-        <p><span onClick={(e)=>{sendLoveToComment(e, each._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><FavoriteIcon/> {genareteLikedAmount(each.commentLove)}</span> <span onClick={(e)=>{sendDisloveToComment(e, each._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><HeartBrokenIcon fontSize='medium'/> {genareteDisLikedAmount(each.commentDislove)}</span> <span onClick={(e)=>{showMeReplyArea(e, `inputindexNo${index}replyarea`)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Reply <SendIcon fontSize='medium'/></span> <span onClick={(e)=>{deleteThisComment(e, each._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Delete <DeleteSweepIcon fontSize='medium'/></span> </p>
+        <p><motion.span whileHover={{scale:1.15}} transition={{type:'spring', stiffness:400}}  onClick={(e)=>{sendLoveToComment(e, each._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><FavoriteIcon/> {genareteLikedAmount(each.commentLove)}</motion.span> <motion.span whileHover={{scale:1.15}} transition={{type:'spring', stiffness:400}} onClick={(e)=>{sendDisloveToComment(e, each._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><HeartBrokenIcon fontSize='medium'/> {genareteDisLikedAmount(each.commentDislove)}</motion.span> <motion.span whileHover={{scale:1.15}} transition={{type:'spring', stiffness:400}} onClick={(e)=>{showMeReplyArea(e, `inputindexNo${index}replyarea`)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Reply <SendIcon fontSize='medium'/></motion.span> <motion.span whileHover={{scale:1.15}} transition={{type:'spring', stiffness:400}} onClick={(e)=>{deleteThisComment(e, each._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Delete <DeleteSweepIcon fontSize='medium'/></motion.span> </p>
         </div>
     
     
         {/* hidden input area */}
-        <div id={"inputindexNo"+index+"replyarea"}  className="card-body d-none justify-content-center align-items-center">
+        <motion.div initial={{y:[-10]}} id={"inputindexNo"+index+"replyarea"}  className="card-body d-none justify-content-center align-items-center againAnime">
         
-        <input id={"inputindexNo"+index+"replyarea"+"messagebox"} onChange={(e)=>{setCommentReplay(e.target.value)}} type="text" className="form-control bgsearch" placeholder="Send Reply" aria-label="Send Reply Bar" aria-describedby="button-addon2" />
+        <motion.input id={"inputindexNo"+index+"replyarea"+"messagebox"} onChange={(e)=>{setCommentReplay(e.target.value)}} type="text" className="form-control bgsearch" placeholder="Send Reply" aria-label="Send Reply Bar" aria-describedby="button-addon2" />
         <button onClick={(e)=>{sendCommentReplay(e, `${each._id}`, `inputindexNo${index}replyareamessagebox`)}} className="btn searchbtn" type="button" id="button-addon2"><SendIcon /></button>
         
         
-        </div>
+        </motion.div>
     
     
         </div>
-        </div>
+        </motion.div>
     
         {/*card col loop each reply has one card with col */}
         
@@ -726,17 +735,19 @@ export default function SeeMyThisVideo() {
     
         {/*comment replier ends*/}
     
-        </div>
+        </motion.div>
     
       })
+      
+      
     }else if(videoComs.videoComs && videoComs.videoComs[0]){
       
-      return    <div style={{display:'flex', flexDirection:'column',minWidth:colWidth, maxWidth:colWidth, justifyContent:'center'}}>
+      return    <motion.div layout style={{display:'flex', flexDirection:'column',minWidth:colWidth, maxWidth:colWidth, justifyContent:'center'}} ref={scope}>
 
     
 
         {/*card col loop each reply has one card with col */}
-        <div className='col col-md-12' style={{whiteSpace : 'pre-line', marginBottom:'2rem'}}>
+        <motion.div whileHover={{scale:1.02}} animate={{opacity:[0,1]}} transition={{type:'spring', stiffness:400}} className='col col-md-12 againAnime' style={{whiteSpace : 'pre-line', marginBottom:'2rem'}}>
         <div className="card" style={{width: '98.5%', border: '0.12rem solid #c0ff1d'}}>
         
         <div className="card-body">
@@ -748,29 +759,29 @@ export default function SeeMyThisVideo() {
                   src={videoComs.videoComs[0].whoGivingImage}
                   sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
               />
-              </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{videoComs.videoComs[0].whoGivingUsername}<p style={{fontSize: '0.6rem'}}>Commented At : {generateCommentingTime(videoComs.videoComs[0].commentingTime)}</p></span>
+              </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername headLine'>{videoComs.videoComs[0].whoGivingUsername}<p style={{fontSize: '0.6rem',fontFamily: 'PT Serif'}}>Commented At : {generateCommentingTime(videoComs.videoComs[0].commentingTime)}</p></span>
           </h5>
-          <p className="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem'}}>{videoComs.videoComs[0].comment}</p>
+          <p className="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem', fontFamily: 'PT Serif'}}>{videoComs.videoComs[0].comment}</p>
           
         </div>
     
         <div  className="card-body d-flex justify-content-start align-items-center">
-        <p><span onClick={(e)=>{sendLoveToComment(e, videoComs.videoComs[0]._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><FavoriteIcon/> {genareteLikedAmount(videoComs.videoComs[0].commentLove)}</span> <span onClick={(e)=>{sendDisloveToComment(e, videoComs.videoComs[0]._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><HeartBrokenIcon fontSize='medium'/> {genareteDisLikedAmount(videoComs.videoComs[0].commentDislove)}</span> <span onClick={(e)=>{showMeReplyArea(e, `inputindexNo1replyarea`)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Reply <SendIcon fontSize='medium'/></span> <span onClick={(e)=>{deleteThisComment(e, videoComs.videoComs[0]._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Delete <DeleteSweepIcon fontSize='medium'/></span></p>
+        <p><motion.span whileHover={{scale:1.15}} transition={{type:'spring', stiffness:400}} onClick={(e)=>{sendLoveToComment(e, videoComs.videoComs[0]._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><FavoriteIcon/> {genareteLikedAmount(videoComs.videoComs[0].commentLove)}</motion.span> <motion.span whileHover={{scale:1.15}} transition={{type:'spring', stiffness:400}} onClick={(e)=>{sendDisloveToComment(e, videoComs.videoComs[0]._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}><HeartBrokenIcon fontSize='medium'/> {genareteDisLikedAmount(videoComs.videoComs[0].commentDislove)}</motion.span> <motion.span whileHover={{scale:1.15}} transition={{type:'spring', stiffness:400}} onClick={(e)=>{showMeReplyArea(e, `inputindexNo1replyarea`)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Reply <SendIcon fontSize='medium'/></motion.span> <motion.span whileHover={{scale:1.15}} transition={{type:'spring', stiffness:400}} onClick={(e)=>{deleteThisComment(e, videoComs.videoComs[0]._id)}} className="badge badge-pill badge-success mb-2" style={{color:'green',backgroundColor:'#c0ff1d', cursor:'pointer'}}>Delete <DeleteSweepIcon fontSize='medium'/></motion.span></p>
         </div>
     
     
         {/* hidden input area */}
-        <div id={"inputindexNo1replyarea"}  className="card-body d-none justify-content-center align-items-center">
+        <motion.div initial={{y:[-10]}} id={"inputindexNo1replyarea"}  className="card-body d-none justify-content-center align-items-center againAnime">
         
         <input id={"inputindexNo1replyareamessagebox"} onChange={(e)=>{setCommentReplay(e.target.value)}} type="text" className="form-control bgsearch" placeholder="Send Reply" aria-label="Send Reply Bar" aria-describedby="button-addon2" />
         <button onClick={(e)=>{sendCommentReplay(e, `${videoComs.videoComs[0]._id}`, `inputindexNo1replyareamessagebox`)}} className="btn searchbtn" type="button" id="button-addon2"><SendIcon /></button>
         
         
-        </div>
+        </motion.div>
     
     
         </div>
-        </div>
+        </motion.div>
     
         {/*card col loop each reply has one card with col */}
         
@@ -783,7 +794,8 @@ export default function SeeMyThisVideo() {
     
         {/*comment replier ends*/}
     
-        </div>
+        </motion.div>
+
     }else if(!videoComs.videoComs[0]){
       return    <div style={{display:'flex', flexDirection:'column',minWidth:colWidth, maxWidth:colWidth, justifyContent:'center'}}>
 
@@ -795,7 +807,7 @@ export default function SeeMyThisVideo() {
         
         <div className="card-body">
           
-          <p className="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem'}}>Kindly Be Considerate While You Comment In Other's Post ... </p>
+          <p className="card-text" style={{whiteSpace: 'pre-line', padding : '1rem', backgroundColor: '#c0ff1d', borderRadius: '0.8rem', fontFamily: 'PT Serif'}}>Kindly Be Considerate While You Comment In Other's Post ... </p>
           
         </div>
     
@@ -822,12 +834,25 @@ export default function SeeMyThisVideo() {
     
         </div>
     }
+
+    
   }
 
 
     
     // Effects Here
     useEffect(() => {
+
+      const intervalID = setInterval(() => {
+        // Your interval logic here
+        
+            console.log('send api')
+            callForNotificationApi(serial, token, dispatch)
+  
+        
+  
+        }, 50000);
+
         if(window.innerWidth<767){
           setResponsiveReply('80%')
         }else{
@@ -865,6 +890,7 @@ export default function SeeMyThisVideo() {
         //  to clean up the tooltips when the component unmounts
         return () => {
           window.$('[data-bs-toggle="tooltip"]').tooltip('dispose');
+          clearInterval(intervalID)
         };
 
       }, []); // [ ] empty mean it will only run once after first render like component did mount :>
@@ -891,32 +917,33 @@ export default function SeeMyThisVideo() {
 
   return (
     <Fragment>
-    <div className='container-fluid pages flex-column'>
+    
+    <motion.div layout  className='container-fluid pages flex-column'>
     <div className='profilePageHeight'>
    
 
     <SearchBar /> 
     
     <div className='videoBox mx-auto mt-3'>
-    <iframe width="100%" height="100%" src={videoData.videourl} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
+    <motion.iframe animate={{x:[-1000,0]}} transition={{type:"spring", stiffness:550}} width="100%" height="100%" src={videoData.videourl} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></motion.iframe>
     
-    <div className='d-flex justify-content-center align-items-center icons' data-bs-toggle="modal" data-bs-target="#staticBackdrop"> 
+    <motion.div whileHover={{scale:1.1}} transition={{type: 'spring', stiffness: 1000}} className='d-flex justify-content-center align-items-center icons' data-bs-toggle="modal" data-bs-target="#staticBackdrop"> 
     <SettingsIcon fontSize='large'/>
-    </div>
+    </motion.div>
 
-    <div onClick={(e)=>{deleteThisVideo(e, videoSerial)}} className='d-flex justify-content-center align-items-center icons2'> 
+    <motion.div whileHover={{scale:1.1}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{deleteThisVideo(e, videoSerial)}} className='d-flex justify-content-center align-items-center icons2'> 
     <DeleteSweepIcon fontSize='large'/>
-    </div>
+    </motion.div>
     
-    <div onClick={(e)=>{giveLoveReact(e, videoSerial)}} className='d-flex justify-content-center align-items-center icons3' data-bs-toggle="tooltip" data-bs-placement="right" title={genareteLikedAmount(videoData.videolike)}> 
+    <motion.div whileHover={{scale:1.1}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{giveLoveReact(e, videoSerial)}} className='d-flex justify-content-center align-items-center icons3' data-bs-toggle="tooltip" data-bs-placement="right" title={genareteLikedAmount(videoData.videolike)}> 
     <FavoriteIcon fontSize='large'/> 
-    </div>
+    </motion.div>
 
     
 
-    <div onClick={(e)=>{giveDisLoveReact(e, videoSerial)}} className='d-flex justify-content-center align-items-center icons4' data-bs-toggle="tooltip" data-bs-placement="right" title= {genareteDisLikedAmount(videoData.videodislike)}> 
+    <motion.div whileHover={{scale:1.1}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{giveDisLoveReact(e, videoSerial)}} className='d-flex justify-content-center align-items-center icons4' data-bs-toggle="tooltip" data-bs-placement="right" title= {genareteDisLikedAmount(videoData.videodislike)}> 
     <HeartBrokenIcon fontSize='large'/>
-    </div>
+    </motion.div>
 
     
 
@@ -929,26 +956,26 @@ export default function SeeMyThisVideo() {
 
       
     <p className='d-flex flex-row' style={{marginTop: '2rem'}}>
-    <Stack direction="row" spacing={2}>
+    <motion.div whileHover={{scale:1.1}} transition={{type: 'spring', stiffness: 1000}}><Stack direction="row" spacing={2}>
                     
     <Avatar
         alt="Remy Sharp"
         src={playerAvatar}
         sx={{ width: 56, height: 56 }}
     />
-    </Stack> <span className='ms-3'><b>{username}</b><br></br><span style={{fontSize:'0.7rem'}}>Uplodaded At : {generatePlainDate(videoData.videouploadtime)}</span><br></br><span style={{fontSize:'0.7rem'}}>Total Views : {videoData.totalViews}</span></span>
+    </Stack></motion.div> <span className='ms-3 headLine'>{username}<br></br><span style={{fontSize:'0.7rem',fontFamily: 'PT Serif'}}>Uplodaded At : {generatePlainDate(videoData.videouploadtime)}</span><br></br><span style={{fontSize:'0.7rem',fontFamily: 'PT Serif'}}>Total Views : {videoData.totalViews}</span></span>
     </p>
 
     
     <div className='row row-cols-1 row-cols-md-1' style={{marginTop: resMargin, marginLeft: '0.5rem'}}>
       <div className='col col-md-12'>
-        <h5>Title : {videoData.videotitle}</h5>
+        <h5 className='headLine'>Title : &nbsp;{videoData.videotitle}</h5>
       </div>
     </div>
 
     <div className='row row-cols-1 row-cols-md-1' style={{marginTop: '0.5rem', marginLeft: '0.5rem', whiteSpace:'pre-line'}}>
       <div className='col col-md-12' style={{whiteSpace : 'pre-line'}}>
-        <p style={{fontSize: '0.8rem'}}>{videoData.videodescription}</p>
+        <p style={{fontSize: '0.8rem',fontFamily: 'PT Serif'}}>{videoData.videodescription}</p>
       </div>
     </div>
 
@@ -957,7 +984,7 @@ export default function SeeMyThisVideo() {
     <div style={{padding: '0.3rem'}}>
 
     <div className='row row-cols-1 row-cols-md-1' style={{marginTop: resMargin, marginLeft: '0.5rem'}}>
-    <h5 className='mx-auto text-center' style={{marginBottom: '2rem', color:'#42590a'}}>All Comments </h5>
+    <h5 className='mx-auto text-center headLine' style={{marginBottom: '2rem', color:'#42590a'}}>All Comments </h5>
     
     <div id="inputindexNo"  className="card-body d-flex justify-content-center align-items-center" style={{width:'100%'}}>
     
@@ -969,42 +996,23 @@ export default function SeeMyThisVideo() {
 
 
 
+    
+    <motion.div className='allComments mx-auto' style={{padding: '2rem'}} ref={scope}>
 
-
-
-
-    <div className='allComments mx-auto' style={{padding: '2rem'}}>
-
+    
     {generateAllComments()}
 
     {/*card col loop each reply has one card with col */}
     
-
     {/*card col loop each reply has one card with col */}
     
-
-
     {/*comments reply */}
     
-
     {/*comment replier ends*/}
 
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    </motion.div>
+  
+    
     
 
     </div>
@@ -1013,7 +1021,7 @@ export default function SeeMyThisVideo() {
 
     
     </div>
-    </div>
+    </motion.div>
 
 
 
@@ -1050,12 +1058,12 @@ export default function SeeMyThisVideo() {
 
         <div className="col col-md-12">
         <label for="title"><b>Title :</b></label>
-        <input onChange={(e)=>{setNewTitle(e)}} value={videoData.videotitle} id="title" type="text" className="form-control mt-1 mb-2"  placeholder="Set video title ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a valid title that suit your video ..."/>
+        <motion.input whileHover={{scale:1.04}} transition={{type: 'spring', stiffness: 1000}} onChange={(e)=>{setNewTitle(e)}} value={videoData.videotitle} id="title" type="text" className="form-control mt-1 mb-2"  placeholder="Set video title ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a valid title that suit your video ..."/>
         </div>
 
         <div className="col col-md-12">
         <label for="description"><b>Description :</b></label>
-        <textarea onChange={(e)=>{setNewDesc(e)}} value={videoData.videodescription} id="description" type="text" className="form-control mt-1 mb-2 videoaddtextarea"  placeholder="Set video discription ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide description that suits your video ... in 200 words."></textarea>
+        <motion.textarea whileHover={{scale:1.04}} transition={{type: 'spring', stiffness: 1000}} onChange={(e)=>{setNewDesc(e)}} value={videoData.videodescription} id="description" type="text" className="form-control mt-1 mb-2 videoaddtextarea"  placeholder="Set video discription ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide description that suits your video ... in 200 words."></motion.textarea>
         </div>
         
 
@@ -1063,8 +1071,8 @@ export default function SeeMyThisVideo() {
 
         <div className="col col-md-12 mt-1">
         <label for="tags"><b>Tags :</b></label>
-        <input onChange={(e)=>(setCurrentlyInsertedTag(e.target.value))} id="tags" type="text" className="form-control mt-2 mb-2"  placeholder="Set video search tags ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide video search tags here in one or two word, after each tag enter click add button kindly ..."/>
-        <button onClick={(e)=>addNewTag(e)} type="button" className="btn btn-sm btn-primary mb-1">Add</button>
+        <motion.input whileHover={{scale:1.04}} transition={{type: 'spring', stiffness: 1000}} onChange={(e)=>(setCurrentlyInsertedTag(e.target.value))} id="tags" type="text" className="form-control mt-2 mb-2"  placeholder="Set video search tags ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide video search tags here in one or two word, after each tag enter click add button kindly ..."/>
+        <motion.button whileHover={{scale:1.04}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>addNewTag(e)} type="button" className="btn btn-sm btn-primary mb-1">Add</motion.button>
         </div>
         
 
@@ -1078,8 +1086,8 @@ export default function SeeMyThisVideo() {
 
         </div>
         <div className="modal-footer">
-            <button type="button" className="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
-            <button onClick={(e)=>{sendNewInfo(e, videoSerial)}} type="button" className="btn btn-sm btn-primary">Update Video ...</button>
+            <motion.button whileHover={{scale:1.04}} transition={{type: 'spring', stiffness: 1000}} type="button" className="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</motion.button>
+            <motion.button whileHover={{scale:1.04}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{sendNewInfo(e, videoSerial)}} type="button" className="btn btn-sm btn-primary">Update Video ...</motion.button>
         </div>
         </div>
 
@@ -1087,9 +1095,6 @@ export default function SeeMyThisVideo() {
 
     </div>
     </div>
-
-
-
 
 
 
@@ -1106,6 +1111,7 @@ export default function SeeMyThisVideo() {
     {responseMessage}
     </Alert>
     </Snackbar>
+   
     </Fragment>
   )
 }

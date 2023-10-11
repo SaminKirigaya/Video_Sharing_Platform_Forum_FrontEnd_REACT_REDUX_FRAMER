@@ -23,6 +23,8 @@ import AlarmOnIcon from '@mui/icons-material/AlarmOn';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
+import {motion} from 'framer-motion'
+import { callForNotificationApi } from './NotificationApi';
 
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -59,6 +61,7 @@ function YourVideos() {
 
     const token = useSelector((state)=>state.tokenData.token)
     const serial = useSelector((state)=>state.userserialData.serialId)
+    const dispatch = useDispatch()
     const username = useSelector((state)=>state.usernameData.username)
     const playerAvatar = useSelector((state) => state.profImgData.proImgPath)
 
@@ -127,7 +130,7 @@ function YourVideos() {
     const showAllTags = ()=>{
       if(videoData.tags){
         return videoData.tags.map((each, index)=>{
-          return  <span className="badge rounded-pill bg-warning text-dark me-2" key={index}>{each}&nbsp;&nbsp;&nbsp;<span onClick={(e)=>{delThisTag(e,index)}} className="badge rounded-pill bg-secondary badgeHovcurs">X</span></span>
+          return  <span className="badge rounded-pill bg-warning text-dark me-2 headLine" key={index}>{each}&nbsp;&nbsp;&nbsp;<span onClick={(e)=>{delThisTag(e,index)}} className="badge rounded-pill bg-secondary badgeHovcurs normalLine">X</span></span>
         })
       }
     }
@@ -200,29 +203,29 @@ function YourVideos() {
     const showAllOldVideosInCard = ()=>{
 
       return oldVideos.map((each, index)=>{
-        return  <div className='col d-flex justify-content-center mb-5' style={{width: thewidth}} key={index}> 
-        <div className="card" style={{width: '16rem', height: '16rem'}}>
+        return  <motion.div variants={item} transition={{duration: 1.3}} className='col d-flex justify-content-center mb-5' style={{width: thewidth}} key={index}> 
+        <motion.div whileHover={{scale:1.065}} transition={{type: 'spring', stiffness: 300}} className="card" style={{width: '16rem', height: '16rem'}}>
 
         <div style={{maxWidth: '100%', minWidth: '100%', maxHeight: '50%', minHeight:'50%'}}>
         <img style={{width:'100%',height:'100%', objectFit: 'fill', borderTopLeftRadius: '0.3rem', borderTopRightRadius: '0.3rem'}} src={each.thumbnailLink} alt="Card image cap" />
         </div>
         
-        <div className='loveemo d-flex justify-content-center align-items-center' data-bs-toggle="tooltip" data-bs-placement="left" title={genareteLikedAmount(each.likeamount)}>
+        <motion.div whileHover={{scale:1.1}} transition={{type: 'spring', stiffness: 1000}} className='loveemo d-flex justify-content-center align-items-center' data-bs-toggle="tooltip" data-bs-placement="left" title={genareteLikedAmount(each.likeamount)}>
         <FavoriteIcon />
-        </div>
+        </motion.div>
 
-        <div className='loveemo2 d-flex justify-content-center align-items-center'  data-bs-toggle="tooltip" data-bs-placement="left" title={genareteDisLikedAmount(each.dislikedamount)}>
+        <motion.div whileHover={{scale:1.1}} transition={{type: 'spring', stiffness: 1000}} className='loveemo2 d-flex justify-content-center align-items-center'  data-bs-toggle="tooltip" data-bs-placement="left" title={genareteDisLikedAmount(each.dislikedamount)}>
         <HeartBrokenIcon />
-        </div>
+        </motion.div>
 
-        <div className='loveemo3 d-flex justify-content-center align-items-center' onClick={(e)=>{addThisToWatchlist(e, each._id)}}>
+        <motion.div whileHover={{scale:1.1}} transition={{type: 'spring', stiffness: 1000}} className='loveemo3 d-flex justify-content-center align-items-center' onClick={(e)=>{addThisToWatchlist(e, each._id)}}>
         <AlarmOnIcon />
-        </div>
+        </motion.div>
 
         <Link to={"/seeMyThisVideo/"+each._id}>
-        <div className='loveemo4 d-flex justify-content-center align-items-center'>
+        <motion.div whileHover={{scale:1.1}} transition={{type: 'spring', stiffness: 1000}} className='loveemo4 d-flex justify-content-center align-items-center'>
         <PlayArrowIcon fontSize='large'/>
-        </div>
+        </motion.div>
         </Link>
 
         <div className="card-body" style={{backgroundColor: '#c0ff1d'}}>
@@ -233,13 +236,13 @@ function YourVideos() {
               src={playerAvatar}
               sx={{ width: 45, height: 45, border: '0.15rem solid #c0ff1d' }}
           />
-          </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername'>{username}<p style={{fontSize: '0.6rem'}}>Uploaded At : {generatePlainDate(each.uploadingDate)}</p></span></h5>
+          </Stack>&nbsp;&nbsp;<span className='mt-2 smollUsername headLine'>{username}<p style={{fontSize: '0.6rem',fontFamily: 'PT Serif'}}>Uploaded At : {generatePlainDate(each.uploadingDate)}</p></span></h5>
           
-          <p className="card-text smollTitle">{makeItSmoll(each.title)}</p>
+          <p className="card-text smollTitle normalLine">{makeItSmoll(each.title)}</p>
           
         </div>
-        </div>
-        </div>
+        </motion.div>
+        </motion.div>
       })
     }
 
@@ -265,6 +268,22 @@ function YourVideos() {
         console.log(err)
       }
     }
+
+    const container = {
+      hidden: { opacity: 0 },
+      show: {
+        opacity: 1,
+        transition: {
+          staggerChildren: 0.1
+        }
+      }
+    }
+    
+    const item = {
+      hidden: { opacity: 0 },
+      show: { opacity: 1 }
+    }
+    
 
 
     // uploading file rest api calling
@@ -337,6 +356,14 @@ function YourVideos() {
      // Effects Here
      useEffect(() => {
 
+      const intervalID = setInterval(() => {
+        // Your interval logic here
+        
+            console.log('send api')
+            callForNotificationApi(serial, token, dispatch)
+  
+        }, 50000);
+
         if(window.innerWidth>710 && window.innerWidth<800){
           setWidth('13.5rem')
         }else if(window.innerWidth>810 && window.innerWidth<900){
@@ -357,6 +384,7 @@ function YourVideos() {
         //  to clean up the tooltips when the component unmounts
         return () => {
           window.$('[data-bs-toggle="tooltip"]').tooltip('dispose');
+          clearInterval(intervalID)
         };
 
       }, []); // [ ] empty mean it will only run once after first render like component did mount :>
@@ -382,17 +410,17 @@ function YourVideos() {
         <WelcomeMsg />
 
         <div className='mt-3 mb-3'>
-        <p className='text-center welcomeTxt'><b>Upload Videos ...</b></p>
+        <p className='text-center welcomeTxt headLine'>Upload Videos ...</p>
         </div>
 
         <div className='row row-cols-1 row-cols-md-2 mb-5 d-flex justify-content-center'>
 
-        <div className='col d-flex justify-content-center'> {/* start of upload card column */}
+        <motion.div animate={{x : [-400, 0]}} transition={{duration:0.3, type: 'spring', stiffness: 250}} className='col d-flex justify-content-center'> {/* start of upload card column */}
 
         <div className="card mb-3 bordcol" style={{maxWidth: '500px'}}>
         <div className="row g-0">
           <div className="col-md-4">
-          <div className='mx-auto text-center d-flex justify-content-center align-items-center pt-4'>
+          <motion.div whileHover={{scale:1.2}} transition={{type: 'spring', stiffness: 400}} className='mx-auto text-center d-flex justify-content-center align-items-center pt-4'>
           <Stack direction="row" spacing={2}>
   
           <Avatar
@@ -401,24 +429,24 @@ function YourVideos() {
               sx={{ width: 65, height: 65, border: '0.15rem solid #c0ff1d' }}
           />
           </Stack>
-          </div>
+          </motion.div>
           
           </div>
           <div className="col-md-8">
             <div className="card-body">
-              <h5 className="card-title">Upload</h5>
-              <p className="card-text">You can upload any sorts of videos as you like make sure to respect other's and follow community guidelines, if 30 people report your video the video will be automatically removed ...</p>
+              <h5 className="card-title headLine">Upload</h5>
+              <p className="card-text normalLine">You can upload any sorts of videos as you like make sure to respect other's and follow community guidelines, if 30 people report your video the video will be automatically removed ...</p>
               
             </div>
             <div className="card-body bordTop">
               
-              <button type='button' data-bs-toggle="modal" data-bs-target="#staticBackdrop" className='linkdesGreen bgbordertrans' ><p className="card-text">Click Here ... </p></button>
+              <button type='button' data-bs-toggle="modal" data-bs-target="#staticBackdrop" className='linkdesGreen bgbordertrans' ><p className="card-text headLine">Click Here ... </p></button>
               
             </div>
           </div>
         </div>
         </div>
-        </div> {/* End of upload card column */}
+        </motion.div> {/* End of upload card column */}
 
 
         </div>
@@ -427,26 +455,26 @@ function YourVideos() {
         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div className="modal-content bgbordermodal">
             <div className="modal-header">
-                <h5 className="modal-title" id="staticBackdropLabel">Upload Content ...</h5>
+                <h5 className="modal-title headLine" id="staticBackdropLabel">Upload Content ...</h5>
                 <button onClick={(e)=>{setFullFormEmpty(e)}} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body">
 
             <div className="col col-md-12">
-            <label for="title"><b>Title :</b></label>
-            <input onChange={(e)=>{setVideoData((prevState)=>({...prevState, title: e.target.value}))}} id="title" type="text" className="form-control mt-1 mb-2"  placeholder="Set video title ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a valid title that suit your video ..."/>
+            <label for="title" className='headLine'>Title :</label>
+            <motion.input whileHover={{scale:1.04}} transition={{type: 'spring', stiffness: 1000}} onChange={(e)=>{setVideoData((prevState)=>({...prevState, title: e.target.value}))}} id="title" type="text" className="form-control mt-1 mb-2"  placeholder="Set video title ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a valid title that suit your video ..."/>
             </div>
 
             <div className="col col-md-12">
-            <label for="description"><b>Description :</b></label>
-            <textarea onChange={(e)=>{setVideoData((prevState)=>({...prevState, description : e.target.value}))}} id="description" type="text" className="form-control mt-1 mb-2 videoaddtextarea"  placeholder="Set video discription ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide description that suits your video ... in 200 words."></textarea>
+            <label for="description" className='headLine'>Description :</label>
+            <motion.textarea whileHover={{scale:1.04}} transition={{type: 'spring', stiffness: 1000}} onChange={(e)=>{setVideoData((prevState)=>({...prevState, description : e.target.value}))}} id="description" type="text" className="form-control mt-1 mb-2 videoaddtextarea"  placeholder="Set video discription ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide description that suits your video ... in 200 words."></motion.textarea>
             </div>
             
 
             <div className="col col-md-12 mx-auto">
             
-            <label for="profImage" className='mt-2 mb-0'  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a video content with .mp4 ... Anything else extension is not supported yet. "><PlayCircleIcon /><b>Add Video Content ... (Click Me)</b></label>
-            <input onChange={(e)=>{setVideoData((prevState)=>({...prevState, videoname: e.target.value, videofile: e.target.files[0]}))}} id="profImage" type="file" className="form-control mb-2"  autoComplete='none' accept=".mp4"/>
+            <label for="profImage" className='mt-2 mb-0 headLine'  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a video content with .mp4 ... Anything else extension is not supported yet. "><PlayCircleIcon /> &nbsp;Add Video Content ... (Click Me)</label>
+            <motion.input onChange={(e)=>{setVideoData((prevState)=>({...prevState, videoname: e.target.value, videofile: e.target.files[0]}))}} id="profImage" type="file" className="form-control mb-2"  autoComplete='none' accept=".mp4"/>
 
 
             <div className='mt-0'> 
@@ -463,7 +491,7 @@ function YourVideos() {
 
             <div className="col col-md-12 mx-auto">
             
-            <label for="coverImage" className='mt-2'  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a jpg or jpeg image file as thumbnail ..."><AddPhotoAlternateIcon /><b>Add Video Thumbnail ... (Click Me)</b></label>
+            <label for="coverImage" className='mt-2 headLine'  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a jpg or jpeg image file as thumbnail ..."><AddPhotoAlternateIcon /> &nbsp;Add Video Thumbnail ... (Click Me)</label>
             <input onChange={(e)=>{setVideoData((prevState)=>({...prevState, thumbnailname: e.target.value, thumbnailfile: e.target.files[0]}))}} id="coverImage" type="file" className="form-control mb-2"  autoComplete='none' accept=".jpg, .jpeg"/>
 
 
@@ -479,9 +507,9 @@ function YourVideos() {
 
 
             <div className="col col-md-12 mt-1">
-            <label for="tags"><b>Tags :</b></label>
-            <input onChange={(e)=>(setCurrentlyInsertedTag(e.target.value))} id="tags" type="text" className="form-control mt-2 mb-2"  placeholder="Set video search tags (lower case letters) ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide video search tags here in one or two word, after each tag enter click add button kindly ..."/>
-            <button onClick={(e)=>addNewTag(e)} type="button" className="btn btn-sm btn-primary mb-1">Add</button>
+            <label for="tags" className='headLine'>Tags :</label>
+            <motion.input whileHover={{scale:1.04}} transition={{type: 'spring', stiffness: 1000}} onChange={(e)=>(setCurrentlyInsertedTag(e.target.value))} id="tags" type="text" className="form-control mt-2 mb-2"  placeholder="Set video search tags (lower case letters) ..." autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide video search tags here in one or two word, after each tag enter click add button kindly ..."/>
+            <motion.button whileHover={{scale:1.04}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>addNewTag(e)} type="button" className="btn btn-sm btn-primary mb-1 headLine">Add</motion.button>
             </div>
             
 
@@ -499,8 +527,8 @@ function YourVideos() {
 
             </div>
             <div className="modal-footer">
-                <button onClick={(e)=>{setFullFormEmpty(e)}} type="button" className="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
-                <button onClick={(e)=>{UploadFile(e)}} type="button" className="btn btn-sm btn-primary">Upload Video ...</button>
+                <motion.button whileHover={{scale:1.04}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{setFullFormEmpty(e)}} type="button" className="btn btn-sm btn-danger headLine" data-bs-dismiss="modal">Close</motion.button>
+                <motion.button whileHover={{scale:1.04}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{UploadFile(e)}} type="button" className="btn btn-sm btn-primary headLine">Upload Video ...</motion.button>
             </div>
             </div>
 
@@ -510,17 +538,17 @@ function YourVideos() {
         </div>
 
         <div className='mt-3 mb-3'>
-        <p className='text-center welcomeTxt'><b>Your Videos ...</b></p>
+        <p className='text-center welcomeTxt headLine'>Your Videos ...</p>
         </div>
 
-        <div className='row row-cols-1 row-cols-md-4 mb-5 d-flex justify-content-start p-3'>
+        <motion.div variants={container} initial="hidden" animate="show" className='row row-cols-1 row-cols-md-4 mb-5 d-flex justify-content-start p-3'>
 
           {oldVideos ? showAllOldVideosInCard() : null}
-          {oldVideos.length<1 ? <div className='d-flex mx-auto w-100 justify-content-center'><p className='mx-auto fontcol'>You Didn't Post Any Video Yet ...</p></div>:null}
+          {oldVideos.length<1 ? <div className='d-flex mx-auto w-100 justify-content-center'><p className='mx-auto fontcol normalLine'>You Didn't Post Any Video Yet ...</p></div>:null}
 
 
 
-        </div>
+        </motion.div>
         
 
     </div>

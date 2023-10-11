@@ -50,7 +50,7 @@ function Login() {
 
     // call redux to see if he is logged in
     var logIn = useSelector((state) => state.loginData.login)
-
+    
     const profPath = useSelector((state)=>state.profImgData.proImgPath)
     
     // call redyux to see if token is there
@@ -226,7 +226,7 @@ function Login() {
                 
 
                 <div className="card-body d-flex justify-content-center flex-column">
-                <h5 className="card-title mx-auto">Sign In</h5>
+                <h5 className="card-title mx-auto headLine">Sign In</h5>
 
             
                 <Box
@@ -287,14 +287,14 @@ function Login() {
                 
 
 
-                <motion.button whileHover={{scale:1.05}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{logMeIn(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-3">Sign In</motion.button>
+                <motion.button whileHover={{scale:1.05}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{logMeIn(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-3 headLine">Sign In</motion.button>
                 </div>
                 </motion.div>
 
-                <sup className='mt-4 linkBtn2'>Don't Have An ID ? .... <Link className='linkBtn2' to='/registration'>Click Here</Link><br></br></sup>
-                <sup className='mt-4 linkBtn2'>Forgot Password ? .... <Link className='linkBtn2' to='/forgotPass'>Click Here</Link></sup>
+                <sup className='mt-4 linkBtn2 normalLine'>Don't Have An ID ? .... <Link className='linkBtn2' to='/registration'>Click Here</Link><br></br></sup>
+                <sup className='mt-4 linkBtn2 normalLine'>Forgot Password ? .... <Link className='linkBtn2' to='/forgotPass'>Click Here</Link></sup>
              
-                {nowGoBack ? <Navigate to='/' replace /> : null}
+                {nowGoBack ? <Navigate to='/profilePage' replace /> : null}
                 
             </motion.div>
             <Snackbar open={open} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>

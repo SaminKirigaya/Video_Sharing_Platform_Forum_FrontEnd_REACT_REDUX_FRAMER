@@ -15,7 +15,9 @@ import { profImgFunctions } from '../Store/Store';
 import { coverImgFunctions } from '../Store/Store';
 import { usernameFunctions } from '../Store/Store';
 import { userserialFunctions } from '../Store/Store';
+import { callForNotificationApi } from './NotificationApi';
 
+import {motion} from 'framer-motion';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -56,6 +58,22 @@ function ChangeProfile() {
         coverImageName : '',
         coverImageFile : null,
     })
+
+    const container = {
+        hidden: { opacity: 0 },
+        show: {
+          opacity: 1,
+          transition: {
+            staggerChildren: 0.1
+          }
+        }
+      }
+      
+      const item = {
+        hidden: { opacity: 0 },
+        show: { opacity: 1 }
+      }
+      
 
     // serial
     const serial = useSelector((state)=>state.userserialData.serialId)
@@ -305,6 +323,16 @@ function ChangeProfile() {
 
     // Effects Here
     useEffect(() => {
+
+        const intervalID = setInterval(() => {
+            // Your interval logic here
+            
+                console.log('send api')
+                callForNotificationApi(serial, token, dispatch)
+      
+            }, 50000);
+
+
         // Initialize tooltips when the component mounts
         window.$('[data-bs-toggle="tooltip"]').tooltip();
     
@@ -316,6 +344,7 @@ function ChangeProfile() {
         //  to clean up the tooltips when the component unmounts
         return () => {
           window.$('[data-bs-toggle="tooltip"]').tooltip('dispose');
+          clearInterval(intervalID)
         };
       }, []); // [ ] empty mean it will only run once after first render like component did mount :>
  
@@ -396,41 +425,41 @@ function ChangeProfile() {
 
 
 
-            <div className="card d-flex justify-content-center cardBd mx-auto mb-5" style={{width: "18rem"}}>
+            <motion.div animate={{x : [-400, 0]}} transition={{duration:0.3, type: 'spring', stiffness: 250}} className="card d-flex justify-content-center cardBd mx-auto mb-5" style={{width: "18rem"}}>
         
         
         
 
         <div className="card-body d-flex justify-content-center flex-column">
-        <h5 className="card-title mx-auto">Change Profile</h5>
+        <h5 className="card-title mx-auto headLine">Change Profile</h5>
 
     
-        <div className="row row-cols-1 row-cols-md-2 g-2 mx-auto mt-3">
+        <motion.div variants={container} initial="hidden" animate="show" className="row row-cols-1 row-cols-md-2 g-2 mx-auto mt-3">
             
 
             
 
-            <div className="col col-md-12">
+            <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-12">
             
-            <input id="username" onChange={(e)=>{setTheUserData((prevState)=>({...prevState, username: e.target.value}))}} value={userData.username} type="text" className="form-control" placeholder="User Name" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a Unique username also it can only have a-z or A-Z or 0-9, It can only have _ as a special character no space is allowed ..."/>
-            </div>
+            <motion.input whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}} id="username" onChange={(e)=>{setTheUserData((prevState)=>({...prevState, username: e.target.value}))}} value={userData.username} type="text" className="form-control" placeholder="User Name" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a Unique username also it can only have a-z or A-Z or 0-9, It can only have _ as a special character no space is allowed ..."/>
+            </motion.div>
 
-            <div className="col col-md-12">
+            <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-12">
             
-            <input id="fullname" onChange={(e)=>{setTheUserData((prevState)=>({...prevState, fullname: e.target.value}))}} value={userData.fullname} type="text" className="form-control" placeholder="Full Name" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide your full name it must not have any special characters and must not have any numbers ..."/>
-            </div>
+            <motion.input whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}} id="fullname" onChange={(e)=>{setTheUserData((prevState)=>({...prevState, fullname: e.target.value}))}} value={userData.fullname} type="text" className="form-control" placeholder="Full Name" autoComplete='none' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide your full name it must not have any special characters and must not have any numbers ..."/>
+            </motion.div>
 
-            <div className="col-6">
-                <select onChange={(e)=>{setTheUserData((prevState)=>({...prevState, gender: e.target.value}))}} value={userData.gender} className="form-select" aria-label="Default select example">
+            <motion.div variants={item} transition={{duration: 1.3}} className="col-6">
+                <motion.select whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}} onChange={(e)=>{setTheUserData((prevState)=>({...prevState, gender: e.target.value}))}} value={userData.gender} className="form-select" aria-label="Default select example">
                 <option disabled={true}>Gender</option>
                 <option selected disabled={true}>{userData.gender}</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Others">Others</option>
-                </select>
-            </div>
-            <div className="col-6">
-                <select onChange={(e)=>{setTheUserData((prevState)=>({...prevState, country: e.target.value}))}} className="form-select" value={userData.country} aria-label="Default select example">
+                </motion.select>
+            </motion.div>
+            <motion.div variants={item} transition={{duration: 1.3}} className="col-6">
+                <motion.select whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}} onChange={(e)=>{setTheUserData((prevState)=>({...prevState, country: e.target.value}))}} className="form-select" value={userData.country} aria-label="Default select example">
                 <option disabled={true}>Country</option>
                 <option selected disabled={true}>{userData.country}</option>
                 <option value="United States">United States</option>
@@ -450,42 +479,42 @@ function ChangeProfile() {
                 <option value="Bangladesh">Bangladesh</option>
                 <option value="India">India</option>
                 <option value="Pakistan">Pakistan</option>
-                </select>
-            </div>
+                </motion.select>
+            </motion.div>
 
-            <div className="col col-md-6">
+            <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-6">
             
-            <input type="date" onChange={(e)=>{setTheUserData((prevState)=>({...prevState, dateofbirth: e.target.value}))}} value={formatDate(userData.dateofbirth)} className="form-control"  placeholder="Date of Birth" autoComplete='none'/>
-            </div>
+            <motion.input whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}} type="date" onChange={(e)=>{setTheUserData((prevState)=>({...prevState, dateofbirth: e.target.value}))}} value={formatDate(userData.dateofbirth)} className="form-control"  placeholder="Date of Birth" autoComplete='none'/>
+            </motion.div>
 
-            <div className="col col-md-6">
+            <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-6">
             
-            <input id="address" onChange={(e)=>{setTheUserData((prevState)=>({...prevState, address: e.target.value}))}} value={userData.address}  type="text" className="form-control"  placeholder="Address" autoComplete='none'/>
-            </div>
+            <motion.input whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}} id="address" onChange={(e)=>{setTheUserData((prevState)=>({...prevState, address: e.target.value}))}} value={userData.address}  type="text" className="form-control"  placeholder="Address" autoComplete='none'/>
+            </motion.div>
 
 
-            <div className="col col-md-12 mx-auto">
+            <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-12 mx-auto">
             
-            <label for="profImage"  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image of jpg or jpeg format less than 1 MB ... Without jpeg or jpg it won't work."><AddPhotoAlternateIcon /> Add Profile Image "Optional"</label>
-            <input onChange={(e)=>{setTheUserData((prevState)=>({...prevState, profileImageName: e.target.value, profileImageFile : e.target.files[0] }))}}  id="profImage" type="file" className="form-control"  autoComplete='none' accept=".jpg, .jpeg"/>
-            </div>
+            <label for="profImage" className='normalLine' data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image of jpg or jpeg format less than 1 MB ... Without jpeg or jpg it won't work."><AddPhotoAlternateIcon /> Add Profile Image "Optional"</label>
+            <motion.input whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}} onChange={(e)=>{setTheUserData((prevState)=>({...prevState, profileImageName: e.target.value, profileImageFile : e.target.files[0] }))}}  id="profImage" type="file" className="form-control"  autoComplete='none' accept=".jpg, .jpeg"/>
+            </motion.div>
 
-            <div className="col col-md-12 mx-auto">
+            <motion.div variants={item} transition={{duration: 1.3}} className="col col-md-12 mx-auto">
             
-            <label for="coverImage"  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image at least 1024px X 680 px which is clear ... Remember image must be jpg or jpeg format."><AddPhotoAlternateIcon /> Add Cover Image "Optional"</label>
-            <input onChange={(e)=>{setTheUserData((prevState)=>({...prevState, coverImageName: e.target.value, coverImageFile: e.target.files[0] }))}} id="coverImage" type="file" class="form-control" autoComplete='none' accept=".jpg, .jpeg"/>
-            </div>
+            <label for="coverImage" className='normalLine'  data-bs-toggle="tooltip" data-bs-placement="right" title="Please provide a image at least 1024px X 680 px which is clear ... Remember image must be jpg or jpeg format."><AddPhotoAlternateIcon /> Add Cover Image "Optional"</label>
+            <motion.input whileHover={{scale:1.04}} transition={{type:'spring', stiffness: 300}} onChange={(e)=>{setTheUserData((prevState)=>({...prevState, coverImageName: e.target.value, coverImageFile: e.target.files[0] }))}} id="coverImage" type="file" class="form-control" autoComplete='none' accept=".jpg, .jpeg"/>
+            </motion.div>
 
 
 
 
-        </div>
+        </motion.div>
         
 
 
-        <button onClick={(e)=>{setNewUserData(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-4">Change Profile</button>
+        <motion.button whileHover={{scale:1.05}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{setNewUserData(e)}} type="button" className="btn btn-sm btn-primary mx-auto mt-4 headLine">Change Profile</motion.button>
         </div>
-        </div>
+        </motion.div>
 
         {nowGoBack ? <Navigate to='/login' replace /> : null}
 
