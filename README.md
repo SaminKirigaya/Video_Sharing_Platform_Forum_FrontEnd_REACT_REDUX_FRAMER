@@ -1,70 +1,88 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Video Sharing Platform Like Forum/Youtube With REACT REDUX FRAMER Motion.
 
-## Available Scripts
+This project, is for building a video sharing server with live notification and full authentication and authorization based also.
+Here, we will add like, dislike, comment, comment like, comment dislike, reply,  reply like, reply dislike feature.
 
-In the project directory, you can run:
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Full Authentication and Authorization based.
+- Uploading video.
+- Video Love React Add.
+- Video Dislove React.
+- Commenting.
+- Comment Love React.
+- Comment Dislove.
+- Reply Adding In Comment.
+- Reply Love React.
+- Reply Dislove.
+- All Realestic Animation with Framer Motion.
+- Latest Anime or Movies Advertise at Homepage.
+- Searching video with username who uploaded or by category type that is added in tag.
+- Searching bar can search also based in the text.
+- Bookmarking video to watch later.
+- Showing Love reacted videos at a page.
+- Category select and see videos based on it.
+## Lessons Learned
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Node Js
+- Express 
+- React Redux
+- React Redux Toolkit
+- Framer Motion
+- Nodemailer
+- Multer
+- Socket Io
+- Jimp
+- Mongo
+- Joi
+- Mongoose
+- Cors
+- Morgan
+- Error Handling
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Run Locally
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Clone the project
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+  https://github.com/SaminKirigaya/Video_Sharing_Platform_Forum_FrontEnd_REACT_REDUX_FRAMER.git
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
 
-### `npm run eject`
+Go to the project directory
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+  cd my-project
+  //your project saving directory name
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Install dependencies
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+  npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Start the server
 
-## Learn More
+```bash
+  npm run start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Cautions And Optimization
+- For your server usage you need to change axios defaults base url and video uploading url of backend that I was sending with xhr for uploader animations.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Go to index.js
+- axios.defaults.baseURL = 'http://localhost:8000' // backend restapi base location 
+- Change this localhost to your hosting
+- At YourVideos.jsx Go there
+- Change const backendlink = 'http://localhost:8000' // change it according to ur server
 
-### Code Splitting
+- Remember I used localhost cause it was my development server
+## Support
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+For support, saminyeasararnob@gmail.com 
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
