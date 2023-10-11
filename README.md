@@ -134,6 +134,9 @@ Start the server
 - Change const backendlink = 'http://localhost:8000' // change it according to ur server
 
 - Remember I used localhost cause it was my development server
+- If you are the owner or developer of server after hosting server create a account at server with that account upload at least 1 video to activate search feature and category select feature of Category page.
+
+  
 ## Support
 
 For support, saminyeasararnob@gmail.com 
