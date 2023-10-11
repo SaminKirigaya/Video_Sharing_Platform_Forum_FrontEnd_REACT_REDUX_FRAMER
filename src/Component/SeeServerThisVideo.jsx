@@ -36,6 +36,7 @@ function SeeServerThisVideo() {
   const [responseMessage, setResponseMessage] = React.useState(''); // initially any error or success message at snackbar
   const [stringComment, setStringComment] = useState('')
   
+  const [warnHeight, setWarnHeight] = useState('')
   const [eventSuccess, setEventSuccess] = useState(false)
   
   const token = useSelector((state)=>state.tokenData.token)
@@ -242,7 +243,10 @@ function SeeServerThisVideo() {
         </div>
         </div>
       })
+    }else{
+      return <p className='mx-auto text-center headLine' style={{backgroundColor:'#c0ff1d', padding:'1rem',maxHeight:warnHeight}}>Seems Like No Video Match This Video Data or Category Type ...</p>
     }
+
   }
 
   // giving love react
@@ -767,6 +771,12 @@ function SeeServerThisVideo() {
 
   // Effects Here
   useEffect(() => {
+
+    if(window.innerWidth>500 && window.innerWidth<700){
+      setWarnHeight('57%')
+    }else{
+      setWarnHeight('35%')
+    } 
 
     const intervalID = setInterval(() => {
       // Your interval logic here

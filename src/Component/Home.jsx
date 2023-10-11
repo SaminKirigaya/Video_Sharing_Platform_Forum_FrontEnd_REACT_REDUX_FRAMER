@@ -413,6 +413,8 @@ function Home() {
         </div>
         </motion.div>
 
+
+        <motion.div animate={{opacity:[0,1]}} transition={{duration:1.4}} className='d-flex mx-auto w-100 justify-content-center mt-4 mb-2'><p className='mx-auto fontcol headLine text-center' style={{fontSize:'1.5rem'}}>User's Posts</p></motion.div>
         
         <motion.div variants={container} initial="hidden" animate="show" className='row row-cols-1 row-cols-md-4 mb-5 d-flex justify-content-start p-3' ref={scope}>
           
