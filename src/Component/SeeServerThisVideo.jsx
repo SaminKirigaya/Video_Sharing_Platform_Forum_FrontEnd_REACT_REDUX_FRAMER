@@ -896,21 +896,25 @@ function SeeServerThisVideo() {
 
 
 
-    
-    
-    <motion.div whileHover={{scale:1.1}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{giveLoveReact(e, videoSerial)}} className='d-flex justify-content-center align-items-center iconmain1' data-bs-toggle="tooltip" data-bs-placement="right" title={genareteDisLikedAmount(videoData.videolike)}> 
+    <div className='d-flex justify-content-center iconbox'>
+    <motion.div whileHover={{scale:1.3}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{giveLoveReact(e, videoSerial)}} className='d-flex justify-content-center align-items-center me-5' data-bs-toggle="tooltip" data-bs-placement="right" title={genareteDisLikedAmount(videoData.videolike)}> 
     <FavoriteIcon fontSize='large'/> 
     </motion.div>
 
     
 
-    <motion.div whileHover={{scale:1.1}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{giveDisLoveReact(e, videoSerial)}} className='d-flex justify-content-center align-items-center iconmain2' data-bs-toggle="tooltip" data-bs-placement="right" title={genareteLikedAmount(videoData.videodislike)}> 
+    <motion.div whileHover={{scale:1.3}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{giveDisLoveReact(e, videoSerial)}} className='d-flex justify-content-center align-items-center me-5' data-bs-toggle="tooltip" data-bs-placement="right" title={genareteLikedAmount(videoData.videodislike)}> 
     <HeartBrokenIcon fontSize='large'/>
     </motion.div>
 
-    <motion.div whileHover={{scale:1.1}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{giveReport(e, videoSerial)}} className='d-flex justify-content-center align-items-center iconmain3'> 
+    <motion.div whileHover={{scale:1.3}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{giveReport(e, videoSerial)}} className='d-flex justify-content-center align-items-center'> 
     <FlagIcon fontSize='large'/>
     </motion.div>
+    </div>
+
+    
+    
+    
 
     
     <div className='d-flex justify-content-start titleDesPos flex-column' style={{borderTop: '0.12rem solid #c0ff1d', borderBottom: '0.12rem solid #c0ff1d', wordBreak:'break-word', padding: '2rem'}}>

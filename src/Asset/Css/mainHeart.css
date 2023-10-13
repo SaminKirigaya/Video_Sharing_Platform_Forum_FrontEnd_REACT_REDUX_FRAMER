@@ -2,6 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Serif&display=swap');
 
 @media (min-width: 320px) and (max-width: 374px){
+    .iconbox{
+        width:50%; 
+        height:25%;
+        position:relative;
+        top:3%;
+        left:24%; 
+        color:#c0ff1d
+    }
 
     .onmostTop{
         z-index: 500;
@@ -31,7 +39,7 @@
     
 .allComments{
     position: relative;
-    top: -7%;
+    top: 0%;
     left: 0%;
     width: 97%;
    
@@ -40,7 +48,7 @@
 
     .commentsArea2{
         position: relative;
-        top: -6%;
+        top: 6%;
        
         display: flex;
         padding : 2rem;
@@ -53,7 +61,7 @@
 
     .titleDesPos{
         position: relative;
-        top:-7%;
+        top:5%;
         padding: 1.5rem;
     }
     .iconmain1{
@@ -297,6 +305,14 @@
 
 
 @media (min-width: 375px) and (max-width: 389px){
+    .iconbox{
+        width:50%; 
+        height:25%;
+        position:relative;
+        top:3%;
+        left:25%; 
+        color:#c0ff1d
+    }
     .onmostTop{
         z-index: 500;
         position: absolute;
@@ -325,7 +341,7 @@
         
 .allComments{
     position: relative;
-    top: -7%;
+    top: 0%;
     left: 0%;
     width: 97%;
  
@@ -335,7 +351,7 @@
 
     .commentsArea2{
         position: relative;
-        top: -6%;
+        top: 6%;
       
         display: flex;
         padding : 2rem;
@@ -348,7 +364,7 @@
 
     .titleDesPos{
         position: relative;
-        top:-8%;
+        top:6%;
         padding: 1.5rem;
     }
     .iconmain1{
@@ -585,6 +601,23 @@
 
 
 @media (min-width: 390px) and (max-width: 411px){
+    .iconbox{
+        width:50%; 
+        height:25%;
+        position:relative;
+        top:3%;
+        left:25%; 
+        color:#c0ff1d
+    }
+
+    .iconbox{
+        width:50%; 
+        height:25%;
+        position:relative;
+        top:3%;
+        left:25%; 
+        color:#c0ff1d
+    }
     .onmostTop{
         z-index: 500;
         position: absolute;
@@ -613,7 +646,7 @@
     
     .allComments{
         position: relative;
-        top: -7%;
+        top: 0%;
         left: 0%;
         width: 97%;
        
@@ -622,7 +655,7 @@
     
     .commentsArea2{
         position: relative;
-        top: -8%;
+        top: 6%;
       
         display: flex;
         padding : 2rem;
@@ -634,7 +667,7 @@
     }
     .titleDesPos{
         position: relative;
-        top:-6%;
+        top:6.5%;
         padding: 1.5rem;
     } 
     .iconmain1{
@@ -870,6 +903,14 @@
 
 
 @media (min-width: 412px) and (max-width: 539px){
+    .iconbox{
+        width:50%; 
+        height:25%;
+        position:relative;
+        top:3%;
+        left:25%; 
+        color:#c0ff1d
+    }
     .onmostTop{
         z-index: 500;
         position: absolute;
@@ -897,7 +938,7 @@
     }
     .allComments{
         position: relative;
-        top: -7%;
+        top: 0%;
         left: 0%;
         width: 97%;
 
@@ -907,7 +948,7 @@
     
     .commentsArea2{
         position: relative;
-        top: -6%;
+        top: 5%;
        
         display: flex;
         padding : 2rem;
@@ -920,7 +961,7 @@
 
     .titleDesPos{
         position: relative;
-        top:-5%;
+        top:5%;
         padding: 1.5rem;
     } 
     .iconmain1{
@@ -1168,6 +1209,14 @@
 
 
 @media (min-width: 540px) and (max-width: 767px){
+    .iconbox{
+        width:50%; 
+        height:25%;
+        position:relative;
+        top:-33%;
+        left:6%; 
+        color:#c0ff1d
+    }
     .onmostTop{
         z-index: 500;
         position: absolute;
@@ -1206,7 +1255,7 @@
 
     .allComments{
         position: relative;
-        top: -46%;
+        top: -37%;
         left: 0%;
         width: 97%;
     
@@ -1215,7 +1264,7 @@
     
     .commentsArea2{
         position: relative;
-        top: -47%;
+        top: -30%;
         
         display: flex;
         padding : 2rem;
@@ -1227,7 +1276,7 @@
     }
     .titleDesPos{
         position: relative;
-        top:-46%;
+        top:-30%;
         padding: 1.5rem;
     } 
     .iconmain1{
@@ -1471,6 +1520,14 @@
 
 
 @media (min-width: 768px) and (max-width: 819px){
+    .iconbox{
+        width:50%; 
+        height:25%;
+        position:relative;
+        top:-33%;
+        left:4%; 
+        color:#c0ff1d
+    }
     .onmostTop{
         z-index: 500;
         position: absolute;
@@ -1511,7 +1568,7 @@
 
     .allComments{
         position: relative;
-        top: -46%;
+        top: -34%;
         left: 0%;
         width: 97%;
      
@@ -1520,7 +1577,7 @@
     
     .commentsArea2{
         position: relative;
-        top: -47%;
+        top: -30%;
         
         display: flex;
         padding : 2rem;
@@ -1532,7 +1589,7 @@
     }
     .titleDesPos{
         position: relative;
-        top:-46%;
+        top:-31%;
         padding: 1.5rem;
     } 
     .iconmain1{
@@ -1786,6 +1843,14 @@
 
 
  @media (min-width: 820px) and (max-width: 911px){
+    .iconbox{
+        width:50%; 
+        height:25%;
+        position:relative;
+        top:-33%;
+        left:4%; 
+        color:#c0ff1d
+    }
     .onmostTop{
         z-index: 500;
         position: absolute;
@@ -1825,7 +1890,7 @@
 
     .allComments{
         position: relative;
-        top: -45%;
+        top: -33%;
         left: 0%;
         width: 97%;
        
@@ -1833,7 +1898,7 @@
     }
     .commentsArea2{
         position: relative;
-        top: -45%;
+        top: -30%;
      
         display: flex;
         padding : 2rem;
@@ -1845,7 +1910,7 @@
     }
     .titleDesPos{
         position: relative;
-        top:-45%;
+        top:-31%;
         padding: 1.5rem;
     } 
     .iconmain1{
@@ -2100,6 +2165,14 @@
 
 
 @media (min-width: 912px) and (max-width: 1023px){
+    .iconbox{
+        width:50%; 
+        height:25%;
+        position:relative;
+        top:-33%;
+        left:3%; 
+        color:#c0ff1d
+    }
     .onmostTop{
         z-index: 500;
         position: absolute;
@@ -2138,7 +2211,7 @@
 
     .allComments{
         position: relative;
-        top: -45%;
+        top: -34%;
         left: 0%;
         width: 97%;
       
@@ -2146,7 +2219,7 @@
     }
     .commentsArea2{
         position: relative;
-        top: -45%;
+        top: -30%;
         
         display: flex;
         padding : 2rem;
@@ -2158,7 +2231,7 @@
     }
     .titleDesPos{
         position: relative;
-        top:-45%;
+        top:-31%;
         padding: 1.5rem;
     } 
     .iconmain1{
@@ -2397,6 +2470,14 @@
 
 
 @media (min-width: 1024px) and (max-width: 1267px){
+    .iconbox{
+        width:50%; 
+        height:25%;
+        position:relative;
+        top:-41%;
+        left:7%; 
+        color:#c0ff1d
+    }
     .onmostTop{
         z-index: 500;
         position: absolute;
@@ -2437,7 +2518,7 @@
 
     .allComments{
         position: relative;
-        top: -61%;
+        top: -49%;
         left: 0%;
         width: 97%;
   
@@ -2445,7 +2526,7 @@
     }
     .commentsArea2{
         position: relative;
-        top: -59%;
+        top: -40%;
         left: 0%;
         display: flex;
         padding : 2rem;
@@ -2457,7 +2538,7 @@
     }
     .titleDesPos{
         position: relative;
-        top:-59%;
+        top:-38%;
         padding: 1.5rem;
     } 
     .iconmain1{
@@ -2688,6 +2769,14 @@
 
 
 @media (min-width: 1268px) and (max-width: 1365px){
+    .iconbox{
+        width:50%; 
+        height:25%;
+        position:relative;
+        top:-40%;
+        left:9%; 
+        color:#c0ff1d
+    }
     .onmostTop{
         z-index: 500;
         position: absolute;
@@ -2728,7 +2817,7 @@
     
     .allComments{
         position: relative;
-        top: -61%;
+        top: -43%;
         left: 0%;
         width: 97%;
        
@@ -2736,7 +2825,7 @@
     }
     .commentsArea2{
         position: relative;
-        top: -59%;
+        top: -37%;
         left: 0%;
         display: flex;
         padding : 2rem;
@@ -2748,7 +2837,7 @@
     }
     .titleDesPos{
         position: relative;
-        top:-62%;
+        top:-37%;
         padding-top: 1.8rem !important;
     } 
     .iconmain1{
@@ -2981,6 +3070,15 @@
 
 
 @media (min-width: 1366px) and (max-width: 1919px){
+    .iconbox{
+        width:50%; 
+        height:25%;
+        position:relative;
+        top:-45%;
+        left:8%; 
+        color:#c0ff1d
+    }
+
     .onmostTop{
         z-index: 500;
         position: absolute;
@@ -3022,7 +3120,7 @@
 
     .allComments{
         position: relative;
-        top: -61%;
+        top: -47%;
         left: 0%;
         width: 97%;
        
@@ -3030,7 +3128,7 @@
     }
     .commentsArea2{
         position: relative;
-        top: -59%;
+        top: -41%;
         left: 0%;
         display: flex;
         padding : 2rem;
@@ -3042,7 +3140,7 @@
     }
     .titleDesPos{
         position: relative;
-        top:-62%;
+        top:-42%;
         padding-top: 1.8rem !important;
     } 
     .iconmain1{
@@ -3274,6 +3372,14 @@
 
 
 @media (min-width: 1920px) and (max-width: 3840px){
+    .iconbox{
+        width:50%; 
+        height:25%;
+        position:relative;
+        top:-47%;
+        left:10%; 
+        color:#c0ff1d
+    }
     .onmostTop{
         z-index: 500;
         position: absolute;
@@ -3313,7 +3419,7 @@
 
     .allComments{
         position: relative;
-        top: -59%;
+        top: -48%;
         left: 0%;
         width: 97%;
  
@@ -3321,7 +3427,7 @@
     }
     .commentsArea2{
         position: relative;
-        top: -59%;
+        top: -45%;
         left: 0%;
         display: flex;
         padding : 2rem;
@@ -3333,7 +3439,7 @@
     }
     .titleDesPos{
         position: relative;
-        top:-65%;
+        top:-45%;
         padding-top: 1.8rem !important;
     } 
 
