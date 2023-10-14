@@ -897,17 +897,17 @@ function SeeServerThisVideo() {
 
 
     <div className='d-flex justify-content-center iconbox'>
-    <motion.div whileHover={{scale:1.3}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{giveLoveReact(e, videoSerial)}} className='d-flex justify-content-center align-items-center me-5' data-bs-toggle="tooltip" data-bs-placement="right" title={genareteDisLikedAmount(videoData.videolike)}> 
+    <motion.div style={{padding:'0.25rem',border:'0.14rem solid #c0ff1d',borderRadius:'50%'}} whileHover={{scale:1.3}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{giveLoveReact(e, videoSerial)}} className='d-flex justify-content-center align-items-center me-5' data-bs-toggle="tooltip" data-bs-placement="right" title={genareteDisLikedAmount(videoData.videolike)}> 
     <FavoriteIcon fontSize='large'/> 
     </motion.div>
 
     
 
-    <motion.div whileHover={{scale:1.3}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{giveDisLoveReact(e, videoSerial)}} className='d-flex justify-content-center align-items-center me-5' data-bs-toggle="tooltip" data-bs-placement="right" title={genareteLikedAmount(videoData.videodislike)}> 
+    <motion.div style={{padding:'0.25rem',border:'0.14rem solid #c0ff1d',borderRadius:'50%'}} whileHover={{scale:1.3}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{giveDisLoveReact(e, videoSerial)}} className='d-flex justify-content-center align-items-center me-5' data-bs-toggle="tooltip" data-bs-placement="right" title={genareteLikedAmount(videoData.videodislike)}> 
     <HeartBrokenIcon fontSize='large'/>
     </motion.div>
 
-    <motion.div whileHover={{scale:1.3}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{giveReport(e, videoSerial)}} className='d-flex justify-content-center align-items-center'> 
+    <motion.div style={{padding:'0.25rem',border:'0.14rem solid #c0ff1d',borderRadius:'50%'}} whileHover={{scale:1.3}} transition={{type: 'spring', stiffness: 1000}} onClick={(e)=>{giveReport(e, videoSerial)}} className='d-flex justify-content-center align-items-center'> 
     <FlagIcon fontSize='large'/>
     </motion.div>
     </div>
